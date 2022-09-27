@@ -13,6 +13,15 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
+
+    <nav>
+        <li><a href="{{ path('app_homepage') }}">Homepage</a></li>
+        <li><a href="{{ path('app_recipes') }}">All Recipes</a></li>
+        <li><a href="{{ path('app_recipes_show') }}">Recipe: Bake cookies</a></li>
+        <li><a href="{{ path('app_skills') }}">All Skill Videos</a></li>
+        <li><a href="{{ path('app_skills_show') }}">Skill Video: Sharpen Knives</a></li>
+    </nav>
+
     <body>
         {% block body %}{% endblock %}
     </body>
