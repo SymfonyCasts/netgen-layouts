@@ -1,5 +1,66 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Homepage</h1>
+    <div class="py-4" style="background-color: #E7F3F3">
+        <h1 class="header">Bark & Bake</h1>
+        <p class="text-center">Doggone Good Treat & Meal Recipes</p>
+    </div>
+    <div class="container-fluid py-4 my-5">
+        <h2 class="text-center mb-4">Featured Techniques</h2>
+        <div class="row my-5">
+            <div class="col-3 offset-3">
+                <div class="text-center entity-container p-3">
+                    <h3>Basic Chop</h3>
+                    <div class="p-3 mt-3 entity-img">
+                        <img src="{{asset('images/chop-entity.png')}}" width="100" height="60" alt="chop entity image">
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="text-center entity-container p-3">
+                    <h3>Folding in Cheese</h3>
+                    <div class="p-3 mt-3 entity-img">
+                        <img src="{{asset('images/chop-entity.png')}}" width="100" height="60" alt="chop entity image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-3 text-underline"><u><a href="#">Show More</a></u></div>
+    </div>
+    
+    <div class="text-center py-3 my-4" style="background-color: #fdedf0;">
+        <h2>Subscribe</h2>
+        <p>Dog Food Cooking Made Easy</p>
+    </div>
+    
+    <h2 class="text-center my-5">Latest Recipes</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="text-center recipe-container p-3">
+                    <div class="p-3 entity-img">
+                        <img src="{{asset('images/chop-entity.png')}}" width="100" height="60" alt="chop entity image">
+                    </div>
+                    <h3>Mixed Vegetables & Rice</h3>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="text-center recipe-container p-3">
+                    <div class="p-3 entity-img">
+                        <img src="{{asset('images/chop-entity.png')}}" width="100" height="60" alt="chop entity image">
+                    </div>
+                    <h3>Egg Protein Dinner</h3>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="text-center recipe-container p-3">
+                    <div class="p-3 entity-img">
+                        <img src="{{asset('images/chop-entity.png')}}" width="100" height="60" alt="chop entity image">
+                    </div>
+                    <h3>Pumpkin Pup Cup</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 {% endblock %}
