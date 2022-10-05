@@ -1,5 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>How to sharpen knives video</h1>
+<div class="container">    
+    <h1 class="text-center mt-5">Drizzle Honey</h1>
+    <p class="text-center">How to add just enough honey for great flavor, but still safe for your beloved pup</p>
+    <div class="mt-5 d-flex justify-content-center">
+        <div class="p-3 mt-3 entity-img">
+            <img src="{{asset('images/honey.png')}}" width="auto" height="200" alt="chop entity image">
+        </div>
+        <div class="p-3 text-center" style="border: 2px solid #E7F3F3; width: 300px; border-radius: 5px;">
+            <h3>Sponsored Product</h3>
+            <img src="{{asset('images/honey-jar.png')}}" width="auto" height="200" alt="chop entity image">
+            <p class="pt-3">The Drizzle Technique is brought to you by <a href="#">the honey street team</a></p>
+        </div>
+    </div>
+</div>
 {% endblock %}

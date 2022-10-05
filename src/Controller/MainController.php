@@ -31,7 +31,7 @@ class MainController extends AbstractController
         return $this->render('main/skills.html.twig');
     }
 
-    #[Route('/skills/sharpen-knives', name: 'app_skills_show')]
+    #[Route('/skills/drizzle-honey', name: 'app_skills_show')]
     public function skillsShow()
     {
         return $this->render('main/skills_show.html.twig');

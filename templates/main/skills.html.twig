@@ -1,5 +1,68 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Skills video list</h1>
+<div class="py-5 text-center" style="background-color: #E7F3F3">
+    <h1>All Techniques</h1>
+    <p>Tips & tricks to making the tastiest dog food</p>
+</div>
+    
+    <div class="container">
+        <div class="row my-5">
+            <div class="col-3 offset-1">
+                <div class="text-center entity-container p-3">
+                    <h3>Basic Chop</h3>
+                    <div class="p-3 mt-3 entity-img">
+                        <img src="{{asset('images/chop-entity.png')}}" width="auto" height="80" alt="chop entity image">
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="text-center entity-container p-3">
+                    <h3>Folding in Cheese</h3>
+                    <div class="p-3 mt-3 entity-img">
+                        <img src="{{asset('images/cheese-grater.png')}}" width="auto" height="80" alt="chop entity image">
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="text-center entity-container p-3">
+                    <h3>Julienne</h3>
+                    <div class="p-3 mt-3 entity-img">
+                        <img src="{{asset('images/peeler.png')}}" width="auto" height="80" alt="chop entity image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-5">
+            <div class="col-3 offset-1">
+                <div class="text-center entity-container p-3">
+                    <h3>Drizzle Honey</h3>
+                    <div class="p-3 mt-3 entity-img">
+                        <img src="{{asset('images/honey.png')}}" width="auto" height="80" alt="chop entity image">
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="text-center entity-container p-3">
+                    <h3>Mashing</h3>
+                    <div class="p-3 mt-3 entity-img">
+                        <img src="{{asset('images/potato-masher.png')}}" width="auto" height="80" alt="chop entity image">
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="text-center entity-container p-3">
+                    <h3>Weigh Ingredients</h3>
+                    <div class="p-3 mt-3 entity-img">
+                        <img src="{{asset('images/scale.png')}}" width="auto" height="80" alt="chop entity image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="text-center pt-4 pb-5 my-4" style="background-color: #fdedf0;">
+        <h3 class="mb-4">Have a question on a technique?</h3>
+        <a class="btn btn-info">Contact Us!</a>
+    </div>
 {% endblock %}
