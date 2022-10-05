@@ -4,10 +4,6 @@ body, a {
     color: #687474;
 }
 
-a {
-    text-decoration: underline;
-}
-
 h3 {
     font-size: 1.25rem;
 }
@@ -34,4 +30,10 @@ h3 {
     border: solid 1px #efefee;
     border-radius: 5px;
     box-shadow: 2px 3px 9px 4px rgb(0 0 0 / 4%);
+    background-color: #fff;
+}
+
+.recipe-list-item {
+    width: 524px;
+    margin-bottom: 30px;
 }

@@ -1,5 +1,82 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Recipes list</h1>
+    <div class="py-5 text-center" style="background-color: #E7F3F3">
+        <h1>Doggone Good Recipes</h1>
+        <p>Recipes your pup will love!</p>
+    </div>
+    
+    <div class="container">
+        <div class="recipe-list-container py-5 px-3 mt-4" style="background-color: #fdedf0; border-radius: 5px;">
+            <div class="d-flex justify-content-center">
+                <div class="text-center recipe-container recipe-list-item p-3">
+                    <div class="p-3 entity-img">
+                        <img src="{{asset('images/carrot.png')}}" width="auto" height="115" alt="carrot image">
+                    </div>
+                    <h3 class="mt-3">Vegetables & Rice</h3>
+                    <small>1 hour (prep & cook)</small>
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-center">
+                <div class="text-center recipe-container recipe-list-item p-3">
+                    <div class="p-3 entity-img">
+                        <img src="{{asset('images/egg.png')}}" width="auto" height="115" alt="egg image">
+                    </div>
+                    <h3 class="mt-3">Egg Protein Dinner</h3>
+                    <small>2 hour (prep & cook)</small>
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-center">
+                <div class="text-center recipe-container recipe-list-item p-3">
+                    <div class="p-3 entity-img">
+                        <img src="{{asset('images/cake.png')}}" width="auto" height="115" alt="cake image">
+                    </div>
+                    <h3 class="mt-3">Doggo Birthday Cake</h3>
+                    <small>6 hours (prep & cook)</small>
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-center">
+                <div class="text-center recipe-container recipe-list-item p-3">
+                    <div class="p-3 entity-img">
+                        <img src="{{asset('images/pup-cup.png')}}" width="auto" height="115" alt="pup cup image">
+                    </div>
+                    <h3 class="mt-3">Pumpkin Pup Cup</h3>
+                    <small>.5 hour (prep & cook)</small>
+                </div>
+            </div>
+            
+            <div class="text-center"><u class="text-center"><a href="#">Load More Recipes</a></u></div>
+            
+        </div>
+        <h3 class="mt-5">Featured Techniques</h3>
+        <div class="row my-5">
+            <div class="col-3 offset-2">
+                <div class="text-center entity-container p-3">
+                    <h3>Basic Chop</h3>
+                    <div class="p-3 mt-3 entity-img">
+                        <img src="{{asset('images/chop-entity.png')}}" width="auto" height="80" alt="chop skill image">
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="text-center entity-container p-3">
+                    <h3>Folding in Cheese</h3>
+                    <div class="p-3 mt-3 entity-img">
+                        <img src="{{asset('images/cheese-grater.png')}}" width="auto" height="80" alt="grater skill image">
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="text-center entity-container p-3">
+                    <h3>Julienne</h3>
+                    <div class="p-3 mt-3 entity-img">
+                        <img src="{{asset('images/peeler.png')}}" width="auto" height="80" alt="peeler skill image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
