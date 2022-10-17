@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container">
+<div class="text-center p-4" style="background-color: #E7F3F3">
     <h1>{{ recipe.name }}</h1>
     <p>{{ recipe.subText }}</p>
+</div>
 
-    <img src="{{asset(recipe.imageUrl)}}" width="auto" height="115" alt="{{ recipe.name }} image">
+<div class="container">
+    <div class="d-flex justify-content-center my-5">
+        <img src="{{asset(recipe.imageUrl)}}" width="auto" height="115" alt="{{ recipe.name }} image">
+    </div>
 
 
     <h3>INGREDIENTS</h3>
@@ -16,13 +20,13 @@
         {% endfor %}
     </ul>
 
-    <h3>INSTRUCTIONS</h3>
+    <h3 class="mt-5">INSTRUCTIONS</h3>
 
-    <ul>
+    <ol>
         {% for instruction in recipe.instructions %}
             <li>{{ instruction }}</li>
         {% endfor %}
-    </ul>
+    </ol>
 
     <p>recipe from:
         <u><a href="{{ recipe.sourceUrl }}">{{ recipe.sourceUrl }}</a></u>
