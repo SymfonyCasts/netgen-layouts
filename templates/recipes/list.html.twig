@@ -22,7 +22,9 @@
                 </div>
             {% endfor %}
 
-            {{ pagerfanta(pager) }}
+            {% if pager.hasNextPage %}
+                <div class="text-center"><u class="text-center"><a href="{{ path('app_recipes', { page: pager.nextPage }) }}">Load More Recipes</a></u></div>
+            {% endif %}
         </div>
         <h3 class="mt-5">Featured Techniques</h3>
         <div class="row my-5">
