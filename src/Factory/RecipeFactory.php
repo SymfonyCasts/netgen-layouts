@@ -42,6 +42,7 @@ final class RecipeFactory extends ModelFactory
             'name' => u(self::faker()->words(4, true))->title(),
             'subText' => self::faker()->sentence,
             'imageFilename' => 'cake.png',
+            'totalTime' => self::faker()->numberBetween(15, 90),
             'ingredients' => [
                 '1 cup flour',
                 '1/2 tsp baking soda',
@@ -61,6 +62,7 @@ final class RecipeFactory extends ModelFactory
                 'Allow to cool on a wire rack prior to removing from pan.',
                 'After cooling, add frosting if desired.',
             ],
+            'sourceUrl' => 'https://www.lovefromtheoven.com/spoiled-dog-cake-recipe/',
         ];
     }
 

@@ -37,6 +37,12 @@ class Recipe
     #[ORM\Column(type: Types::JSON)]
     private array $instructions = [];
 
+    #[ORM\Column]
+    private ?int $totalTime = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $sourceUrl = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -115,6 +121,48 @@ class Recipe
     public function setInstructions(array $instructions): self
     {
         $this->instructions = $instructions;
+
+        return $this;
+    }
+
+    public function getTotalTime(): ?int
+    {
+        return $this->totalTime;
+    }
+
+    public function setTotalTime(int $totalTime): self
+    {
+        $this->totalTime = $totalTime;
+
+        return $this;
+    }
+
+    public function getTimeAsWords(): string
+    {
+        if ($this->totalTime < 60) {
+            return sprintf('%d minutes', $this->totalTime);
+        }
+
+        $hours = floor($this->totalTime / 60);
+        // it's always a good day when you can use the modulo operator!
+        $minutes = $this->totalTime % 60;
+
+        return sprintf(
+            '%s hour%d, %s minutes',
+            $hours,
+            $hours === 1 ? '' : 's',
+            $minutes
+        );
+    }
+
+    public function getSourceUrl(): ?string
+    {
+        return $this->sourceUrl;
+    }
+
+    public function setSourceUrl(string $sourceUrl): self
+    {
+        $this->sourceUrl = $sourceUrl;
 
         return $this;
     }
