@@ -2,14 +2,14 @@
 
 {% block body %}
 <div class="container">
-    <h1>Doggo Birthday Cake</h1>
-    <p>Pawesome way to celebrate your pup!</p>
-    
-    <img src="{{asset('images/cake.png')}}" width="auto" height="115" alt="cake image">
-    
-    
+    <h1>{{ recipe.name }}</h1>
+    <p>{{ recipe.subText }}</p>
+
+    <img src="{{asset(recipe.imageUrl)}}" width="auto" height="115" alt="{{ recipe.name }} image">
+
+
     <h3>INGREDIENTS</h3>
-    
+
     <h4>CAKE</h4>
     <ul>
         <li>1 cup flour</li>
@@ -27,7 +27,7 @@
     </ul>
 
     <h3>INSTRUCTIONS</h3>
-    
+
     <h4>CAKE</h4>
     <ul>
         <li>Preheat oven to 177°C (350 °F)</li>
@@ -39,10 +39,10 @@
         <li>Allow to cool on a wire rack prior to removing from pan.</li>
         <li>After cooling, add frosting if desired.</li>
     </ul>
-    
+
     FROSTING
     <ul><li>Mix Greek yogurt and peanut butter until well combined. Spread over cake. If not serving immediately, store in refrigerator.</li></ul>
-    
+
     <p>recipe from: <u><a href="https://www.lovefromtheoven.com/spoiled-dog-cake-recipe/">Love from the Oven</a></u></p>
 </div>
 {% endblock %}

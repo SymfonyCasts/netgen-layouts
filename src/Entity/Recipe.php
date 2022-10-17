@@ -83,6 +83,11 @@ class Recipe
         return $this->imageFilename;
     }
 
+    public function getImageUrl(): string
+    {
+        return 'public/uploads/recipes/' . $this->getImageFilename();
+    }
+
     public function setImageFilename(string $imageFilename): self
     {
         $this->imageFilename = $imageFilename;

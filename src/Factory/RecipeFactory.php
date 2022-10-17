@@ -8,6 +8,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
+use function Symfony\Component\String\u;
 
 /**
  * @extends ModelFactory<Recipe>
@@ -38,7 +39,7 @@ final class RecipeFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'name' => self::faker()->words(4, true),
+            'name' => u(self::faker()->words(4, true))->title(),
             'subText' => self::faker()->sentence,
             'imageFilename' => 'cake.png',
             'ingredients' => [
