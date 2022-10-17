@@ -14,8 +14,9 @@ class AppFixtures extends Fixture
         RecipeFactory::createMany(25);
 
         UserFactory::createOne([
-            'email' => 'doggo_admin@barkbite.com',
+            'email' => 'doggo@barkbite.com',
             'password' => 'woof',
+            'roles' => ['ROLE_ADMIN']
         ]);
 
         $manager->flush();
