@@ -26,32 +26,5 @@
                 <div class="text-center"><u class="text-center"><a href="{{ path('app_recipes', { page: pager.nextPage }) }}">Load More Recipes</a></u></div>
             {% endif %}
         </div>
-        <h3 class="mt-5">Featured Techniques</h3>
-        <div class="row my-5">
-            <div class="col-3 offset-2">
-                <div class="text-center entity-container p-3">
-                    <h3>Basic Chop</h3>
-                    <div class="p-3 mt-3 entity-img">
-                        <img src="{{asset('images/chop-entity.png')}}" width="auto" height="80" alt="chop skill image">
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="text-center entity-container p-3">
-                    <h3>Folding in Cheese</h3>
-                    <div class="p-3 mt-3 entity-img">
-                        <img src="{{asset('images/cheese-grater.png')}}" width="auto" height="80" alt="grater skill image">
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="text-center entity-container p-3">
-                    <h3>Julienne</h3>
-                    <div class="p-3 mt-3 entity-img">
-                        <img src="{{asset('images/peeler.png')}}" width="auto" height="80" alt="peeler skill image">
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 {% endblock %}

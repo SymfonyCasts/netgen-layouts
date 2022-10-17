@@ -38,3 +38,10 @@ h3 {
     width: 524px;
     margin-bottom: 30px;
 }
+.recipe-list-item a {
+    text-decoration: none;
+    color: #687474;
+}
+.text-heart {
+    color: #b30000;
+}
