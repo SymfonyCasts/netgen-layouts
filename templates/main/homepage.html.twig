@@ -5,7 +5,7 @@
         <h1 class="header">Bark & Bake</h1>
         <p class="text-center">Doggone Good Treat & Meal Recipes</p>
         <div class="d-flex justify-content-center">
-            <img src="{{asset('images/dog-bone.png')}}" width="auto" height="50" alt="dog bone icon">
+            <img src="{{ asset('images/dog-bone.png') }}" width="auto" height="50" alt="dog bone icon">
         </div>
     </div>
 
@@ -15,7 +15,7 @@
             <div class="col-3">
                 <div class="text-center recipe-container p-3">
                     <div class="p-3 entity-img">
-                        <img src="{{asset('images/pup-cup.png')}}" width="auto" height="115" alt="carrot image">
+                        <img src="{{ asset('images/pup-cup.png') }}" width="auto" height="115" alt="carrot image">
                     </div>
                     <h3 class="mt-3">Vegetables & Rice</h3>
                     <small>1 hour (prep & cook)</small>
@@ -24,7 +24,7 @@
             <div class="col-3">
                 <div class="text-center recipe-container p-3">
                     <div class="p-3 entity-img">
-                        <img src="{{asset('images/pup-cup.png')}}" width="auto" height="115" alt="egg image">
+                        <img src="{{ asset('images/pup-cup.png') }}" width="auto" height="115" alt="egg image">
                     </div>
                     <h3 class="mt-3">Egg Protein Dinner</h3>
                     <small>2 hour (prep & cook)</small>
@@ -33,7 +33,7 @@
             <div class="col-3">
                 <div class="text-center recipe-container p-3">
                     <div class="p-3 entity-img">
-                        <img src="{{asset('images/pup-cup.png')}}" width="auto" height="115" alt="cake image">
+                        <img src="{{ asset('images/pup-cup.png') }}" width="auto" height="115" alt="cake image">
                     </div>
                     <h3 class="mt-3">Doggo Birthday Cake</h3>
                     <small>6 hours (prep & cook)</small>
@@ -42,7 +42,7 @@
             <div class="col-3">
                 <div class="text-center recipe-container p-3">
                     <div class="p-3 entity-img">
-                        <img src="{{asset('images/pup-cup.png')}}" width="auto" height="115" alt="pup cup image">
+                        <img src="{{ asset('images/pup-cup.png') }}" width="auto" height="115" alt="pup cup image">
                     </div>
                     <h3 class="mt-3">Pumpkin Pup Cup</h3>
                     <small>.5 hour (prep & cook)</small>
@@ -56,19 +56,7 @@
         <h2>Subscribe</h2>
         <p class="mb-4">Dog Food Cooking Made Easy</p>
 
-        <form>
-          <div class="d-flex justify-content-center">
-            <div class="pr-2">
-              <input type="text" class="form-control" placeholder="First name">
-            </div>
-            <div class="pr-2">
-              <input class="form-control d-inline" type="text" placeholder="email address">
-            </div>
-            <div class="pr-2">
-                <a class="btn btn-secondary">Sign Up</a>
-            </div>
-          </div>
-        </form>
+        {{ component('subscribe_newsletter') }}
     </div>
 
     <div class="container py-4 my-5">
@@ -78,7 +66,7 @@
                 <div class="text-center entity-container p-3">
                     <h3>Basic Chop</h3>
                     <div class="p-3 mt-3 entity-img">
-                        <img src="{{asset('images/pup-cup.png')}}" width="auto" height="80" alt="chop skill image">
+                        <img src="{{ asset('images/pup-cup.png') }}" width="auto" height="80" alt="chop skill image">
                     </div>
                 </div>
             </div>
@@ -86,7 +74,7 @@
                 <div class="text-center entity-container p-3">
                     <h3>Folding in Cheese</h3>
                     <div class="p-3 mt-3 entity-img">
-                        <img src="{{asset('images/pup-cup.png')}}" width="auto" height="80" alt="grater skill image">
+                        <img src="{{ asset('images/pup-cup.png') }}" width="auto" height="80" alt="grater skill image">
                     </div>
                 </div>
             </div>
