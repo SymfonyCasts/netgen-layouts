@@ -5,6 +5,7 @@ namespace App\Factory;
 use App\Entity\Recipe;
 use App\Repository\RecipeRepository;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -31,6 +32,8 @@ use function Symfony\Component\String\u;
  */
 final class RecipeFactory extends ModelFactory
 {
+    private ?array $availableImages = null;
+
     public function __construct()
     {
         parent::__construct();
@@ -41,7 +44,7 @@ final class RecipeFactory extends ModelFactory
         return [
             'name' => u(self::faker()->words(4, true))->title(),
             'subText' => self::faker()->sentence,
-            'imageFilename' => 'cake.png',
+            'imageFilename' => self::faker()->randomElement($this->getImages()),
             'totalTime' => self::faker()->numberBetween(15, 90),
             'ingredients' => [
                 '1 cup flour',
@@ -71,10 +74,14 @@ final class RecipeFactory extends ModelFactory
         $fs = new Filesystem();
         return $this
             ->afterInstantiate(function (Recipe $recipe) use ($fs): void {
+                $targetFile = __DIR__ . sprintf('/../DataFixtures/images/%s', $recipe->getImageFilename());
+                if (!file_exists($targetFile)) {
+                    return;
+                }
 
                 $newFilename = self::faker()->slug(2) . '.png';
                 $fs->copy(
-                    __DIR__ . sprintf('/../DataFixtures/images/%s', $recipe->getImageFilename()),
+                    $targetFile,
                     __DIR__ . '/../../public/uploads/recipes/' . $newFilename
                 );
                 $recipe->setImageFilename($newFilename);
@@ -84,5 +91,21 @@ final class RecipeFactory extends ModelFactory
     protected static function getClass(): string
     {
         return Recipe::class;
+    }
+
+    private function getImages(): array
+    {
+        if ($this->availableImages === null) {
+            $finder = new Finder();
+            $finder->in(__DIR__.'/../DataFixtures/images')
+                ->files();
+
+            $this->availableImages = [];
+            foreach ($finder as $file) {
+                $this->availableImages[] = $file->getFilename();
+            }
+        }
+
+        return $this->availableImages;
     }
 }
