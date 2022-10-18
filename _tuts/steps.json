@@ -39,7 +39,22 @@
             "id": "install-extend-layout-in-all-templates",
             "name": "Install: extend layout in all templates",
             "description": null
+        },
+        {
+            "id": "blocks-add-more-blocks-to-homepage",
+            "name": "Blocks: add more blocks to homepage",
+            "description": null
+        },
+        {
+            "id": "blocks-move-layout-around-everything",
+            "name": "Blocks: move layout around everything",
+            "description": null
+        },
+        {
+            "id": "blocks-nav-footer-blocks",
+            "name": "Blocks: nav\/footer blocks",
+            "description": null
         }
     ],
-    "sha": "75dd7b2bfb1e84a2f84ededc81824d10f9697a88"
+    "sha": "f7ca39874c5b2df0d9b03816b931f48c228f5de0"
 }
