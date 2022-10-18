@@ -1,0 +1,45 @@
+{
+    "steps": [
+        {
+            "id": "start",
+            "name": "start",
+            "description": null
+        },
+        {
+            "id": "install-require-layouts-standard",
+            "name": "Install: require layouts-standard",
+            "description": null
+        },
+        {
+            "id": "install-schema-filter",
+            "name": "Install: schema_filter",
+            "description": null
+        },
+        {
+            "id": "install-add-role-nglayouts-admin-to-hierarchy",
+            "name": "Install: add ROLE_NGLAYOUTS_ADMIN to hierarchy",
+            "description": null
+        },
+        {
+            "id": "install-extend-layout-on-homepage",
+            "name": "Install: extend layout on homepage",
+            "description": null
+        },
+        {
+            "id": "install-configure-pagelayout",
+            "name": "Install: configure pagelayout",
+            "description": null
+        },
+        {
+            "id": "install-render-layout-block-in-base",
+            "name": "Install: render layout block in base",
+            "description": null
+        },
+        {
+            "id": "install-extend-layout-in-all-templates",
+            "name": "Install: extend layout in all templates",
+            "description": null
+        }
+    ],
+    "sha": "75dd7b2bfb1e84a2f84ededc81824d10f9697a88"
+}
