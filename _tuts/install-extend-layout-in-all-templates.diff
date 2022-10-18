@@ -1,0 +1,30 @@
+diff --git a/templates/recipes/list.html.twig b/templates/recipes/list.html.twig
+index 3121d31..149c434 100644
+--- a/templates/recipes/list.html.twig
++++ b/templates/recipes/list.html.twig
+@@ -1,4 +1,4 @@
+-{% extends 'base.html.twig' %}
++{% extends nglayouts.layoutTemplate %}
+ 
+ {% block title %}All Recipes{% endblock %}
+ 
+diff --git a/templates/recipes/show.html.twig b/templates/recipes/show.html.twig
+index 067b6c9..ff8837e 100644
+--- a/templates/recipes/show.html.twig
++++ b/templates/recipes/show.html.twig
+@@ -1,4 +1,4 @@
+-{% extends 'base.html.twig' %}
++{% extends nglayouts.layoutTemplate %}
+ 
+ {% block title %}{{ recipe.name }}{% endblock %}
+ 
+diff --git a/templates/security/login.html.twig b/templates/security/login.html.twig
+index 5dc43bf..1f4e569 100644
+--- a/templates/security/login.html.twig
++++ b/templates/security/login.html.twig
+@@ -1,4 +1,4 @@
+-{% extends 'base.html.twig' %}
++{% extends nglayouts.layoutTemplate %}
+ 
+ {% block title %}Log in!{% endblock %}
+ 
