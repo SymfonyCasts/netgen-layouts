@@ -10,10 +10,15 @@ h3 {
     font-size: 1.25rem;
 }
 
-.header {
+.hero-wrapper {
+    background-color: #E7F3F3;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    text-align: center;
+}
+.hero-wrapper h1 {
     font-family: 'Lobster', cursive;
     font-size: 60px;
-    text-align: center;
 }
 
 .entity-container{
