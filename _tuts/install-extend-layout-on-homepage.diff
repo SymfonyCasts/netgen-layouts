@@ -1,0 +1,10 @@
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index e8485f2..0a32bb9 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -1,4 +1,4 @@
+-{% extends 'base.html.twig' %}
++{% extends nglayouts.layoutTemplate %}
+ 
+ {% block body %}
+     <div class="py-5 text-center" style="background-color: #E7F3F3">
