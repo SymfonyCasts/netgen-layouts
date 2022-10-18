@@ -3,10 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Barn & Bake: Yum for your Puppers!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -35,7 +33,7 @@
                         <a class="nav-link" href="{{ path('app_recipes') }}">All Recipes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_skills') }}">All Techniques</a>
+                        <a class="nav-link" href="#">All Techniques</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
