@@ -1,5 +1,5 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 76048ef..d324e33 100644
+index 2467f3b..7e500ff 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -1,6 +1,8 @@
@@ -21,7 +21,7 @@ index 76048ef..d324e33 100644
      <div class="container">
          <h2 class="text-center my-5">Latest Recipes</h2>
          <div class="row">
-@@ -51,14 +55,18 @@
+@@ -26,14 +30,18 @@
          </div>
          <div class="text-center mt-5 text-underline"><u><a href="#">Show More</a></u></div>
      </div>
@@ -40,7 +40,7 @@ index 76048ef..d324e33 100644
      <div class="container py-4 my-5">
          <h2 class="text-center mb-4">Featured Techniques</h2>
          <div class="row my-5">
-@@ -82,3 +90,5 @@
+@@ -57,3 +65,5 @@
          <div class="text-center mt-3 text-underline"><u><a href="#">Show More</a></u></div>
      </div>
  {% endblock %}
