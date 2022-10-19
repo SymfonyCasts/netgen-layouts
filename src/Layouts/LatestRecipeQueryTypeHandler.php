@@ -6,7 +6,9 @@ use App\Repository\RecipeRepository;
 use Netgen\Layouts\API\Values\Collection\Query;
 use Netgen\Layouts\Collection\QueryType\QueryTypeHandlerInterface;
 use Netgen\Layouts\Parameters\ParameterBuilderInterface;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
+#[AutoconfigureTag('netgen_layouts.query_type_handler', ['type' => 'latest_recipes'])]
 class LatestRecipeQueryTypeHandler implements QueryTypeHandlerInterface
 {
     public function __construct(private RecipeRepository $recipeRepository)
