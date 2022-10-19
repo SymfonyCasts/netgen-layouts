@@ -2,6 +2,7 @@
 
 namespace App\ContentBrowser;
 
+use App\Entity\Recipe;
 use App\Repository\RecipeRepository;
 use Netgen\ContentBrowser\Backend\BackendInterface;
 use Netgen\ContentBrowser\Item\ItemInterface;
@@ -52,6 +53,8 @@ class RecipeBrowserBackend implements BackendInterface
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+
+        return array_map(fn(Recipe $recipe) => new RecipeBrowserItem($recipe), $recipes);
     }
 
     public function getSubItemsCount(LocationInterface $location): int
