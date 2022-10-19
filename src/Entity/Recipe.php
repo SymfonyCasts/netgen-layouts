@@ -148,9 +148,9 @@ class Recipe
         $minutes = $this->totalTime % 60;
 
         return sprintf(
-            '%s hour%d, %s minutes',
+            '%s hour%s, %s minutes',
             $hours,
-            $hours === 1 ? '' : 's',
+            $hours == 1 ? '' : 's',
             $minutes
         );
     }
