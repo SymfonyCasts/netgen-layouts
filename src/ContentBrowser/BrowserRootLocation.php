@@ -8,16 +8,16 @@ class BrowserRootLocation implements LocationInterface
 {
     public function getLocationId()
     {
-        // TODO: Implement getLocationId() method.
+        return 0;
     }
 
     public function getName(): string
     {
-        // TODO: Implement getName() method.
+        return 'All';
     }
 
     public function getParentId()
     {
-        // TODO: Implement getParentId() method.
+        return null;
     }
 }
