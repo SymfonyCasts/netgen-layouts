@@ -2,27 +2,32 @@
 
 namespace App\ContentBrowser;
 
+use App\Entity\Recipe;
 use Netgen\ContentBrowser\Item\ItemInterface;
 
 class RecipeBrowserItem implements ItemInterface
 {
+    public function __construct(private Recipe $recipe)
+    {
+    }
+
     public function getValue()
     {
-        // TODO: Implement getValue() method.
+        return $this->recipe->getId();
     }
 
     public function getName(): string
     {
-        // TODO: Implement getName() method.
+        return $this->recipe->getName();
     }
 
     public function isVisible(): bool
     {
-        // TODO: Implement isVisible() method.
+        return true;
     }
 
     public function isSelectable(): bool
     {
-        // TODO: Implement isSelectable() method.
+        return true;
     }
 }
