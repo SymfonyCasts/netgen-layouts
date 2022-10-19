@@ -38,6 +38,13 @@ h3 {
     border-radius: 5px;
     box-shadow: 2px 3px 9px 4px rgb(0 0 0 / 4%);
     background-color: #fff;
+    display: block;
+    transition: background-color 100ms;
+}
+.recipe-container:hover {
+    text-decoration: none;
+    color: #687474;
+    background-color: #fff1f2;
 }
 
 .recipe-list-item {
