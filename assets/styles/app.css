@@ -58,3 +58,10 @@ h3 {
 .text-heart {
     color: #b30000;
 }
+
+.ajax-navigation {
+    margin-top: 2rem;
+}
+.ajax-load-more {
+    border: none;
+}
