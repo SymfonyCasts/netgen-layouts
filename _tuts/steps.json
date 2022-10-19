@@ -54,7 +54,217 @@
             "id": "blocks-nav-footer-blocks",
             "name": "Blocks: nav\/footer blocks",
             "description": null
+        },
+        {
+            "id": "admin-link-to-layouts-admin",
+            "name": "Admin: Link to layouts admin",
+            "description": null
+        },
+        {
+            "id": "valuetype-add-value-types-config",
+            "name": "ValueType: add value_types config",
+            "description": null
+        },
+        {
+            "id": "querytype-add-query-types-config",
+            "name": "QueryType: Add query_types config",
+            "description": null
+        },
+        {
+            "id": "querytype-add-latestrecipequerytypehandler-empty",
+            "name": "QueryType: Add LatestRecipeQueryTypeHandler empty",
+            "description": null
+        },
+        {
+            "id": "querytype-fill-in-methods",
+            "name": "QueryType: Fill in methods",
+            "description": null
+        },
+        {
+            "id": "querytype-add-autoconfiguretag",
+            "name": "QueryType: Add AutoconfigureTag",
+            "description": null
+        },
+        {
+            "id": "valueconverter-create-recipevalueconverter",
+            "name": "ValueConverter: create RecipeValueConverter",
+            "description": null
+        },
+        {
+            "id": "valueconverter-fill-in-logic",
+            "name": "ValueConverter: fill in logic",
+            "description": null
+        },
+        {
+            "id": "querytype-adding-parameter",
+            "name": "QueryType: adding parameter",
+            "description": null
+        },
+        {
+            "id": "querytype-add-parameter-translation",
+            "name": "QueryType: add parameter translation",
+            "description": null
+        },
+        {
+            "id": "querytype-use-in-query",
+            "name": "QueryType: use in query",
+            "description": null
+        },
+        {
+            "id": "itemview-add-admin-item-view",
+            "name": "ItemView: Add admin item_view",
+            "description": null
+        },
+        {
+            "id": "itemview-dump-in-template",
+            "name": "ItemView: dump() in template",
+            "description": null
+        },
+        {
+            "id": "itemview-finish-admin-layout",
+            "name": "ItemView: finish admin layout",
+            "description": null
+        },
+        {
+            "id": "itemview-add-frontend-view",
+            "name": "ItemView: Add frontend view",
+            "description": null
+        },
+        {
+            "id": "itemview-copy-in-template-from-homepage",
+            "name": "ItemView: Copy in template from homepage",
+            "description": null
+        },
+        {
+            "id": "itemview-customize-for-correct-variables",
+            "name": "ItemView: customize for correct variables",
+            "description": null
+        },
+        {
+            "id": "itemview-remove-custom-recipe-logic",
+            "name": "ItemView: Remove custom recipe logic",
+            "description": null
+        },
+        {
+            "id": "ajaxmore-include-page-head",
+            "name": "AjaxMore: include page_head",
+            "description": null
+        },
+        {
+            "id": "ajaxmore-add-ajax-item-view",
+            "name": "AjaxMore: Add ajax item_view",
+            "description": null
+        },
+        {
+            "id": "ajaxmore-customize-load-more-text",
+            "name": "AjaxMore: Customize load more text",
+            "description": null
+        },
+        {
+            "id": "ajaxmore-customize-css",
+            "name": "AjaxMore: customize CSS",
+            "description": null
+        },
+        {
+            "id": "manual-enable-in-config",
+            "name": "Manual: Enable in config",
+            "description": null
+        },
+        {
+            "id": "manual-browser-item-types-config",
+            "name": "Manual: browser item_types config",
+            "description": null
+        },
+        {
+            "id": "manual-create-recipebrowserbackend",
+            "name": "Manual: Create RecipeBrowserBackend",
+            "description": null
+        },
+        {
+            "id": "manual-add-tag",
+            "name": "Manual: add tag",
+            "description": null
+        },
+        {
+            "id": "manual-add-browserrootlocation",
+            "name": "Manual: Add BrowserRootLocation",
+            "description": null
+        },
+        {
+            "id": "manual-browserrootlocation-logic",
+            "name": "Manual: BrowserRootLocation logic",
+            "description": null
+        },
+        {
+            "id": "manual-most-basic-backend-implementation",
+            "name": "Manual: most basic backend implementation",
+            "description": null
+        },
+        {
+            "id": "manual-do-query-in-getsubitems",
+            "name": "Manual: Do query in getSubItems()",
+            "description": null
+        },
+        {
+            "id": "manual-empty-recipebrowseritem",
+            "name": "Manual: Empty RecipeBrowserItem",
+            "description": null
+        },
+        {
+            "id": "manual-recipebrowseritem-logic",
+            "name": "Manual: RecipeBrowserItem logic",
+            "description": null
+        },
+        {
+            "id": "manual-return-items-in-getsubitems",
+            "name": "Manual: Return items in getSubItems()",
+            "description": null
+        },
+        {
+            "id": "manual-return-correct-count",
+            "name": "Manual: return correct count",
+            "description": null
+        },
+        {
+            "id": "manual-finish-search-methods",
+            "name": "Manual: Finish search methods",
+            "description": null
+        },
+        {
+            "id": "valueloader-create-recipevalueloader",
+            "name": "ValueLoader: Create RecipeValueLoader",
+            "description": null
+        },
+        {
+            "id": "valueloader-tag-it",
+            "name": "ValueLoader: tag it",
+            "description": null
+        },
+        {
+            "id": "valueloader-fill-in-methods",
+            "name": "ValueLoader: fill in methods",
+            "description": null
+        },
+        {
+            "id": "browserpreview-implement-loaditem",
+            "name": "BrowserPreview: implement loadItem()",
+            "description": null
+        },
+        {
+            "id": "browserpreview-add-basic-template",
+            "name": "BrowserPreview: Add basic template",
+            "description": null
+        },
+        {
+            "id": "browserpreview-add-getter-on-item-class",
+            "name": "BrowserPreview: Add getter on item class",
+            "description": null
+        },
+        {
+            "id": "browserpreview-finish-template",
+            "name": "BrowserPreview: Finish template",
+            "description": null
         }
     ],
-    "sha": "f7ca39874c5b2df0d9b03816b931f48c228f5de0"
+    "sha": "13a72adabd83f537c4ad87c5f64f3da04689e155"
 }
