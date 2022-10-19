@@ -3,4 +3,5 @@ netgen_content_browser:
         # must match "value_types" key in netgen_layouts config
         doctrine_recipes:
             name: 'Recipes 🍓'
-
+            preview:
+                template: 'nglayouts/content_browser/recipe_preview.html.twig'
