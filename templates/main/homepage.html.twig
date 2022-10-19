@@ -16,42 +16,17 @@
     <div class="container">
         <h2 class="text-center my-5">Latest Recipes</h2>
         <div class="row">
-            <div class="col-3">
-                <div class="text-center recipe-container p-3">
-                    <div class="p-3 entity-img">
-                        <img src="{{ asset('images/pup-cup.png') }}" width="auto" height="115" alt="carrot image">
+            {% for recipe in latestRecipes %}
+                <div class="col-3">
+                    <div class="text-center recipe-container p-3">
+                        <div class="p-3 entity-img">
+                            <img src="{{ asset(recipe.imageUrl) }}" width="auto" height="115" alt="{{ recipe.name }} image">
+                        </div>
+                        <h3 class="mt-3">{{ recipe.name }}</h3>
+                        <small>{{ recipe.timeAsWords }} (prep & cook)</small>
                     </div>
-                    <h3 class="mt-3">Vegetables & Rice</h3>
-                    <small>1 hour (prep & cook)</small>
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="text-center recipe-container p-3">
-                    <div class="p-3 entity-img">
-                        <img src="{{ asset('images/pup-cup.png') }}" width="auto" height="115" alt="egg image">
-                    </div>
-                    <h3 class="mt-3">Egg Protein Dinner</h3>
-                    <small>2 hour (prep & cook)</small>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="text-center recipe-container p-3">
-                    <div class="p-3 entity-img">
-                        <img src="{{ asset('images/pup-cup.png') }}" width="auto" height="115" alt="cake image">
-                    </div>
-                    <h3 class="mt-3">Doggo Birthday Cake</h3>
-                    <small>6 hours (prep & cook)</small>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="text-center recipe-container p-3">
-                    <div class="p-3 entity-img">
-                        <img src="{{ asset('images/pup-cup.png') }}" width="auto" height="115" alt="pup cup image">
-                    </div>
-                    <h3 class="mt-3">Pumpkin Pup Cup</h3>
-                    <small>.5 hour (prep & cook)</small>
-                </div>
-            </div>
+            {% endfor %}
         </div>
         <div class="text-center mt-5 text-underline"><u><a href="#">Show More</a></u></div>
     </div>
