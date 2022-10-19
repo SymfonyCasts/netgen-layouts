@@ -1,0 +1,7 @@
+diff --git a/translations/nglayouts.en.yaml b/translations/nglayouts.en.yaml
+new file mode 100644
+index 0000000..38b3a97
+--- /dev/null
++++ b/translations/nglayouts.en.yaml
+@@ -0,0 +1 @@
++query.latest_recipes.term: 'Search term'
