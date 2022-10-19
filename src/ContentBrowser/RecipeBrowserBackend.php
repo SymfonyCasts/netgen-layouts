@@ -32,7 +32,7 @@ class RecipeBrowserBackend implements BackendInterface
 
     public function loadItem($value): ItemInterface
     {
-        // TODO: Implement loadItem() method.
+        return new RecipeBrowserItem($this->recipeRepository->find($value));
     }
 
     public function getSubLocations(LocationInterface $location): iterable
