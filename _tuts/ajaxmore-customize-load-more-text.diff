@@ -1,0 +1,7 @@
+diff --git a/translations/nglayouts.en.yaml b/translations/nglayouts.en.yaml
+index 38b3a97..45c22b9 100644
+--- a/translations/nglayouts.en.yaml
++++ b/translations/nglayouts.en.yaml
+@@ -1 +1,2 @@
+ query.latest_recipes.term: 'Search term'
++collection.pager.load_more: 'Show More'
