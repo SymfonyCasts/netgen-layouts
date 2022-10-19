@@ -1,1 +1,2 @@
 query.latest_recipes.term: 'Search term'
+collection.pager.load_more: 'Show More'
