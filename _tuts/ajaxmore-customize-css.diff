@@ -1,0 +1,15 @@
+diff --git a/assets/styles/app.css b/assets/styles/app.css
+index 6d178a1..466f5cb 100644
+--- a/assets/styles/app.css
++++ b/assets/styles/app.css
+@@ -60,3 +60,10 @@ h3 {
+ .text-heart {
+     color: #b30000;
+ }
++
++.ajax-navigation {
++    margin-top: 2rem;
++}
++.ajax-load-more {
++    border: none;
++}
