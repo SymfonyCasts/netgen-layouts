@@ -1,0 +1,57 @@
+diff --git a/src/Layouts/RecipeValueConverter.php b/src/Layouts/RecipeValueConverter.php
+index 39907ad..cf82a00 100644
+--- a/src/Layouts/RecipeValueConverter.php
++++ b/src/Layouts/RecipeValueConverter.php
+@@ -2,42 +2,45 @@
+ 
+ namespace App\Layouts;
+ 
++use App\Entity\Recipe;
+ use Netgen\Layouts\Item\ValueConverterInterface;
+ 
+ class RecipeValueConverter implements ValueConverterInterface
+ {
+     public function supports(object $object): bool
+     {
+-        // TODO: Implement supports() method.
++        return $object instanceof Recipe;
+     }
+ 
+     public function getValueType(object $object): string
+     {
+-        // TODO: Implement getValueType() method.
++        return 'doctrine_recipe';
+     }
+ 
+     public function getId(object $object)
+     {
+-        // TODO: Implement getId() method.
++        return $object->getId();
+     }
+ 
+     public function getRemoteId(object $object)
+     {
+-        // TODO: Implement getRemoteId() method.
++        return $this->getId($object);
+     }
+ 
+     public function getName(object $object): string
+     {
+-        // TODO: Implement getName() method.
++        assert($object instanceof Recipe);
++
++        return $object->getName();
+     }
+ 
+     public function getIsVisible(object $object): bool
+     {
+-        // TODO: Implement getIsVisible() method.
++        return true;
+     }
+ 
+     public function getObject(object $object): object
+     {
+-        // TODO: Implement getObject() method.
++        return $object;
+     }
+ }
