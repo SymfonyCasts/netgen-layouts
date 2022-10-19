@@ -29,4 +29,7 @@ return [
     Netgen\Bundle\LayoutsAdminBundle\NetgenLayoutsAdminBundle::class => ['all' => true],
     Netgen\Bundle\LayoutsDebugBundle\NetgenLayoutsDebugBundle::class => ['dev' => true, 'test' => true],
     Netgen\Bundle\LayoutsStandardBundle\NetgenLayoutsStandardBundle::class => ['all' => true],
+    Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle::class => ['all' => true],
+    Contentful\ContentfulBundle\ContentfulBundle::class => ['all' => true],
+    Netgen\Bundle\LayoutsContentfulBundle\NetgenLayoutsContentfulBundle::class => ['all' => true],
 ];
