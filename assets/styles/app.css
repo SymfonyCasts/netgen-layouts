@@ -40,6 +40,8 @@ h3 {
     background-color: #fff;
     display: block;
     transition: background-color 100ms;
+    margin-bottom: 3rem;
+    height: 280px;
 }
 .recipe-container:hover {
     text-decoration: none;
