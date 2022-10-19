@@ -1,0 +1,7 @@
+diff --git a/templates/nglayouts/admin/recipe_item.html.twig b/templates/nglayouts/admin/recipe_item.html.twig
+index 8ad82b1..1c951c0 100644
+--- a/templates/nglayouts/admin/recipe_item.html.twig
++++ b/templates/nglayouts/admin/recipe_item.html.twig
+@@ -1 +1 @@
+-Does it work?
++{{ dump() }}
