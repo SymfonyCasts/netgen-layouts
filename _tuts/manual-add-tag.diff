@@ -1,0 +1,14 @@
+diff --git a/src/ContentBrowser/RecipeBrowserBackend.php b/src/ContentBrowser/RecipeBrowserBackend.php
+index 4327a90..7733a7a 100644
+--- a/src/ContentBrowser/RecipeBrowserBackend.php
++++ b/src/ContentBrowser/RecipeBrowserBackend.php
+@@ -5,7 +5,9 @@ namespace App\ContentBrowser;
+ use Netgen\ContentBrowser\Backend\BackendInterface;
+ use Netgen\ContentBrowser\Item\ItemInterface;
+ use Netgen\ContentBrowser\Item\LocationInterface;
++use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
+ 
++#[AutoconfigureTag('netgen_content_browser.backend', [ 'item_type' => 'doctrine_recipe' ])]
+ class RecipeBrowserBackend implements BackendInterface
+ {
+     public function getSections(): iterable
