@@ -1,0 +1,22 @@
+diff --git a/config/packages/netgen_layouts.yaml b/config/packages/netgen_layouts.yaml
+index 924979f..94a9afd 100644
+--- a/config/packages/netgen_layouts.yaml
++++ b/config/packages/netgen_layouts.yaml
+@@ -19,3 +19,10 @@ netgen_layouts:
+                     template: 'nglayouts/admin/recipe_item.html.twig'
+                     match:
+                         item\value_type: 'doctrine_recipe'
++            # default = frontend
++            default:
++                # this key is not important
++                latest_recipes_default:
++                    template: 'nglayouts/frontend/recipe_item.html.twig'
++                    match:
++                        item\value_type: 'doctrine_recipe'
+diff --git a/templates/nglayouts/frontend/recipe_item.html.twig b/templates/nglayouts/frontend/recipe_item.html.twig
+new file mode 100644
+index 0000000..d313254
+--- /dev/null
++++ b/templates/nglayouts/frontend/recipe_item.html.twig
+@@ -0,0 +1 @@
++{{ item.object.name }}
