@@ -1,0 +1,17 @@
+diff --git a/src/ContentBrowser/RecipeBrowserBackend.php b/src/ContentBrowser/RecipeBrowserBackend.php
+index b0fab77..81a76e2 100644
+--- a/src/ContentBrowser/RecipeBrowserBackend.php
++++ b/src/ContentBrowser/RecipeBrowserBackend.php
+@@ -59,7 +59,11 @@ class RecipeBrowserBackend implements BackendInterface
+ 
+     public function getSubItemsCount(LocationInterface $location): int
+     {
+-        return 0;
++        return $this->recipeRepository
++            ->createQueryBuilderOrderedByNewest()
++            ->select('COUNT(recipe.id)')
++            ->getQuery()
++            ->getSingleScalarResult();
+     }
+ 
+     public function search(string $searchText, int $offset = 0, int $limit = 25): iterable
