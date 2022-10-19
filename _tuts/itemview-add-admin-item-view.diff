@@ -1,0 +1,25 @@
+diff --git a/config/packages/netgen_layouts.yaml b/config/packages/netgen_layouts.yaml
+index b2d2587..924979f 100644
+--- a/config/packages/netgen_layouts.yaml
++++ b/config/packages/netgen_layouts.yaml
+@@ -9,3 +9,13 @@ netgen_layouts:
+     query_types:
+         latest_recipes:
+             name: 'Latest Recipes'
++
++    view:
++        item_view:
++            # app = admin
++            app:
++                # this key is not important
++                latest_recipes_app:
++                    template: 'nglayouts/admin/recipe_item.html.twig'
++                    match:
++                        item\value_type: 'doctrine_recipe'
+diff --git a/templates/nglayouts/admin/recipe_item.html.twig b/templates/nglayouts/admin/recipe_item.html.twig
+new file mode 100644
+index 0000000..8ad82b1
+--- /dev/null
++++ b/templates/nglayouts/admin/recipe_item.html.twig
+@@ -0,0 +1 @@
++Does it work?
