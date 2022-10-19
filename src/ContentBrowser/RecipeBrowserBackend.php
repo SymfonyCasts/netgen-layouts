@@ -68,11 +68,22 @@ class RecipeBrowserBackend implements BackendInterface
 
     public function search(string $searchText, int $offset = 0, int $limit = 25): iterable
     {
-        return [];
+        $recipes = $this->recipeRepository
+            ->createQueryBuilderOrderedByNewest($searchText)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+
+        return array_map(fn(Recipe $recipe) => new RecipeBrowserItem($recipe), $recipes);
     }
 
     public function searchCount(string $searchText): int
     {
-        return 0;
+        return $this->recipeRepository
+            ->createQueryBuilderOrderedByNewest($searchText)
+            ->select('COUNT(recipe.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }
