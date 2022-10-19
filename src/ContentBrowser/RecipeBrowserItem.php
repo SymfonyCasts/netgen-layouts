@@ -30,4 +30,9 @@ class RecipeBrowserItem implements ItemInterface
     {
         return true;
     }
+
+    public function getRecipe(): Recipe
+    {
+        return $this->recipe;
+    }
 }
