@@ -1,0 +1,13 @@
+diff --git a/config/packages/netgen_layouts.yaml b/config/packages/netgen_layouts.yaml
+index c55a8b0..47aab1e 100644
+--- a/config/packages/netgen_layouts.yaml
++++ b/config/packages/netgen_layouts.yaml
+@@ -4,7 +4,7 @@ netgen_layouts:
+     value_types:
+         doctrine_recipe:
+             name: Recipe
+-            manual_items: false
++            manual_items: true
+ 
+     query_types:
+         latest_recipes:
