@@ -1,0 +1,13 @@
+diff --git a/src/ContentBrowser/RecipeBrowserBackend.php b/src/ContentBrowser/RecipeBrowserBackend.php
+index 9e29e0b..8a0d68d 100644
+--- a/src/ContentBrowser/RecipeBrowserBackend.php
++++ b/src/ContentBrowser/RecipeBrowserBackend.php
+@@ -32,7 +32,7 @@ class RecipeBrowserBackend implements BackendInterface
+ 
+     public function loadItem($value): ItemInterface
+     {
+-        // TODO: Implement loadItem() method.
++        return new RecipeBrowserItem($this->recipeRepository->find($value));
+     }
+ 
+     public function getSubLocations(LocationInterface $location): iterable
