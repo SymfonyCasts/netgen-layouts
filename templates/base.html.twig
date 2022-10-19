@@ -5,6 +5,8 @@
         <title>{% block title %}Barn & Bake: Yum for your Puppers!{% endblock %}</title>
         <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+        {{ include('@NetgenLayoutsStandard/page_head.html.twig', { full: true }) }}
+        {{ include('@NetgenLayouts/page_head.html.twig', { full: true }) }}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
