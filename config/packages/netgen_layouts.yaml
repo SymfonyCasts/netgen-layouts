@@ -4,7 +4,7 @@ netgen_layouts:
     value_types:
         doctrine_recipe:
             name: Recipe
-            manual_items: false
+            manual_items: true
 
     query_types:
         latest_recipes:
