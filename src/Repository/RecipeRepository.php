@@ -40,9 +40,16 @@ class RecipeRepository extends ServiceEntityRepository
         }
     }
 
-    public function createQueryBuilderOrderedByNewest(): QueryBuilder
+    public function createQueryBuilderOrderedByNewest(string $search = null): QueryBuilder
     {
-        return $this->createQueryBuilder('recipe')
+        $queryBuilder = $this->createQueryBuilder('recipe')
             ->orderBy('recipe.createdAt', 'DESC');
+
+        if ($search) {
+            $queryBuilder->andWhere('recipe.name LIKE :term OR recipe.subText LIKE :term')
+                ->setParameter('term', '%'.$search.'%');
+        }
+
+        return $queryBuilder;
     }
 }
