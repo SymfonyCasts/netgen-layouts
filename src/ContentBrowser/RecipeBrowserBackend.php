@@ -17,7 +17,7 @@ class RecipeBrowserBackend implements BackendInterface
 
     public function loadLocation($id): LocationInterface
     {
-        if ($id === 0) {
+        if ($id === '0') {
             return new BrowserRootLocation();
         }
 
