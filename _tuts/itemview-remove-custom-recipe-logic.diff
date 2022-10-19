@@ -1,0 +1,60 @@
+diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
+index fdab247..4c31a82 100644
+--- a/src/Controller/MainController.php
++++ b/src/Controller/MainController.php
+@@ -2,7 +2,6 @@
+ 
+ namespace App\Controller;
+ 
+-use App\Repository\RecipeRepository;
+ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+ use Symfony\Component\HttpFoundation\Response;
+ use Symfony\Component\Routing\Annotation\Route;
+@@ -10,15 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
+ class MainController extends AbstractController
+ {
+     #[Route('/', name: 'app_homepage')]
+-    public function homepage(RecipeRepository $recipeRepository): Response
++    public function homepage(): Response
+     {
+-        $latestRecipes = $recipeRepository->createQueryBuilderOrderedByNewest()
+-            ->setMaxResults(4)
+-            ->getQuery()
+-            ->getResult();
+-
+         return $this->render('main/homepage.html.twig', [
+-            'latestRecipes' => $latestRecipes,
+         ]);
+     }
+ }
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index 7e500ff..8367764 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -12,26 +12,6 @@
+     </div>
+ {% endblock %}
+ 
+-{% block latest_recipes %}
+-    <div class="container">
+-        <h2 class="text-center my-5">Latest Recipes</h2>
+-        <div class="row">
+-            {% for recipe in latestRecipes %}
+-                <div class="col-3">
+-                    <a href="{{ path('app_recipes_show', { slug: recipe.slug }) }}" class="text-center recipe-container p-3">
+-                        <div class="p-3 entity-img">
+-                            <img src="{{ asset(recipe.imageUrl) }}" width="auto" height="115" alt="{{ recipe.name }} image">
+-                        </div>
+-                        <h3 class="mt-3">{{ recipe.name }}</h3>
+-                        <small>{{ recipe.timeAsWords }} (prep & cook)</small>
+-                    </a>
+-                </div>
+-            {% endfor %}
+-        </div>
+-        <div class="text-center mt-5 text-underline"><u><a href="#">Show More</a></u></div>
+-    </div>
+-{% endblock %}
+-
+ {% block subscribe_newsletter %}
+     <div class="text-center pt-4 pb-5 my-4" style="background-color: #fdedf0;">
+         <h2>Subscribe</h2>
