@@ -1,0 +1,12 @@
+diff --git a/config/packages/netgen_layouts.yaml b/config/packages/netgen_layouts.yaml
+index bc371cd..11abe72 100644
+--- a/config/packages/netgen_layouts.yaml
++++ b/config/packages/netgen_layouts.yaml
+@@ -1,2 +1,7 @@
+ netgen_layouts:
+     pagelayout: 'base.html.twig'
++
++    value_types:
++        doctrine_recipe:
++            name: Recipe
++            manual_items: false
