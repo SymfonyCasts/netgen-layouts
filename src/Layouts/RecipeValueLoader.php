@@ -9,7 +9,9 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 #[AutoconfigureTag('netgen_layouts.cms_value_loader', ['value_type' => 'doctrine_recipe'])]
 class RecipeValueLoader implements ValueLoaderInterface
 {
-    private function __construct(private RecipeRepository $recipeRepository)
+    public function __construct(private RecipeRepository $recipeRepository)
+    {
+    }
 
     public function load($id): ?object
     {
