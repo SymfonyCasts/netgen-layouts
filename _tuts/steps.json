@@ -264,7 +264,22 @@
             "id": "browserpreview-finish-template",
             "name": "BrowserPreview: Finish template",
             "description": null
+        },
+        {
+            "id": "contentful-install-it",
+            "name": "Contentful: install it",
+            "description": null
+        },
+        {
+            "id": "contentful-adding-cmf-routing-config",
+            "name": "Contentful: Adding CMF routing config",
+            "description": null
+        },
+        {
+            "id": "contentful-use-our-contentful-space",
+            "name": "Contentful: use our contentful space",
+            "description": null
         }
     ],
-    "sha": "13a72adabd83f537c4ad87c5f64f3da04689e155"
+    "sha": "9faf722fc7675c67a84aa6cb484682c0a470ee0f"
 }
