@@ -1,8 +1,8 @@
 diff --git a/assets/styles/app.css b/assets/styles/app.css
-index 6d178a1..466f5cb 100644
+index 63d4aeb..407dfad 100644
 --- a/assets/styles/app.css
 +++ b/assets/styles/app.css
-@@ -60,3 +60,10 @@ h3 {
+@@ -68,3 +68,10 @@ h3 {
  .text-heart {
      color: #b30000;
  }
