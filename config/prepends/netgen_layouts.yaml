@@ -10,6 +10,12 @@ netgen_layouts:
         latest_recipes:
             name: 'Latest Recipes'
 
+    block_definitions:
+        list:
+            view_types:
+                one_by_two:
+                    name: 1x2 Featured Grid
+
     view:
         item_view:
             # app = admin
