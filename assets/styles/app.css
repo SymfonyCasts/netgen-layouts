@@ -21,12 +21,16 @@ h3 {
     font-size: 60px;
 }
 
-.skill-item-container{
+.skill-item-container {
     background-color: #F8EEE7;
     border-radius: 5px;
     box-shadow: 2px 3px 9px 4px rgb(0 0 0 / 4%);
     height: 185px;
     display: block;
+}
+.skill-item-container:hover {
+    text-decoration: none;
+    color: #687474;
 }
 
 .skill-img {
