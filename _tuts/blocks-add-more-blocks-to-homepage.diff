@@ -1,5 +1,5 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 4a0ccfd..b4d04d8 100644
+index 98799c0..f1f68af 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -1,6 +1,8 @@
@@ -36,7 +36,7 @@ index 4a0ccfd..b4d04d8 100644
      </div>
 +{% endblock %}
  
-+{% block featured_techniques %}
++{% block featured_skills %}
      <div class="container py-4 my-5">
          <h2 class="text-center mb-4">Featured Skills</h2>
          <div class="row my-5">
