@@ -1,1 +1,11 @@
-1x2
+{% extends '@nglayouts/block/block.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        {% for result in collections.default %}
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                {{ nglayouts_render_result(result, null, block.itemViewType) }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
