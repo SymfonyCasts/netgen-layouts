@@ -1,0 +1,22 @@
+diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
+index 4c31a82..0a07cef 100644
+--- a/src/Controller/MainController.php
++++ b/src/Controller/MainController.php
+@@ -14,4 +14,10 @@ class MainController extends AbstractController
+         return $this->render('main/homepage.html.twig', [
+         ]);
+     }
++
++    #[Route('/skills', name: 'app_skills')]
++    public function skills(): Response
++    {
++        return $this->render('main/skills.html.twig');
++    }
+ }
+diff --git a/templates/main/skills.html.twig b/templates/main/skills.html.twig
+new file mode 100644
+index 0000000..5683ba4
+--- /dev/null
++++ b/templates/main/skills.html.twig
+@@ -0,0 +1 @@
++{% extends nglayouts.layoutTemplate %}
