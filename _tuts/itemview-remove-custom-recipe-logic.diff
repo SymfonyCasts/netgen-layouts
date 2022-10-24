@@ -28,7 +28,7 @@ index fdab247..4c31a82 100644
      }
  }
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index b4d04d8..f2d7cd1 100644
+index f1f68af..775413a 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -12,26 +12,6 @@
