@@ -2,6 +2,5 @@
 
 {% block content %}
     {% set field = block.dynamicParameter('field') %}
-    {{ dump() }}
     <img class="{{ css_class }}" src="{{ field.value.file.url }}?h={{ block.parameter('height').value }}&w={{ block.parameter('width').value }}" alt="{{ field.value.title }}" />
 {% endblock %}
