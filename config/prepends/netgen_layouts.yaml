@@ -15,6 +15,10 @@ netgen_layouts:
             view_types:
                 one_by_two:
                     name: 1x2 Featured Grid
+                list:
+                    item_view_types:
+                        skill_big_view:
+                            name: Skills Big View
 
     view:
         item_view:
@@ -32,6 +36,12 @@ netgen_layouts:
                     template: 'nglayouts/frontend/recipe_item.html.twig'
                     match:
                         item\value_type: 'doctrine_recipe'
+                contentful_entry/skill_big_view:
+                    template: '@nglayouts/item/contentful_entry/skill_big_view.html.twig'
+                    match:
+                        item\value_type: 'contentful_entry'
+                        contentful\content_type: 'skill'
+                        item\view_type: 'skill_big_view'
                 contentful_entry/skill:
                     template: '@nglayouts/item/contentful_entry/skill.html.twig'
                     match:
