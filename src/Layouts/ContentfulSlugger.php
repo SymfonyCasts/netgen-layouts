@@ -12,6 +12,10 @@ class ContentfulSlugger implements EntrySluggerInterface
 
     public function getSlug(ContentfulEntry $contentfulEntry): string
     {
-        return '/skills/'.$this->filterSlug($contentfulEntry->get('title'));
+        return match ($contentfulEntry->getContentType()->getId()) {
+            'skill' => '/skills/'.$this->filterSlug($contentfulEntry->get('title')),
+            'advertisement' => '/_ad',
+            default => throw new \Exception('Invalid type'),
+        };
     }
 }
