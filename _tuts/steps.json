@@ -56,6 +56,11 @@
             "description": null
         },
         {
+            "id": "blocks-remove-h1-on-recipe-list",
+            "name": "Blocks: remove h1 on recipe list",
+            "description": null
+        },
+        {
             "id": "admin-link-to-layouts-admin",
             "name": "Admin: Link to layouts admin",
             "description": null
@@ -276,10 +281,120 @@
             "description": null
         },
         {
+            "id": "contentful-add-migration",
+            "name": "Contentful: add migration",
+            "description": null
+        },
+        {
             "id": "contentful-use-our-contentful-space",
             "name": "Contentful: use our contentful space",
             "description": null
+        },
+        {
+            "id": "slugger-add-slugger-class",
+            "name": "Slugger: Add Slugger class",
+            "description": null
+        },
+        {
+            "id": "slugger-add-logic",
+            "name": "Slugger: Add logic",
+            "description": null
+        },
+        {
+            "id": "slugger-add-tag",
+            "name": "Slugger: Add tag",
+            "description": null
+        },
+        {
+            "id": "slugger-add-config-file",
+            "name": "Slugger: Add config file",
+            "description": null
+        },
+        {
+            "id": "skills-list-create-route-controller",
+            "name": "Skills List: Create route\/controller",
+            "description": null
+        },
+        {
+            "id": "skills-list-link-to-it",
+            "name": "Skills List: Link to it",
+            "description": null
+        },
+        {
+            "id": "skills-list-override-title",
+            "name": "Skills List: override title",
+            "description": null
+        },
+        {
+            "id": "theming-override-title-template",
+            "name": "Theming: Override title template",
+            "description": null
+        },
+        {
+            "id": "theming-paste-in-core-template",
+            "name": "Theming: Paste in core template",
+            "description": null
+        },
+        {
+            "id": "theming-remove-title-class",
+            "name": "Theming: remove \"title\" class",
+            "description": null
+        },
+        {
+            "id": "theming-override-contentful-assets-template",
+            "name": "Theming: Override contentful assets template",
+            "description": null
+        },
+        {
+            "id": "theming-paste-in-core-tpl-dump",
+            "name": "Theming: Paste in core tpl + dump()",
+            "description": null
+        },
+        {
+            "id": "theming-render-simple-img",
+            "name": "Theming: Render simple img",
+            "description": null
+        },
+        {
+            "id": "theming-add-alt-attribute",
+            "name": "Theming: Add alt attribute",
+            "description": null
+        },
+        {
+            "id": "theming-render-css-class",
+            "name": "Theming: Render css_class",
+            "description": null
+        },
+        {
+            "id": "itemview-add-skill-item-view",
+            "name": "ItemView: add skill item view",
+            "description": null
+        },
+        {
+            "id": "itemview-move-config-to-prepends",
+            "name": "ItemView: Move config to prepends\/",
+            "description": null
+        },
+        {
+            "id": "itemview-add-prepend-extension",
+            "name": "ItemView: Add prepend extension",
+            "description": null
+        },
+        {
+            "id": "itemview-paste-in-real-contents-dump",
+            "name": "ItemView: Paste in real contents + dump",
+            "description": null
+        },
+        {
+            "id": "itemview-print-title",
+            "name": "ItemView: Print title",
+            "description": null
+        },
+        {
+            "id": "itemview-finalizing-template",
+            "name": "ItemView: Finalizing template",
+            "description": null
         }
     ],
-    "sha": "9faf722fc7675c67a84aa6cb484682c0a470ee0f"
+    "sha": "ffff94256d7c7075bf92cc2992c23cb19bd7df55"
 }
