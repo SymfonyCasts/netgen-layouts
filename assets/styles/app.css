@@ -27,10 +27,13 @@ h3 {
     box-shadow: 2px 3px 9px 4px rgb(0 0 0 / 4%);
     height: 185px;
     display: block;
+    border: 2px solid #F8EEE7;
+    transition: border-color 100ms;
 }
 .skill-item-container:hover {
     text-decoration: none;
     color: #687474;
+    border-color: #ffe8d7;
 }
 
 .skill-img {
