@@ -15,7 +15,7 @@ netgen_layouts:
             view_types:
                 one_by_two:
                     name: 1x2 Featured Grid
-                list:
+                grid:
                     item_view_types:
                         skill_big_view:
                             name: Skills Big View
