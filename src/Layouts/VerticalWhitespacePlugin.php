@@ -10,5 +10,4 @@ class VerticalWhitespacePlugin extends Plugin
     {
         // TODO: Implement getExtendedHandlers() method.
     }
-
-
+}
