@@ -10,6 +10,25 @@ h3 {
     font-size: 1.25rem;
 }
 
+.whitespace-top-small {
+    padding-top: 2rem;
+}
+.whitespace-top-medium {
+    padding-top: 4rem;
+}
+.whitespace-top-large {
+    padding-top: 8rem;
+}
+.whitespace-bottom-small {
+    padding-bottom: 2rem;
+}
+.whitespace-bottom-medium {
+    padding-bottom: 4rem;
+}
+.whitespace-bottom-large {
+    padding-bottom: 8rem;
+}
+
 .hero-wrapper {
     background-color: #E7F3F3;
     padding-top: 3rem;
