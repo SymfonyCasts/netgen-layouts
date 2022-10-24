@@ -42,19 +42,19 @@ h3 {
 }
 
 .recipe-container {
-    border: solid 1px #efefee;
+    border: solid 2px #efefee;
     border-radius: 5px;
     box-shadow: 2px 3px 9px 4px rgb(0 0 0 / 4%);
     background-color: #fff;
     display: block;
-    transition: background-color 100ms;
+    transition: border-color 100ms;
     margin-bottom: 3rem;
     height: 280px;
 }
 .recipe-container:hover {
     text-decoration: none;
     color: #687474;
-    background-color: #fff1f2;
+    border-color: #ffe8d7;
 }
 
 .recipe-list-item {
