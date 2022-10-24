@@ -15,14 +15,14 @@ netgen_layouts:
             # app = admin
             app:
                 # this key is not important
-                latest_recipes_app:
+                recipes_app:
                     template: 'nglayouts/admin/recipe_item.html.twig'
                     match:
                         item\value_type: 'doctrine_recipe'
             # default = frontend
             default:
                 # this key is not important
-                latest_recipes_default:
+                recipes_default:
                     template: 'nglayouts/frontend/recipe_item.html.twig'
                     match:
                         item\value_type: 'doctrine_recipe'
