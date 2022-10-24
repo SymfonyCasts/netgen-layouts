@@ -5,7 +5,9 @@ namespace App\Layouts;
 use Netgen\Layouts\Contentful\Entity\ContentfulEntry;
 use Netgen\Layouts\Contentful\Routing\EntrySlugger\FilterSlugTrait;
 use Netgen\Layouts\Contentful\Routing\EntrySluggerInterface;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
+#[AutoconfigureTag('netgen_layouts.contentful.entry_slugger', ['type' => 'skill'])]
 class SkillSlugger implements EntrySluggerInterface
 {
     use FilterSlugTrait;
