@@ -1,5 +1,5 @@
 diff --git a/config/packages/netgen_layouts.yaml b/config/packages/netgen_layouts.yaml
-index 924979f..94a9afd 100644
+index c378a80..3085822 100644
 --- a/config/packages/netgen_layouts.yaml
 +++ b/config/packages/netgen_layouts.yaml
 @@ -19,3 +19,10 @@ netgen_layouts:
@@ -9,7 +9,7 @@ index 924979f..94a9afd 100644
 +            # default = frontend
 +            default:
 +                # this key is not important
-+                latest_recipes_default:
++                recipes_default:
 +                    template: 'nglayouts/frontend/recipe_item.html.twig'
 +                    match:
 +                        item\value_type: 'doctrine_recipe'
