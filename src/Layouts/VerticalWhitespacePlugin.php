@@ -33,6 +33,7 @@ class VerticalWhitespacePlugin extends Plugin
                 'default_value' => 'medium',
                 'label' => 'Top Spacing',
                 'options' => [
+                    'None' => 'none',
                     'Small' => 'small',
                     'Medium' => 'medium',
                     'Large' => 'large',
@@ -48,6 +49,7 @@ class VerticalWhitespacePlugin extends Plugin
                 'default_value' => 'medium',
                 'label' => 'Bottom Spacing',
                 'options' => [
+                    'None' => 'none',
                     'Small' => 'small',
                     'Medium' => 'medium',
                     'Large' => 'large',
