@@ -1,0 +1,13 @@
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index 1ec87b7..85f620c 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -36,7 +36,7 @@
+                         <a class="nav-link" href="{{ path('app_recipes') }}">All Recipes</a>
+                     </li>
+                     <li class="nav-item">
+-                        <a class="nav-link" href="#">All Skills</a>
++                        <a class="nav-link" href="{{ path('app_skills') }}">All Skills</a>
+                     </li>
+                 </ul>
+                 <form class="form-inline my-2 my-lg-0">
