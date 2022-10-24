@@ -31,6 +31,11 @@ netgen_layouts:
                     match:
                         item\value_type: 'contentful_entry'
                         contentful\content_type: 'skill'
+                contentful_entry/ad:
+                    template: '@nglayouts/item/contentful_entry/ad.html.twig'
+                    match:
+                        item\value_type: 'contentful_entry'
+                        contentful\content_type: 'advertisement'
 
             ajax:
                 # this key is not important
