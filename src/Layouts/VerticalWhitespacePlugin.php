@@ -22,7 +22,7 @@ class VerticalWhitespacePlugin extends Plugin
             [
                 'default_value' => false,
                 'label' => 'Enable Vertical Whitespace?',
-                'groups' => self::GROUP_DESIGN,
+                'groups' => [self::GROUP_DESIGN],
             ],
         );
     }
