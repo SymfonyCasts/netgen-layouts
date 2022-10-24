@@ -46,6 +46,13 @@ netgen_layouts:
                         item\value_type: 'doctrine_recipe'
 
         block_view:
+            app:
+                list/one_by_two:
+                    template: '@NetgenLayoutsStandard/app/block/list/grid.html.twig'
+                    match:
+                        block\definition: list
+                        block\view_type: one_by_two
+
             default:
                 list/one_by_two:
                     template: '@nglayouts/block/list/one_by_two_list.html.twig'
