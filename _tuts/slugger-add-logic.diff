@@ -1,0 +1,25 @@
+diff --git a/src/Layouts/ContentfulSlugger.php b/src/Layouts/ContentfulSlugger.php
+index a959403..9068486 100644
+--- a/src/Layouts/ContentfulSlugger.php
++++ b/src/Layouts/ContentfulSlugger.php
+@@ -3,12 +3,19 @@
+ namespace App\Layouts;
+ 
+ use Netgen\Layouts\Contentful\Entity\ContentfulEntry;
++use Netgen\Layouts\Contentful\Routing\EntrySlugger\FilterSlugTrait;
+ use Netgen\Layouts\Contentful\Routing\EntrySluggerInterface;
+ 
+ class ContentfulSlugger implements EntrySluggerInterface
+ {
++    use FilterSlugTrait;
++
+     public function getSlug(ContentfulEntry $contentfulEntry): string
+     {
+-        // TODO: Implement getSlug() method.
++        return match ($contentfulEntry->getContentType()->getId()) {
++            'skill' => '/skills/'.$this->filterSlug($contentfulEntry->get('title')),
++            'advertisement' => '/_ad',
++            default => throw new \Exception('Invalid type'),
++        };
+     }
+ }
