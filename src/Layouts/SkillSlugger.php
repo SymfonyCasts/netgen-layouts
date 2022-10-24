@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Contentful;
+namespace App\Layouts;
 
 use Netgen\Layouts\Contentful\Entity\ContentfulEntry;
 use Netgen\Layouts\Contentful\Routing\EntrySluggerInterface;
