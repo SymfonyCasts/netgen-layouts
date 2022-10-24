@@ -9,7 +9,7 @@
     {# Located inside the "content" block to include the context from the parent template #}
     {% set title = macros.inline_template(block.parameter('title').value, _context) %}
 
-    <{{ tag }} class="title">
+    <{{ tag }}>
         {% if block.parameter('use_link').value and not link.empty %}
             {{ nglayouts_render_parameter(link, {content: title}) }}
         {% else %}
