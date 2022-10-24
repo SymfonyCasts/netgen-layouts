@@ -21,14 +21,15 @@ h3 {
     font-size: 60px;
 }
 
-.entity-container{
+.skill-item-container{
     background-color: #F8EEE7;
     border-radius: 5px;
     box-shadow: 2px 3px 9px 4px rgb(0 0 0 / 4%);
     height: 185px;
+    display: block;
 }
 
-.entity-img {
+.skill-img {
     background-color: #fff;
     border-radius: 5px;
 }
