@@ -6,7 +6,7 @@ use Netgen\Layouts\Contentful\Entity\ContentfulEntry;
 use Netgen\Layouts\Contentful\Routing\EntrySlugger\FilterSlugTrait;
 use Netgen\Layouts\Contentful\Routing\EntrySluggerInterface;
 
-class SkillSlugger implements EntrySluggerInterface
+class ContentfulSlugger implements EntrySluggerInterface
 {
     use FilterSlugTrait;
 
