@@ -1,0 +1,7 @@
+diff --git a/templates/nglayouts/themes/standard/block/title.html.twig b/templates/nglayouts/themes/standard/block/title.html.twig
+new file mode 100644
+index 0000000..9ceaee5
+--- /dev/null
++++ b/templates/nglayouts/themes/standard/block/title.html.twig
+@@ -0,0 +1 @@
++OVERRIDING TITLES!!
