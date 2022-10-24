@@ -8,12 +8,16 @@ use Netgen\Layouts\Contentful\Routing\EntrySluggerInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 #[AutoconfigureTag('netgen_layouts.contentful.entry_slugger', ['type' => 'skill'])]
-class SkillSlugger implements EntrySluggerInterface
+class ContentfulSlugger implements EntrySluggerInterface
 {
     use FilterSlugTrait;
 
     public function getSlug(ContentfulEntry $contentfulEntry): string
     {
-        return '/skills/'.$this->filterSlug($contentfulEntry->get('title'));
+        return match ($contentfulEntry->getContentType()->getId()) {
+            'skill' => '/skills/'.$this->filterSlug($contentfulEntry->get('title')),
+            'advertisement' => '/_ad',
+            default => throw new \Exception('Invalid type'),
+        };
     }
 }
