@@ -1,0 +1,3 @@
+netgen_layouts_contentful:
+    entry_slug_type:
+        default: default_slugger
