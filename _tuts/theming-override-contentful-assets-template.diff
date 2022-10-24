@@ -1,0 +1,7 @@
+diff --git a/templates/nglayouts/themes/standard/block/contentful_entry_field/assets.html.twig b/templates/nglayouts/themes/standard/block/contentful_entry_field/assets.html.twig
+new file mode 100644
+index 0000000..7b2c0bc
+--- /dev/null
++++ b/templates/nglayouts/themes/standard/block/contentful_entry_field/assets.html.twig
+@@ -0,0 +1 @@
++ASSET
