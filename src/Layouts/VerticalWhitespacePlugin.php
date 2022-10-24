@@ -25,5 +25,35 @@ class VerticalWhitespacePlugin extends Plugin
                 'groups' => [self::GROUP_DESIGN],
             ],
         );
+
+        $builder->get('vertical_whitespace:enabled')->add(
+            'vertical_whitespace:top',
+            ParameterType\ChoiceType::class,
+            [
+                'default_value' => 'medium',
+                'label' => 'Top Spacing',
+                'options' => [
+                    'Small' => 'small',
+                    'Medium' => 'medium',
+                    'Large' => 'large',
+                ],
+                'groups' => [self::GROUP_DESIGN],
+            ],
+        );
+
+        $builder->get('vertical_whitespace:enabled')->add(
+            'vertical_whitespace:bottom',
+            ParameterType\ChoiceType::class,
+            [
+                'default_value' => 'medium',
+                'label' => 'Bottom Spacing',
+                'options' => [
+                    'Small' => 'small',
+                    'Medium' => 'medium',
+                    'Large' => 'large',
+                ],
+                'groups' => [self::GROUP_DESIGN],
+            ],
+        );
     }
 }
