@@ -68,3 +68,14 @@ h3 {
 .text-heart {
     color: #b30000;
 }
+
+.ad-item-container {
+    border: 2px solid #E7F3F3;
+    width: 300px;
+    border-radius: 5px;
+    display: block;
+}
+.ad-item-container:hover {
+    text-decoration: none;
+    color: #687474;
+}
