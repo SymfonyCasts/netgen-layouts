@@ -14,4 +14,10 @@ class MainController extends AbstractController
         return $this->render('main/homepage.html.twig', [
         ]);
     }
+
+    #[Route('/skills', name: 'app_skills')]
+    public function skills(): Response
+    {
+        return $this->render('main/skills.html.twig');
+    }
 }
