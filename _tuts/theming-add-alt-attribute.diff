@@ -1,0 +1,11 @@
+diff --git a/templates/nglayouts/themes/standard/block/contentful_entry_field/assets.html.twig b/templates/nglayouts/themes/standard/block/contentful_entry_field/assets.html.twig
+index ff0834b..11f654f 100644
+--- a/templates/nglayouts/themes/standard/block/contentful_entry_field/assets.html.twig
++++ b/templates/nglayouts/themes/standard/block/contentful_entry_field/assets.html.twig
+@@ -3,5 +3,5 @@
+ {% block content %}
+     {% set field = block.dynamicParameter('field') %}
+     {{ dump() }}
+-    <img src="{{ field.value.file.url }}?h={{ block.parameter('height').value }}&w={{ block.parameter('width').value }}" />
++    <img src="{{ field.value.file.url }}?h={{ block.parameter('height').value }}&w={{ block.parameter('width').value }}" alt="{{ field.value.title }}" />
+ {% endblock %}
