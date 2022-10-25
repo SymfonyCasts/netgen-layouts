@@ -24,7 +24,7 @@ index 25ff430..9258262 100644
          "pagerfanta/doctrine-orm-adapter": "^3.6",
          "sensio/framework-extra-bundle": "^6.2",
 diff --git a/composer.lock b/composer.lock
-index f769f88..81cdaaa 100644
+index 537d634..e508807 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,8 +4,71 @@
@@ -391,45 +391,6 @@ index f769f88..81cdaaa 100644
          {
              "name": "doctrine/annotations",
              "version": "1.13.3",
-@@ -2024,16 +2371,16 @@
-         },
-         {
-             "name": "friendsofphp/proxy-manager-lts",
--            "version": "v1.0.12",
-+            "version": "v1.0.13",
-             "source": {
-                 "type": "git",
-                 "url": "https://github.com/FriendsOfPHP/proxy-manager-lts.git",
--                "reference": "8419f0158715b30d4b99a5bd37c6a39671994ad7"
-+                "reference": "88354616f4cf4f6620910fd035e282173ba453e8"
-             },
-             "dist": {
-                 "type": "zip",
--                "url": "https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/8419f0158715b30d4b99a5bd37c6a39671994ad7",
--                "reference": "8419f0158715b30d4b99a5bd37c6a39671994ad7",
-+                "url": "https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/88354616f4cf4f6620910fd035e282173ba453e8",
-+                "reference": "88354616f4cf4f6620910fd035e282173ba453e8",
-                 "shasum": ""
-             },
-             "require": {
-@@ -2090,7 +2437,7 @@
-             ],
-             "support": {
-                 "issues": "https://github.com/FriendsOfPHP/proxy-manager-lts/issues",
--                "source": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.12"
-+                "source": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.13"
-             },
-             "funding": [
-                 {
-@@ -2102,7 +2449,7 @@
-                     "type": "tidelift"
-                 }
-             ],
--            "time": "2022-05-05T09:31:05+00:00"
-+            "time": "2022-10-17T19:48:16+00:00"
-         },
-         {
-             "name": "friendsofsymfony/http-cache",
 @@ -2393,39 +2740,58 @@
              "time": "2022-09-22T02:37:53+00:00"
          },
@@ -552,8 +513,6 @@ index f769f88..81cdaaa 100644
 -                "package",
 -                "release",
 -                "versions"
--            ],
--            "support": {
 +                "client",
 +                "curl",
 +                "framework",
@@ -835,8 +794,8 @@ index f769f88..81cdaaa 100644
 +                "package",
 +                "release",
 +                "versions"
-+            ],
-+            "support": {
+             ],
+             "support": {
                  "issues": "https://github.com/Jean85/pretty-package-versions/issues",
 -                "source": "https://github.com/Jean85/pretty-package-versions/tree/2.0.5"
 +                "source": "https://github.com/Jean85/pretty-package-versions/tree/1.6.0"
