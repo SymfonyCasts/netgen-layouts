@@ -1,0 +1,26 @@
+diff --git a/templates/nglayouts/themes/standard/block/block.html.twig b/templates/nglayouts/themes/standard/block/block.html.twig
+new file mode 100644
+index 0000000..6d93750
+--- /dev/null
++++ b/templates/nglayouts/themes/standard/block/block.html.twig
+@@ -0,0 +1,20 @@
++{% set css_class = ['ngl-block', 'ngl-' ~ block.definition.identifier, 'ngl-vt-' ~ block.viewType, css_class|default(block.parameter('css_class').value)]|join(' ') %}
++{% set css_id = css_id|default(block.parameter('css_id').value) %}
++{% set set_container = block.parameter('set_container').value %}
++
++{% if show_empty_wrapper is not defined %}
++    {% set show_empty_wrapper = false %}
++{% endif %}
++
++{% set block_content = (block('content') is defined ? block('content') : '')|trim %}
++
++{% if block_content is not empty or show_empty_wrapper %}
++    <div class="{{ css_class }}" {% if css_id is not empty %} id="{{ css_id }}" {% endif %}>
++        TEST
++        {% if set_container %}<div class="container">{% endif %}
++
++        {{ block_content|raw }}
++
++        {% if set_container %}</div>{% endif %}
++    </div>
++{% endif %}
