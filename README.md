@@ -64,7 +64,7 @@ or `npm` installed (`npm` comes with Node) and then run:
 
 ```
 yarn install
-yarn encore dev --watch
+yarn watch
 
 # or
 npm install
