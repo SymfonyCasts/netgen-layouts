@@ -1,10 +1,10 @@
 diff --git a/assets/styles/app.css b/assets/styles/app.css
-index 63d4aeb..407dfad 100644
+index ecba6b6..b1bc19d 100644
 --- a/assets/styles/app.css
 +++ b/assets/styles/app.css
-@@ -68,3 +68,10 @@ h3 {
- .text-heart {
-     color: #b30000;
+@@ -98,3 +98,10 @@ h3 {
+     text-decoration: none;
+     color: #687474;
  }
 +
 +.ajax-navigation {
