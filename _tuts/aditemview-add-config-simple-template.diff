@@ -1,0 +1,23 @@
+diff --git a/config/prepends/netgen_layouts.yaml b/config/prepends/netgen_layouts.yaml
+index e274259..4cd81b8 100644
+--- a/config/prepends/netgen_layouts.yaml
++++ b/config/prepends/netgen_layouts.yaml
+@@ -31,6 +31,11 @@ netgen_layouts:
+                     match:
+                         item\value_type: 'contentful_entry'
+                         contentful\content_type: 'skill'
++                contentful_entry/ad:
++                    template: '@nglayouts/item/contentful_entry/ad.html.twig'
++                    match:
++                        item\value_type: 'contentful_entry'
++                        contentful\content_type: 'advertisement'
+ 
+             ajax:
+                 # this key is not important
+diff --git a/templates/nglayouts/themes/standard/item/contentful_entry/ad.html.twig b/templates/nglayouts/themes/standard/item/contentful_entry/ad.html.twig
+new file mode 100644
+index 0000000..552f007
+--- /dev/null
++++ b/templates/nglayouts/themes/standard/item/contentful_entry/ad.html.twig
+@@ -0,0 +1 @@
++Advertisement
