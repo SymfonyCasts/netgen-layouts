@@ -1,0 +1,17 @@
+diff --git a/templates/nglayouts/themes/standard/block/list/one_by_two_list.html.twig b/templates/nglayouts/themes/standard/block/list/one_by_two_list.html.twig
+index 213c0da..d0c1359 100644
+--- a/templates/nglayouts/themes/standard/block/list/one_by_two_list.html.twig
++++ b/templates/nglayouts/themes/standard/block/list/one_by_two_list.html.twig
+@@ -1 +1,11 @@
+-1x2
++{% extends '@nglayouts/block/block.html.twig' %}
++
++{% block content %}
++    <div class="row">
++        {% for result in collections.default %}
++            <div class="col-sm-6 col-md-6 col-lg-4">
++                {{ nglayouts_render_result(result, null, block.itemViewType) }}
++            </div>
++        {% endfor %}
++    </div>
++{% endblock %}

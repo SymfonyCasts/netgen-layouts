@@ -1,0 +1,19 @@
+diff --git a/templates/nglayouts/themes/standard/block/block.html.twig b/templates/nglayouts/themes/standard/block/block.html.twig
+index 3ff3229..8f90de0 100644
+--- a/templates/nglayouts/themes/standard/block/block.html.twig
++++ b/templates/nglayouts/themes/standard/block/block.html.twig
+@@ -2,6 +2,14 @@
+ {% set css_id = css_id|default(block.parameter('css_id').value) %}
+ {% set set_container = block.parameter('set_container').value %}
+ 
++{% set use_whitespace = block.parameter('vertical_whitespace:enabled').value is same as(true) %}
++{% set whitespace_top = block.parameter('vertical_whitespace:top').value %}
++{% set whitespace_bottom = block.parameter('vertical_whitespace:bottom').value %}
++{% if use_whitespace %}
++    {% set css_classes = css_classes|merge(['whitespace-top-' ~ whitespace_top]) %}
++    {% set css_classes = css_classes|merge(['whitespace-bottom-' ~ whitespace_bottom]) %}
++{% endif %}
++
+ {% if show_empty_wrapper is not defined %}
+     {% set show_empty_wrapper = false %}
+ {% endif %}
