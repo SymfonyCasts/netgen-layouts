@@ -394,7 +394,82 @@
             "id": "itemview-finalizing-template",
             "name": "ItemView: Finalizing template",
             "description": null
+        },
+        {
+            "id": "aditemview-add-config-simple-template",
+            "name": "AdItemView: Add config + simple template",
+            "description": null
+        },
+        {
+            "id": "aditemview-customize-template",
+            "name": "AdItemView: customize template",
+            "description": null
+        },
+        {
+            "id": "blockview-add-block-definitions",
+            "name": "BlockView: Add block_definitions",
+            "description": null
+        },
+        {
+            "id": "blockview-add-block-view",
+            "name": "BlockView: Add block_view",
+            "description": null
+        },
+        {
+            "id": "blockview-simple-template",
+            "name": "BlockView: Simple template",
+            "description": null
+        },
+        {
+            "id": "blockview-full-customization",
+            "name": "BlockView: Full customization",
+            "description": null
+        },
+        {
+            "id": "itemviewtype-add-2nd-skill-item-view",
+            "name": "ItemViewType: Add 2nd skill item view",
+            "description": null
+        },
+        {
+            "id": "itemviewtype-customize-template",
+            "name": "ItemViewType: Customize template",
+            "description": null
+        },
+        {
+            "id": "blockplugin-create-verticalwhitespaceplugin",
+            "name": "BlockPlugin: Create VerticalWhitespacePlugin",
+            "description": null
+        },
+        {
+            "id": "blockplugin-fill-in-getextendedhandlers",
+            "name": "BlockPlugin: Fill in getExtendedHandlers()",
+            "description": null
+        },
+        {
+            "id": "blockplugin-add-first-parameter",
+            "name": "BlockPlugin: Add first parameter",
+            "description": null
+        },
+        {
+            "id": "blockplugin-add-2-child-fields",
+            "name": "BlockPlugin: Add 2 child fields",
+            "description": null
+        },
+        {
+            "id": "blockplugin-duplicate-block-tpl-debug-code",
+            "name": "BlockPlugin: Duplicate block tpl + debug code",
+            "description": null
+        },
+        {
+            "id": "blockplugin-allow-css-classes-array",
+            "name": "BlockPlugin: Allow css_classes array",
+            "description": null
+        },
+        {
+            "id": "blockplugin-add-css-merge-for-vertical-spacing",
+            "name": "BlockPlugin: Add css merge for vertical spacing",
+            "description": null
         }
     ],
-    "sha": "ffff94256d7c7075bf92cc2992c23cb19bd7df55"
+    "sha": "c7179a30f8a1f544df526a036cabd8c6ea5f87e2"
 }
