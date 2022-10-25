@@ -1,0 +1,15 @@
+diff --git a/templates/nglayouts/themes/standard/item/contentful_entry/skill_big_view.html.twig b/templates/nglayouts/themes/standard/item/contentful_entry/skill_big_view.html.twig
+index 67b8f71..04dc233 100644
+--- a/templates/nglayouts/themes/standard/item/contentful_entry/skill_big_view.html.twig
++++ b/templates/nglayouts/themes/standard/item/contentful_entry/skill_big_view.html.twig
+@@ -1 +1,9 @@
+-BIG VIEW
++<a href="{{ path('cmf_routing_object', {'_route_object': item.object}) }}" class="text-center skill-item-container skill-item-container-large p-3 my-3" style="height: auto;">
++    <h3>{{ item.object.get('title') }}</h3>
++    <div class="d-flex">
++        <div class="p-3 mt-3 skill-img">
++            <img src="{{ item.object.get('image').file.url }}" width="auto" height="80" alt="{{ item.object.get('title')}} skill image">
++        </div>
++        <div class="p-3 mt-3">{{ item.object.get('shortDescription') }}</div>
++    </div>
++</a>
