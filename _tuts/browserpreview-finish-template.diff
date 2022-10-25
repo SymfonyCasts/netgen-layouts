@@ -1,9 +1,0 @@
-diff --git a/templates/nglayouts/content_browser/recipe_preview.html.twig b/templates/nglayouts/content_browser/recipe_preview.html.twig
-index 1c951c0..511d770 100644
---- a/templates/nglayouts/content_browser/recipe_preview.html.twig
-+++ b/templates/nglayouts/content_browser/recipe_preview.html.twig
-@@ -1 +1,3 @@
--{{ dump() }}
-+<strong>{{ item.recipe.name }}</strong>
-+<br><br>
-+<img src="{{ asset(item.recipe.imageUrl) }}" alt="Recipe Image">

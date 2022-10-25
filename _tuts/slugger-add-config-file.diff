@@ -1,9 +1,0 @@
-diff --git a/config/packages/netgen_layouts_contentful.yaml b/config/packages/netgen_layouts_contentful.yaml
-new file mode 100644
-index 0000000..837c1d2
---- /dev/null
-+++ b/config/packages/netgen_layouts_contentful.yaml
-@@ -0,0 +1,3 @@
-+netgen_layouts_contentful:
-+    entry_slug_type:
-+        default: default_slugger

@@ -1,7 +1,0 @@
-diff --git a/templates/nglayouts/content_browser/recipe_preview.html.twig b/templates/nglayouts/content_browser/recipe_preview.html.twig
-new file mode 100644
-index 0000000..1c951c0
---- /dev/null
-+++ b/templates/nglayouts/content_browser/recipe_preview.html.twig
-@@ -0,0 +1 @@
-+{{ dump() }}

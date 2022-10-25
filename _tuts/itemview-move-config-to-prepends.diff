@@ -1,4 +1,0 @@
-diff --git a/config/packages/netgen_layouts.yaml b/config/prepends/netgen_layouts.yaml
-similarity index 100%
-rename from config/packages/netgen_layouts.yaml
-rename to config/prepends/netgen_layouts.yaml
