@@ -1,0 +1,35 @@
+diff --git a/config/prepends/netgen_layouts.yaml b/config/prepends/netgen_layouts.yaml
+index c5d088b..456b080 100644
+--- a/config/prepends/netgen_layouts.yaml
++++ b/config/prepends/netgen_layouts.yaml
+@@ -15,6 +15,10 @@ netgen_layouts:
+             view_types:
+                 one_by_two:
+                     name: 1x2 Featured Grid
++                grid:
++                    item_view_types:
++                        skill_big_view:
++                            name: Skills Big View
+ 
+     view:
+         item_view:
+@@ -32,6 +36,12 @@ netgen_layouts:
+                     template: 'nglayouts/frontend/recipe_item.html.twig'
+                     match:
+                         item\value_type: 'doctrine_recipe'
++                contentful_entry/skill_big_view:
++                    template: '@nglayouts/item/contentful_entry/skill_big_view.html.twig'
++                    match:
++                        item\value_type: 'contentful_entry'
++                        contentful\content_type: 'skill'
++                        item\view_type: 'skill_big_view'
+                 contentful_entry/skill:
+                     template: '@nglayouts/item/contentful_entry/skill.html.twig'
+                     match:
+diff --git a/templates/nglayouts/themes/standard/item/contentful_entry/skill_big_view.html.twig b/templates/nglayouts/themes/standard/item/contentful_entry/skill_big_view.html.twig
+new file mode 100644
+index 0000000..67b8f71
+--- /dev/null
++++ b/templates/nglayouts/themes/standard/item/contentful_entry/skill_big_view.html.twig
+@@ -0,0 +1 @@
++BIG VIEW
