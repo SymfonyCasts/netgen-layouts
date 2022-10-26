@@ -18,8 +18,9 @@ index b2d2587..c378a80 100644
 +                        item\value_type: 'doctrine_recipe'
 diff --git a/templates/nglayouts/admin/recipe_item.html.twig b/templates/nglayouts/admin/recipe_item.html.twig
 new file mode 100644
-index 0000000..8ad82b1
+index 0000000..b7e111f
 --- /dev/null
 +++ b/templates/nglayouts/admin/recipe_item.html.twig
-@@ -0,0 +1 @@
+@@ -0,0 +1,2 @@
 +Does it work?
++{{ dump() }}
