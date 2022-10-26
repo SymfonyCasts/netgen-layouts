@@ -1,5 +1,5 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 0defaa4..1ec87b7 100644
+index 0defaa4..3ebb4f1 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -5,6 +5,8 @@
@@ -7,7 +7,7 @@ index 0defaa4..1ec87b7 100644
          <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
          <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
 +        {{ include('@NetgenLayoutsStandard/page_head.html.twig', { full: true }) }}
-+        {{ include('@NetgenLayouts/page_head.html.twig', { full: true }) }}
++        {{ include('@NetgenLayouts/page_head.html.twig') }}
          {% block stylesheets %}
              {{ encore_entry_link_tags('app') }}
          {% endblock %}
