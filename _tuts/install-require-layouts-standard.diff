@@ -11,7 +11,7 @@ index 4d7beb2..25ff430 100644
          "sensio/framework-extra-bundle": "^6.2",
          "stof/doctrine-extensions-bundle": "^1.7",
 diff --git a/composer.lock b/composer.lock
-index a5337d7..f769f88 100644
+index 8bf217b..537d634 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
@@ -231,20 +231,20 @@ index a5337d7..f769f88 100644
          },
          {
 -            "name": "friendsofphp/proxy-manager-lts",
--            "version": "v1.0.12",
+-            "version": "v1.0.13",
 +            "name": "egulias/email-validator",
 +            "version": "3.2.1",
              "source": {
                  "type": "git",
 -                "url": "https://github.com/FriendsOfPHP/proxy-manager-lts.git",
--                "reference": "8419f0158715b30d4b99a5bd37c6a39671994ad7"
+-                "reference": "88354616f4cf4f6620910fd035e282173ba453e8"
 +                "url": "https://github.com/egulias/EmailValidator.git",
 +                "reference": "f88dcf4b14af14a98ad96b14b2b317969eab6715"
              },
              "dist": {
                  "type": "zip",
--                "url": "https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/8419f0158715b30d4b99a5bd37c6a39671994ad7",
--                "reference": "8419f0158715b30d4b99a5bd37c6a39671994ad7",
+-                "url": "https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/88354616f4cf4f6620910fd035e282173ba453e8",
+-                "reference": "88354616f4cf4f6620910fd035e282173ba453e8",
 +                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/f88dcf4b14af14a98ad96b14b2b317969eab6715",
 +                "reference": "f88dcf4b14af14a98ad96b14b2b317969eab6715",
                  "shasum": ""
@@ -322,7 +322,7 @@ index a5337d7..f769f88 100644
              ],
              "support": {
 -                "issues": "https://github.com/FriendsOfPHP/proxy-manager-lts/issues",
--                "source": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.12"
+-                "source": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.13"
 +                "issues": "https://github.com/egulias/EmailValidator/issues",
 +                "source": "https://github.com/egulias/EmailValidator/tree/3.2.1"
              },
@@ -337,7 +337,7 @@ index a5337d7..f769f88 100644
 -                    "type": "tidelift"
                  }
              ],
--            "time": "2022-05-05T09:31:05+00:00"
+-            "time": "2022-10-17T19:48:16+00:00"
 +            "time": "2022-06-18T20:57:19+00:00"
          },
          {
@@ -624,20 +624,20 @@ index a5337d7..f769f88 100644
 -            "name": "monolog/monolog",
 -            "version": "2.8.0",
 +            "name": "friendsofphp/proxy-manager-lts",
-+            "version": "v1.0.12",
++            "version": "v1.0.13",
              "source": {
                  "type": "git",
 -                "url": "https://github.com/Seldaek/monolog.git",
 -                "reference": "720488632c590286b88b80e62aa3d3d551ad4a50"
 +                "url": "https://github.com/FriendsOfPHP/proxy-manager-lts.git",
-+                "reference": "8419f0158715b30d4b99a5bd37c6a39671994ad7"
++                "reference": "88354616f4cf4f6620910fd035e282173ba453e8"
              },
              "dist": {
                  "type": "zip",
 -                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/720488632c590286b88b80e62aa3d3d551ad4a50",
 -                "reference": "720488632c590286b88b80e62aa3d3d551ad4a50",
-+                "url": "https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/8419f0158715b30d4b99a5bd37c6a39671994ad7",
-+                "reference": "8419f0158715b30d4b99a5bd37c6a39671994ad7",
++                "url": "https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/88354616f4cf4f6620910fd035e282173ba453e8",
++                "reference": "88354616f4cf4f6620910fd035e282173ba453e8",
                  "shasum": ""
              },
              "require": {
@@ -744,7 +744,7 @@ index a5337d7..f769f88 100644
 -                "issues": "https://github.com/Seldaek/monolog/issues",
 -                "source": "https://github.com/Seldaek/monolog/tree/2.8.0"
 +                "issues": "https://github.com/FriendsOfPHP/proxy-manager-lts/issues",
-+                "source": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.12"
++                "source": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.13"
              },
              "funding": [
                  {
@@ -759,7 +759,7 @@ index a5337d7..f769f88 100644
                  }
              ],
 -            "time": "2022-07-24T11:55:47+00:00"
-+            "time": "2022-05-05T09:31:05+00:00"
++            "time": "2022-10-17T19:48:16+00:00"
          },
          {
 -            "name": "pagerfanta/core",
