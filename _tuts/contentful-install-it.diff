@@ -12,7 +12,7 @@ index 2727427..30eaad2 100644
 +CONTENTFUL_ACCESS_TOKEN=b4c0n73n7fu1
 +###< contentful/contentful-bundle ###
 diff --git a/composer.json b/composer.json
-index 25ff430..9258262 100644
+index 59b0e33..e1b9c08 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -12,6 +12,7 @@
@@ -24,15 +24,15 @@ index 25ff430..9258262 100644
          "pagerfanta/doctrine-orm-adapter": "^3.6",
          "sensio/framework-extra-bundle": "^6.2",
 diff --git a/composer.lock b/composer.lock
-index 537d634..e508807 100644
+index 27b2807..86b3a8d 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,8 +4,71 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "8e5ae2d91e3340ec01181090d4d16235",
-+    "content-hash": "5ff5e59b2148cdd91935ec6aa5c92187",
+-    "content-hash": "dd08252472bcaaeaf5e7c50184e2e4a8",
++    "content-hash": "e291c6ae2c1b9567f322631e63691ac0",
      "packages": [
 +        {
 +            "name": "aptoma/twig-markdown",

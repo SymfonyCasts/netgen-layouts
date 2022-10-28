@@ -1,5 +1,5 @@
 diff --git a/composer.json b/composer.json
-index 4d7beb2..25ff430 100644
+index d57736c..59b0e33 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -12,6 +12,7 @@
@@ -11,15 +11,15 @@ index 4d7beb2..25ff430 100644
          "sensio/framework-extra-bundle": "^6.2",
          "stof/doctrine-extensions-bundle": "^1.7",
 diff --git a/composer.lock b/composer.lock
-index 8bf217b..537d634 100644
+index dfecd26..27b2807 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "12c06d456521b39136618bd9ba4aeb16",
-+    "content-hash": "8e5ae2d91e3340ec01181090d4d16235",
+-    "content-hash": "8b792697d764dc8f7078a989b7feade4",
++    "content-hash": "dd08252472bcaaeaf5e7c50184e2e4a8",
      "packages": [
          {
              "name": "babdev/pagerfanta-bundle",
@@ -227,7 +227,7 @@ index 8bf217b..537d634 100644
              "name": "doctrine/annotations",
              "version": "1.13.3",
 @@ -1597,45 +1786,41 @@
-             "time": "2022-10-05T18:13:05+00:00"
+             "time": "2022-10-27T18:36:25+00:00"
          },
          {
 -            "name": "friendsofphp/proxy-manager-lts",
@@ -3170,7 +3170,7 @@ index 8bf217b..537d634 100644
 +                "standards"
 +            ],
 +            "support": {
-+                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.1.1"
++                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.0.2"
 +            },
 +            "funding": [
 +                {
@@ -3186,7 +3186,7 @@ index 8bf217b..537d634 100644
 +                    "type": "tidelift"
 +                }
 +            ],
-+            "time": "2022-02-25T11:15:52+00:00"
++            "time": "2022-01-02T09:55:41+00:00"
 +        },
 +        {
 +            "name": "symfony/expression-language",
@@ -3244,7 +3244,7 @@ index 8bf217b..537d634 100644
 -                "standards"
 -            ],
              "support": {
--                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.1.1"
+-                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.0.2"
 +                "source": "https://github.com/symfony/expression-language/tree/v5.4.14"
              },
              "funding": [
@@ -3253,7 +3253,7 @@ index 8bf217b..537d634 100644
                      "type": "tidelift"
                  }
              ],
--            "time": "2022-02-25T11:15:52+00:00"
+-            "time": "2022-01-02T09:55:41+00:00"
 +            "time": "2022-10-07T08:01:20+00:00"
          },
          {
