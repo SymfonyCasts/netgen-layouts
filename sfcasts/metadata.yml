@@ -1,0 +1,25 @@
+chapters:
+    - install
+    - how-it-works
+    - twig-blocks
+    - using-blocks
+    - value-type
+    - value-converter
+    - item-view
+    - frontend-item
+    - ajax
+    - content-browser
+    - backend-items
+    - value-loader
+    - contentful
+    - contentful-layout
+    - contentful-page
+    - slugger
+    - skills-page
+    - theme-templates
+    - block-views
+    - item-views
+    - prepend-config
+    - new-block-view
+    - item-view-type
+    - block-plugin
