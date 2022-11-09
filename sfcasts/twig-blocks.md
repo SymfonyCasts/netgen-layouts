@@ -1,54 +1,63 @@
-# Twig Blocks
+# Adding Twig Blocks to your Dynamic Layout
 
-Coming soon...
+So we just *completely* replaced our homepage with a dynamic layout. But, that's
+not really *that* interesting. What I *really* want to be able to do is use my
+*existing* homepage template and all this good content I've prepared... but then
+be able to *tweak* it by adding little bits of dynamic content here and there...
+or even by rearranging sections. To do that in the layout, under the blocks,
+at the bottom, add a special one called "Twig Block"... and let's put that right
+below the title. Notice that you can put as many blocks as you want inside of a single
+zone. These zones don't really end up being *all* that important.
 
-So we just completely replaced our homepage with a dynamic layout, but that's not
-really that interesting. What I really wanna be able to do is use my existing
-homepage template and all this good content I've prepared, but then be able to tweak
-it by adding little bits of dynamic content here and there, or even by rearranging
-sections to do that in the layout, go down into the bottom to a special block called
-TWI Block. And let's just put that right below the title. Notice you can put things
-in their own zones, or you can put as many blocks as you want inside of a single
-zone. These zones don't really end up being all that important anyways. When you
-click a block on the right side, you're gonna get block options. And this one has an
-important one called Twig Block name, where I'm gonna put body matching the block
-body I have in my template. Now here, let's hit publish and continue editing and then
-go over to refresh the homepage. And holy Toledo, our Static Twig content is inside
-our dynamic page. That's awesome. And everything still works. Even my fancy live
-components powered part of my page here.
+Anyways, when you click a block, on the right side, you'll see that block's options.
+This has an important one called "Twig block name". Enter `body` to match the
+`{% block body %}` that we have in the template.
 
-Okay, so this is cool, but it's still kind of like dynamic content on top and then
-static content on the bottom
+Ok, hit "publish and continue editing".. then go over and refresh the homepage.
+Holy content batman! Our Twig content now lives *inside* this dynamic page. That's
+awesome! And everything *still* works: even the fancy "live component" in the center
+of the page.
 
-<laugh>.
+## Adding More Blocks to your Template
 
-So to make this more flexible, we can just add more blocks to our template. So for
-example, I'll keep block body there, It doesn't really matter too much. And let's add
-Block Hero around our top part below that, a block called How about latest recipes
-and block one called Block Subscribe newsletter and Block. And finally down here, one
-called Featured Skills with an end block at the bottom. Now, if we just have those
-blocks, that makes no difference to our app, we're still rendering the body block
-down here, which includes all of those. But we now have a lot of flexibility here.
+Okay, so this is cool... but it's still just a bunch of dynamic content on top...
+then Twig template content on the bottom: can't *really* mix anything into the
+*middle* of our Twig content..
 
-Check
+*Unless*... we add more *blocks* to our template. For example, keep the `block body`...
+just so the page keeps working even if we *don't* map a layout, but then add a
+`block hero` around the top section, then a block called, how about, `latest_recipes`,
+`endblock`, another called `subscribe_newsletter` and a final one called
+`featured_skills`.
 
-This out. Let's change this body block here to render the hero block. And then let's
-add a couple more. Uh, another trick block here. Call this latest recipes. And by the
-way, this block labels just for your, just for you for clarity. So I could put latest
-recipes here and you can see that kind of shows up on top. Totally optional. And
-let's add two more blocks for the two other blocks. Subscribe newsletter. Yeah, I
-know I'm using the word blocks to mean two different things. And finally, this last
-one will be called featured skills. And then up here, I'm actually going to remove my
-title block temporarily. I don't need that. So now I'm running those four blocks.
-Let's say publish and continue editing. And then go check out the front end. Sweet.
-Our page is back, and I know it looks exactly like it did a second ago, but it's now
-being rendered by layouts. Do you see the power? We now have the ability to, for
-example, rearrange stuff. So watch, I'll move this subscribe newsletter down to the
-bottom, hit publish and continue editing Refresh. And boom, that static part of our
-site is now at the bottom of the page. Man, that is so cool.
+If we stopped now, this makes *no* difference to our app: we're still rendering the
+`body` block down here... which includes all of those. But we just gave ourselves
+a *lot* of new power.
 
-Or we could move that back up and we could include like dynamic content if we wanted,
-like text right in between one of these other blocks. Next, let's get even more
-aggressive and flexible by allowing the top navigation and bottom footer to be
-optional, but easy to add inside of a layout.
+Check it out: change the `body` block name to `hero` block. And then let's
+add a few more Twig blocks. Call this one `latest_recipes`. Oh, by the way, the
+block "labels" are just for us in the admin: just for for clarity. If I put
+"Latest Recipes" that shows up above the block. Totally optional.
 
+Add two more blocks: one that renders `subscribe_newsletter` and finally one
+for `featured_skills`. Then, up here, I'm going to remove the `title` block for now.
+
+By the way, I'm using the word "block" to mean two different things at once. First,
+the "things" we add to our layout - like a title, Google map, list of items, etc -
+are called blocks. Then, there are Twig blocks in our templates. And of course,
+one of the *types* of blocks we can add is one that renders... Twig blocks. Don't
+worry - it doesn't get any weirder than that.
+
+Anyways, say "Publish and Continue Editing"... then go refresh the frontend. And...
+sweet! Our page works. I know, it looks exactly like it did a minute ago, but
+it's now being rendered by layouts... *and* we can rearrange the pieces.
+
+Watch: I'll move the `subscribe_newsletter` down to the bottom, hit "publish and
+continue editing", refresh, and... boom! That static part of the page magically
+moved to the bottom. That is *cool*.
+
+Or, we could move that back up... then add some dynamic content, like text, in
+between one of thee other blocks.
+
+Next, let's get even more aggressive and flexible by allowing the top navigation
+and bottom footer to be optional, but easy to add, inside the layout.
