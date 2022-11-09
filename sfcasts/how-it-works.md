@@ -1,121 +1,176 @@
-# How It Works
+# Creating & Mapping Layouts
 
-Coming soon...
+Ok, let's see what layouts is all about. In this chapter, we'll, step-by-step,
+create & use a "layout", learning *exactly* how Layouts works its magic along
+the way.
 
-To check out the layouts admin section, head to ng layouts slash admin to find a
-login form. All right, I've already got set up where you have a user
-doggo@barkbite.com. Password wolf. This is an admin user and yet when we log in,
-access denied. All right, if you actually click down here on the Web Depot to abar
-security icon and go to access decision, you can see that we were deny access cuz it
-was looking for something called roll ng layouts Admin. In order to see the layouts
-admin area, you need to have this roll. The simplest way to add it is to go config
-packages security dot yaml and the role the user we're logged in as right now has
-roll admin speaking as roll hierarchy to also give it user role NG layouts admin. And
-now if we click back, ta-da. Welcome to the layouts admin section. Whoa. To
-understand what layouts does, it's just best to see it in action. Start in this
-layout section and let's create a new layout. The first step is it gives you a bunch
-of different layouts, types you can choose from. As you'll see, these are less
-important than it looks because once you are in a layout, you can really do whatever
-you want. But I typically choose layout two.
+To check out the Layouts admin section, head to `/ng-layouts/admin` to find... a
+login form! The login form has nothing to do with Layouts... it's just that the
+layouts admin area *requires* you to be logged in... and I've already added a login
+form to our site. And I've already got a user set up to use: `doggo@barkbite.com`.
+Password `woof`.
 
-I'm gonna call this homepage layout. That's just a description for us. Okay, great
-layout. And now you are on the layout editor. So pretty simple. What you have over
-here on the left side are called blocks. And there's lots of different type of blocks
-from simple title blocks to Google maps to more complex things like lists and grids
-where we're gonna bring in like collections of dynamic items like uh, featured
-recipes. So the idea is that you take one of these blocks, let's add a title block
-and you move it onto the page. All right, put some texts into that. And then up here,
-we'll just keep simple. We're just gonna hit published layout. Perfect. Now that we
-have this new layout, I'm gonna open second tab here, go to the homepage and
-absolutely nothing changed. Let me actually rearrange my tabs here. That's because
-once you have a layout, you need to map it to a specific page or a set of pages.
-That's the layout mapping section. So these are really the two important sections in
-the admin area. So here we can add new mapping and then go to details. And then you
-have multiple ways that you can map a layout to a specific URL. You could use, for
-example, the path info, path info prefix,
+## The Security Role Needed for the Admin Area
 
-Or even the route. So in this case, I'm actually gonna use, we could do path info
-with just slash, in this case I'm gonna use route. I'll add target and then I'm gonna
-go over here into my source controller, Main controller. And the name of my homepage
-is app under Score homepage. So read that over here and hit save Target. We're gonna
-talk about some of the other ways you can map targets on here. But the simplest way
-is you can basically say I want a specific layout mapped to a specific route or a
-specific you url. So we hit save changes and then actually decide which layout this
-map's to. We hit link layout and then we'll select our only one homepage layout.
-Awesome. So now when we go to the homepage, it should use the homepage layout. What
-does that mean? Let's see it refresh. And we still don't see any difference. It's
-still our static page. Oh, that's because we have an important installation step. My
-bad had head over and find the template for this page, which is templates main
-homepage dot htm on that twig. Right now we're extending base dot hgm that twig. So
-it's a very traditional setup. We're a base HTL twig and we have block body in the
-middle. Now change that to a dynamic variable
+And when we log in... access denied! No worries: click down here on the we debug
+toolbar's security icon... and go to "Access Decision". Yup: we were denied access
+because it was looking for a role called `ROLE_NGLAYOUTS_ADMIN`. In order to access
+the layouts admin area, we need to have this role.
 
-Called NG layouts layout template. Now try it Error. That's progress. It says base
-page layout, not specified. To run to the page with layouts. Specify the base page
-layout with this configure. This will make a little bit, this will make more sense in
-a minute, but what it wants us to do is to go into config packages and create a new
-file, which can be called anything, but let's call it net. Again, underscore layouts
-dot yaml. Inside of here we'll say net. Again underscore layouts. And below that, say
-page layout and set this to our base.channel dot twig. What that does will make sense
-in a minute. All right, let's refresh again. And hmm, same error. Let's actually make
-sure that Symphony saw that file. I'm gonna go over my terminal and clear my cash
-should Norman need to do that, but maybe Symphony is not seeing that new config file.
-Perfect. Once that's done, let's try it again. Awesome. It works except it's still my
-static page. But check out for the first time down here, the web debug toolbar shows
-that the homepage layout is being used. So it found the layout, but it's just not
-rendering it.
+The simplest way to add it is to go `config/packages/security.yaml`. The user
+we're logged in as right now has `ROLE_ADMIN`. So, under `role_hierarchy` we
+can *also* give our user `ROLE_NGLAYOUTS_ADMIN`.
 
-To fix that, we need to do one last thing and then we're gonna back up and we'll see
-just how cool this is inside of the base dot htl, that twig right around block body,
-say block layout. And then after it end block refresh one more time. And whoa, our
-page is gone. Okay. We still have the nav and the footer, which come from above and
-below and based at HTML twig, but the actual contents of our page are gone and it's
-replaced by our dynamic title block. What Black Magic is this? All right, so listen,
-there are faster ways to start with layouts. They have starter projects for normal
-symphony apps, Sillies apps and IXa apps. But we did all this set up manually on
-purpose. Cause I really want you to understand how layouts works because it's
-surprisingly simple. All right, So there's much less magic than you might think. Our
-page is still hitting our normal route at homepage, it's still executing our normal
-controller and it's still rendering our normal template. But we then extend this nng
-layouts dot layout template. Now first, if there was no layout mapped to this
-particular page, NG layouts dot layout template is going to resolve to base dot html
-that twig. And that's thanks to the config we do here. So any page that doesn't use
-layouts, like for example, our recipes page, this hasn't changed at all. We're still
-extending base dot html that twig twi. But if layouts does find a layout mapping for
-this page,
+## Creating our First Layout
 
-Then NG layouts dot layout template ex uh, resolves to a core NG layouts template. In
-this case it's called Layout two H channel twig. So I'll hit shift shift and it's
-this one right here because it doesn't really matter. But this is because we chose a
-layout underscore two. What's really important, I want you to see here, this is
-pretty simple. It renders our layout. That's what these kind of NG layout render zone
-things do. This is actually just referring to the different zones in here. Those
-aren't that important. It renders all the layouts into a block called layout. And
-then NNG layouts that page layout template that equates resolves to base dot html
-twig. So the end result is that our page renders completely normally and it still
-extends base dot html twig, but the contents of our layout are rendered into a block
-called layout. That's why we didn't see anything at first until we actually included
-block layout in base dot html twig. So that's really the best way to think about it.
-If you're on a page that doesn't resolve to a layout, everything is entirely the
-same. If you are on a page that does resolve to a layout, it simply means that you
-have a new block called layout whose contents are equal to whatever you have inside
-of that layout.
+And now if we click back, ta-da! Welcome to the layouts admin section! Whoa. To
+understand what layouts does... it's best to see it in action. Start in this Layouts
+section... and click to create a new layout. This shows us about six different
+layout *types* we an choose from. As you'll see, these are much less important than
+they might seem because, once you're in a layout, you can really do whatever you
+want, including floating things left and right. I typically choose "Layout 2".
+And call this "Homepage" because I'm planning to use this on our homepage.
 
-So at this point,
+And... welcome to the layout editor! Quick tour: these items on the left side
+are called "blocks", and there are many different types of blocks from simple
+title blocks to Google maps... to more complex things like lists and grids where
+you can render dynamic collections of things, like featured recipes. Our main
+job here is to choose some blocks on the left, then drag them into one of the
+"zones" in the middle.
 
-So as I mentioned earlier, we don't have to add layouts to every page in our site. We
-could just add it to the homepage if we wanted to. But every page that we want to
-support layouts, we should extend the NG layouts layout template. And the nice thing
-is, even if we extend this, nothing happens until we actually map a layout to that
-page. So this is just a good idea to use in all of your templates. So I'm gonna go
-down here and let's add it to our login template just in case we ever wanna customize
-that with layouts. And let's also add it to our recipes list page
+## Putting Blocks onto the Layout
 
-And our show. But for a one specific, So if we go over here, you can see when I click
-to all recipes or a recipe page, no layout is resolved, but it's now ready to be used
-and mapped to a layout if we want to. Now, as interesting as it is that we can now
-control the content on the homepage, we uh, kind of did too much. All of our old
-content is gone. Is it possible to mix dynamic content with some of the static
-content that's inside of our homepage template? Absolutely. And that is a big part of
-what makes layouts special.
+Grab a "Title" block and drag it somewhere onto the page. Cool! Now put some
+text into it.
 
+I know, a *pretty* amazing start. But, good enough!  In the upper right, hit
+"Publish Layout".
+
+And now that we have this new layout, open a second tab and go to the homepage
+to discover that... absolutely nothing changed! Let me actually rearrange my tabs.
+
+## Mapping a Layout
+
+Anyways, nothing changed because, once you have a layout, you need to *map* it to
+a specific page or set of pages. *That's* the job of the layout mapping section.
+These are really the only two important sections in the admin area.
+
+Here, add a new mapping and then go to Details. There are multiple ways that you
+can map a layout to a specific URL. You could use, for example, the path info,
+which is a fancy term that means "the URL, but without query parameters". Or you
+could use a path info prefix - like apply this layout to all URLs starting with
+"/products" *or* even a route name.
+
+Let's try that one. Hit "Add target". Then... lets go find our homepage route name:
+`src/Controller/MainController`. Here it is: `app_homepage`. Move back over,
+paste and hit "Save target".
+
+We're going to talk about other ways to map or "activate" a layout for a specific
+page, but route and path info are the simplest. They say:
+
+> If the current route or URL exactly matches what we have here, use this layout
+
+Hit save changes. And then to choose *which* layout goes with this mapping, hit
+"Link layout" and select the only one: "Homepage Layout".
+
+Awesome! So *now* when we go to the homepage, it *should* use the homepage layout.
+But... what does that even *mean*? Let's find out! Refresh and... we *still* don't
+see any difference. It's still a totally static page.
+
+## Extending the Dynamic Base Layout
+
+Oh, that's because we missed an important installation step. My bad! Go open the
+template for this page: `templates/main/homepage.html.twig`. Right now, we're
+extending `base.html.twig`. And *that* template, like usual, has a bock called
+`body` in the middle. So it's a *super* traditional setup.
+
+Now, change the `extends` to a dynamic variable called `nglayouts.layoutTemplate`.
+
+## Configuring the Base Layout
+
+*Now* try the page again. Error! That's progress. It says:
+
+> Base page layout, not specified. To render the page with Layouts, specify
+> the base page layout with this config.
+
+This will all make more sense in a minute. What it wants us to do is open
+`config/packages` and create a new file, which can be called anything, but let's
+call it `netgen_layouts.yaml`. Inside, add `netgen_layouts` and, below that,
+`pagelayout` and set to our `base.html.twig`.
+
+I'll explain this all in a minute. If we refresh now... huh same error! It's
+possible Symfony didn't see my new config file... so let me clear the cache to
+be sure. And now... yes! It works! Except... it's *still* the same static page!
+*But*, for the first time, down here on the web debug toolbar, it shows that the
+"Homepage Layout" is being used. So it *realized* the layout should be used...
+it just doesn't seem to be *rendering* it.
+
+## Rendering the layout Block
+
+To fix that, we need to do *one* last thing... then we'll back up and explain what's
+going on and how cool it is. In `base.htmltwig`, right around `block body`,
+say `{% block layout %}`... then after, `{% endblock %}`.
+
+Refresh one more time. And... whoa! Our page is gone! Okay, we still have the nav
+and footer... which come from above and below the blocks in `base.html.twig`, but
+the actual *contents* of our page are gone and replaced by the dynamic title block!
+What Black Magic is this?
+
+## The Layouts Template Inheritance Magic
+
+Ok, so, there are *much* faster ways to start with Netgen Layouts: they have starter
+projects for normal Symfony apps, Sylius apps and Ibexa CMS apps. But we did all
+this set up work *manually* on purpose... because I *really* want you to understand
+*how* layouts works: it's surprisingly simple.
+
+First, our page is still hitting our normal route - `app_homepage` - and it's
+*still* executing our normal controller and *still* rendering our normal template.
+No magic there at *all*.
+
+But then we extend `nglayouts.layoutTemplate`. What does *that* point to? If there
+were *no* layout mapped for this particular page, `nglayouts.layoutTemplate` would
+simply resolve to `base.html.twig`. That's thanks to the config we added here.
+
+But if layouts *does* find a layout mapping for this page, then
+`nglayouts.layoutTemplate` resolves to a core Layouts template. In this case,
+if you hit Shift+Shift, it's called `layout2.html.twig`... since we selected
+"Layout 2".
+
+*This* renders the dynamic layout via these `nglayouts_render_zone` tags: each
+of these refers to a different section - or "zone" inside our layout.
+
+*Anyways*, what's *really* important is that it renders the layout into a Twig
+block called `layout`. It then extends `ngLayouts.pageLayoutTemplate`, which
+resolves to `base.html.twig`.
+
+The end result is that our page renders *completely* normally and it still extends
+`base.html.twig`... but a block called `layout` has been *added* that holds the
+contents of the dynamic layout.
+
+*That's* why we didn't see any changes on the page at first. Until we actually
+*included* `{% block layout %}` in `base.html.twig`, the layout *was* loading...
+we just weren't *rendering* it anywhere.
+
+The takeaway is this: if you're on a page that does *not* map to a layout, everything
+is *exactly* the same as always. But if you *are* on a page that maps to a layout,
+it simply means that you have a new block called `layout` whose contents are equal
+to whatever you have *inside* of that layout.
+
+## Extending the Dynamic Layout on All Pages
+
+So as I mentioned earlier, we don't have to add layouts to every page in our site:
+we could just add it to the homepage and be done! but every page that we want
+to *support* layouts needs to extend `nglayouts.layoutTemplate`. The nice thing
+is, even if we extend this, nothing *happens* unless we actually *map* a layout to
+this page. So, there's no downside to using it everywhere. I'll quickly update
+`login.html.twig` to use it, then `list.html.twig` and `show.html.twig`. I can
+really move fast when I need to!
+
+Back in the browser, the recipe list and recipe show pages still look the same...
+because no layout is resolved. But they're now *ready* to use layouts, if we want
+to.
+
+Now, as interesting as it is to dynamically control the content on the homepage,
+we uh, kind of did too much! All of our old content is gone. Is it possible to mix
+dynamic content with some of the static content from our homepage Twig template?
+Absolutely. And that's a big part of what makes layouts special.
