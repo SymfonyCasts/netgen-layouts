@@ -1,61 +1,78 @@
 # Adding More Customized Blocks
 
-Coming soon...
+We're going to work more on this Recipe List Layout later. But, let's do one more
+things right now. Edit that layout. I want to give our admin users the flexibility
+to change this *title*. So cool, let's add a new title block right above... and
+enter some text.
 
-All right, we're going to work more on this recipes page later, but if we edit that
-layout, let's at least give our admin users a bit more flexibility, like the
-flexibility to change this title here. So cool, let's add a new title, lock right
-above there and put some texts into there. I'll hit publish and continue editing.
-And if you go over and refresh, what I'm trying to do is basically replicate this
-title here so then we can remove it from our Twig template. But if you refresh now
-that doesn't look right yet. So if we go over and look at that template, you can
-see the key is here that we need an h1 wrapped in a hero-rapper div right now this
-just gave us an h1, and you can see here on whenever you're using the title, you
-can actually change between h1, H two and eighth three. So the h1 is correct
+Hit "publish and continue editing"... then go to the frontend. What I'm *attempting*
+to do is replicate this title, or "hero" area so that we can *remove* it from our
+Twig template. But when we refresh, that doesn't look right yet.
 
+Go over and look at that template. Ok: to replicate this, we need an `h1` tag
+wrapped in a `hero-wrapper` div. Right now, layouts is simply rendering an `h1`.
+And, by the way, you can, in the title block options, choose if you need `h1`,
+`h2` or `h3`. `h1` is correct for this situation.
 
-So how do we wrap this in another diviv and give it that hero rapper class? The
-answer to that is to add a nifty column inside of here. So we can add a column, move
-the title into the column, and then the column, we can get that of the CSS class hero
-dash wrapper. Now at publish publishing continu editing refresh. And much better, we
-can even kind of grab this text here and let's add a little text block. We'll put it
-right inside of that column, add the text publishing can continue saving. And now
-look at that. Beautiful. So now we can go in here and remove that from our template.
-So now we only have one of them and the user has the ability to change that. Now you
-can see it did require to me to be a little bit technical here, I had to know the CSS
-class needed to be on this column. Um, if you have tech, that might not be a problem
-for you. If it is, you could actually create a custom block, like a hero block where
-the user just typed in the hero and text and you rendered this whole thing for them.
-We're not going to create custom blocks in this tutorial, but by the end you'll know
-you'll ha you'll have plenty to be able to do that yourself.
+## Adding a Wrapper Div Column
 
-All right, back on the front end, open up the web two of our, again, I do want to,
-we're going to layouts comes with its own web debug toolbar icon. And if you click
-this,
-it's pretty cool, we're going to check out this many times. It shows you the layout
-that
-was resolved and even like the reason why that layout was resolved. But the really
-important thing here is the rendered blocks. This shows you all the blocks that were
-rendered for that page. So you can see there's one called a twig block render. For
-the top nav, there's a column block that was rendered. Then the title block, the text
-block, the full view block, and finally the twig block. So this is a cool way to kind
-of see all the different blocks that how they're being rendered, as well as the
-actual template behind them. Later we're going to talk about overriding those
-templates
-so we can customize how they look. All right, finally, now that we have this nice
-admin layouts admin area, I'll hit publish layout. We also, if you go to /admin,
-have easy admin installed. Here we go.
+So: how can we wrap this in a `div` and give it that a `hero-wrapper` class? The
+answer: add a nifty "column" block inside... then move the title *into* the column.
+Coll right? Finally, when you click on the column, you can add any class you want.
+Add `hero-wrapper`.
 
-So
+Let's try it! Hit "publish and continue editing", refresh the frontend and... much
+better! What about that text? Copy it, add a new "text" block right below our
+"title" block" and... paste . Publish and continue editing again... try the frontend
+again and... look at that! A perfect replica!
 
-Let's add a link from easy admin over to our layouts to make life easier. So I'll go
-to src/Controller. Admin dashboard controller is what controls those links. Down
-here. We'll say yield menu item,:link to url. Let's call it layouts. Give it
-some icons, Fas fa-list. And then for the url we can say this->generate
-url. And then the name of the route is nng layouts_admin Layouts index.
-Perfect. So small detail there, but now I can go to /admin. I can click over to
-layouts and I get right here. Okay, so we can now add twig blocks. We can mixin
-title text, html, Google Maps videos right inside of here. But what about being able
-to embed a collection of, for example, recipes like on our homepage, being able to
-maybe recreate this widget and even select dynamically which recipes we want. Let's
-start diving into that topic next.
+Now, over in the template, we can remove that section entirely. The end result
+is the *same* thing as before... except admin users have the ability to change
+the text.
+
+## Custom CSS in Layouts or Pre-Made Custom Block Type?
+
+Now, you can see that this *did* require me to be a bit technical: I had to know
+the CSS class that was needed for the column. If the admin users designing your
+layouts *are* a bit technical, then this might not be problem. But if your editors
+are *less* technical, you could, instead, create a custom block type - like a hero
+block - where the user just types in the text and you render this whole thing
+*for* them. We're not going to create custom blocks in this tutorial, in part
+because, by the end of the tutorial, you'll know everything you need to follow
+the docs for that.
+
+## The Layouts Web Debug Toolbar
+
+All right, back on the front end, layouts comes with its own web debug toolbar icon.
+And if you click this, it's pretty cool. We're going to use this a *bunch* of times.
+It shows you the layout that was resolved and even like the *reason* why it was
+chosen.
+
+But the *really* useful thing is the "rendered blocks" section. This shows us all
+the layouts "blocks" that were rendered to build this page. So you can see there's
+one called "Twig Block" for the top nav, a "Column" block, then the "Title" block,
+"Text", full view block, and finally the last "Twig block" for the footer. This is
+a cool way to see all the different blocks that are being rendered, as well as the
+actual *template* behind each one. Later, we're going to talk about overriding those
+templates so we can customize how they look.
+
+## Linking to the Layouts Admin
+
+Back in the layouts admin, Publish the layout to get back to the main page. If you
+go to `/admin`, you'll find that our app already as EasyAdmin installed. Let's add
+a link from easy admin to our Layouts to make life easier. Open
+`src/Controller/Admin/DashboardController.php`... and find `configureMenuItems()`.
+Add another item with `yield MenuItem::linktoUrl()`, all it "Layouts" and give it
+some icons: `fas fa-list`. For the url, we can say `this->generateUrl()` and pass
+in the route name, which happens to be `nglayouts_admin_layouts_index`.
+
+Perfect! That's a small detail, but now when we're on `/admin`, we can click "Layouts"
+to jump right over.
+
+Okay, status check! We can render Twig blocks and mix in title, text, HTML, Google
+Maps and other content wherever we want. The more Twig blocks we have, the more
+flexibility we have.
+
+But what about being able to render a collection of recipes from our database, like
+we have on the homepage? That's a big piece of layers: let's start diving into that
+next.
