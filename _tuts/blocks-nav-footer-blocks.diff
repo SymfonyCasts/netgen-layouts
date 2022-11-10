@@ -1,12 +1,12 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 3c28c6a..0defaa4 100644
+index 3c28c6a..86cbb38 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -16,6 +16,7 @@
  
      <body>
      {% block layout %}
-+        {% block nav %}
++        {% block navigation %}
          <nav class="navbar navbar-expand-lg navbar-light bg-light">
              <a class="navbar-brand" href="{{ path('app_homepage')}}">
                  <img src="{{ asset('images/B-B-logo.png') }}" width="30" height="30" alt="bark and bake logo">
