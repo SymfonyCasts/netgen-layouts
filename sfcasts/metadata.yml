@@ -2,6 +2,7 @@ chapters:
     - install
     - how-it-works
     - twig-blocks
+    - shared-layouts
     - using-blocks
     - value-type
     - value-converter
