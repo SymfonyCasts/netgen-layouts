@@ -1,92 +1,108 @@
-# Frontend Item
+# Frontend Item View
 
-Coming soon...
+Let's now create the `Recipe` item view for the *frontend*. This starts almost exactly
+the same. In fact, copy the admin config... then paste. In Layouts, we know that
+the `app` key means the "admin" section. And, it turns out, `default` is used for
+the *frontend*.
 
-All right, let's work on the front end item view. So we can see our recipe items
-here. So this starts almost exactly the same. In fact, I'm going to take our
-configuration down here and paste. So if app is the admin key, default means your
-front end section. So under here, again, this key is not important. I can call it
-recipes defaults, but it doesn't matter. And then for the template, we'll just change
-it to the same thing, but front end. And then the item value type is gonna be exactly
-the same. So cool, nothing new there. All right, let's go create that template in NG
-layouts. I'll make a directory called front end. Then it's outta there. Recipe
-underscore item dot html, that twig.
+## Frontend (default) item_view & Template
 
-And
+Under once again, this key is not important. For the template, use the same path
+but `frontend`. Then the `match` will be exactly the same.
 
-This will be past the same variables as our admin item template. So we know there's
-gonna be an item dot object, and we can call the name property on our recipe just to
-see if things are working and it is working, it's live. And one of the cool things I
-like about using layouts when I start talking about templates is click down on the
-twig item in the web d toolbar, we can actually see how layouts is rendering. You can
-see it renders layout underscore two point htma qug. And then down here it starts
-rendering our zones. It renders our navigation block, it renders our hero block. And
-then eventually down here you can see this is where our grid is rendered. And because
-we are using, you can see it renders a grid called three columns. That's actually
-something we, we actually wanted four columns in ours. This is something we can
-control in our admin areas. If you click on the grid right now, we're on the content
-tab where we control really the content that's in there. There's also a design tab
-where we can change this to four columns and I'll hit publish and continue loading.
-So this, if we refreshed it in a second, would now render four underscore columns
-that hhl twig, and then inside of each column it renders our recipe underscore item
-that hgm of that twig. So just really cool to see this. We're gonna look at this more
-later. It's gonna be the key to helping us, um, understand which templates we can
-override to customize things further.
+I love when things are boring and easy! Let's go create that template. In `nglayouts`,
+make the `frontend` directory... and inside, `recipe_item.html.twig`.
 
-Now, one thing I do wanna point out that is that our applications using bootstrap
-four, not bootstrap five. And the reason is actually because right now the grid
-layout actually uses a bootstrap for friendly markup. So if you wanted to use
-bootstrap five, you would actually need to override these column templates, like that
-column underscore or four underscore column html. That twig we were just looking at a
-second ago. I can even show you that you can actually override that to change these
-classes here. And we'll talk about how to override core templates in a little while.
-All right, let's bring these little things to life here. So open up the homepage
-template, so main homepage.ht twig, and scroll up to where we loop over the latest
-recipes. Perfect. What I basically wanna do is just steal all of the markup for one
-of these recipe tiles here. And then we're gonna paste that into the front end
-template. Now we just need to tweak some variables. It's not going to be recipe that
-slug, it's gonna be item dot object dot slug. So I'm actually gonna do a little find
-and replace here, replace recipe dot with item dot object dot
+Layouts will pass this the *same* variables as the admin item template. This means
+we can, once again, use `item.object` to access our `Recipe` object. Let's print
+the `name` key to see if things are working.
 
-Replace all. And let's see if that worked. Move over, refresh. And it does. That
-looks like the front end. That's awesome. Except it, you can see it has, it's missing
-the gutter that we have here. So if I inspect element, you can see the difference is
-we have columns here, but they're inside of a container that gives us that, uh, extra
-margin. If we look up here, we're inside of a robe or we're not inside of a
-container. So we don't get that extra gutter on the side. So to fix this in layouts,
-we can add a, our, our favorite guys a column, move the grid into that column.
-Actually, I don't need to do that. And then click wrap in container and I'll hit
-publish. Continue editing. Refresh. Now, whoop, I actually clicked on one of those.
-Here we go. Go back there. Got it. It's inside of that container. Now notice I also
-could have just gone onto the grid and clicked rapid container there. Um, the reason
-I'm putting this inside of a column that's inside the wrapper is that we can also
-move this latest recipes into that column. So this is an H two. So let's go over
-here. Let's add a new title header, put it inside of our column. Get outta here.
-Apple,
+And... they *are* working. It's alive!
 
-Say latest recipes, change us to an H two. So it's inside the column, so it's gonna
-be inside of the container, publish and continue editing refresh. And even closer. So
-now is we need to center this and maybe give it a little top margin so you can see
-how we can just build this out little by little. So I'm actually gonna use the CSS
-class on this. I'm gonna add text dash center and NY dash five. That's from
-Bootstrap. And you can see I'm getting this over from the same stuff that I actually
-have on that H two inside of my template. Now if we try it, look at that, it matches
-it exactly, that's what I'm talking about. Except now we actually have control over
-the recipes inside of here. We could change to a different query. Uh, in a little
-while. We could even change to selecting manual items and they will show up here on
-the front end. We can also now embed this anywhere we want on the site. So to
-celebrate, we don't need this stuff down here anymore. We don't need any of this
-logic. So I'm gonna delete the latest recipes block entirely. And also we can save
-ourselves some trouble in a controller. So in source controller, main controller
-right here, we don't need to query the latest recipes at all,
+## Checking Templates in the Twig Profiler
 
-And we don't need a pass any variables into our template. Also remove the rest
-repository argument and the use statement. So really nice cleanups on the front end.
-When we refresh, we just have one latest recipe coming from our dynamic block. So you
-can see down here, I'm still wondering the tweak block latest recipes that doesn't
-exist anymore. You can see layouts doesn't throw an air, it just doesn't render it.
-But obviously we don't need that anymore. So I'm going to delete that block and let's
-just publish and continue editing one last time to make sure things look good. And
-they do. All right, next, now that we have this grid inside of a inside of layouts,
-we can do some cool stuff with it, like enabling a Jack's powered Page Nation.
+One of my favorite things to do when I start working with templates inside Layouts
+is to click the Twig item in the web debug toolbar. Here, we can actually *see* how
+Layouts is rendering. Yup, it renders `layout_2.html.twig`... then starts rendering
+each zone. It renders our `navigation` block, the `hero` block, then, eventually
+down here, it renders the grid. You can see that it renders `grid/3_columns.html.twig`.
+This is something we can control in the admin area. Click the grid. On the right,
+we're looking at the "Content" tab. But there's also a "Design" tab. Change this
+to 4 columns... and I'll hit "publish and continue editing".
 
+If we refreshed now and reloaded the Twig profiler, we would see it rendering
+`4_columns.html.twig`. Then, hey! Inside of each column, it renders *our*
+`recipe_item.html.twig`. This is just really cool to see, and we're going to
+look at this again later when we talk about *overriding* core templates.
+
+## Bootstrap 4 CSS
+
+Now, one thing I *do* need to mention is that our application is using Bootstrap
+version 4, not Bootstrap 5. The reason is because, right now the grid template
+renders Bootstrap version *4* markup. So if you wanted to use Bootstrap 5, that's
+totally possible, but you would need to override these columns templates - like
+`4_column.html.twig` - to tweak the classes. Overriding core templates is actually
+*super* easy, and we'll talk about how to do it soon.
+
+## Customizing our Frontend Template
+
+Ok, let's bring this frontend view to life! Open up the homepage template:
+`main/homepage.html.twig`... and scroll up to where we loop over the latest recipes.
+Perfect. What I basically want to do is *steal* the markup for one of these
+recipe tiles... then paste that into the frontend template. Now we just need to tweak
+some variables: instead of `recipe.slug`, it needs to be `item.object.slug`.
+I'll do a find and replace: replace `recipe.` with `item.object.`.
+
+## Wrapping Blocks in a Container
+
+Nice! Let's see if that worked. Move over, refresh... and it did! That looks like
+the frontend. We're awesome. Except, it's missing the "gutter" that we have in
+the original. Inspect element. Ah, the difference is that the original columns
+were inside of a `container` div, which adds the margin. In the new code, we
+*are* inside of a row... but not a `container`.
+
+To fix this in Layouts, we can add our favorite utility block: a column! Move the
+grid *into* that column. Then, we *could* add a CSS class like we did before in
+the hero area. But instead, take a shortcut and check "wrap in container".
+
+Hut "publish an continue editing" and refresh. Whoops - wrong page. Head back
+to the homepage and... it looks great! It's now inside of an element with a
+`container` class.
+
+This "wrap in container" is *super* handy: it literally just adds an extra `div`
+around your block with `class="container"` and *every* block supports this. Heck,
+we didn't even *need* a column: we could have just checked the "wrap in container"
+on the grid itself.
+
+The only reason I put this inside of a *column* is so we can *also* add the
+"Latest Recipes" header there too. Drag a new "Title" block into the column. Ah,
+get outta here Apple! Inside, type "Latest Recipes" and change to an `h2`.
+
+Hit our favorite "publish and continue editing", refresh and... even closer! We
+just need to center this... and maybe give it a little top margin. Add two classes
+to the title: `text-center` and `my-5` for some vertical margin. That's a Bootstrap
+class. I'm just repeating the classes that my designer was already using in the
+template.
+
+Publish that... and when we try it... it *exactly* matches. Woo! But *now*, we
+have full control over the recipes inside! We could change to a different query,
+change the *number* of items or, in a little while, we could choose to *manually*
+select the *exact* recipes to show. We can also now embed lists and grids of
+recipes *anywhere* we want on the site.
+
+## Cleanup!
+
+To celebrate, remove the *entire* `latest_recipes` Twig block... and, up in
+`MainController`, we delete the query, the variable, the repository argument and
+the `use` statement.
+
+When we refresh, we have just *one* "latest recipes" section coming from our dynamic
+block. Oh, but notice in the layouts admin, we are *still* rendering the
+`latest_recipes` block... even though it doesn't exist anymore! Layouts is pretty
+forgiving to admin users: instead of throwing an error, it simply doesn't render
+anything.
+
+But let's delete that... then publish... and take one last look. It's perfect.
+
+Next: now that we have this grid inside of layouts, we can do some cool stuff with
+it, like enabling Ajax-powered pagination.
