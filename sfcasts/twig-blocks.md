@@ -26,7 +26,7 @@ then Twig template content on the bottom: we can't *really* mix anything into th
 
 *Unless*... we add more *blocks* to our template. For example, keep the `block body`...
 just so the page keeps working even if we *don't* map a layout... but then add a
-`block hero` around the top section, then a block called, how about, `latest_recipes`,
+`block hero` around the top section, a block called, how about, `latest_recipes`,
 `endblock`, another called `subscribe_newsletter`, `endblock` and a final one called
 `featured_skills`, `endblock`.
 
@@ -35,16 +35,16 @@ the `body` block down here... which includes all of those. But we just gave ours
 a *lot* of new power.
 
 Check it out: change the `body` block name to `hero`. And then let's add a few
-more Twig blocks. Render `latest_recipes` for this line. Oh, by the way, the
-block "labels" are just for us in the admin area: just for for clarity. If I enter
+more Twig blocks. Render `latest_recipes` for this one. Oh, by the way, the
+block "labels" are just for us in the admin area: just for clarity. If I enter
 "Latest Recipes", that shows up above the block. Totally optional.
 
 Add two more blocks: one that renders `subscribe_newsletter` and finally one
 for `featured_skills`. Then, up here, I'm going to remove the `title` block for now.
 
 By the way, I'm using the word "block" to mean two different things at once. Blocks
-are the "things" we add to our layout - like a title, Google map or list of list
-of items. But blocks *also* refer to the Twig blocks in our templates. And of course,
+are the "things" we add to our layout - like a title, Google map or list of items.
+But blocks *also* refer to the Twig blocks in our templates. And of course,
 one of the *types* of blocks we can add... is one that renders... Twig blocks.
 A little confusing - but that's as bad as it gets.
 

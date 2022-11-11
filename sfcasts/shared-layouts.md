@@ -62,7 +62,7 @@ my normal one... and call it "Nav and Footer Layout".
 This is not going to be a *real* layout that's linked to any pages. Nope, it's just
 going to be a layout that we steal pieces from. Up in the top zone, create a
 Twig Block that renders `navigation`... and I'll even label it "Top Nav" to make
-it more clear. Then in any *other* zone here - you can put it at the bottom, but
+it more clear. Then in any *other* zone - you can put it at the bottom, but
 you don't have to, add another twig block that renders `footer` and is *labeled*
 Footer.
 

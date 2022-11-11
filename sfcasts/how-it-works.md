@@ -29,7 +29,8 @@ section... and click to create a new layout. This shows us about six different
 layout *types* we can choose from. As you'll see, these are much less important
 than they might seem at first, because, once you're in a layout, you can really
 do whatever you want, including floating things left and right. I typically choose
-"Layout 2". And call this "Homepage" because I'm planning to use this on our homepage.
+"Layout 2". And call this "Homepage Layout" because I'm planning to use this on our
+homepage.
 
 And... welcome to the layout editor! Quick tour: these items on the left side
 are called "blocks", and there are many different types, from simple title blocks
@@ -117,10 +118,10 @@ What Black Magic is this?
 
 ## The Layouts Template Inheritance Magic
 
-First, there are *much* faster ways to start with Netgen Layouts: they have starter
-projects for normal Symfony apps, Sylius apps and Ibexa CMS apps. But we did all
-this set up work *manually* on purpose... because I *really* want you to understand
-*how* layouts works: it's surprisingly simple.
+Before I explain, let me say that  there are *much* faster ways to start with Netgen
+Layouts: they have starter projects for normal Symfony apps, Sylius apps and Ibexa CMS
+apps. But we did all this set up work *manually* on purpose... because I *really* want
+you to understand *how* layouts works: it's surprisingly simple.
 
 First, our page is still hitting our normal route - `app_homepage` - and it's
 *still* executing our normal controller and *still* rendering our normal template.
@@ -172,4 +173,4 @@ to.
 Now, as interesting as it is to dynamically control the content on the homepage,
 we uh, kind of did too much! All of our old content is gone. Is it possible to mix
 dynamic content with some of the static content from our homepage Twig template?
-Absolutely. And that's a big part of what makes layouts special.
+Absolutely. And that's a big part of what makes layouts special. That's next.
