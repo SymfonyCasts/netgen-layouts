@@ -1,25 +1,141 @@
-# Value Type
+# Adding Lists: Value Type
 
-We have a recipe entity and on the front end, a page with a list of recipes, and we saw how we can easily transform this page into a layout, which instantly makes parts of it configurable. But looking at the homepage now, I wonder if we can add more complex blocks beyond just text. Could we, for example, add a block that dynamically renders the list of recipes? Something similar to what we have here right now, except instead of adding this via our Twig template, add it via layouts? If we *could*, we could recreate this, but give our admin users control over which recipes show here. If the first big idea for Layouts was allowing the layouts to be rearranged and mixed with dynamic content, then the second big idea is allowing pieces of *existing* content, like recipes, to be embedded onto our page via the Layout system.
+We have a `Recipe` entity and, on the frontend, a page that lists the recipes. We
+also saw how easy it is to create a layout, which instantly makes parts of this
+page configurable.
 
-Let's edit the homepage layout. In our list of blocks on the left, check out this "Grid" option. Let's add that right here after our "Hero" Twig block. The Grid allows us to add individual items to it, but... I don't see a way to do that. We know that we can add a lot of cool blocks, like titles, maps, markdown, to the page right out of the box. *But* some blocks like List, Grid, and the Gallery blocks down here (which are just fancy grids that have some JavaScript behavior attached to them) contain dynamic items that are loaded from *somewhere else*, like our local database, CMS, or even Sylius if you're using Layouts on a Sylius project. All of these things we can add to the blocks are called "value types". We currently have *zero*. If this were a Sylius project, we could install Sylius and Layouts integration and instantly be able to select products. The same is true if you're using Ibexa CMS.
+## Adding Lists of Existing Content via Layouts?
 
-So here's our next big goal: To add our recipe doctrine entity layouts as a value type so we can create lists and grids containing recipes. Step one to adding a value type is to tell Layouts about it in a config file. So over in `/config/packages/netgen_layouts.php`, very simply, we say `value_types`, and below that, `doctrine_recipe `. This will be the internal name of the value type, and we'll refer to it in a few places. I'll give it a nice human-friendly `name` - `Recipe` - and for now, `manual_items: false`. We'll talk about the `manual_items` thing later. Whoops... Make sure this is *items* with a "s". It's easier to set this to `false `to start with. If we head over and refresh our layouts page (it's okay to reload it)... check out our Grid block! We have a collection type, and "Manual collection" is our only option right now. So... this still doesn't seem to be working. I can't change this to anything else, and I also can't select items manually.
+But now, looking at the homepage, I'm wondering if we can add more complex blocks,
+beyond just text. Could we, for example, add a block that dynamically renders a
+list of recipes? Something similar to what we have here right now... except instead
+of adding this via a Twig block, it's added entirely via layouts by an admin users?
+And, to go further, could we even let the admin user *choose* which recipes to show
+here?
 
-There are two ways to add items to a collection block. The first is a *dynamic* collection where we choose from a pre-made query. We could choose from a something like "Most Popular", for example, that would automatically query for the most popular or latest recipes. The *second* way to choose items is by *manually* choosing them. Eventually, we'll be able to pick out the exact recipes we want to go into one of these blocks.
+Totally! If the *first* big idea of Layouts is allowing our Twig blocks to be
+rearranged and mixed with dynamic content, then the *second* big idea is allowing
+pieces of *existing* content - like recipes from our database - to be embedded onto
+our page via the Layout system.
 
-We're going to start with the first type: The *dynamic* collection. We don't see "Dynamic collection" as an option here yet because we need to create one of those pre-made queries first. Those pre-made queries are called `query_types`. We could, for instance, create a query type for `Recipe` called "Most Popular" and another one called "Latest". How do we create these query types? We need to head back over to our `/config` file, add `query_types` and below that, let's say `latest_recipes`. Once again, this is going to be an internal key here, so we'll give it a human-readable `name` - `Latest Recipes`.
+How? Edit the Homepage Layout. In the blocks on the left, check out this one called
+"Grid". Add that after our "Hero" Twig block. The Grid allows us to add individual
+*items* to it... which could be *anything*. But, I don't see a way to do that!
 
-So... what do we do now? If we head back and refresh... we get a very nice error that tells us what to do next: `Query type handler for "latest_recipes" query type does not exist.` We need a class to represent this query type! Awesome!
+Ok, so we know that a lot of blocks, like titles, maps, markdown, etc can be added
+to our pages in layouts out-of-the-box with no extra setup work from us. But the
+purpose of *some* blocks - like List, Grid, and the Gallery blocks down here (which
+are just fancy grids that have some JavaScript behavior attached to them) - is to
+render a collection of "items" that are loaded from *somewhere else*, like our local
+database, CMS, or even your Sylius store. The "things" or "items" we can add to these
+blocks are called "value types". And... we currently have *zero*. If this were a
+Sylius project, we could install the Sylius and Layouts integration and instantly
+be able to select products. The same is true if you're using Ibexa CMS.
 
-Over in the `/src` directory, I'm going to create a new `/Layouts` directory. We'll be organizing a lot of our custom layout stuff inside of here. I'll create a new PHP class called... how about `LatestRecipeQueryTypeHandler`. Then, let's make this implement `QueryTypeHandlerInterface`. Nice! Next, I'll go to "Code Generate" (or "command" + "N" on a Mac), and go to "Implement Methods" to implement the four methods that we need. Cool!
+## Adding a Value Type
 
-Our job in here is pretty simple. I'll leave `buildParameters()` empty for a second. We'll talk about that in a minute. The most important thing here is called `getvalues()`. This is where we're actually going to make the query for the recipes and return them. To do that, I'm going to go to the top of the class, add a `__construct()` method, and we'll say `private RecipeRepository $recipeRepository` so I can use my `RecipeRepository` to make my queries. Then, down in `getValues()`, I'll `return $this->recipeRepository`, and I'm going to call a method on this that I've already created inside of `RecipeRepository` called `->createQueryBuilderOrderedByNewest()`. That creates a QueryBuilder. Then we can say `->setFirstResult()` and pass it `$offset`, and below that, `->setMaxResults()` and pass `$limit`. You'll see why these are passed in a second. As an admin, we can control how many it should return and if it should skip the first two, for example. We feed those into our query. Finally, we'll say `->getQuery()` and `->getResult()`. Perfect!
+So here's our next big goal: to add our `Recipe` doctrine entity as a "value
+type" in layouts so we can create lists and grids containing recipes.
 
-Down here... for `getCount()`, we'll do the exact same thing, except we don't need the `->setMaxResults()` or `->setFirstResults()`. Instead, we're going to say `->select('COUNT(recipe.id)')`. I'm using `recipe` here because, over in `RecipeRepository`, if we look at the custom method we added here, we're using `recipe`, the alias in my query. After that, let's update this `->getResult()` to say `->getSingleScalarResult()`. That was a little bit of work, but it's fairly straightforward. It's pretty much the same query two different times. This time is just getting the count. For `isContextual()`, I'm going to `return false`.
+Step one to adding a value type is to tell Layouts about it in a config file. Over
+in `/config/packages/netgen_layouts.yaml`, very simply, say `value_types`, and below
+that, `doctrine_recipe `. This will be the *internal name* of the value type, and
+we'll refer to it in a few places. Give it a human-friendly `name` -
+`Recipe` - and for now, set `manual_items` to `false`... and make sure that has
+an "s" on the end. We'll talk about `manual_items` more later, but it's easier to
+set this to `false `to start with.
 
-That's *it*. This is now a functional query type handler. But if you go over and refresh... it *still* doesn't work. We get the *same* error. That's because we need to associate this query type handler class with the `latest_recipes` query type in our config. To do that, we need to give this service a tag, and there's a really cool new way to do this, thanks to Symphony 6.1.
+If we head over and refresh our layouts page (it's okay to reload it)... check out
+our Grid block! There's a new "Collection type" field and "Manual collection" is
+our only option right now. So... this still doesn't seem to be working. I can't change
+this to anything else, and I also can't select items manually.
 
-We're going to add an attribute above our class called `#[AutoconfigureTag()]`, and the name of the tag we need here is called `netgen_layouts.query_type_handler`. This is straight out of the documentation. We also need to pass this an array with a `type` key set to `latest_recipes`. It's important that his `type` here matches up with what we have in our config so it ties these two things together. And now... the page *works*! If we click on our Grid block... we can switch to "Dynamic collection". *Awesome*! I'll hit apply and... everything immediately stops loading.
+## Dynamic vs Manual Queries
 
-When you have an error in the admin section, there's a good chance it will show up via an AJAX call. If you look down here on the web debug toolbar, we have a 400 Error that just happened. Let's fix that next by creating a *value converter*. Then we'll make our query *even smarter*.
+Ok, there are *two* ways to add items to a one of these "collection" block. The first
+is a *dynamic* collection where we choose from a pre-made query. We could choose,
+for example, a "Most Popular" query that would query for the most popular or latest
+recipes. The *second* way to choose items is *manually*: the admin user literally
+selects which they want from a list.
+
+## Adding a Query Type
+
+We're going to start with the first type: the *dynamic* collection. We don't see
+"Dynamic collection" as an option here yet because we need to create one of those
+pre-made queries first. Those pre-made queries are called `query_types`. We could,
+for example, create a query type for `Recipe` called "Most Popular" and another
+one called "Latest".
+
+How do we create those? Head back to the config file, add `query_types` and below
+that, let's say `latest_recipes`. Once again, this is just an "internal name".
+Also give it a human-readable `name`: `Latest Recipes`.
+
+So... what do we do now? If we head back and refresh... we get a very nice error
+that *tells* us what to do next:
+
+> Query type handler for `latest_recipes` query type does not exist.
+
+It's trying to tell us that we need to build a *class* that represent this query
+type! Let's do it!
+
+## The Query Type Class
+
+Over in the `src/` directory, I'm going to create a new `Layouts/` directory: we'll
+be organizing a lot of our custom Layouts stuff inside here. Then add a new PHP class
+called... how about `LatestRecipeQueryTypeHandler`. Make this implement
+`QueryTypeHandlerInterface`. Nice! Finally, go to "Code Generate" (or "command" +
+"N" on a Mac), and select to "Implement Methods" to add the four we need.
+
+Let's see... I'll leave `buildParameters()` empty for a minute, but we'll come
+back to it soon. The most important method is `getValues()`. This is where we'll
+load and return our "items". If our recipes were stored on some API, we would
+make an API request here to fetch those. But since they're in our local database,
+we'll query for them.
+
+To do that, go to the top of the class, add a `__construct()` method with
+`private RecipeRepository $recipeRepository`. Then, down in `getValues()`,
+`return $this->recipeRepository`... and we can use a method that I already created
+inside of `RecipeRepository` called `->createQueryBuilderOrderedByNewest()`. Then
+add `->setFirstResult($offset)` and `->setMaxResults($limit)`. The admin user will
+be able to choose *how* many items to show *and* they can even skip as many as
+they want. And so, Layouts passes us those values, and we fill them into our query.
+Finish this with `->getQuery()` and `->getResult()`.
+
+Perfect! Below, for `getCount()`, let's do the exact same thing... except we don't
+need `->setMaxResults()` or `->setFirstResult()`. Instead, add
+`->select('COUNT(recipe.id)')`. I'm using `recipe` because, over in
+`RecipeRepository`... if we look at the custom method, it uses `recipe` as the alias
+in the query. After that, let's update `->getResult()` to be
+`->getSingleScalarResult()`.
+
+Phew! That was a bit of work, but it's fairly straightforward. It's pretty much the
+same query two different times. Oh, and for `isContextual()`, `return false`. *We*
+won't need it, but this method is kinda cool. If you return `true`, then you can
+read information from the current page to *change* the query - like if you were
+on a "category" page and needed to list only products *in* that category.
+
+## Tagging the Query Type Handler Class
+
+Anyways, that's *it*. This is now a functional query type handler! But if you go
+over and refresh... it *still* doesn't work. We get the *same* error. That's because
+we need to *associate* this query type handler class with the `latest_recipes` query
+type in our config. To do that, we need to give the service a tag... and there's
+a really cool new way to do this, thanks to Symfony 6.1.
+
+Above the class, add an attribute called `#[AutoconfigureTag()]`. The name of the
+tag we need is `netgen_layouts.query_type_handler`: this is straight out of the
+documentation. We also need to pass an array with a `type` key set to
+`latest_recipes`. This `type` must match what we have in our config: it ties the
+two things together.
+
+And now... the page *works*! If we click on our Grid block... we can switch to
+"Dynamic collection". *Awesome*! I'll hit apply and... everything immediately stops
+loading!
+
+When you have an error in the admin section, there's a good chance it will show up
+via an AJAX call. Often, Layouts will show you the error in a modal. But if it
+doesn't, just look down here on the web debug toolbar. Yup! We have a 400 Error.
+
+
+Let's fix that next by creating a *value converter*. Then we'll make our query
+*even smarter*.
