@@ -1,29 +1,138 @@
 # Value Converter
 
-As soon as we changed our Grid type to use a Dynamic collection, it stopped loading. The error is hiding down here in this AJAX call. The best way to see it is to actually click the URL in a new tab. There we go - `Value converter for "App\Entity\Recipe" type does not exist.` Okay, so far, we've created a custom value type for `Recipe`, which was just this config here, and we created a custom query type which allows us to load a list of the latest recipes by running the query inside of the associated class. *Now* we're getting this value converter error. A value converter is really simple. It's a class that transforms the underlying object - `Recipe` - into a format that Layouts can understand. So in that same `/src/Layouts` directory, let's create a `RecipeValueConverter` and make this implement `ValueConverterInterface`. This is great, because I can now go to Code Generate (or "command" + "N" on a Mac) and hit "Implement Methods" to implement the seven we need. I know that sounds like a lot, but these are really easy to fill in.
+As soon as we changed our Grid type to use a Dynamic collection... it stopped loading.
+The error is hiding down here in this AJAX call. The best way to see it is to
+open that URL in a new tab. There we go:
 
-First, for `supports()`, Layouts will call our `RecipeValueConverter` every time it has a value it doesn't understand. We want to tell it which type we support, and in this case, we support the `$object` if it's an `instanceof` `Recipe`.
+> Value converter for `App\Entity\Recipe` type does not exist.
 
-Second, for `getValueType()`, we're actually going to `return` the internal key of our value type - `doctrine_recipe`.
+Okay, so far, we've created a custom "value type" for `Recipe`, which was just this
+config here, and a custom "query type" which allows us to load a list of the latest
+recipes by running the query inside of the associated class. *Now* we're getting
+this value converter error.
 
-Next is `getId()`, and we're literally just going to `return` our ID with `$object->getId()`. We don't have autocomplete on this, but we know that this object is going to be a recipe.
+## Creating the Value Converter Class
 
-For `getRemoteId()`, just `return $this->getId($object)`. This is only relevant if you are trying to move content between databases.
+A value converter is really simple: it's a class that transforms the underlying
+object - `Recipe` - into a format that Layouts can understand. In that same
+`src/Layouts/` directory, let's create a `RecipeValueConverter` class... and make
+it implement `ValueConverterInterface`. Now, you know the drill: go to Code -> Generate
+(or "command" + "N" on a Mac) and hit "Implement Methods" to generate the *seven*
+we need. I know, that sounds like a lot, but these are super easy to fill in.
 
-Down here, for `getName()`, this is just going to be a human-readable name that's going to be shown, for example, in the admin area. This time, to help out my editor, I'm going to add a little `assert()` function and say `$object instanceof Recipe`. There are two things to note here. First, we *know* that this object will always be a `Recipe` because, up in `supports()`, we said that's the only type we'll support. If you haven't seen this `assert()` function before, if the `$object` is *not* an `instanceof` a recipe, it will throw an exception. It's a really easy way to tell your editor or other tools like PHPStan that the object is *definitely* an `instanceof Recipe`. That's nice, because now, we'll get an autocompletion when we say `return $object->getName()`.
+First, for `supports()`, Layouts will call this method *every* time it has a "value"
+it doesn't understand. We want to tell it that we know how to convert the `$object`
+if it's an `instanceof` `Recipe`.
 
-Next is `getIsVisible()`. Let's `return true`. If your recipes could be published or unpublished,for example, then you could check that here and return `true` or `false`.
+Second, for `getValueType()`, `return` the internal key of our value type:
+`doctrine_recipe`.
 
-Finally, for `getObject()`, we'll `return $object`. I know that seems a little silly, but this is a handy way for you to change your recipe after it's loaded if you wanted to add more stuff to it. That's not something that we *need* to do, just a convenience for our users. And... we're finished! *Sweet*.
+Next is `getId()`... and we're literally going to `return` our ID with
+`$object->getId()`. We don't have autocomplete on this, but *we* know this object
+will be a `Recipe`.
 
-This time, unlike the query type handler, auto-configuration takes care of *everything*, so we don't need to add a manual tag up here. If we move over, I'll try refreshing this AJAX endpoint first and... that works! Let's go over here and refresh our layouts admin page again. And... *whoa*. Check it out! You can see a bunch of items on our Grid. If we click it, we can see our items loading below. That's awesome!
+For `getRemoteId()`, just `return $this->getId($object)`. This method is only relevant
+if you plan to use the import feature in Layouts to move data, for example, between
+staging and production. If you *did* have that, you could give your objects a
+UUID and return that here.
 
-~~~~~
+Down here, for `getName()`, this will be a human-readable name that will be shown
+in the admin area. This time, to help my editor, let's `assert()` that
+`$object instanceof Recipe`.
 
-Now notice we only ever had to choose dynamic collection. We didn't actually ever have to choose that we were specifically using our latest recipes query type. That's simply because it's the only query type in our system. If we added a second query type in our system, we would see another drop down here where we could slack between maybe latest recipes and most popular recipes. So this is using our latest recipes query type to get all 25 of these results. So for example, if we're trying to recreate this area here, we only want four. So let's limit the number of items to four. Awesome.
+Two things about this. First, we *know* that this object will always be a `Recipe`
+because, up in `supports()`, we *said* that's that only object we support. Second,
+if you haven't seen this `assert()` function before, if the `$object` is *not* an
+`instanceof` a recipe, it will throw an exception. It's a really easy way to tell
+your editor - or other tools like PHPStan - that the object is *definitely* an
+instance of `Recipe`.... which means *now* we get autocompletion when we say
+`return $object->getName()`.
 
-All right, let's see what this looks like on the front end. I'm hit publish and continue editing And once that saves, we'll go over and refresh. It should show up right here and we see absolutely nothing, or at least it seems like that at first. But if you zoom in here a little bit, let's see, you can see we have a diviv here call that has a class VT grid on it and inside a row and inside of that we see a bunch of empty diffs. If you ignore this clear fix here we have 1, 2, 3, 4. So the items are rendering there, They're just rendering empty. And that makes sense. We haven't told layouts how recipe items should be rendered yet. More on that in a few minutes. But before we get there, I wanna make our query type a bit fancier. So notice there's this one method called it build parameters that we ignored. This is a way for us to add extra form fields to allow our query to be modified by the admin. For example, if we wanted to, we could add like a search term so that we could return the latest recipes that match a certain term. So to do that, we could say builder, add term and they'll say text type and get the one from neck and layouts, parameters, types. There's several different built in form field types that you can use. Perfect with just that, we go and refresh our admin now and click down here on grid. Sweet. We've got a big new box here. Of course, if we type anything on here, nothing happens. And it also has a really weird label.
+Next is `getIsVisible()`. Let's `return true`. If your recipes could be published
+or unpublished, for example, then you could check that here and return `true` or
+`false`.
 
-So let's fix that label first. It's got this weird label so that um, we can translate it. So what we do, this is in the translations directory that's being translated through a domain called NNG layouts. So we can create a file called nng layouts dot en.dot Yaml. By the way, a really easy way to know that that's the domain you need to use is to leverage. No, nevermind, I'm not gonna talk about that. And so here I'll paste and we'll set that to search term. Now if we refresh that right now and click it works, for some reason you're don't see the translation there, try clearing your cash now to actually make that do something, modify the query over in our query type handler, this query object that we're passed from layouts that contains this value. So our create query builder ordered by newest actually already has an optional search term that we can pass into it. So here we can pass query arrow, get parameter, and then type, type and term and then get value. So I'm gonna copy that and we'll repeat that down here for our count. Awesome, let's try that. Refresh the layouts area, go down here and sweet. Consider there's no items. Cause I have this silly search term if I'll clear it out. We get everything. All right. Just type couple letters into there. You can see it changing below. Awesome.
+Finally, for `getObject()`, `return $object`. I know that seems a little silly, but
+this is a handy way for you to *change* your `Recipe` after it's loaded if you wanted
+to add more stuff to it. but that's not something that we *need* to do.
 
-Next, let's teach layouts how to render the recipe items both on the front end as well as the back end preview.
+And... done!
+
+This time, unlike with the query type handler, autoconfiguration takes care of
+*everything*... so we don't need to add a manual tag up here. Watch: move over
+and try refreshing the AJAX endpoint first. And... it works! Now go over here and
+refresh the layouts admin page. Now... *whoa*. Check it out! We see a bunch of items
+on our Grid! If we click that, we see the items loading below. That's awesome!
+
+## Customizing the Item Results
+
+Notice that we *only* had to choose "dynamic collection". We... never told the
+system that we wanted to use the "latest recipes" query type. That's simply because
+we only have *one* query type... and so Layouts guessed that's what we want. If we
+added a *second* query type to the system, we would see another select drop-down
+here where we could choose between latest recipes and "most popular" recipes,
+for example.
+
+So this is using our "latest recipes" query type to get 25 results. If we were
+trying to recreate this area here, we would only want 4. So let's limit the
+number of items to four. Cool!
+
+## Checking out the Frontend
+
+What see this look like on the frontend? Let's find out! Hit "publish and
+continue editing" and.... once that saves, go over and refresh. It should show up
+right here but... we see absolutely nothing! Or at least it *seems* that way
+at first.
+
+But we inspect element... and zoom in a bit... there's `div` with the class
+`ngl-vt-grid` on it. And inside, a row and inside of *that*, a bunch of empty divs.
+If you ignore the `clearfix` elements, this renders 1, 2, 3, 4 divs for our *four*
+items. So the items *are* rendering... they're just rendering empty.
+
+And, that makes sense. We haven't told layouts *how* recipe items should be rendered
+yet. More on that in a few minutes.
+
+## Query Type Form Options (Parameters)
+
+But before we get there, I want to make our query type a *tiny* bit fancier. On
+the first pass, we ignored this `buildParameters()` method. Whelp, it turns out
+that this is a way for us to add extra *form fields* so that an admin user can
+pass *options* to the query.
+
+For example, let's add an optional search term. Say `$builder->add()` passing
+`term` - the internal name for this parameter - then `TextType`: the one from
+`Netgen\Layouts`. There are a *bunch* of other field types for URLs, dates
+and more.
+
+With *just* this, when we refresh the admin section... and click down here on grid.
+there it is! We've got a big new box here. Of course, if we *type* anything on here,
+nothing happens... and it also has a really weird label.
+
+## Translating the Field Label
+
+Let's fix that label first. Layouts defaults to this odd string, but that's because
+it's already running this through the *translator* via a domain called `nglayouts`.
+So, in the `translations/` directory, create a file called `nglayouts.en.yaml`,
+or use whatever format you want for translations.
+
+Paste the label and set it to "Search term". Try the admin section now. When we
+click... much better. If you still see the old label, try clearing your cache:
+sometimes Symfony doesn't notice when you add a *new* translation file.
+
+## Using the Parameter
+
+Ok, to *use* the search term, head over to our query type handler. The `Query`
+object passed to `getValues()` contains any parameters we've added. *And*, I
+already prepared the `createQueryBuilderOrderedByNewest()` to accept an optional
+search term. Pass this `$query->getParameter()`, its name - `term` - then
+`->getValue()`.
+
+Copy that and repeat it down here for the `getCount()` method.
+
+Alrighty, let's take this thing for a test drive! Refresh the layouts area, go down
+here and I think that worked! It shows no items... because I used a pretty silly
+search term. Clear it out. We get everything. Now type just a few letters... and
+watch as it changes below.
+
+Next, let's teach layouts how to *render* the recipe items both on the frontend as
+well as for the admin-area preview.
