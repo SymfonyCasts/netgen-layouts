@@ -29,7 +29,7 @@ section... and click to create a new layout. This shows us about six different
 layout *types* we can choose from. As you'll see, these are much less important
 than they might seem at first, because, once you're in a layout, you can really
 do whatever you want, including floating things left and right. I typically choose
-"Layout 2". And call this "Homepage Layout" because I'm planning to use this on our
+"Layout 2". Call this "Homepage Layout" because I'm planning to use this on our
 homepage.
 
 And... welcome to the layout editor! Quick tour: these items on the left side
