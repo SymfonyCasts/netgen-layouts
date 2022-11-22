@@ -1,11 +1,11 @@
 # Creating & Mapping Layouts
 
-Ok, let's see what layouts is all about. In this chapter, we'll, step-by-step,
+Ok, let's see what Layouts is all about. In this chapter, we'll, step-by-step,
 create & use a "layout", learning *exactly* how Layouts works its magic along
 the way.
 
-To check out the Layouts admin section, head to `/ng-layouts/admin` to find... a
-login form! The login form has nothing to do with Layouts... it's just that the
+To check out the Layouts admin section, head to `/nglayouts/admin` to find... a
+login form! The login form has nothing to do with the Layouts... it's just that the
 layouts admin area *requires* you to be logged in... and I've already added a login
 form to our site. There's even a user in the database! Log in with
 `doggo@barkbite.com`, password `woof`.
@@ -19,7 +19,9 @@ layouts admin area, we need to have this role.
 
 The simplest way to add it is to go to `config/packages/security.yaml`. The user
 we're logged in as right now has `ROLE_ADMIN`. So, under `role_hierarchy` *also*
-give our user `ROLE_NGLAYOUTS_ADMIN`.
+give our user `ROLE_NGLAYOUTS_ADMIN`:
+
+[[[ code('e46ba5fe4a') ]]]
 
 ## Creating our First Layout
 
@@ -62,8 +64,11 @@ could use a path info prefix - like use this layout for all URLs that start with
 "/products". *Or* you can even map a layout to a specific route name.
 
 Let's try that one. Hit "Add target". Then... let's go find our homepage route name:
-`src/Controller/MainController.php`. Here it is: `app_homepage`. Move back over,
-paste and hit "Save target".
+`src/Controller/MainController.php`. Here it is: `app_homepage`:
+
+[[[ code('d1393347fe') ]]]
+
+Move back over, paste and hit "Save target".
 
 We're going to talk about other ways to map or "activate" a layout for pages later.
 But route and path info are the simplest and flexible. They say:
@@ -81,10 +86,19 @@ see any difference! It's the same static page from Symfony!
 
 Oh, that's because we missed an important installation step. My bad! Go open the
 template for this page: `templates/main/homepage.html.twig`. Right now, we're
-extending `base.html.twig`. And *that* template, like usual, has a block called
-`body` in the middle. So it's a *super* traditional setup.
+extending `base.html.twig`:
 
-Now, change the `extends` to a dynamic variable called `nglayouts.layoutTemplate`.
+[[[ code('69c71706f3') ]]]
+
+And *that* template, like usual, has a block called `body` in the middle:
+
+[[[ code('7b98ab918d') ]]]
+
+So it's a *super* traditional setup.
+
+Now, change the `extends` to a dynamic variable called `nglayouts.layoutTemplate`:
+
+[[[ code('081e4be324') ]]]
 
 ## Configuring the Base Layout
 
@@ -96,11 +110,19 @@ Try the page again. Error! That's progress! It says:
 This will all make more sense in a minute. What it wants us to do is open
 `config/packages/` and create a new file - which can be called anything - but let's
 call it `netgen_layouts.yaml`. Inside, add `netgen_layouts` and, below that,
-`pagelayout` set to our `base.html.twig`.
+`pagelayout` set to our `base.html.twig`:
 
-I'll explain this all in a minute. If we refresh now... huh same error! It's
+[[[ code('27cfddc67a') ]]]
+
+I'll explain this all in a minute. If we refresh now... huh, same error! It's
 possible Symfony didn't see my new config file... so let me clear the cache to
-be sure. And now... yes! It works! Except... it's *still* the same static page!
+be sure:
+
+```terminal-silent
+php ./bin/console cache:clear
+```
+
+And now... yes! It works! Except... it's *still* the same static page!
 *But*, for the first time, down on the web debug toolbar, it shows that the
 "Homepage Layout" is being used. So it *realized* the layout should be used...
 it just doesn't seem to be *rendering* it.
@@ -108,8 +130,10 @@ it just doesn't seem to be *rendering* it.
 ## Rendering the layout Block
 
 To fix that, we need to do *one* last thing... then we'll back up and explain what's
-going on and how cool it is. In `base.htmltwig`, around `block body`,
-add `{% block layout %}`... then after `{% endblock %}`.
+going on and how cool it is. In `base.html.twig`, around `{% block body %}`,
+add `{% block layout %}`... then after `{% endblock %}`:
+
+[[[ code('8867c5b0b5') ]]]
 
 Refresh one more time. And... whoa! Our page is gone! Okay, we still have the nav
 and footer... which come from above and below the blocks in `base.html.twig`, but
@@ -118,10 +142,10 @@ What Black Magic is this?
 
 ## The Layouts Template Inheritance Magic
 
-Before I explain, let me say that  there are *much* faster ways to start with Netgen
+First, before I explain, let me say that there are *much* faster ways to start with Netgen
 Layouts: they have starter projects for normal Symfony apps, Sylius apps and Ibexa CMS
 apps. But we did all this set up work *manually* on purpose... because I *really* want
-you to understand *how* layouts works: it's surprisingly simple.
+you to understand *how* Layouts works: it's surprisingly simple.
 
 First, our page is still hitting our normal route - `app_homepage` - and it's
 *still* executing our normal controller and *still* rendering our normal template.
@@ -129,15 +153,17 @@ No magic there at *all*.
 
 But then, we extend `nglayouts.layoutTemplate`. What does *that* point to? If there
 is *no* layout mapped to a particular page, `nglayouts.layoutTemplate` will
-resolve to `base.html.twig`. That's thanks to the config we added here.
+resolve to `base.html.twig`. That's thanks to the config we added here:
+
+[[[ code('e2c3c9b79f') ]]]
 
 But if layouts *does* find a layout mapping for this page, then
 `nglayouts.layoutTemplate` resolves to a core Layouts template. In this case,
-if you hit Shift+Shift, it's called `layout2.html.twig`... since we selected
+if you hit `Shift`+`Shift`, it's called `layout2.html.twig`... since we selected
 "Layout 2".
 
 *This* renders the dynamic layout via these `nglayouts_render_zone` tags: each
-of these refers to a different section - or "zone" inside our layout.
+of these refers to a different section - or "zone" - inside our layout.
 
 *Anyways*, what's *really* important is that it renders the layout into a Twig
 block called `layout`. It then extends `ngLayouts.pageLayoutTemplate`, which
@@ -163,8 +189,17 @@ we could add it to the homepage and be done! But every page that we want
 to *support* layouts needs to extend `nglayouts.layoutTemplate`. The nice thing
 is, even if we extend this, nothing *happens* unless we actually *map* a layout to
 this page. So, there's no downside to using it everywhere. I'll quickly update
-`login.html.twig` to use it, then `list.html.twig` and `show.html.twig`. I can
-really move fast when I need to!
+`login.html.twig` to use it:
+
+[[[ code('2dd3fa018d') ]]]
+
+then `list.html.twig` and `show.html.twig`:
+
+[[[ code('0325f4f028') ]]]
+
+[[[ code('959088390f') ]]]
+
+I can really move fast when I need to!
 
 Back in the browser, the recipe list and recipe show pages still look the same...
 because no layout is resolved. But they're now *ready* to use layouts, if we want

@@ -1,8 +1,10 @@
 # Shared Layouts
 
-Open up `base.html.twig` and move the `block layout` to be around *everything*.
+Open up `base.html.twig` and move the `{% block layout %}` to be around *everything*.
 So, put the start just inside the `body` tag... and the end just before the *closing*
-`body` tag.
+`body` tag:
+
+[[[ code('aa49c5d223') ]]]
 
 If we refresh the homepage now... it's destroyed! The top `nav` and `footer` are gone.
 Why did I do this? Because I love chaos! Kidding - I did it because it gives us
@@ -13,23 +15,32 @@ a promotion.
 But let's be honest, 99% of the time, we *will* want the `nav` and `footer`.
 No problem, head back over to `base.html.twig`. Remember: adding blocks give us
 more flexibility. So, above the navigation, add a new block called `navigation`,
-with `endblock` after. Then, down here, another called `footer`... and `endblock`.
+with `{% endblock %}` after. Then, down here, another called `footer`... and
+`{% endblock %}`:
+
+[[[ code('a91fe5214d') ]]]
 
 I bet you know what I'll do next. In the layout admin, we can *now* add a Twig block
 to the top that renders `navigation`... then one down here on the bottom. It doesn't
 need to be in this last zone... but it makes sense there. Render `footer`.
 
-Let's try it! Hit "publish and continue editing" and... refresh. We are back!
+Let's try it! Hit "Publish and continue editing" and... refresh. We are back!
 
 ## Creating a Second Layout
 
 Let's create a *second* layout, this time for the `/recipes` page. If you look
 at `RecipeController`, you'll see that I already did all the work to query for the
-recipes, and pass them into this template. And *in* that template, we loop over
-and render each one, *with* pagination. And so, I *definitely* want to include
-all of this custom work in the new layout.
+recipes, and pass them into this template:
 
-Back in the admin area, I'll hit "publish layout" as an easy way to get back to the
+[[[ code('19661a73f5') ]]]
+
+And *in* that template, we loop over and render each one, *with* pagination:
+
+[[[ code('a5a9d53de5') ]]]
+
+And so, I *definitely* want to include all of this custom work in the new layout.
+
+Back in the admin area, I'll hit "Publish layout" as an easy way to get back to the
 layout list. Then hit new layout, I'll choose my favorite layout 2 and call it
 "Recipes List Layout". To start, add a new block called "Full View"... and drag it
 anywhere onto the page, whoops! There we go.
@@ -55,9 +66,9 @@ would need to edit *every* layout to manually add that new banner.
 
 Fortunately, there's a better way to handle repeated layout elements like this.
 
-Hit "Discard" to get back to the layouts list, then click "Shared Layouts" and
-"New Shared Layout". As usual, the layout type doesn't matter much, so I'll use
-my normal one... and call it "Nav and Footer Layout".
+Hit "Discard" to get back to the layouts list, then click "Shared layouts" and
+"New shared layout". As usual, the layout type doesn't matter much, so I'll use
+my normal one... and call it "Nav & Footer Layout".
 
 This is not going to be a *real* layout that's linked to any pages. Nope, it's just
 going to be a layout that we steal pieces from. Up in the top zone, create a
@@ -66,7 +77,7 @@ it more clear. Then in any *other* zone - you can put it at the bottom, but
 you don't have to, add another twig block that renders `footer` and is *labeled*
 Footer.
 
-Cool! Hit "Publish Layout". Now we have *one* shared layout. Again, these are *not*
+Cool! Hit "Publish layout". Now we have *one* shared layout. Again, these are *not*
 meant to be mapped to pages: they're meant for us to *use* in other *real* layouts.
 
 Check it out: edit "Recipe List Layout". On the bottom left of the screen, hiding

@@ -34,18 +34,29 @@ It's *super* fun to play with, so you should definitely download the course code
 from this page and code along with me. When you unzip the file, you'll find a
 `start/` directory with the same code that you see here. Pop open this `README.md`
 file for all those sweet setup details. I've *already* gone over to my terminal,
-installed my node assets via `yarn install` and ran `yarn watch` to build my
-CSS and JS files. But that's all just to make our app and this tutorial more
-realistic. Layouts doesn't require us to use Encore and it doesn't mess with our
-CSS and JS at all.
+installed my Node assets via:
 
-Anyway, the last step in the `README` is to open another terminal tab and run
+```terminal
+yarn install
+```
+
+and ran:
+
+```terminal
+yarn watch
+```
+
+to build my CSS and JS files. But that's all just to make our app and this
+tutorial more realistic. Layouts doesn't require us to use Encore and it doesn't
+mess with our CSS and JS at all.
+
+Anyway, the last step in the `README` is to open another terminal tab and run:
 
 ```terminal
 symfony serve -d
 ```
 
-to start a web server at `127.0.0.1:8000`. I'll cheat and click that. And...
+to start a web server at https://127.0.0.1:8000 - I'll cheat and click that. And...
 hello new side project: it's Bark & Bake! Listen, dogs are pretty tired of our lazy
 attempts at canine cuisine. Crunchy kibble? *No thanks*. So we've built this site
 to inspire people to be the *best* chefs they can be... for their dogs.
@@ -53,7 +64,7 @@ to inspire people to be the *best* chefs they can be... for their dogs.
 This is a pretty traditional Symfony app with a few controllers and some Twig
 templates. It also has two entities: A `User` entity for security, and a `Recipe`
 entity. On the site, we have a homepage that shows the latest and greatest recipes,
-a recipe section, and the ability to *open* a specific recipe so we can follow along
+a recipe section, and the ability to *open* a specific recipe, so we can follow along
 in the kitchen. That's *it*. This skills stuff isn't implemented at *all* yet.
 
 So, other than being able to edit the details of each recipe via an admin area, this
@@ -70,7 +81,7 @@ composer require netgen/layouts-standard
 ```
 
 This will download several packages, including a couple of new bundles. When it
-finishes, run
+finishes, run:
 
 ```terminal
 git status
@@ -93,7 +104,7 @@ setup that we described in the README - I am - then modify this to start with
 to our database:
 
 ```terminal-silent
-symfony console console doctrine:migrations:migrate --configuration=vendor/netgen/layouts-core/migrations/doctrine.yml
+symfony console doctrine:migrations:migrate --configuration=vendor/netgen/layouts-core/migrations/doctrine.yml
 ```
 
 And... perfect! One caveat is that these migrations are written for MySQL
@@ -114,7 +125,9 @@ symfony console doctrine:schema:update --dump-sql --complete
 This mimics generating a migration, and... yup! It wants to drops all of the
 Layouts tables. To fix this, head into `config/packages/doctrine.yaml` and, under
 `dbal`, add `schema_filter`, and pass a regular expression... which you can copy
-from the Layouts documentation.
+from the Layouts documentation:
+
+[[[ code('4add623423') ]]]
 
 Perfect! With that, if we go back and run the `doctrine:schema:update` command
 *again*...
