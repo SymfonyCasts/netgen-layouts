@@ -93,7 +93,7 @@ setup that we described in the README - I am - then modify this to start with
 to our database:
 
 ```terminal-silent
-symfony console console doctrine:migrations:migrate --configuration=vendor/netgen/layouts-core/migrations/doctrine.yml
+symfony console doctrine:migrations:migrate --configuration=vendor/netgen/layouts-core/migrations/doctrine.yml
 ```
 
 And... perfect! One caveat is that these migrations are written for MySQL
