@@ -1,0 +1,387 @@
+WEBVTT
+
+00:00:01.076 --> 00:00:07.406 align:middle
+Abre base.html.twig y mueve el
+{% block layout %} para que esté
+
+00:00:07.506 --> 00:00:11.076 align:middle
+alrededor de todo. Así, pon
+el inicio justo dentro de la
+
+00:00:11.486 --> 00:00:14.576 align:middle
+etiquetabody... y el final justo
+antes de la etiqueta de cierre
+
+00:00:17.876 --> 00:00:19.666 align:middle
+body: Si ahora actualizamos
+
+00:00:20.046 --> 00:00:21.846 align:middle
+la página de inicio... ¡está
+
+00:00:22.246 --> 00:00:24.956 align:middle
+destruida! La parte superior nav y
+
+00:00:25.476 --> 00:00:27.266 align:middle
+footer han desaparecido. ¿Por qué he
+
+00:00:27.466 --> 00:00:29.336 align:middle
+hecho esto? ¡ Porque
+
+00:00:29.626 --> 00:00:33.986 align:middle
+me encanta el caos! Es broma,
+lo hice porque nos da el poder,
+
+00:00:34.276 --> 00:00:41.006 align:middle
+dentro de los diseños, de diseñar páginas totalmente
+personalizadas: incluso páginas sin los tradicionales navigation
+
+00:00:41.376 --> 00:00:44.916 align:middle
+y footer, quizás como una página
+de aterrizaje temporal para
+
+00:00:45.276 --> 00:00:50.856 align:middle
+una promoción. Pero seamos sinceros,
+el 99% de las veces, querremos los nav
+
+00:00:51.676 --> 00:00:55.186 align:middle
+y footer. No hay problema, vuelve a
+
+00:00:56.186 --> 00:00:59.596 align:middle
+base.html.twig. Recuerda:
+añadir bloques nos da
+
+00:00:59.806 --> 00:01:06.536 align:middle
+más flexibilidad. Así que, encima de la navegación,
+añade un nuevo bloque llamado navigation, con
+
+00:01:09.036 --> 00:01:11.966 align:middle
+{% endblock %} después. Luego,
+
+00:01:13.406 --> 00:01:14.706 align:middle
+aquí abajo, otro llamado
+
+00:01:15.676 --> 00:01:17.826 align:middle
+footer... y {% endblock %}: Seguro que
+
+00:01:18.376 --> 00:01:24.456 align:middle
+sabes lo que voy a hacer a continuación. En el administrador
+del diseño, ahora podemos añadir un bloque Twig en
+
+00:01:27.536 --> 00:01:29.556 align:middle
+la parte superior que muestre navigation... y
+
+00:01:30.256 --> 00:01:32.536 align:middle
+otro aquí abajo en la parte
+inferior. No es necesario
+
+00:01:32.536 --> 00:01:33.756 align:middle
+que esté en esta última zona...
+
+00:01:34.726 --> 00:01:35.646 align:middle
+pero
+
+00:01:36.806 --> 00:01:37.436 align:middle
+tiene sentido
+
+00:01:37.546 --> 00:01:40.436 align:middle
+allí. Renderiza footer. ¡Vamos a probarlo!
+
+00:01:40.716 --> 00:01:44.416 align:middle
+Pulsa "Publicar y continuar
+
+00:01:45.246 --> 00:01:50.066 align:middle
+editando" y... actualiza. ¡Ya estamos de
+vuelta! Vamos a crear un segundo diseño,
+
+00:01:50.066 --> 00:01:55.986 align:middle
+esta vez para la página /recipes. Si
+miras en RecipeController, verás que ya he
+
+00:01:55.986 --> 00:01:58.926 align:middle
+hecho todo el trabajo
+para consultar las recetas
+
+00:01:59.226 --> 00:02:05.636 align:middle
+y pasarlas a esta plantilla: Y en
+esa plantilla, hacemos un bucle y
+
+00:02:06.206 --> 00:02:09.016 align:middle
+renderizamos cada una, con paginación:
+Y así, definitivamente quiero
+
+00:02:09.016 --> 00:02:11.366 align:middle
+incluir todo este trabajo personalizado en el
+
+00:02:11.986 --> 00:02:14.896 align:middle
+nuevo diseño. De vuelta al área
+de administración, puls aré
+
+00:02:15.226 --> 00:02:18.016 align:middle
+"Publicar diseño" como una
+forma fácil de volver a la
+
+00:02:18.606 --> 00:02:25.016 align:middle
+lista de diseños. A continuación, pulsa en nuevo diseño, elegiré
+mi diseño favorito 2 y lo llamaré " Diseño de la lista de recetas
+
+00:02:25.016 --> 00:02:30.796 align:middle
+". Para empezar, añade un nuevo
+bloque llamado " Vista completa "...
+
+00:02:31.046 --> 00:02:35.136 align:middle
+y arrástralo a cualquier parte de la
+
+00:02:35.206 --> 00:02:35.686 align:middle
+página, ¡vaya! Ya
+
+00:02:36.446 --> 00:02:38.516 align:middle
+está. ¿Qué es esta "Vista completa"
+
+00:02:38.976 --> 00:02:42.436 align:middle
+? No es nada especial, de hecho, ¡ es un
+
+00:02:42.786 --> 00:02:47.796 align:middle
+poco redundante! No es más que un
+"bloque Twig" que renderiza el bloque
+
+00:02:48.226 --> 00:02:53.116 align:middle
+llamado body. Así que, sí,
+podríamos haber hecho esto fácilmente
+
+00:02:53.116 --> 00:02:56.206 align:middle
+utilizando el bloque Twig normal
+
+00:02:57.016 --> 00:02:58.846 align:middle
+y escribiendo
+
+00:02:59.976 --> 00:03:00.886 align:middle
+body. Publica este diseño...
+
+00:03:01.546 --> 00:03:03.486 align:middle
+luego ve a "Mapeos de
+diseño". Añade una nueva...
+
+00:03:03.796 --> 00:03:05.776 align:middle
+y esta vez
+
+00:03:07.276 --> 00:03:08.586 align:middle
+la enlazaré
+
+00:03:09.636 --> 00:03:13.056 align:middle
+primero... a "Diseño de la lista de recetas".
+Luego haz clic en "Detalles". Como la última
+
+00:03:13.406 --> 00:03:20.406 align:middle
+vez, podríamos mapear esto a través del nombre de la ruta. Pero
+para ver algo diferente, utiliza "Información de la ruta", que,
+
+00:03:20.406 --> 00:03:22.556 align:middle
+de nuevo, es sólo una palabra elegante
+
+00:03:23.376 --> 00:03:25.256 align:middle
+para la URL,
+
+00:03:25.256 --> 00:03:29.466 align:middle
+pero sin ningún
+
+00:03:30.936 --> 00:03:33.296 align:middle
+parámetro de consulta. Haz
+que coincida con /recipes...
+
+00:03:33.746 --> 00:03:35.386 align:middle
+"Guarda los cambios" y...
+
+00:03:35.666 --> 00:03:39.326 align:middle
+¡bien! Cuando probamos la página ... ¡se ve
+
+00:03:40.026 --> 00:03:43.706 align:middle
+genial! Excepto que, ¡me olvidé
+del nav y del pie de página! Añadir
+
+00:03:44.256 --> 00:03:51.806 align:middle
+esos dos bloques al "Diseño de la lista de recetas" es
+fácil. Pero ¿qué pasa si, más adelante, decidimos que cada
+
+00:03:52.056 --> 00:03:56.996 align:middle
+página debe mostrar tanto el bloque de navegación
+en la parte superior como un banner dinámico,
+
+00:03:57.616 --> 00:04:03.666 align:middle
+quizá para una venta que estemos realizando?
+Si eso ocurriera, tendríamos que editar cada
+
+00:04:03.666 --> 00:04:09.226 align:middle
+diseño para añadir manualmente ese nuevo
+banner. Afortunadamente, hay una forma mejor
+
+00:04:10.376 --> 00:04:12.856 align:middle
+de manejar elementos de diseño
+repetidos como éste. Pulsa "Descartar"
+
+00:04:13.106 --> 00:04:16.676 align:middle
+para volver a la lista de diseños, y luego
+
+00:04:17.916 --> 00:04:22.766 align:middle
+haz clic en "Diseños compartidos" y en "Nuevo diseño
+compartido". Como siempre, el tipo de diseño no
+
+00:04:22.766 --> 00:04:25.166 align:middle
+importa mucho, así que usaré el normal...
+
+00:04:26.046 --> 00:04:30.376 align:middle
+y lo llamaré "Diseño de navegación
+y pie de página". Este no va a ser
+
+00:04:30.916 --> 00:04:35.476 align:middle
+un diseño real que esté vinculado a ninguna
+página. No, sólo va a ser una maqueta
+
+00:04:35.606 --> 00:04:40.516 align:middle
+de la que robaremos piezas.
+En la zona superior,
+
+00:04:41.046 --> 00:04:44.526 align:middle
+crea un bloque de Twig que se muestre en
+navigation... e incluso lo etiquetaré como
+
+00:04:45.146 --> 00:04:50.016 align:middle
+"Top Nav" para que quede más claro. A continuación, en
+cualquier otra zona -puedes ponerlo en la parte inferior, pero
+
+00:04:50.406 --> 00:04:54.556 align:middle
+no es necesario-, añade otro
+bloque Twig que renderice footer
+
+00:04:55.486 --> 00:04:57.466 align:middle
+y se etiquete como Pie de página.
+
+00:04:57.466 --> 00:05:00.736 align:middle
+¡Genial! Pulsa "Publicar
+diseño". Ahora tenemos
+
+00:05:01.146 --> 00:05:07.996 align:middle
+un diseño compartido. De nuevo, no están pensados para ser
+asignados a páginas: están pensados para que los utilicemos
+
+00:05:09.096 --> 00:05:11.566 align:middle
+en otros diseños reales. Compruébalo:
+
+00:05:12.396 --> 00:05:16.816 align:middle
+editar "Diseño de lista de recetas". En la parte
+inferior izquierda de la pantalla, escondido detrás de la
+
+00:05:17.086 --> 00:05:22.756 align:middle
+barra de herramientas de depuración web -la cerraré
+temporalmente- hay un botón para vincular una zona con
+
+00:05:23.216 --> 00:05:27.426 align:middle
+una zona de diseño compartido. Haz clic
+en él y selecciona la zona superior...
+
+00:05:27.506 --> 00:05:29.366 align:middle
+llamada zona "Cabecera", aunque
+
+00:05:30.076 --> 00:05:33.166 align:middle
+ese nombre no es importante. Ahora,
+podemos encontrar una zona compartida
+
+00:05:33.446 --> 00:05:34.986 align:middle
+desde un diseño compartido... y
+
+00:05:35.626 --> 00:05:37.356 align:middle
+sólo tenemos una.
+
+00:05:37.476 --> 00:05:38.206 align:middle
+Pulsa "Seleccionar
+
+00:05:38.506 --> 00:05:43.656 align:middle
+zona" y... ¡ya está! La zona superior
+de nuestro diseño será ahora igual al
+
+00:05:43.656 --> 00:05:46.566 align:middle
+bloque o bloques que haya
+en la zona superior de
+
+00:05:47.016 --> 00:05:50.006 align:middle
+ese diseño compartido. Si
+añadimos más cosas a esa zona
+
+00:05:50.376 --> 00:05:52.356 align:middle
+en el diseño compartido, aparecerán
+
+00:05:53.116 --> 00:05:58.346 align:middle
+automáticamente aquí. Hazlo una vez
+más: selecciona la última zona para que
+
+00:05:58.346 --> 00:06:01.806 align:middle
+el pie de página aparezca definitivamente
+en la parte inferior, selecciona
+
+00:06:02.076 --> 00:06:08.606 align:middle
+la zona compartida y... ¡listo! Publica eso,
+
+00:06:09.176 --> 00:06:11.436 align:middle
+muévete, actualiza y... ¡la
+
+00:06:12.176 --> 00:06:15.506 align:middle
+página completa está de vuelta!
+Repitamos rápidamente esto para
+
+00:06:16.276 --> 00:06:22.046 align:middle
+la "Disposición de la página de inicio". Pero esto es
+complicado porque pongo todos mis bloques dentro de esta zona
+
+00:06:22.706 --> 00:06:29.266 align:middle
+superior. En general, estas zonas no importan,
+pero en este caso, para evitar sobrescribir todo
+
+00:06:29.636 --> 00:06:34.096 align:middle
+esto, arrastraré todo excepto
+el bloque Twig de navegación
+
+00:06:36.036 --> 00:06:38.456 align:middle
+hacia abajo. Podemos arreglar
+el orden más tarde. Y ahora,
+
+00:06:38.456 --> 00:06:42.206 align:middle
+configura la zona superior para que
+utilice la del diseño compartido. Sí
+
+00:06:43.436 --> 00:06:46.386 align:middle
+Reemplaza lo que teníamos allí
+antes. A continuación, enlaza también
+
+00:06:47.016 --> 00:06:50.506 align:middle
+la zona inferior con el diseño compartido.
+¡Perfecto! Comprobemos el orden
+
+00:06:52.236 --> 00:06:55.786 align:middle
+de nuestros bloques... que es
+
+00:06:55.946 --> 00:06:58.416 align:middle
+lo bonito de las maquetas. Si no me gusta
+
+00:06:58.736 --> 00:07:03.106 align:middle
+el orden de lo que hay en mi página, ¡siempre
+puedo cambiarlo! Eso es mejor. Publica el
+
+00:07:03.846 --> 00:07:04.426 align:middle
+diseño,
+
+00:07:04.926 --> 00:07:10.106 align:middle
+vuelve a la página de inicio en el
+frontend y... ¡bien! Siguiente: hagamos que
+
+00:07:10.416 --> 00:07:11.186 align:middle
+nuestra
+
+00:07:11.856 --> 00:07:17.056 align:middle
+página de la lista de recetas sea más flexible
+permitiendo que esta zona superior de h1 se construya y
+
+00:07:17.056 --> 00:07:22.086 align:middle
+personalice desde dentro de los
+diseños... en lugar de que esté
+
+00:07:22.086 --> 00:07:24.616 align:middle
+codificada en la plantilla
