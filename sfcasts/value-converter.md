@@ -16,28 +16,47 @@ this value converter error.
 A value converter is really simple: it's a class that transforms the underlying
 object - `Recipe` - into a format that Layouts can understand. In that same
 `src/Layouts/` directory, let's create a `RecipeValueConverter` class... and make
-it implement `ValueConverterInterface`. You know the drill: go to Code -> Generate
-(or "command" + "N" on a Mac) and hit "Implement Methods" to generate the *seven*
-we need. I know, that sounds like a lot, but these are super easy to fill in.
+it implement `ValueConverterInterface`:
+
+[[[ code('628e5b6967') ]]]
+
+You know the drill: go to "Code" -> "Generate" (or `Command`+`N` on a Mac) and
+hit "Implement methods" to generate the *seven* we need:
+
+[[[ code('8d37f86a52') ]]]
+
+I know, that sounds like a lot, but these are super easy to fill in.
 
 First, for `supports()`, Layouts will call this method *every* time it has a "value"
 it doesn't understand. We want to tell it that *we* know how to convert the `$object`
-if it's an `instanceof` `Recipe`.
+if it's an `instanceof` `Recipe`:
+
+[[[ code('d12cff09a3') ]]]
 
 Second, for `getValueType()`, `return` the internal *key* of our value type:
-`doctrine_recipe`.
+`doctrine_recipe`:
+
+[[[ code('834efdca23') ]]]
 
 Next is `getId()`... and we're literally going to `return` our ID with
-`$object->getId()`. We don't have autocomplete on this, but *we* know this object
-will be a `Recipe`.
+`$object->getId()`:
 
-For `getRemoteId()`, just `return $this->getId($object)`. This method is only
-important if you plan to use the import feature in Layouts to move data, for
-example, between staging and production. If *were* planning to do that, you could
-give your objects a UUID and return that here.
+[[[ code('352adab894') ]]]
+
+We don't have autocomplete on this, but *we* know this object will be a `Recipe`.
+
+For `getRemoteId()`, just `return $this->getId($object)`:
+
+[[[ code('0f4ddd89e7') ]]]
+
+This method is only important if you plan to use the import feature in Layouts
+to move data, for example, between staging and production. If *were* planning
+to do that, you could give your objects a UUID and return that here.
 
 Down here, for `getName()`, this will be a human-readable name shown in the admin
-area. This time, to help my editor, let's `assert()` that `$object instanceof Recipe`.
+area. This time, to help my editor, let's `assert()` that `$object instanceof Recipe`:
+
+[[[ code('24634bca85') ]]]
 
 Two things about this. First, *we* know that this object will always be a `Recipe`
 because, up in `supports()`, we *said* that's that only object we support. Second,
@@ -45,15 +64,24 @@ if you haven't seen the `assert()` function before, if the `$object` is *not* an
 `instanceof` `Recipe`, it will throw an exception. It's a really easy way to tell
 your editor - or other tools like PHPStan - that the object is *definitely* an
 instance of `Recipe`.... which means *now* we get autocompletion when we say
-`return $object->getName()`.
+`return $object->getName()`:
 
-Next is `getIsVisible()`. Just `return true`. If your recipes could be published
-or unpublished, for example, then you could check *that* here to return `true` or
-`false`.
+[[[ code('cc0bbe6423') ]]]
 
-Finally, for `getObject()`, `return $object`. I know, that seems a bit silly, but
-this is a handy way for you to *change* your `Recipe` after it's loaded if you
-needed to. But that's not something that we *need* to do.
+Next is `getIsVisible()`. Just `return true`:
+
+[[[ code('7eae615203') ]]]
+
+If your recipes could be published or unpublished, for example, then you could
+check *that* here to return `true` or `false`.
+
+Finally, for `getObject()`, `return $object`:
+
+[[[ code('03f4c13386') ]]]
+
+I know, that seems a bit silly, but this is a handy way for you to *change*
+your `Recipe` after it's loaded if you needed to. But that's not something
+that we *need* to do.
 
 And... done!
 
@@ -99,8 +127,11 @@ that this is a way for us to add extra *form fields* so an admin user can pass
 
 For example, let's add an optional search term. Say `$builder->add()` passing
 `term` - that will be the internal name for this new parameter - then `TextType`:
-the one from `Netgen\Layouts`. There are a *bunch* of other field types for URLs,
-dates and more.
+the one from `Netgen\Layouts`:
+
+[[[ code('c78fcf3109') ]]]
+
+There are a *bunch* of other field types for URLs, dates and more.
 
 With *just* this, when we refresh the admin section... and click down on the grid,
 there it is! We've got a big new box! Of course, if we *type* anything inside,
@@ -113,9 +144,18 @@ running this through the *translator* via a domain called `nglayouts`. So, in th
 `translations/` directory, create a file called `nglayouts.en.yaml`, or use
 whatever format you want.
 
-Paste the label and set it to "Search term". Try the admin section now. When we
-click... much better! If you still see the old label, try clearing your cache:
-sometimes Symfony doesn't notice when you add a *new* translation file.
+Paste the label and set it to "Search term":
+
+[[[ code('730d026ff0') ]]]
+
+Try the admin section now. When we click... much better! If you still see
+the old label, try clearing your cache:
+
+```terminal-silent
+symfony console cache:clear
+```
+
+Sometimes Symfony doesn't notice when you add a *new* translation file.
 
 ## Using the Parameter
 
@@ -123,11 +163,15 @@ Ok, to *use* the search term, head over to our query type handler. The `Query`
 object passed to `getValues()` contains any parameters we added. *And*, I
 already prepared the `createQueryBuilderOrderedByNewest()` method to accept an
 optional search term! Pass this `$query->getParameter()`, its name - `term` - then
-`->getValue()`.
+`->getValue()`:
 
-Copy that and repeat it down here for the `getCount()` method.
+[[[ code('5a3bdca627') ]]]
 
-Alrighty, let's take this thing for a test drive! Refresh the layouts area, go down
+Copy that and repeat it down here for the `getCount()` method:
+
+[[[ code('3e10f8b2ef') ]]]
+
+Alrighty, let's take this thing for a test drive! Refresh the Layouts area, go down
 here and I think that worked! It shows no items... because I used a pretty silly
 search term. Clear it out. We get everything. Now type just a few letters... and
 watch as it changes below.

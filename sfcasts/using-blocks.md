@@ -5,14 +5,18 @@ things right now. Edit that layout. I want to give our admin users the flexibili
 to change this *title*. Cool! Let's add a new title block right above... and
 enter some text.
 
-Hit "publish and continue editing"... then go to the frontend. What I'm *attempting*
+Hit "Publish and continue editing"... then go to the frontend. What I'm *attempting*
 to do is replicate this title, or "hero" area - so that we can *remove* it from our
 Twig template. But when we refresh, that doesn't look right yet.
 
 Go over and look at that template. Ok: to replicate this, we need an `h1` tag
-wrapped in a `hero-wrapper` div. Right now, layouts is simply rendering an `h1`.
-And, by the way, you can, in the title block options, choose between `h1`, `h2`
-or `h3`. `h1` is what we need this time.
+wrapped in a `hero-wrapper` div:
+
+[[[ code('a5a9d53de5') ]]]
+
+Right now, layouts is simply rendering an `h1`. And, by the way, you can,
+in the title block options, choose between `h1`, `h2`, or `h3`. `h1` is what
+we need this time.
 
 ## Adding a Wrapper Div Column
 
@@ -21,14 +25,17 @@ answer: add a nifty "column" block... then move the title *into* that column.
 Cool right? Finally, when you click on the column, you can add any class you want.
 Add `hero-wrapper`.
 
-Let's try it! Hit "publish and continue editing", refresh the frontend and... much
+Let's try it! Hit "Publish and continue editing", refresh the frontend and... much
 better! What about that text? Copy it, add a new "text" block right below our
-"title" and... paste . Publish and continue editing again... try the frontend
+"title" and... paste. Publish and continue editing again... try the frontend
 again and... look at that! A perfect replica!
 
-To celebrate, over in the template, we can remove that section entirely. The end
-result is the *same* as before... except admin users *now* have the ability to
-change the text.
+To celebrate, over in the template, we can remove that section entirely:
+
+[[[ code('74e279eacb') ]]]
+
+The end result is the *same* as before... except admin users *now* have
+the ability to change the text.
 
 ## Custom CSS in Layouts or Pre-Made Custom Block Type?
 
@@ -47,23 +54,25 @@ All right, back on the front end, layouts comes with its own web debug toolbar i
 And if you click this, it's pretty cool. We're going to use this a *bunch* of times.
 It shows you the layout that was resolved and even the *reason* why it was chosen.
 
-But the *really* useful thing is the "rendered blocks" section. This shows us all
-the layouts "blocks" that were rendered to build this page. You can see there's
-one called "Twig Block" for the top nav, a "Column", then the "Title", "Text",
-"Full View Block" and finally the last "Twig block" for the footer. This is
+But the *really* useful thing is the "Rendered blocks" section. This shows us all
+the layouts *blocks* that were rendered to build this page. You can see there's
+one called "Twig block" for the top nav, a "Column", then the "Title", "Text",
+"Full view" block and finally the last "Twig" block for the footer. This is
 a great way to see all the different blocks that are being rendered, as well as the
 *template* behind each one. Later, we're going to talk about overriding those
-templates so we can customize how they look.
+templates, so we can customize how they look.
 
 ## Linking to the Layouts Admin
 
-Back in the layouts admin, Publish the layout to get back to the main page. If you
+Back in the Layouts admin, publish the layout to get back to the main page. If you
 go to `/admin`, you'll find that our app already has EasyAdmin installed. Let's add
 a link from the menu here to Layouts to make life easier. Open
 `src/Controller/Admin/DashboardController.php`... and find `configureMenuItems()`.
 Add another with `yield MenuItem::linkToUrl()`, call it "Layouts" and give it
 some icons: `fas fa-list`. For the url, use `this->generateUrl()` and pass
-in the route name, which happens to be `nglayouts_admin_layouts_index`.
+in the route name, which happens to be `nglayouts_admin_layouts_index`:
+
+[[[ code('b4e3a9c232') ]]]
 
 Perfect! That's a small detail, but now when we're on `/admin`, we can click "Layouts"
 to jump right there.

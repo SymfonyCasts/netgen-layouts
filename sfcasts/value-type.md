@@ -41,8 +41,12 @@ in `config/packages/netgen_layouts.yaml`, very simply, say `value_types`, and be
 that, `doctrine_recipe `. This is the *internal name* of the value type, and
 we'll refer to it in a few places. Give it a human-friendly `name` -
 `Recipe` - and for now, set `manual_items` to `false`... and make sure that has
-an "s" on the end. We'll talk about `manual_items` more later, but it's easier to
-set this to `false` to start.
+an "s" on the end:
+
+[[[ code('8d1f76144f') ]]]
+
+We'll talk about `manual_items` more later, but it's easier to set this to `false`
+to start.
 
 Head over, refresh our layouts page (it's okay to reload it)... and check out
 our Grid block! There's a new "Collection type" field and "Manual collection" is
@@ -67,7 +71,9 @@ one called "Latest".
 
 How do we create those? Head back to the config file, add `query_types` and below
 that, let's say `latest_recipes`. Once again, this is just an "internal name".
-Also give it a human-readable `name`: `Latest Recipes`.
+Also give it a human-readable `name`: `Latest Recipes`:
+
+[[[ code('b74adc5964') ]]]
 
 So... what do we do now? If we head back and refresh... we get a very nice error
 that *tells* us what to do next:
@@ -82,35 +88,62 @@ type! Let's do it!
 Over in the `src/` directory, I'm going to create a new `Layouts/` directory: we'll
 organize a lot of our custom Layouts stuff inside here. Then add a new PHP class
 called... how about `LatestRecipeQueryTypeHandler`. Make this implement
-`QueryTypeHandlerInterface`... then go to "Code Generate" (or "command" +
-"N" on a Mac), and select "Implement Methods" to add the four we need.
+`QueryTypeHandlerInterface`:
+
+[[[ code('babd282473') ]]]
+
+Then go to "Code Generate" (or `Command`+`N` on a Mac), and select "Implement methods"
+to add the four we need:
+
+[[[ code('c04981c1d2') ]]]
 
 Nice! Let's see... I'll leave `buildParameters()` empty for a minute, but we'll come
-back to it soon. The most important method is `getValues()`. This is where we'll
-load and return the "items". If our recipes were stored on an API, we would
-make an API request here to fetch those. But since they're in our local database,
-we'll query for them.
+back to it soon:
+
+[[[ code('39c0dab62c') ]]]
+
+The most important method is `getValues()`. This is where we'll load and return
+the "items". If our recipes were stored on an API, we would make an API request
+here to fetch those. But since they're in our local database, we'll query for them.
 
 To do that, go to the top of the class, add a `__construct()` method with
-`private RecipeRepository $recipeRepository`. Then, down in `getValues()`,
-`return $this->recipeRepository`... and use a method that I already created
-inside of `RecipeRepository` called `->createQueryBuilderOrderedByNewest()`. Also
-add `->setFirstResult($offset)` and `->setMaxResults($limit)`. The admin user will
-be able to choose *how* many items to show and they can even *skip* some. And so,
-Layouts passes us those values as `$limit` and `$offset`... and we use them in
-our query. Finish with `->getQuery()` and `->getResult()`.
+`private RecipeRepository $recipeRepository`:
+
+[[[ code('53ab55cc70') ]]]
+
+Then, down in `getValues()`, `return $this->recipeRepository`... and use a method
+that I already created inside of `RecipeRepository` called
+`->createQueryBuilderOrderedByNewest()`. Also add `->setFirstResult($offset)`
+and `->setMaxResults($limit)`. The admin user will be able to choose *how* many
+items to show and they can even *skip* some. And so, Layouts passes us those
+values as `$limit` and `$offset`... and we use them in our query. Finish with
+`->getQuery()` and `->getResult()`:
+
+[[[ code('5d32df906d') ]]]
 
 Perfect! Below, for `getCount()`, let's do the exact same thing... except we don't
 need `->setMaxResults()` or `->setFirstResult()`. Instead, add
-`->select('COUNT(recipe.id)')`. I'm using `recipe` because, over in
-`RecipeRepository`... if we look at the custom method, it uses `recipe` as the alias
-in the query. After that, update `->getResult()` to be `->getSingleScalarResult()`.
+`->select('COUNT(recipe.id)')`:
+
+[[[ code('00d69e8605') ]]]
+
+I'm using `recipe` because, over in `RecipeRepository`... if we look at the custom
+method, it uses `recipe` as the alias in the query:
+
+[[[ code('b21de44ac4') ]]]
+
+After that, update `->getResult()` to be `->getSingleScalarResult()`:
+
+[[[ code('ec0d670017') ]]]
 
 Phew! That was a bit of work, but fairly straightforward. Oh, and for
-`isContextual()`, `return false`. *We* won't need it, but this method is kinda
-cool. If you return `true`, then you can read information from the current page
-to *change* the query - like if you were on a "category" page and needed to list
-only products *in* that category.
+`isContextual()`, `return false`:
+
+[[[ code('fff5255415') ]]]
+
+*We* won't need it, but this method is kinda cool. If you return `true`, then
+you can read information from the current page to *change* the query - like
+if you were on a "category" page and needed to list only products *in* that category.
 
 ## Tagging the Query Type Handler Class
 
@@ -123,11 +156,18 @@ a really cool way to do this thanks to Symfony 6.1.
 Above the class, add an attribute called `#[AutoconfigureTag()]`. The name of the
 tag we need is `netgen_layouts.query_type_handler`: this is straight out of the
 documentation. We also need to pass an array with a `type` key set to
-`latest_recipes`. This `type` must match what we have in our config: it ties the
-two together.
+`latest_recipes`:
+
+[[[ code('83a1b6448c') ]]]
+
+This `type` must match what we have in our config:
+
+[[[ code('4195bc4644') ]]]
+
+It ties the two together.
 
 And now... the page *works*! If we click on our Grid block... we can switch to
-"Dynamic collection". *Awesome*! I'll hit apply and... everything immediately stops
+"Dynamic collection". *Awesome*! I'll hit Apply and... everything immediately stops
 loading!
 
 When you have an error in the admin section, there's a good chance it'll show up
