@@ -1,101 +1,30 @@
 # Content Browser
 
-Coming soon...
+We can *now* embed lists, grids, or thumb galleries of recipes to *any* layout in our system *dynamically*. That's *super* cool. And we can always create more query types so we could, for example, choose between the *latest* recipes or *most popular* recipes. But what about being able to *manually* select recipes? Maybe we want to feature four *specific* recipes on the homepage. In the layouts area, on the grid, if you change the Collection type, we *can* change to "Manual collection". But notice that I can't actually select any items.
 
-So we can now embed lists or grids or thumb galleries of recipes to any layout in our
-system dynamically. That's just super cool. And we can always create more query types
-so that we could, for example, choose between latest recipes or most popular recipes.
-But what about being able to select manually select recipes? Like maybe we want to
-feature four specific recipes in the home beach in a Lays area on the grid. If you
-change the collection type, we can change to manual collection. No, when I do that,
-it actually breaks, but if we refresh, okay, it's working again, manual collection.
-But you can see here I can't actually select any items to allow your items in our
-case recipes to be selected manually. First we need to allow that in the config. So
-you remember earlier when we created the value type, we said manual items false.
-Let's change that to manual items. True. And now when we dry it, we get an air neck
-and content browser backend for doc and recipe value type does not exist. Yep. We
-need to implement a class that helps layouts browse our recipes. That's called a
-content browser.
+To allow your items (in our case, *recipes*) to be selected manually, we first need to allow that in the config. Earlier, when we created the `value_types`, we set `manual_items` to `false`. Let's change that to `manual_items: true`. And now, when we try it, we get an error:
 
-Adding a content browser is actually done by a completely different bundle, which you
-can even use outside of neck end layouts if you ever need a really nice interface for
-selecting items. Since this is done in a different bundle, I'm actually gonna, I
-don't have to but I'm gonna configure this with a different configuration file called
-that. Again, content browser dot yaml. It's inside of here. Set the root key to that
-content browser cuz it's called net. Again content browser bundle. And inside of here
-we get to describe all of the different manual things that we wanna be able to brows
-browse. We do that under an item types key. And then for the root key here we are
-gonna grab the value type, internal name doctrine underscore recipe. So that needs to
-match. And then we'll give us a name, say recipes with a cute strawberry icon. And
-the only other thing we need in here is a preview key with a template sub key. And
-I'll set that the engine layouts slash How about content browser slash recipe
-underscore preview html. Do twig we did. Oh, and make sure you call spelled template
-correctly. So we're setting this preview template because the configuration forces us
-to, but we're actually gonna worry about creating that template later.
+`Netgen Content Browser backend for
+"doctrine_recipe" value type does not exist`
 
-All right, when we, if we refresh now same error, that's because we need a back end
-class that will connect to this new item type. So this is a, creating a backend is a
-simple process, but it does require creating a few different classes. So in the
-source directory I'm gonna create a new directory called content browser. And inside
-of there we're gonna create a new PHP class called recipe browser backend. This needs
-to implement a backend interface, the one from net gun browser backend. Then I'll go
-to code generate or command and on Mac to implement the nine methods that are needed.
-Don't worry, it's not nearly as bad as it looks. Finally, to link this backend to the
-item type that we have in our config, we need to give this service a class. So we're
-gonna do this the same way that we did earlier with our query type. We're gonna use
-auto configured tags. In fact, I'll steal this auto configured tag since I'm here.
-Paste that. Add the use statement for it this time. The tag name is net gun
-underscore content underscore browser dot backend. And then instead of type, it's
-item underscore typed. And this is gonna be set to the key we have in here. So
-doctrine underscore recipe, paste that there.
+Yep! We need to implement a class that helps Layouts browse our recipes. That's called a "content browser".
 
-All right, before we refresh, now the air is gone. So I'm going to temporarily add a
-new grid up here. I'm gonna choose manual collection. And now check this out because
-we have a back end, we have an add items button and when we click that it fails,
-which shouldn't be too surprising since our back end is completely empty still. If
-you wanna see the exact air, you could open up the ax call. All right. So the way
-that the browser works is, is in these methods we almost describe a tree structure
-like a file system. So locations are kind of like directories and items are gonna be
-the recipes inside those directories. Now we're gonna keep things really simple and
-instead of having like different categories of recipes that you can choose from,
-we're just gonna have a single location called recipes and everything will be under
-that. You'll see what this looks like in the content browser in a few minutes. So to
-get this all working inside our source content browser directory, we need to create a
-class that uh, represents a location. So I'm gonna call it browser root location.
-This is really not that important. It's kind of low level plumbing that you just need
-to have.
+Adding a content browser is actually done by a completely different bundle, which you can also use outside of Netgen Layouts. It's handy if you ever need a really nice interface for selecting items. Since this is done in a different bundle, it's not *required*, but I'm going to configure this with a different configuration file called `netgen_content_browser.yaml`. Inside of that, set the root key to `netgen_content_browser`, since it's called "Netgen Content Browser" bundle. Inside of *this*, we get to describe all of the different manual things that we want to be able to browse. We can do that under an `item_types` key, and then, for the root key here, we're going to grab the value type's internal name - `doctrine_recipe` - so these match, and then we'll give it a name. How about... `Recipes` with a cute little strawberry icon.
 
-Make this implement location interface. Then I will implement the three methods that
-I need. So again, we're gonna have this class just represent the one and only route
-to location. So forget location id, you can return anything. I'm gonna return zero.
-You'll see how that's used in a second. Or get name. This is gonna be what's gonna be
-displayed in the admin section. I'll say all and for get parent id because if return
-null, if you have a more complex system with like multiple sort of sub directories,
-you can have um, a hierarchy of locations. All right, let's update our back end to
-uses. So get sections is gonna be called right in the very beginning to figure out
-all the different kind of route directories that you have in your backend browser.
-For us it's gonna be literally returning new browser route location, an array with
-just that one thing. Now as soon as this loads, it's going to grab the idea of that
-make another age x request to get more information about it. So this is only gonna be
-called one time where ID is zero. And what we need to do is actually return that same
-location. So I'll say if Id equals equals zero,
+The only other thing we need in here is a `preview` key with a `template` sub-key, which I'll set to `nglayouts/content_browser/recipe_preview.html.twig`. Oh! And make sure you spell "template" correctly. Whoops... We're setting this `preview` `template` because the configuration forces us to, but we'll worry about creating that template later.
 
-Then return new browser route location. Now I notice I'm using zero in strings here,
-whereas before it's an integer. That's because this will be parsed by uh, parsed and
-used in JavaScript. So by the time it gets back to our server, it will be a string.
-So just watch out for that. And down here I can, we can throw a new um, invalid
-argument exception in case we get down here, we shouldn't. It says invalid location
-and then we'll pass the id. Perfect. So that handles our one location. Now for
-everything else, I'm just going to return the simplest thing possible. So for load
-item. So for load item, actually lead that empty for a moment. Forget sub locations,
-return empty array, get sub locations, count return zero, get sub items, return an
-empty array, get sub item count return zero. And finally for search return and MT
-array and search count return zero. Phew. We're talk about all of that in a minute,
-but this backend is class is at least somewhat functional. So if we refresh the admin
-area now click on our grid, go to add items, it loads, say hello to the content
-browser. Of course there's no items in it, but you can see are all here. This is our
-one location and inside that location and currently there are no items to get items
-in here. We need to return them from get sub items.
+If we head over and refresh... we get the *same* error. That's because we need a backend class that will connect to this new item type. Creating a backend is a simple process, but it *does* require creating a few different classes. In the `/src` directory, let's create a new directory called `/ContentBrowser`. Inside of that, we're going to create a new PHP class called `RecipeBrowserBackend.php`. This needs to implement a `BackendInterface` - the one from `Netgen\ContentBrowser\Backend`. Then, I'll go to Code Generate (or "command" + "N" on a Mac) to implement the *nine* methods that are needed. Don't worry! It's not nearly as bad as it looks.
 
-Let's do that next.
+*Finally*, to link this backend to the item type that we have in our config, we need to give this service a class. We'll do this the same way we did earlier with our query type - with an `AutoconfigureTag`. In fact, I'll steal this `AutoconfigureTag` since I'm here... paste that... and add the `use` statement for it. This time, the tag name is `netgen_content_browser.backend`, and instead of `type`, it's `item_type`. This will be set to the key we have in here - so `doctrine_recipe`. Paste that there. *Nice*.
 
+If we go over and refresh again... the error is *gone*. I'm going to temporarily add a new Grid up here, and I'll choose "Manual collection". Now... check this out! Because we have a backend, we have an "Add Items" button. When we click it... it *fails*. That shouldn't be too surprising since our backend is still completely empty. If you want to see the *exact* error, you could open up the AJAX call.
+
+The way the browser works is this: In these methods, we almost describe a tree structure, kind of like a file system. Locations are like directories, and items are the recipes inside of those directories. We're going to keep things really simple, and instead of having different categories of recipes that you can choose from, we'll just have a single location *called* "Recipes" and everything will file under that. You'll see what this looks like in the content browser in a few minutes.
+
+To get this working, inside our `/src/ContentBrowser` directory, we need to create a class that represents a location. I'll call it `BrowserRootLocation.php`. This isn't super important. It's just some low-level plumbing that you just need to have. Make this implement `LocationInterface`, and below that, we'll implement the three methods we need. Again, we'll just have this class represent the one and only route to location. So for `getLocationId()`, you can return *anything*. I'm going to `return 0`. You'll see how that's used in a second. For `getName()`, this is what will be displayed in the admin section. I'll `return 'All'`... and for `getParentId()`, `return null`. If you have a more complex system with multiple sub-directories, you can create a hierarchy of locations.
+
+All right, let's update our backend to use this. Up here, `getSections()` will be called in the very beginning so it can discover all of the different route directories you have in your backend browser. For us, it will literally `return [new BrowserRouteLocation()]` - an array with just that one thing. As soon as this loads, it's going to grab that ID and make another AJAX request to get more information about it. So this will only be called one time where the `$id` is `0`. What we need to do is actually return that same location, so I'll say `if ($id === '0')`, then `return new BrowserRootLocation()`. Notice that I'm using `0` in strings here, whereas before, it was an integer. That's because this will be parsed and used in JavaScript, so by the time it gets back to our server, it will be a string. That's just something to keep in mind.
+
+Down here, we can `throw new \InvalidArgumentException(sprintf())` in case we make it this far, though we *shouldn't*. We'll say `Invalid location "%s"` and then we'll pass the `$id`. Perfect! So that handles *one* location. For everything else, I'm just going to return the simplest thing possible. We'll leave `loadItem()` empty for a moment. For `getSubLocations()`, `return []`. For `getSubLocationsCount()`, `return 0`. For `getSubItems()`, `return []`. For `getSubItemCount()`, `return 0`. For `search()`, `return []`. And *finally*, for `searchCount()`, `return 0`. *Phew*... We'll talk about all of that later, but our backend class is at least *somewhat* functional now.
+
+If we refresh the admin area again... click on our grid, and go to "Add Items"... *it loads*! Say "hello" to the content browser. It's currently *empty*, but you can see our "All" here, which is our *one* location. There are no items inside to retrieve at the moment. We'll need to return them from `getSubItems()`. Let's do that *next*.
