@@ -28,8 +28,13 @@ isn't to teach you about Contentful. Nope. It's to show you how we could grab co
 for layouts from anywhere and to grab that content. We could manually create a new
 value type for skill and do all the work that we did before. But layouts already has
 a bundle that supports content fold and which does all of the value type query type
-item view stuff for us. So let's grab it. Spin over your terminal run composer
-require net gain layouts, dash content fold dash w. The dash W is just there because
+item view stuff for us. So let's grab it. Spin over your terminal run
+
+```terminal
+composer require netgen/layouts-contentful -W
+```
+
+ The dash W is just there because
 if you try without you get an air, it's there so that it can down to allow a
 downgrading one, not super important package
 
