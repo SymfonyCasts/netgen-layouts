@@ -1,0 +1,381 @@
+WEBVTT
+
+00:00:01.016 --> 00:00:04.586 align:middle
+Es hora de crear la vista de
+artículos Recipe para el frontend.
+
+00:00:05.246 --> 00:00:07.406 align:middle
+Esto empieza casi exactamente igual.
+
+00:00:07.856 --> 00:00:09.906 align:middle
+De hecho, copia la configuración
+del administrador...
+
+00:00:10.106 --> 00:00:12.286 align:middle
+y pégala.
+
+00:00:12.286 --> 00:00:16.816 align:middle
+En Layouts, sabemos que la clave
+app significa la sección "admin".
+
+00:00:17.216 --> 00:00:21.856 align:middle
+Y resulta que default se utiliza
+para referirse al frontend:
+
+00:00:22.746 --> 00:00:27.066 align:middle
+Una vez más, este nombre interno
+no es importante, para la plantilla,
+
+00:00:27.066 --> 00:00:29.356 align:middle
+utiliza la misma ruta pero frontend...
+
+00:00:29.886 --> 00:00:32.136 align:middle
+y mantén match exactamente igual:
+
+00:00:32.716 --> 00:00:35.536 align:middle
+¡Me encanta cuando las cosas
+son aburridas y fáciles!
+
+00:00:36.196 --> 00:00:37.366 align:middle
+Vamos a crear esa plantilla.
+
+00:00:38.406 --> 00:00:41.386 align:middle
+En nglayouts/, haz el directorio frontend/...
+
+00:00:42.736 --> 00:00:46.326 align:middle
+y dentro, recipe_item.html.twig.
+
+00:00:47.426 --> 00:00:52.126 align:middle
+Los diseños le pasarán las mismas variables que
+a la plantilla de elementos de administración.
+
+00:00:52.696 --> 00:00:59.236 align:middle
+Esto significa que podemos, una vez más,
+utilizar {{ item.object }} para acceder a nuestro
+
+00:00:59.846 --> 00:01:02.396 align:middle
+objetoRecipe. Vamos a imprimir la clave
+name para ver si las cosas funcionan:
+
+00:01:03.716 --> 00:01:06.696 align:middle
+Y...
+
+00:01:06.846 --> 00:01:08.066 align:middle
+están funcionando.
+
+00:01:08.686 --> 00:01:13.596 align:middle
+¡Está vivo! Una de mis cosas favoritas cuando
+empiezo a trabajar con plantillas dentro de
+
+00:01:13.596 --> 00:01:16.276 align:middle
+Layouts es hacer clic en el elemento Twig de
+la barra de herramientas de depuración web.
+
+00:01:16.946 --> 00:01:20.836 align:middle
+Aquí podemos ver realmente cómo
+
+00:01:21.616 --> 00:01:25.726 align:middle
+se renderiza Layouts. Sí,
+
+00:01:26.056 --> 00:01:28.326 align:middle
+renderiza layout_2.html.twig...
+y luego empieza a renderizar
+
+00:01:28.896 --> 00:01:35.606 align:middle
+cada zona. Renderiza nuestro bloque navigation,
+el bloque hero, y luego, finalmente aquí abajo,
+
+00:01:36.546 --> 00:01:41.746 align:middle
+la cuadrícula. Puedes ver que está
+
+00:01:42.436 --> 00:01:45.506 align:middle
+utilizando grid/3_columns.html.twig.
+Esto es algo que podemos controlar en el
+
+00:01:46.436 --> 00:01:47.226 align:middle
+área de administración. Haz clic en
+
+00:01:48.486 --> 00:01:51.586 align:middle
+la cuadrícula. A la derecha, vemos la
+
+00:01:51.926 --> 00:01:54.136 align:middle
+pestaña "Contenido". Pero
+también hay una pestaña "
+
+00:01:54.966 --> 00:01:56.926 align:middle
+Diseño". Cambia esto a
+
+00:01:57.346 --> 00:01:59.766 align:middle
+"4 columnas"... y le doy a "Publicar y
+
+00:02:01.206 --> 00:02:04.816 align:middle
+continuar editando". Si ahora
+refrescamos y volvemos a cargar el
+
+00:02:05.046 --> 00:02:09.026 align:middle
+perfilador Twig , veremos que
+
+00:02:09.886 --> 00:02:11.126 align:middle
+se renderiza 4_columns.html.twig.
+
+00:02:11.486 --> 00:02:16.716 align:middle
+Entonces, ¡eh! Dentro de
+cada columna, renderiza
+
+00:02:17.206 --> 00:02:22.156 align:middle
+nuestro recipe_item.html.twig. Esto es
+realmente genial de ver, y vamos a ver esto de
+
+00:02:22.406 --> 00:02:25.236 align:middle
+nuevo más tarde cuando hablemos de anular las
+
+00:02:26.416 --> 00:02:33.826 align:middle
+plantillas del núcleo. Una cosa que tengo que mencionar es que
+nuestra aplicación está utilizando la versión 4 de Bootstrap, no la
+
+00:02:34.546 --> 00:02:41.386 align:middle
+5. La razón es que, en este momento, la plantilla
+de cuadrícula muestra la versión 4 de Bootstrap.
+
+00:02:42.046 --> 00:02:46.906 align:middle
+Si quisieras usar Bootstrap 5, es
+totalmente posible, pero tendrías
+
+00:02:46.906 --> 00:02:54.426 align:middle
+que anular estas plantillas de columnas
+-como 4_columns.html.twig - para modificar
+
+00:02:55.296 --> 00:03:01.196 align:middle
+las clases. Anular las plantillas del núcleo es en
+realidad súper fácil, y hablaremos de cómo hacerlo
+
+00:03:01.976 --> 00:03:06.416 align:middle
+pronto. Bien, ¡ vamos a dar
+vida a esta vista del frontend
+
+00:03:06.536 --> 00:03:10.636 align:middle
+! Abre la plantilla de la página de inicio
+
+00:03:11.146 --> 00:03:15.016 align:middle
+: main/homepage.html.twig... y desplázate hacia arriba
+hasta el lugar en el que hacemos un bucle con las
+
+00:03:15.916 --> 00:03:22.406 align:middle
+últimas recetas. Perfecto. Lo que básicamente
+quiero hacer es robar el marcado de uno de estos
+
+00:03:22.986 --> 00:03:25.676 align:middle
+mosaicos de recetas... y pegarlo
+en la plantilla del frontend:
+
+00:03:26.616 --> 00:03:28.696 align:middle
+Ahora sólo tenemos que ajustar
+
+00:03:28.876 --> 00:03:33.996 align:middle
+algunas variables: en lugar
+de recipe.slug, tiene que
+
+00:03:34.986 --> 00:03:37.826 align:middle
+ser item.object.slug. Haré
+una búsqueda y reemplazo:
+
+00:03:38.166 --> 00:03:40.496 align:middle
+sustituir recipe.
+
+00:03:43.456 --> 00:03:45.826 align:middle
+por item.object.: ¡Bien! Veamos si ha
+
+00:03:46.376 --> 00:03:47.906 align:middle
+funcionado. Muévete
+
+00:03:48.206 --> 00:03:50.076 align:middle
+, refresca... ¡y
+
+00:03:50.306 --> 00:03:52.316 align:middle
+lo hizo! Eso parece
+
+00:03:52.476 --> 00:03:53.826 align:middle
+el frontend.
+
+00:03:54.446 --> 00:03:58.126 align:middle
+¡Somos increíbles! Excepto que le
+falta el "canalón" que tenemos en
+
+00:03:59.136 --> 00:04:00.216 align:middle
+el original.
+
+00:04:01.976 --> 00:04:06.646 align:middle
+Inspecciona el elemento. Ah, la
+diferencia es que las columnas originales
+
+00:04:06.646 --> 00:04:10.216 align:middle
+estaban dentro de un div container, que añade
+
+00:04:11.056 --> 00:04:14.406 align:middle
+el margen. En el nuevo código,
+estamos dentro de una fila...
+
+00:04:14.746 --> 00:04:16.176 align:middle
+pero no de un
+
+00:04:17.436 --> 00:04:24.456 align:middle
+container. Para arreglar esto en Layouts, vamos
+a añadir nuestro bloque de utilidad favorito
+
+00:04:25.426 --> 00:04:27.176 align:middle
+¡una columna! Mueve la cuadrícula dentro de
+
+00:04:27.756 --> 00:04:33.046 align:middle
+esa columna. Entonces, podríamos añadir
+una clase CSS como hicimos antes en la
+
+00:04:33.416 --> 00:04:37.846 align:middle
+zona del héroe. Pero en su lugar,
+toma un atajo y marca "Envolver
+
+00:04:38.606 --> 00:04:42.636 align:middle
+en contenedor". Pulsa
+"Publicar y continuar editando"
+
+00:04:43.626 --> 00:04:45.006 align:middle
+y actualiza. Vaya,
+
+00:04:45.396 --> 00:04:47.416 align:middle
+página equivocada. Vuelve a la página de
+
+00:04:48.216 --> 00:04:49.416 align:middle
+inicio y ... ¡se
+
+00:04:49.736 --> 00:04:53.006 align:middle
+ve muy bien! ¡ Ahora está
+dentro de un elemento con una
+
+00:04:53.906 --> 00:05:00.556 align:middle
+clasecontainer! Esta "envoltura en el contenedor" es
+súper útil: añade literalmente un div extra alrededor de
+
+00:05:00.716 --> 00:05:05.176 align:middle
+tu bloque con class="container"
+y todos los bloques
+
+00:05:05.716 --> 00:05:10.756 align:middle
+lo admiten. Diablos, ni siquiera necesitamos una
+columna: podríamos haber marcado simplemente
+
+00:05:10.756 --> 00:05:14.076 align:middle
+la opción "Envolver en contenedor" en la
+
+00:05:14.196 --> 00:05:19.486 align:middle
+propia cuadrícula. La única razón por la que he puesto
+esto dentro de una columna es para que también podamos
+
+00:05:19.486 --> 00:05:21.766 align:middle
+añadir allí la cabecera "Últimas recetas ".
+
+00:05:23.086 --> 00:05:25.116 align:middle
+Arrastra un nuevo bloque "Título " a
+
+00:05:25.696 --> 00:05:26.706 align:middle
+la columna. ¡ Sal de
+
+00:05:27.646 --> 00:05:34.476 align:middle
+aquí, Apple! Dentro, escribe
+"Últimas recetas" y cambia a
+
+00:05:34.476 --> 00:05:39.436 align:middle
+un h2. Pulsa nuestro favorito
+"Publicar y continuar editando",
+
+00:05:40.296 --> 00:05:41.676 align:middle
+actualiza y...
+
+00:05:42.086 --> 00:05:43.906 align:middle
+¡aún más cerca! Sólo tenemos que
+
+00:05:44.116 --> 00:05:46.686 align:middle
+centrar esto... y quizás darle un pequeño
+
+00:05:47.866 --> 00:05:54.076 align:middle
+margen superior. Añade dos clases al título:
+text-center y my-5 para darle un poco de margen vertical
+
+00:05:54.976 --> 00:05:56.926 align:middle
+: ambas clases
+
+00:05:57.276 --> 00:06:02.076 align:middle
+provienen de Bootstrap. Sólo estoy repitiendo
+las clases que mi diseñador ya utilizaba en
+
+00:06:03.236 --> 00:06:03.916 align:middle
+la plantilla.
+
+00:06:04.316 --> 00:06:06.266 align:middle
+Publica eso... y cuando
+
+00:06:07.416 --> 00:06:09.516 align:middle
+lo probamos...
+
+00:06:09.716 --> 00:06:15.576 align:middle
+coincide exactamente. ¡Guau! Pero ahora,
+¡tenemos un control total sobre las recetas
+
+00:06:16.066 --> 00:06:22.216 align:middle
+que hay dentro! Podemos cambiar a una consulta diferente,
+cambiar el número de elementos o, dentro de un
+
+00:06:22.546 --> 00:06:27.036 align:middle
+rato, podemos optar por seleccionar
+manualmente las recetas exactas
+
+00:06:27.716 --> 00:06:33.806 align:middle
+a mostrar. Ahora también podemos incrustar listas y
+cuadrículas de recetas en cualquier lugar que queramos
+
+00:06:34.906 --> 00:06:39.146 align:middle
+del sitio. Para celebrarlo, elimina
+todo el bloque de latest_recipes
+
+00:06:40.426 --> 00:06:46.786 align:middle
+Twig: Y, arriba en MainController,
+elimina la consulta,
+
+00:06:48.006 --> 00:06:53.236 align:middle
+la variable, el argumento del repositorio y la
+
+00:06:55.596 --> 00:07:02.186 align:middle
+declaraciónuse: Cuando actualicemos, sólo tendremos una
+sección "Últimas recetas" procedente de nuestro bloque
+
+00:07:02.856 --> 00:07:09.426 align:middle
+dinámico. Ah, pero fíjate en que en el
+admin de layouts, seguimos mostrando el bloque
+
+00:07:09.916 --> 00:07:12.576 align:middle
+latest_recipes... ¡aunque
+
+00:07:13.236 --> 00:07:16.846 align:middle
+ya no exista! Layouts es
+bastante indulgente con
+
+00:07:17.206 --> 00:07:20.656 align:middle
+los usuarios administradores: en
+lugar de lanzar un error, simplemente
+
+00:07:21.326 --> 00:07:22.886 align:middle
+no renderiza nada. Pero vamos a
+
+00:07:23.336 --> 00:07:24.516 align:middle
+borrar eso...
+
+00:07:25.646 --> 00:07:28.036 align:middle
+luego publiquemos... y echemos un
+
+00:07:28.896 --> 00:07:30.176 align:middle
+último vistazo. ¡ Me encanta
+
+00:07:31.446 --> 00:07:37.266 align:middle
+! A continuación: ahora que tenemos esta cuadrícula
+dentro de Layouts, podemos hacer algunas cosas interesantes
+
+00:07:37.646 --> 00:07:40.646 align:middle
+con ella, como activar
