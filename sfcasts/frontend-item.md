@@ -3,19 +3,25 @@
 Time to create the `Recipe` item view for the *frontend*. This starts almost exactly
 the same. In fact, copy the admin config... then paste. In Layouts, we know that
 the `app` key means the "admin" section. And, it turns out, `default` is used to
-mean the *frontend*.
+mean the *frontend*:
+
+[[[ code('960b2697f2') ]]]
 
 ## Frontend (default) item_view & Template
 
 Once again, this internal name isn't important, for the template, use the same path
-but `frontend`... and keep `match` exactly the same.
+but `frontend`... and keep `match` exactly the same:
+
+[[[ code('065646168b') ]]]
 
 I love when things are boring and easy! Let's go create that template. In `nglayouts/`,
 make the `frontend/` directory... and inside, `recipe_item.html.twig`.
 
 Layouts will pass this the *same* variables as the admin item template. This means
-we can, once again, use `item.object` to access our `Recipe` object. Let's print
-the `name` key to see if things are working.
+we can, once again, use `{{ item.object }}` to access our `Recipe` object. Let's print
+the `name` key to see if things are working:
+
+[[[ code('55cca23705') ]]]
 
 And... they *are* working. It's alive!
 
@@ -28,7 +34,7 @@ each zone. It renders our `navigation` block, the `hero` block, then, eventually
 down here, the grid. You can see it's using `grid/3_columns.html.twig`.
 This is something we can control in the admin area. Click the grid. On the right,
 we're looking at the "Content" tab. But there's also a "Design" tab. Change this
-to 4 columns... and I'll hit "publish and continue editing".
+to "4 columns"... and I'll hit "Publish and continue editing".
 
 If we refreshed now and reloaded the Twig profiler, we would see it rendering
 `4_columns.html.twig`. Then, hey! Inside of each column, it renders *our*
@@ -49,9 +55,15 @@ totally possible, but you would need to override these columns templates - like
 Ok, let's bring this frontend view to life! Open up the homepage template:
 `main/homepage.html.twig`... and scroll up to where we loop over the latest recipes.
 Perfect. What I basically want to do is *steal* the markup for one of these
-recipe tiles... then paste that into the frontend template. Now we just need to tweak
-some variables: instead of `recipe.slug`, it needs to be `item.object.slug`.
-I'll do a find and replace: replace `recipe.` with `item.object.`.
+recipe tiles... then paste that into the frontend template:
+
+[[[ code('bece7a5480') ]]]
+
+Now we just need to tweak some variables: instead of `recipe.slug`, it needs
+to be `item.object.slug`. I'll do a find and replace: replace `recipe.` with
+`item.object.`:
+
+[[[ code('63495a185e') ]]]
 
 ## Wrapping Blocks in a Container
 
@@ -63,22 +75,22 @@ were inside of a `container` div, which adds the margin. In the new code, we
 
 To fix this in Layouts, let's add our favorite utility block: a column! Move the
 grid *into* that column. Then, we *could* add a CSS class like we did before in
-the hero area. But instead, take a shortcut and check "wrap in container".
+the hero area. But instead, take a shortcut and check "Wrap in container".
 
-Hit "publish and continue editing" and refresh. Whoops - wrong page. Head back
+Hit "Publish and continue editing" and refresh. Whoops - wrong page. Head back
 to the homepage and... it looks great! It's now inside of an element with a
 `container` class!
 
-This "wrap in container" is *super* handy: it literally adds an extra `div`
+This "Wrap in container" is *super* handy: it literally adds an extra `div`
 around your block with `class="container"` and *every* block supports this. Heck,
-we didn't even *need* a column: we could have just checked the "wrap in container"
+we didn't even *need* a column: we could have just checked the "Wrap in container"
 on the grid itself.
 
 The only reason I put this inside of a *column* is so we can *also* add the
 "Latest Recipes" header there too. Drag a new "Title" block into the column.
 Get outta here Apple! Inside, type "Latest Recipes" and change to an `h2`.
 
-Hit our favorite "publish and continue editing", refresh and... even closer! We
+Hit our favorite "Publish and continue editing", refresh and... even closer! We
 just need to center this... and maybe give it a little top margin. Add two classes
 to the title: `text-center` and `my-5` for some vertical margin: both classes come
 from Bootstrap. I'm just repeating the classes that my designer was already using
@@ -92,11 +104,16 @@ recipes *anywhere* we want on the site.
 
 ## Cleanup!
 
-To celebrate, remove the *entire* `latest_recipes` Twig block... and, up in
-`MainController`, delete the query, the variable, the repository argument and
-the `use` statement.
+To celebrate, remove the *entire* `latest_recipes` Twig block:
 
-When we refresh, we have just *one* "latest recipes" section coming from our dynamic
+[[[ code('7860e6d918') ]]]
+
+And, up in `MainController`, delete the query, the variable, the repository
+argument and the `use` statement:
+
+[[[ code('db45591402') ]]]
+
+When we refresh, we have just *one* "Latest Recipes" section coming from our dynamic
 block. Oh, but notice in the layouts admin, we're *still* rendering the
 `latest_recipes` block... even though it doesn't exist anymore! Layouts is pretty
 forgiving to admin users: instead of throwing an error, it simply renders

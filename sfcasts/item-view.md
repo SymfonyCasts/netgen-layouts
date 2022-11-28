@@ -15,14 +15,21 @@ version of the item.
 How an item is rendered is called an "item view". To add a *new* item view, we'll
 start in the config. Add a `view` key with `item_view` below it and *app* below
 that. I'll add a comment, because, in Layouts, `app` means "admin". So what we're
-about to define under the `app` key will be the *admin* view for our recipe item.
+about to define under the `app` key will be the *admin* view for our recipe item:
 
-Next, add `recipes_app`... with a little note to say that this key is *not* important.
+[[[ code('5535f7173a') ]]]
+
+Next, add `recipes_app`... with a little note to say that this key is *not* important:
+
+[[[ code('6d55d1ee68') ]]]
+
 Unlike other things, such as `latest_recipes`, this internal key won't be used
 *anywhere*. Below, we need two important things. First, `template` - don't include
-the "s" like I did - set to a template path, like `nglayouts` - that's a standard
+the "s" like I did - set to a template path, like `nglayouts/` - that's a standard
 directory name to use for templates, but you could use anything - then, how about
-`/admin/recipe_item.html.twig`.
+`admin/recipe_item.html.twig`:
+
+[[[ code('470e1c123b') ]]]
 
 The second important thing is the very special `match` key. We need to tell Layouts
 that this is the template that should be used when a *recipe* item is being
@@ -32,8 +39,13 @@ posts. Well, layouts would need to know that this is the template to use for
 
 ## The "match" Config Key
 
-To do that, we'll use a strange syntax: `item\value_type` set to `doctrine_recipe`,
-where `doctrine_recipe` references the name of our value type up here.
+To do that, we'll use a strange syntax: `item\value_type` set to `doctrine_recipe`:
+
+[[[ code('3df293972f') ]]]
+
+Where `doctrine_recipe` references the name of our value type up here:
+
+[[[ code('ed9d573d32') ]]]
 
 We're going to see this `match` key several more times in this tutorial. Layouts
 has a bunch of built-in "matchers", which are identified by strings like
@@ -52,7 +64,7 @@ only a small number of *sub-keys* that go under it.
 Find your terminal and run:
 
 ```terminal
-php bin/console debug:config netgen_layouts view
+php ./bin/console debug:config netgen_layouts view
 ```
 
 This will dump a huge list of config, but don't be overwhelmed! We'll check out
@@ -77,18 +89,22 @@ and you'll never need to worry about them.
 
 Ok: we have our `item_view` for our `doctrine_recipe` for the *admin* area. Let's
 go add that template. In the `templates/` directory, create two new sub-directories:
-`nglayouts/admin`. And then, a new file called `recipe_item.html.twig`. Inside,
+`nglayouts/admin/`. And then, a new file called `recipe_item.html.twig`. Inside,
 write `Does it work?` and... let's also use the `dump()` function so we can see
-what *variables* we have access to.
+what *variables* we have access to:
+
+[[[ code('01ddc3b046') ]]]
 
 Alright, head back to your browser, refresh the layouts admin and... it *does*
 work! *And*, apparently, we have access to several variables. The most important
 is `item`. This is a `CmsItem` object from Layouts... and it has a property
 called `object` set to our `Recipe`!
 
-Let's use that! say `{{ item.object.name }}`, then a pipe, and... let's also print
-a date: `item.object.createdAt` - one of the other properties on `Recipe` piped
-into the `date` filter with `Y-m-d`.
+Let's use that! Say `{{ item.object.name }}`, then a pipe, and... let's also print
+a date: `{{ item.object.createdAt }}` - one of the other properties on `Recipe` piped
+into the `date` filter with `Y-m-d`:
+
+[[[ code('ec94a08b43') ]]]
 
 Let's check it! Move over, refresh and... got it! You can make this fancier if
 you want, but that'll work for us.

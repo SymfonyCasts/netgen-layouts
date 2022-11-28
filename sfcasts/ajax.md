@@ -2,10 +2,10 @@
 
 Now that we're rendering these recipe items via the grid block type, check out what
 we can do. Click the grid, go to the design tab and then check
-"Enable Pagination". Then you can choose between a pager style with page links,
+"Enable pagination". Then you can choose between a pager style with page links,
 like 1, 2, 3 and 4, or just a "load more" button. Let's use that one.
 
-All right, hit publish and continue editing. Then... once that saves, refresh to
+All right, hit "Publish and continue editing". Then... once that saves, refresh to
 see... absolutely nothing! The pagination is powered entirely via JavaScript and
 Ajax. And we don't *see* anything because we haven't, yet, included the JavaScript
 needed onto our page.
@@ -15,7 +15,9 @@ needed onto our page.
 Adding it is pretty easy. Go to `templates/base.html.twig`. Up here in the `head`
 area, we're going to include two templates. The first is:
 `@NetgenLayoutsStandard/page_head.html.twig`... and pass this an extra
-variable: `full: true`.
+variable: `full: true`:
+
+[[[ code('ccfcc0e8fc') ]]]
 
 This will load the CSS and JavaScript that support these gallery items down here.
 I'm not gonna talk about these gallery blocks in this tutorial, but they're
@@ -33,7 +35,9 @@ including this file entirely. But I'll leave it.
 
 But notice, I didn't say anything about pagination. For that, we need to include
 a second template. Copy this line, paste, remove the word `Standard` and this doesn't
-need the `full` variable.
+need the `full` variable:
+
+[[[ code('df9e46f97e') ]]]
 
 This template is dead simple: it brings in a tiny bit of CSS and a little bit of
 JavaScript to power Ajax pagination. And these are the *only* two templates that
@@ -46,30 +50,36 @@ with a 500 error! Whoops.
 
 Open that URL in a new tab. Interesting:
 
-> No template match could be found for `item_view` and content `ajax`.
+> No template match could be found for "item_view" view and content "ajax".
 
-When we click "Load More", no surprise, that Ajax call renders the next recipe
+When we click "Load more", no surprise, that Ajax call renders the next recipe
 *items*. You might *think* that this would re-use our "frontend" item view template.
 But... there's actually a different section specifically for when content is rendered
 via Ajax. Copy the `default` frontend section entirely, paste, then change it to
-`ajax`.
+`ajax`:
+
+[[[ code('3f0902ae1b') ]]]
 
 Nothing else needs to change: when we're in `ajax` mode, use the normal frontend
 template.
 
 *Now*, if we refresh the Ajax endpoint... it works! Reload the homepage and click
-"Load More". That is *so* nice!
+"Load more". That is *so* nice!
 
 ## Translating the Pagination Button
 
 Though, *minor* thing, our designers *really* want to use the text "Show More".
 No problem: *everything* that Layouts renders is processed through the translator.
 Click the translation icon on the web debug toolbar. Oh, there it is! Apparently
-the translation key is `collection.pager_load_more`.
+the translation key is `collection.pager.load_more`.
 
 Copy that... then go open our translation file - `nglayouts.en.yaml` - and paste.
 My editor changed the format... which actually *would* work... but I'll go back
-to the flatter format. Set this to "Show More", spin over and... we got it!
+to the flatter format. Set this to "Show More":
+
+[[[ code('34c2089272') ]]]
+
+Spin over and... we got it!
 
 ## CSS Changes to Pagination
 
@@ -81,7 +91,9 @@ In our editor, open `assets/styles/app.css`. As a reminder, we're already
 running Webpack Encore in the background. So, if we change this file, that change
 will automatically be rebuilt and used on the frontend.
 
-At the bottom, I'll paste some CSS to give that button more margin but no border.
+At the bottom, I'll paste some CSS to give that button more margin but no border:
+
+[[[ code('5c438fa21f') ]]]
 
 Flip back over, refresh and... our designers are happy.
 
@@ -91,7 +103,7 @@ customize. That's sweet.
 ## Grids vs Custom Twig Content
 
 At this point, because we're able to render grids and lists of recipes, we *could*
-go into the "Recipes List Layout" and *replace* this hardcoded HTML, which
+go into the "Recipes List" layout and *replace* this hardcoded HTML, which
 comes from the template: `templates/recipes/list.html.twig`. Yup, we could, in
 theory, remove this and replace it with a list block.
 
