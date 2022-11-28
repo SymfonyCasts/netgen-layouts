@@ -1,0 +1,487 @@
+WEBVTT
+
+00:00:01.306 --> 00:00:07.146 align:middle
+Tenemos una entidad Recipe y, en el frontend,
+una página que enumera las recetas.
+
+00:00:08.566 --> 00:00:11.906 align:middle
+También hemos visto lo fácil
+que es crear un diseño,
+
+00:00:12.206 --> 00:00:15.496 align:middle
+lo que hace que algunas partes de esta
+página sean inmediatamente configurables.
+
+00:00:16.106 --> 00:00:19.616 align:middle
+Pero ahora, mirando la
+página de inicio, me pregunto
+
+00:00:19.616 --> 00:00:23.866 align:middle
+si podemos añadir bloques más
+complejos, más allá del simple texto.
+
+00:00:24.516 --> 00:00:29.526 align:middle
+¿Podríamos, por ejemplo, añadir un
+bloque que muestre una lista de recetas?
+
+00:00:29.986 --> 00:00:32.636 align:middle
+Algo similar a lo que tenemos aquí ahora...
+
+00:00:32.636 --> 00:00:35.886 align:middle
+¿sólo que en lugar de añadirlo
+a través de un bloque Twig, se
+
+00:00:36.016 --> 00:00:39.696 align:middle
+añadiría completamente a través de
+los diseños de un usuario administrador?
+
+00:00:40.306 --> 00:00:46.216 align:middle
+Y, para ir más lejos, ¿podríamos incluso dejar que el
+usuario administrador eligiera qué recetas mostrar aquí?
+
+00:00:46.956 --> 00:00:55.226 align:middle
+¡Totalmente! Si la primera gran idea de Layouts es
+permitir que los bloques de plantillas Twig se reorganicen
+
+00:00:55.226 --> 00:01:01.296 align:middle
+y se mezclen con contenido dinámico, entonces la segunda gran idea es
+permitir que los usuarios administradores incrusten en nuestra página piezas
+
+00:01:01.296 --> 00:01:05.596 align:middle
+de contenido existente, como las
+recetas de nuestra base de datos.
+
+00:01:10.506 --> 00:01:13.026 align:middle
+¿Cómo? Edita el diseño
+de la página de inicio.
+
+00:01:14.116 --> 00:01:17.766 align:middle
+En los bloques de la izquierda,
+fíjate en este llamado "Rejilla".
+
+00:01:18.516 --> 00:01:21.156 align:middle
+Añádelo después de
+nuestro bloque Twig "Héroe".
+
+00:01:22.106 --> 00:01:26.166 align:middle
+La cuadrícula nos permite añadir
+elementos individuales a ella...
+
+00:01:26.546 --> 00:01:28.356 align:middle
+que pueden ser cualquier cosa.
+
+00:01:28.936 --> 00:01:31.476 align:middle
+Pero, ¡no veo la forma de hacerlo!
+
+00:01:32.256 --> 00:01:37.496 align:middle
+Vale, sabemos que muchos bloques, como
+los títulos, los mapas, el markdown,
+
+00:01:37.496 --> 00:01:44.536 align:middle
+etc., pueden añadirse a nuestras páginas en los diseños de
+forma inmediata, sin ningún trabajo de configuración adicional.
+
+00:01:45.146 --> 00:01:51.706 align:middle
+Pero el propósito de algunos bloques -como el
+de Lista, el de Cuadrícula y el de Galería
+
+00:01:51.706 --> 00:01:57.386 align:middle
+aquí abajo (que no son más que cuadrículas extravagantes
+que tienen un comportamiento de JavaScript asociado a ellas)-
+
+00:01:57.776 --> 00:02:03.226 align:middle
+es representar una colección de
+"elementos" que se cargan desde otro lugar,
+
+00:02:03.646 --> 00:02:08.326 align:middle
+como nuestra base de datos local,
+el CMS o incluso tu tienda Sylius.
+
+00:02:09.076 --> 00:02:15.336 align:middle
+Las "cosas" o "elementos" que podemos añadir
+a estos bloques se llaman "tipos de valores".
+
+00:02:15.906 --> 00:02:18.876 align:middle
+Y... actualmente tenemos cero.
+
+00:02:18.876 --> 00:02:25.146 align:middle
+Si se tratara de un proyecto de Sylius, podríamos
+instalar la integración de Sylius y Layouts
+
+00:02:25.516 --> 00:02:29.116 align:middle
+y al instante podríamos seleccionar productos.
+
+00:02:29.116 --> 00:02:31.736 align:middle
+Lo mismo ocurre si utilizas Ibexa CMS.
+
+00:02:32.166 --> 00:02:41.626 align:middle
+Así que éste es nuestro siguiente gran objetivo: añadir nuestra
+entidad Doctrine Recipe como "tipo de valor" en los layouts para
+
+00:02:41.946 --> 00:02:45.606 align:middle
+poder crear listas y cuadrículas
+que contengan recetas.
+
+00:02:45.606 --> 00:02:50.896 align:middle
+El primer paso para añadir un tipo de valor es informar
+a Layouts sobre él en un archivo de configuración. En
+
+00:02:51.576 --> 00:02:58.096 align:middle
+config/packages/netgen_layouts.yaml,
+de forma muy sencilla, di value_types,
+
+00:02:58.596 --> 00:03:01.476 align:middle
+y debajo, doctrine_recipe .
+
+00:03:02.346 --> 00:03:08.716 align:middle
+Este es el nombre interno del tipo de valor,
+y nos referiremos a él en algunos lugares.
+
+00:03:09.536 --> 00:03:15.766 align:middle
+Dale un nombre amigable para los humanos name -
+Recipe - y por ahora, pon manual_items en false...
+
+00:03:16.446 --> 00:03:18.976 align:middle
+y asegúrate de que tiene una "s" al final:
+
+00:03:19.576 --> 00:03:25.336 align:middle
+Hablaremos más tarde de manual_items, pero
+es más fácil ponerlo en false para empezar.
+
+00:03:26.246 --> 00:03:30.226 align:middle
+Dirígete, actualiza nuestra página
+de diseños (está bien recargarla)...
+
+00:03:31.476 --> 00:03:33.766 align:middle
+y echa un vistazo a nuestro
+bloque de rejilla Hay
+
+00:03:34.216 --> 00:03:36.396 align:middle
+un nuevo campo "Tipo de colección"
+
+00:03:36.556 --> 00:03:39.436 align:middle
+y "Colección manual" es nuestra
+única opción ahora mismo.
+
+00:03:39.436 --> 00:03:42.986 align:middle
+Entonces... parece que
+esto sigue sin funcionar.
+
+00:03:43.656 --> 00:03:45.856 align:middle
+No puedo cambiar esto por otra cosa...
+
+00:03:46.106 --> 00:03:49.006 align:middle
+y tampoco puedo seleccionar
+los artículos manualmente.
+
+00:03:49.746 --> 00:03:54.226 align:middle
+Hay dos formas de añadir elementos a
+uno de estos bloques de "colección".
+
+00:03:54.576 --> 00:04:00.496 align:middle
+La primera es una colección dinámica en la que
+elegimos a partir de una consulta preelaborada.
+
+00:04:00.976 --> 00:04:06.306 align:middle
+Podríamos elegir una consulta "Más populares"
+que buscara las recetas más populares
+
+00:04:06.686 --> 00:04:10.326 align:middle
+o una consulta "últimas
+recetas", por poner dos ejemplos.
+
+00:04:11.146 --> 00:04:14.656 align:middle
+La segunda forma de elegir
+elementos es manualmente:
+
+00:04:15.136 --> 00:04:19.606 align:middle
+el usuario administrador selecciona
+literalmente lo que quiere de una lista.
+
+00:04:20.336 --> 00:04:23.946 align:middle
+Vamos a empezar con el primer
+tipo: la colección dinámica.
+
+00:04:24.596 --> 00:04:28.806 align:middle
+Todavía no vemos la "Colección
+dinámica" como opción porque
+
+00:04:28.806 --> 00:04:32.466 align:middle
+primero tenemos que crear una
+de esas consultas prefabricadas.
+
+00:04:33.046 --> 00:04:35.966 align:middle
+Esas consultas prefabricadas
+se llaman query_types.
+
+00:04:36.556 --> 00:04:40.816 align:middle
+Podríamos, por ejemplo, crear un
+tipo de consulta para Recipe llamado
+
+00:04:40.816 --> 00:04:43.766 align:middle
+"Más popular" y otro llamado "Más reciente".
+
+00:04:44.506 --> 00:04:46.036 align:middle
+¿Cómo las creamos?
+
+00:04:46.576 --> 00:04:53.826 align:middle
+Vuelve al archivo de configuración, añade
+query_types y debajo, digamos, latest_recipes.
+
+00:04:54.476 --> 00:04:57.816 align:middle
+Una vez más, esto es
+sólo un "nombre interno".
+
+00:04:58.346 --> 00:05:01.606 align:middle
+También dale un nombre legible para
+los humanos name: Latest Recipes:
+
+00:05:02.306 --> 00:05:04.296 align:middle
+Entonces... ¿qué hacemos ahora?
+
+00:05:05.046 --> 00:05:06.376 align:middle
+Si volvemos y refrescamos...
+
+00:05:07.706 --> 00:05:13.636 align:middle
+obtenemos un error muy bonito que nos indica
+qué hacer a continuación: El gestor de tipos
+
+00:05:13.636 --> 00:05:17.136 align:middle
+de consulta para el tipo de
+consulta latest_recipes no existe.
+
+00:05:17.136 --> 00:05:22.436 align:middle
+¡Está intentando decirnos que tenemos que construir
+una clase que represente este tipo de consulta!
+
+00:05:22.936 --> 00:05:24.046 align:middle
+¡Hagámoslo!
+
+00:05:24.876 --> 00:05:30.626 align:middle
+En el directorio src/, voy a crear un nuevo
+directorio Layouts/: aquí organizaremos muchas
+
+00:05:30.626 --> 00:05:32.986 align:middle
+de nuestras cosas de Layouts personalizados.
+
+00:05:33.706 --> 00:05:36.226 align:middle
+Luego añade una nueva clase PHP llamada...
+
+00:05:36.546 --> 00:05:40.106 align:middle
+qué tal LatestRecipeQueryTypeHandler.
+
+00:05:41.476 --> 00:05:44.986 align:middle
+Haz que esto implemente
+QueryTypeHandlerInterface:
+
+00:05:45.436 --> 00:05:49.136 align:middle
+Luego ve a "Generar código" (o
+Command+N en un Mac), y selecciona
+
+00:05:49.526 --> 00:05:52.906 align:middle
+"Implementar métodos" para añadir
+los cuatro que necesitamos: ¡Bien!
+
+00:05:53.646 --> 00:05:55.966 align:middle
+Veamos... Dejaré
+
+00:05:56.176 --> 00:06:00.426 align:middle
+buildParameters() vacío por un momento,
+pero volveremos a él pronto: El
+
+00:06:01.176 --> 00:06:04.296 align:middle
+método más importante
+es getValues(). Aquí es
+
+00:06:04.746 --> 00:06:08.796 align:middle
+donde cargaremos y devolveremos
+los "artículos". Si nuestras
+
+00:06:09.486 --> 00:06:15.756 align:middle
+recetas estuvieran almacenadas en una API, haríamos aquí
+una petición a la API para obtenerlas. Pero como están
+
+00:06:16.316 --> 00:06:20.226 align:middle
+en nuestra base de datos
+local, las consultaremos. Para
+
+00:06:20.846 --> 00:06:25.876 align:middle
+ello, ve a la parte superior de la clase,
+añade un método __construct() con private
+
+00:06:26.346 --> 00:06:29.766 align:middle
+RecipeRepository $recipeRepository
+: A continuación , baja
+
+00:06:30.546 --> 00:06:36.106 align:middle
+a getValues(), return
+$this->recipeRepository... y utiliza
+
+00:06:36.586 --> 00:06:39.456 align:middle
+un método que ya he creado
+dentro de RecipeRepository
+
+00:06:39.456 --> 00:06:44.436 align:middle
+llamado ->createQueryBuilderOrderedByNewest().
+Añade también
+
+00:06:45.366 --> 00:06:50.606 align:middle
+->setFirstResult($offset) y ->setMaxResults($limit).
+El usuario administrador podrá
+
+00:06:51.546 --> 00:06:57.096 align:middle
+elegir cuántos elementos mostrar e
+incluso podrá saltarse algunos. Y así,
+
+00:06:57.626 --> 00:07:03.076 align:middle
+Layouts nos pasa esos valores
+como $limit y $offset... y
+
+00:07:03.076 --> 00:07:04.706 align:middle
+los utilizamos en nuestra
+consulta. Terminamos con
+
+00:07:04.706 --> 00:07:08.806 align:middle
+->getQuery() y ->getResult():
+¡Perfecto! A continuación,
+
+00:07:10.536 --> 00:07:16.556 align:middle
+para getCount(), vamos a hacer
+exactamente lo mismo... excepto que
+
+00:07:17.516 --> 00:07:21.796 align:middle
+no necesitamos ->setMaxResults() ni
+->setFirstResult(). En su lugar, añadimos
+
+00:07:21.796 --> 00:07:27.236 align:middle
+->select('COUNT(recipe.id)'):
+Estoy utilizando
+
+00:07:28.276 --> 00:07:32.326 align:middle
+recipe porque, en RecipeRepository... si
+
+00:07:32.796 --> 00:07:38.506 align:middle
+miramos el método personalizado, utiliza
+recipe como alias en la consulta: Después,
+
+00:07:39.826 --> 00:07:44.496 align:middle
+actualiza ->getResult() para que
+sea ->getSingleScalarResult(): ¡Uf!
+
+00:07:44.696 --> 00:07:49.936 align:middle
+Ha sido un poco de trabajo,
+pero bastante sencillo. Ah, y
+
+00:07:50.746 --> 00:07:53.936 align:middle
+para isContextual(), return false : No
+
+00:07:54.776 --> 00:07:58.016 align:middle
+lo necesitaremos, pero este
+método está bastante bien. Si
+
+00:07:58.636 --> 00:08:03.706 align:middle
+devuelve true, puedes leer la información
+de la página actual para cambiar
+
+00:08:03.916 --> 00:08:09.216 align:middle
+la consulta, como si estuvieras en una
+página de "categorías" y necesitaras listar
+
+00:08:09.216 --> 00:08:11.766 align:middle
+sólo los productos de esa
+categoría. En fin, eso es
+
+00:08:12.646 --> 00:08:14.456 align:middle
+todo. ¡ Esto es
+
+00:08:14.916 --> 00:08:17.986 align:middle
+ahora un manejador de tipo de
+consulta funcional! Pero si
+
+00:08:18.496 --> 00:08:20.276 align:middle
+vas y actualizas... sigue
+
+00:08:20.556 --> 00:08:22.416 align:middle
+sin funcionar. Nos da
+
+00:08:22.876 --> 00:08:24.376 align:middle
+el mismo error. Eso es porque
+
+00:08:25.146 --> 00:08:30.186 align:middle
+necesitamos asociar esta clase de
+manejador de tipos de consulta con el
+
+00:08:30.576 --> 00:08:34.726 align:middle
+tipo de consultalatest_recipes
+en nuestra configuración. Para
+
+00:08:35.446 --> 00:08:39.826 align:middle
+ello, tenemos que dar una
+etiqueta al servicio... y hay
+
+00:08:39.826 --> 00:08:44.386 align:middle
+una forma muy interesante de hacerlo
+gracias a Symfony 6.1. Sobre la
+
+00:08:44.976 --> 00:08:49.216 align:middle
+clase, añade un atributo llamado
+#[AutoconfigureTag()]. El nombre
+
+00:08:50.186 --> 00:08:55.296 align:middle
+de la etiqueta que necesitamos es
+netgen_layouts.query_type_handler: está
+
+00:08:55.976 --> 00:08:58.486 align:middle
+sacado de la documentación. También
+
+00:08:59.136 --> 00:09:04.536 align:middle
+necesitamos pasar un array con una clave
+type establecida en latest_recipes: Este type
+
+00:09:05.076 --> 00:09:10.946 align:middle
+debe coincidir con lo que tenemos en nuestra
+configuración: Esto une a los dos. Y ahora...
+
+00:09:11.946 --> 00:09:12.836 align:middle
+¡la página
+
+00:09:14.426 --> 00:09:16.076 align:middle
+funciona! Si
+
+00:09:16.556 --> 00:09:18.116 align:middle
+hacemos clic en nuestro bloque Grid... podemos
+
+00:09:20.136 --> 00:09:23.156 align:middle
+cambiar a "Colección
+dinámica". ¡Espectacular!
+
+00:09:23.616 --> 00:09:26.886 align:middle
+Le doy a Aplicar y... ¡todo
+deja de cargarse inmediatamente
+
+00:09:27.466 --> 00:09:30.156 align:middle
+! Cuando
+
+00:09:30.776 --> 00:09:33.146 align:middle
+tengas un error en la sección
+de administración, es
+
+00:09:33.446 --> 00:09:37.056 align:middle
+muy probable que aparezca a través de
+una llamada AJAX. A menudo, los diseños
+
+00:09:37.806 --> 00:09:41.366 align:middle
+te mostrarán el error en un modal. Pero si
+
+00:09:41.746 --> 00:09:47.056 align:middle
+no lo hace, no te preocupes: sólo tienes que mirar aquí
+abajo en la barra de herramientas de depuración web. ¡Sí!
+
+00:09:47.746 --> 00:09:50.286 align:middle
+Tenemos un error 400. Vamos a solucionarlo
+
+00:09:51.196 --> 00:09:54.696 align:middle
+creando un convertidor de valores. Luego
+
+00:09:55.216 --> 00:09:57.686 align:middle
+haremos nuestra consulta aún más inteligente

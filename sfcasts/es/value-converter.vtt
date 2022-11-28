@@ -1,0 +1,436 @@
+WEBVTT
+
+00:00:01.026 --> 00:00:04.776 align:middle
+En cuanto cambiamos el tipo de rejilla
+para utilizar una colección dinámica...
+
+00:00:04.956 --> 00:00:06.756 align:middle
+dejó de cargarse.
+
+00:00:07.096 --> 00:00:10.366 align:middle
+El error se esconde aquí
+abajo en esta llamada AJAX.
+
+00:00:11.046 --> 00:00:14.506 align:middle
+La mejor manera de verlo es abrir
+esa URL en una nueva pestaña.
+
+00:00:16.236 --> 00:00:21.396 align:middle
+Ya está: El convertidor de valores para
+el tipo App\Entity\Recipe no existe.
+
+00:00:22.196 --> 00:00:28.996 align:middle
+Bien, hasta ahora hemos creado un "tipo de valor" personalizado
+para Recipe, que era simplemente esta configuración,
+
+00:00:29.406 --> 00:00:34.406 align:middle
+y un "tipo de consulta" personalizado que nos
+permite cargar una lista de las últimas recetas
+
+00:00:34.596 --> 00:00:38.516 align:middle
+ejecutando la consulta
+dentro de la clase asociada.
+
+00:00:38.516 --> 00:00:41.766 align:middle
+Ahora recibimos este error
+del convertidor de valores.
+
+00:00:42.376 --> 00:00:49.746 align:middle
+Un convertidor de valores es realmente sencillo: es una
+clase que transforma el objeto subyacente - Recipe -
+
+00:00:49.936 --> 00:00:52.696 align:middle
+en un formato que los Layouts puedan entender.
+
+00:00:53.346 --> 00:00:59.896 align:middle
+En ese mismo directorio src/Layouts/, vamos
+a crear una clase RecipeValueConverter...
+
+00:01:00.046 --> 00:01:03.996 align:middle
+y hagamos que implemente
+ValueConverterInterface:
+
+00:01:04.046 --> 00:01:08.256 align:middle
+Ya conoces el procedimiento: ve a "Código"
+-> "Generar" (o Command+N en un Mac) y pulsa
+
+00:01:08.536 --> 00:01:13.476 align:middle
+"Implementar métodos" para generar
+los siete que necesitamos: Lo sé,
+
+00:01:13.886 --> 00:01:18.496 align:middle
+parece mucho, pero son súper fáciles
+de rellenar. En primer lugar, para
+
+00:01:18.496 --> 00:01:24.516 align:middle
+supports(), Layouts llamará a este
+método cada vez que tenga un "valor " que
+
+00:01:24.516 --> 00:01:26.546 align:middle
+no entienda. Queremos
+
+00:01:27.116 --> 00:01:34.036 align:middle
+decirle que sabemos cómo convertir el $object si
+es un instanceof Recipe : En segundo lugar, para
+
+00:01:34.196 --> 00:01:41.936 align:middle
+getValueType(), return la clave interna de nuestro
+tipo de valor: doctrine_recipe : El siguiente es
+
+00:01:44.966 --> 00:01:46.346 align:middle
+getId().. . y vamos a
+
+00:01:46.686 --> 00:01:51.626 align:middle
+return literalmente nuestro ID
+con $object->getId() : No
+
+00:01:51.626 --> 00:01:57.816 align:middle
+tenemos autocompletado en esto, pero sabemos que
+este objeto será un Recipe. Para getRemoteId(),
+
+00:01:57.906 --> 00:02:03.886 align:middle
+sólo return
+$this->getId($object): Este método
+
+00:02:03.886 --> 00:02:10.996 align:middle
+sólo es importante si planeas utilizar la función de
+importación en Layouts para mover datos, por ejemplo,
+
+00:02:11.196 --> 00:02:14.026 align:middle
+entre staging y producción. Si piensas
+
+00:02:14.856 --> 00:02:20.536 align:middle
+hacerlo, puedes dar a tus objetos un
+UUID y devolverlo aquí. Aquí abajo,
+
+00:02:21.786 --> 00:02:27.116 align:middle
+para getName(), éste será un nombre legible para los humanos
+que se mostrará en el área de administración. Esta vez,
+
+00:02:27.846 --> 00:02:33.596 align:middle
+para ayudar a mi editor, vamos a assert()
+que $object instanceof Recipe: Dos cosas
+
+00:02:34.596 --> 00:02:35.676 align:middle
+sobre esto. Primero,
+
+00:02:35.986 --> 00:02:42.236 align:middle
+sabemos que este objeto será siempre un Recipe
+porque, arriba en supports(), dijimos que es
+
+00:02:42.326 --> 00:02:45.236 align:middle
+el único objeto que soportamos.
+En segundo lugar , si
+
+00:02:45.946 --> 00:02:49.446 align:middle
+no has visto la función assert() antes, si el
+
+00:02:49.846 --> 00:02:54.586 align:middle
+$object no es un instanceof Recipe
+, lanzará una excepción. Es una
+
+00:02:55.186 --> 00:03:00.316 align:middle
+forma muy fácil de decirle a tu editor
+-u otras herramientas como PHPStan- que el
+
+00:03:00.546 --> 00:03:03.986 align:middle
+objeto es definitivamente una instancia
+de Recipe.... lo que significa que
+
+00:03:04.176 --> 00:03:09.836 align:middle
+ahora obtendremos el autocompletado cuando digamos
+return $object->getName(): Lo siguiente es
+
+00:03:09.836 --> 00:03:12.936 align:middle
+getIsVisible(). Sólo return
+
+00:03:13.266 --> 00:03:14.656 align:middle
+true : Si tus
+
+00:03:15.496 --> 00:03:20.866 align:middle
+recetas pudieran ser publicadas o no, por
+ejemplo, entonces podrías comprobarlo aquí
+
+00:03:20.866 --> 00:03:23.226 align:middle
+para devolver true o false. Por último , para
+
+00:03:23.226 --> 00:03:28.276 align:middle
+getObject(), return $object: Lo sé,
+
+00:03:28.276 --> 00:03:34.486 align:middle
+parece una tontería, pero es una forma
+práctica de cambiar tu Recipe después de que
+
+00:03:34.636 --> 00:03:36.776 align:middle
+se haya cargado si lo necesitas. Pero eso
+
+00:03:37.096 --> 00:03:40.226 align:middle
+no es algo que necesitemos hacer. Y... ¡listo!
+
+00:03:40.226 --> 00:03:41.416 align:middle
+Esta vez,
+
+00:03:41.976 --> 00:03:48.886 align:middle
+a diferencia del manejador de tipos de consulta, la
+autoconfiguración se encarga de todo... así que
+
+00:03:49.136 --> 00:03:51.936 align:middle
+no necesitamos añadir una etiqueta
+manual aquí arriba. Observa: muévete
+
+00:03:52.516 --> 00:03:56.836 align:middle
+y prueba a refrescar la ruta
+AJAX primero. ¡Eso funciona!
+
+00:03:58.076 --> 00:03:59.136 align:middle
+Ahora vete
+
+00:03:59.136 --> 00:04:01.676 align:middle
+, refresca la página de administración
+de los diseños... y guau.
+
+00:04:02.976 --> 00:04:05.436 align:middle
+¡Fíjate! ¡ Vemos
+
+00:04:05.746 --> 00:04:08.596 align:middle
+un montón de elementos en nuestra parrilla! Si
+
+00:04:09.406 --> 00:04:13.166 align:middle
+hacemos clic en él, vemos que los
+elementos se cargan abajo. ¡Es increíble!
+
+00:04:13.356 --> 00:04:14.686 align:middle
+Fíjate en que
+
+00:04:15.296 --> 00:04:18.886 align:middle
+sólo hemos tenido que elegir
+"colección dinámica". Nosotros... nunca
+
+00:04:19.236 --> 00:04:25.206 align:middle
+le dijimos al sistema que queríamos utilizar el tipo
+de consulta "últimas recetas". Esto se debe simplemente
+
+00:04:25.906 --> 00:04:29.836 align:middle
+a que sólo tenemos un tipo
+de consulta... y por lo tanto
+
+00:04:30.136 --> 00:04:32.866 align:middle
+Layouts adivinó que eso
+era lo que queríamos. Si
+
+00:04:33.446 --> 00:04:39.206 align:middle
+añadiéramos un segundo tipo de consulta al sistema,
+veríamos aquí otro desplegable de selección en el que
+
+00:04:39.446 --> 00:04:45.136 align:middle
+podríamos elegir entre las últimas recetas y las
+recetas "más populares", por ejemplo. Así que
+
+00:04:45.206 --> 00:04:51.456 align:middle
+estamos utilizando nuestro tipo de consulta
+"últimas recetas" para obtener 25 resultados. Si
+
+00:04:51.966 --> 00:04:57.256 align:middle
+intentáramos recrear esta zona aquí,
+sólo querríamos 4. Así que vamos a
+
+00:04:57.256 --> 00:05:00.476 align:middle
+limitar el número de elementos a
+cuatro. ¡Genial! ¿Qué aspecto tiene
+
+00:05:00.986 --> 00:05:04.746 align:middle
+esto en el frontend? ¡
+
+00:05:05.316 --> 00:05:06.136 align:middle
+Averigüémoslo! Pulsa "publicar
+
+00:05:06.466 --> 00:05:09.606 align:middle
+y continuar editando" y .... una vez que
+
+00:05:09.606 --> 00:05:12.526 align:middle
+se guarde, ve y actualiza. Debería
+
+00:05:13.366 --> 00:05:15.646 align:middle
+aparecer aquí, pero... ¡no vemos
+
+00:05:15.906 --> 00:05:18.426 align:middle
+absolutamente nada! O...
+
+00:05:18.866 --> 00:05:21.586 align:middle
+eso parece al principio. Pero cuando
+
+00:05:21.936 --> 00:05:23.736 align:middle
+inspeccionamos el elemento... y hacemos
+
+00:05:24.156 --> 00:05:25.626 align:middle
+un poco de zoom... hay un
+
+00:05:26.286 --> 00:05:31.566 align:middle
+div con la clase ngl-vt-grid en él. Y dentro,
+
+00:05:32.056 --> 00:05:38.516 align:middle
+una fila y dentro de ésta,
+un montón de divs vacíos. Si
+
+00:05:39.116 --> 00:05:47.316 align:middle
+ignoras los elementos de clearfix, ¡esto renderiza 1, 2, 3, 4 divs
+para nuestros cuatro elementos! Así que los elementos se renderizan..
+
+00:05:47.316 --> 00:05:50.216 align:middle
+. simplemente
+
+00:05:50.276 --> 00:05:52.266 align:middle
+se renderizan vacíos. Y eso
+
+00:05:52.776 --> 00:05:54.266 align:middle
+tiene sentido.
+
+00:05:54.716 --> 00:05:59.206 align:middle
+Todavía no le hemos dicho a los layouts cómo deben representarse
+los elementos de la receta. En unos minutos hablaremos de
+
+00:05:59.576 --> 00:06:01.216 align:middle
+ello. Pero antes de
+
+00:06:01.756 --> 00:06:06.776 align:middle
+llegar allí, quiero hacer que nuestro tipo
+de consulta sea un poco más elegante. En la
+
+00:06:07.696 --> 00:06:11.556 align:middle
+primera pasada, ignoramos el
+método buildParameters(). Resulta
+
+00:06:12.146 --> 00:06:17.616 align:middle
+que es una forma de añadir campos
+de formulario adicionales para que un
+
+00:06:17.856 --> 00:06:21.226 align:middle
+usuario administrador pueda pasar opciones
+a la consulta. Por ejemplo, vamos a
+
+00:06:21.256 --> 00:06:25.046 align:middle
+añadir un término de búsqueda
+opcional. Digamos que $builder->add()
+
+00:06:25.156 --> 00:06:31.726 align:middle
+pasa a term -que será el nombre interno de
+este nuevo parámetro- y luego a TextType:
+
+00:06:32.076 --> 00:06:36.246 align:middle
+el de Netgen\Layouts: Hay un
+
+00:06:36.796 --> 00:06:41.776 align:middle
+montón de otros tipos de campos
+para URLs, fechas y más. Sólo con
+
+00:06:42.846 --> 00:06:46.886 align:middle
+esto, cuando refresquemos la sección
+de administración... y hagamos clic
+
+00:06:47.056 --> 00:06:50.946 align:middle
+abajo en la cuadrícula,
+¡ahí está! ¡ Tenemos
+
+00:06:51.206 --> 00:06:53.296 align:middle
+una nueva caja grande! Por supuesto,
+
+00:06:53.646 --> 00:06:57.546 align:middle
+si escribimos algo dentro, no pasa nada... y
+
+00:06:57.846 --> 00:07:00.026 align:middle
+además tiene una etiqueta rara. Arreglemos
+
+00:07:00.956 --> 00:07:02.476 align:middle
+primero esa etiqueta. Layouts tiene por defecto
+
+00:07:03.016 --> 00:07:07.516 align:middle
+esta extraña cadena, pero
+ya está pasando esto por el
+
+00:07:07.516 --> 00:07:11.646 align:middle
+traductor a través de un dominio
+llamado nglayouts. Así que, en
+
+00:07:11.856 --> 00:07:13.796 align:middle
+el directorio translations/, crea un
+
+00:07:14.046 --> 00:07:20.176 align:middle
+archivo llamado nglayouts.en.yaml, o
+utiliza el formato que quieras. Pega la
+
+00:07:20.776 --> 00:07:23.226 align:middle
+etiqueta y ponla como "Término
+de búsqueda": Prueba ahora la
+
+00:07:24.536 --> 00:07:26.626 align:middle
+sección de administración. Cuando
+
+00:07:29.806 --> 00:07:30.986 align:middle
+hagamos clic... ¡mucho mejor!
+
+00:07:31.546 --> 00:07:32.306 align:middle
+Si
+
+00:07:32.886 --> 00:07:38.666 align:middle
+sigues viendo la etiqueta antigua, prueba a borrar
+la caché: A veces Symfony no se da cuenta cuando
+
+00:07:38.666 --> 00:07:40.936 align:middle
+añades un nuevo archivo
+de traducción. Bien, para
+
+00:07:41.986 --> 00:07:46.696 align:middle
+utilizar el término de búsqueda, dirígete a
+nuestro manejador de tipo de consulta. El objeto Query
+
+00:07:47.306 --> 00:07:52.646 align:middle
+pasado a getValues() contiene los
+parámetros que hemos añadido. Además,
+
+00:07:53.186 --> 00:07:58.926 align:middle
+¡ya he preparado el método createQueryBuilderOrderedByNewest()
+para que acepte un término de búsqueda
+
+00:07:59.016 --> 00:08:01.316 align:middle
+opcional! Pasa este
+
+00:08:01.936 --> 00:08:08.896 align:middle
+$query->getParameter(), su nombre -
+term - y luego ->getValue(): Copia eso
+
+00:08:10.116 --> 00:08:14.436 align:middle
+y repítelo aquí abajo para el método
+getCount(): Muy bien, ¡ vamos a
+
+00:08:16.276 --> 00:08:19.066 align:middle
+probar esto! Refresca el
+
+00:08:19.816 --> 00:08:27.346 align:middle
+área de Diseños, baja aquí y
+¡creo que ha funcionado! No muestra
+
+00:08:28.006 --> 00:08:29.576 align:middle
+ningún elemento... porque he
+
+00:08:29.686 --> 00:08:32.276 align:middle
+utilizado un término de búsqueda
+bastante tonto. Despeja la zona.
+
+00:08:32.706 --> 00:08:33.276 align:middle
+Lo tenemos
+
+00:08:33.906 --> 00:08:35.006 align:middle
+todo. Ahora escribe
+
+00:08:35.876 --> 00:08:37.716 align:middle
+unas cuantas letras... y observa
+
+00:08:38.216 --> 00:08:40.556 align:middle
+cómo cambia abajo. A continuación, vamos a
+
+00:08:41.516 --> 00:08:47.036 align:middle
+enseñar a los diseñadores cómo mostrar los
+elementos de la receta tanto en el frontend como
+
+00:08:47.316 --> 00:08:49.866 align:middle
+en la vista previa del área de administración

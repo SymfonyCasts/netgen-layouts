@@ -1,0 +1,268 @@
+WEBVTT
+
+00:00:01.016 --> 00:00:04.236 align:middle
+Vamos a trabajar más en este diseño
+de lista de recetas más adelante.
+
+00:00:04.406 --> 00:00:06.856 align:middle
+Pero, vamos a hacer una cosa más ahora mismo.
+
+00:00:07.296 --> 00:00:08.306 align:middle
+Editar este diseño.
+
+00:00:08.816 --> 00:00:13.346 align:middle
+Quiero dar a nuestros usuarios administradores
+la flexibilidad de cambiar este título.
+
+00:00:14.196 --> 00:00:17.126 align:middle
+¡Genial! Vamos a añadir un nuevo
+bloque de título justo encima...
+
+00:00:18.196 --> 00:00:19.606 align:middle
+e introduzcamos algún texto.
+
+00:00:22.776 --> 00:00:24.586 align:middle
+Pulsa "Publicar y continuar editando"...
+
+00:00:25.206 --> 00:00:26.756 align:middle
+y luego ve al frontend.
+
+00:00:27.306 --> 00:00:33.356 align:middle
+Lo que estoy intentando hacer es
+replicar este título, o área "héroe",
+
+00:00:33.356 --> 00:00:36.796 align:middle
+para que podamos eliminarlo
+de nuestra plantilla Twig.
+
+00:00:37.446 --> 00:00:41.606 align:middle
+Pero cuando refrescamos,
+todavía no se ve bien.
+
+00:00:42.276 --> 00:00:43.606 align:middle
+Ve y mira esa plantilla.
+
+00:00:44.416 --> 00:00:50.946 align:middle
+Bien: para replicar esto, necesitamos una
+etiqueta h1 envuelta en un div hero-wrapper:
+
+00:00:52.316 --> 00:00:56.636 align:middle
+Ahora mismo, Layouts está
+simplemente renderizando un h1.
+
+00:00:56.636 --> 00:01:04.126 align:middle
+Y, por cierto, puedes, en las opciones del
+bloque de título, elegir entre h1, h2, o h3.
+
+00:01:04.356 --> 00:01:05.976 align:middle
+h1 es lo que necesitamos esta vez.
+
+00:01:05.976 --> 00:01:12.766 align:middle
+Entonces: ¿cómo podemos envolver esto
+en un div y darle una clase hero-wrapper?
+
+00:01:13.406 --> 00:01:16.926 align:middle
+La respuesta: añadiendo un
+ingenioso bloque "columna"...
+
+00:01:17.846 --> 00:01:20.756 align:middle
+y mover el título a esa columna.
+
+00:01:21.376 --> 00:01:22.276 align:middle
+Genial, ¿verdad?
+
+00:01:22.276 --> 00:01:27.306 align:middle
+Por último, al hacer clic en la columna,
+puedes añadir la clase que quieras.
+
+00:01:27.566 --> 00:01:29.696 align:middle
+Añade hero-wrapper.
+
+00:01:30.506 --> 00:01:31.236 align:middle
+¡Vamos a probarlo!
+
+00:01:31.546 --> 00:01:35.986 align:middle
+Pulsa "Publicar y continuar
+editando", refresca el frontend y...
+
+00:01:36.406 --> 00:01:37.556 align:middle
+¡mucho mejor!
+
+00:01:38.336 --> 00:01:39.536 align:middle
+¿Qué pasa con ese texto?
+
+00:01:40.106 --> 00:01:44.136 align:middle
+Cópialo, añade un nuevo bloque de "texto"
+justo debajo de nuestro "título" y...
+
+00:01:45.636 --> 00:01:49.926 align:middle
+pega. Publica y continúa
+editando de nuevo... prueba de
+
+00:01:50.816 --> 00:01:53.296 align:middle
+nuevo el frontend y... ¡mira
+
+00:01:53.576 --> 00:01:54.566 align:middle
+eso! ¡ Una
+
+00:01:54.826 --> 00:01:56.586 align:middle
+réplica perfecta! Para
+
+00:01:57.246 --> 00:02:02.456 align:middle
+celebrarlo, en la plantilla, podemos
+eliminar esa sección por completo: El
+
+00:02:03.306 --> 00:02:05.856 align:middle
+resultado final es el mismo
+que antes... excepto que
+
+00:02:06.336 --> 00:02:11.536 align:middle
+los usuarios administradores tienen ahora
+la posibilidad de cambiar el texto. Aunque,
+
+00:02:11.536 --> 00:02:16.796 align:middle
+probablemente te hayas dado cuenta de
+que esto me exigió ser un poco técnico:
+
+00:02:17.586 --> 00:02:21.266 align:middle
+tuve que conocer la clase CSS que necesitaba
+la columna. Si los usuarios administradores
+
+00:02:21.876 --> 00:02:27.656 align:middle
+que diseñan tus diseños son un poco técnicos,
+entonces esto podría no ser un problema. Pero
+
+00:02:28.146 --> 00:02:35.466 align:middle
+si tus editores son menos técnicos, podrías, en
+cambio, crear un tipo de bloque personalizado -como
+
+00:02:35.806 --> 00:02:40.616 align:middle
+un bloque héroe- en el que el usuario
+sólo tenga que escribir el texto y
+
+00:02:40.616 --> 00:02:43.486 align:middle
+tú lo renderices todo por él.
+
+00:02:44.096 --> 00:02:47.126 align:middle
+No vamos a crear bloques
+personalizados en este tutorial... pero
+
+00:02:47.346 --> 00:02:51.206 align:middle
+eso es principalmente porque,
+al final del tutorial,
+
+00:02:51.586 --> 00:02:55.006 align:middle
+sabrás todo lo que necesitas para
+seguir los documentos para ello.
+
+00:02:55.716 --> 00:03:00.696 align:middle
+Muy bien, volviendo al front-end, los diseños vienen con su
+propio icono de la barra de herramientas de depuración web. Y
+
+00:03:01.096 --> 00:03:04.166 align:middle
+si haces clic en esto, es muy bonito. Vamos a
+
+00:03:04.776 --> 00:03:07.176 align:middle
+usar esto un montón de veces.
+
+00:03:07.446 --> 00:03:12.686 align:middle
+Te muestra el diseño que se ha resuelto e
+incluso la razón por la que se ha elegido. Pero
+
+00:03:13.346 --> 00:03:17.396 align:middle
+lo realmente útil es la sección
+"Bloques renderizados". Esto
+
+00:03:17.946 --> 00:03:22.186 align:middle
+nos muestra todos los bloques de diseño que
+se renderizaron para construir esta página.
+
+00:03:22.906 --> 00:03:28.656 align:middle
+Puedes ver que hay uno llamado "Bloque Twig " para la navegación
+superior, una "Columna", luego el bloque "Título", "Texto",
+
+00:03:29.346 --> 00:03:34.866 align:middle
+"Vista completa" y finalmente el último
+bloque " Twig " para el pie de página. Esta
+
+00:03:35.876 --> 00:03:39.726 align:middle
+es una gran manera de ver todos los diferentes
+bloques que se están renderizando, así como
+
+00:03:40.126 --> 00:03:43.506 align:middle
+la plantilla que hay detrás
+de cada uno. Más adelante,
+
+00:03:44.276 --> 00:03:48.076 align:middle
+hablaremos de anular esas plan tillas, para
+
+00:03:48.076 --> 00:03:50.326 align:middle
+poder personalizar su aspecto. De vuelta al
+
+00:03:51.116 --> 00:03:54.936 align:middle
+administrador de Diseños, publica el diseño
+para volver a la página principal. Si
+
+00:03:54.936 --> 00:04:01.436 align:middle
+vas a /admin, verás que nuestra aplicación
+ya tiene EasyAdmin instalado. Vamos a
+
+00:04:02.016 --> 00:04:05.956 align:middle
+añadir un enlace desde el menú de aquí
+a Diseños para facilitarnos la vida. Abre
+
+00:04:06.816 --> 00:04:10.546 align:middle
+src/Controller/Admin/DashboardController.php...
+y
+
+00:04:10.546 --> 00:04:12.836 align:middle
+encuentra configureMenuItems(). Añade
+
+00:04:13.386 --> 00:04:19.836 align:middle
+otro con yield MenuItem::linkToUrl(),
+llámalo "Diseños" y
+
+00:04:20.346 --> 00:04:24.066 align:middle
+dale unos iconos: fas fa-list. Para
+
+00:04:24.066 --> 00:04:30.526 align:middle
+la url, utiliza this->generateUrl()
+y pasa el nombre de la ruta, que
+
+00:04:30.776 --> 00:04:34.706 align:middle
+resulta ser nglayouts_admin_layouts_index:
+¡Perfecto! Es
+
+00:04:35.306 --> 00:04:40.816 align:middle
+un pequeño detalle, pero
+ahora, cuando estemos en /admin,
+
+00:04:40.976 --> 00:04:43.526 align:middle
+podemos hacer clic en "Diseños"
+para saltar directamente allí. Bien,
+
+00:04:44.516 --> 00:04:46.166 align:middle
+¡comprobación de estado!
+
+00:04:46.576 --> 00:04:51.706 align:middle
+Podemos representar los bloques Twig y
+mezclar títulos, texto, HTML, Google Maps y
+
+00:04:51.706 --> 00:04:54.076 align:middle
+otros bloques donde queramos.
+
+00:04:54.876 --> 00:05:00.126 align:middle
+Cuantos más bloques Twig tengamos en la
+plantilla, más flexibilidad tendremos. ¿Pero
+
+00:05:00.746 --> 00:05:06.536 align:middle
+qué pasa con la posibilidad de representar una
+colección de recetas de nuestra base de datos, como las
+
+00:05:06.976 --> 00:05:10.506 align:middle
+"Últimas recetas" que tenemos
+en la página de inicio? Esa es
+
+00:05:11.106 --> 00:05:15.616 align:middle
+una pieza importante de los diseños: así que
+empecemos a sumergirnos en ella a continuación
