@@ -80,7 +80,7 @@ and pass it `$searchText` as well.
 And just like that, if we move over here and try to search... *it works*. That's
 awesome!
 
-Alright - select a few items, hit "Confirm" and... oh now! It breaks! It still says
+Alright - select a few items, hit "Confirm" and... oh no! It breaks! It still says
 "Loading". If you look down on the web debug toolbar, we have a 400 error.
 *Dang*. When we open that up, we see:
 

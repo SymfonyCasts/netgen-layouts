@@ -31,7 +31,7 @@ API that we can use to *fetch* all of this.
 Contentful is *cool*. But the point of this isn't to teach you about Contentful.
 Nope! It's to show you how we could grab content for Layouts from *anywhere*. For
 example, if we want to load "skills" from Contentful, we could manually create a
-new value type and do all the work that we did before, except making an API request
+new value type and do all the work that we did before, except making API requests
 to Contentful instead of querying the database.
 
 But! We don't even need to do that! Why? Because Layouts *already* has a bundle
@@ -42,7 +42,7 @@ Let's grab it!
 
 ## Installing the Contentful Bundle
 
-Spin over your terminal and run:
+Spin over to your terminal and run:
 
 ```terminal
 composer require netgen/layouts-contentful -W
@@ -89,7 +89,7 @@ doesn't matter too much. This is *all about* allowing Contentful to automaticall
 add dynamic URLs to our site.
 
 This routing system stores routes in the database... and that means we need some
-new database tables to store those. Head over to your console and run:
+new database. Head over to your console and run:
 
 ```terminal
 symfony console make:migration
@@ -131,7 +131,7 @@ The result of this command is that every piece of content on Contentful now has 
 own page! To see them, run:
 
 ```terminal
-Symfony console contentful:routes
+symfony console contentful:routes
 ```
 
 And... *awesome*! Apparently I have a URL called `/mashing`. Let's go check it out!
