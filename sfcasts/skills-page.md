@@ -1,95 +1,115 @@
-# Skills Page
+# The Skills List Page + A Grid of Skills
 
-Coming soon...
+Thanks to the Contentful integration, in addition to our `doctrine_recipe` value
+type, we now have a *second* value type that can load things from Contentful.
+This means that we can render lists and grids of skills on other pages, like over
+here on our homepage.
 
-Thanks to the Contentful integration we installed. In addition to our doctrine recipe
-value type, we now have a second value type that can load things from Contentful. So
-in addition to add a layout for IND the individual skill page, we can also now render
-lists and grids of skills on other pages like over here on our homepage. So let's do
-that. I am going to publish my layout. Get back. What I wanna do is edit our homepage
-layout and I'm actually gonna remove our manual grid here. That's kinda a little
-funny. Now, and down here for our featured down here, our featured skills are
-currently render via twig block. They're just hard coded. Let's now actually add a
-grid and over here I'll use Manual Connection and then check this out. We can now
-choose between manually selecting Contentful entries or recipes. So let's just
-pretend like we are going to select a couple of Contentful entries right there.
-Beautiful publish and continue editing Refresh. And awesome. There they are. I mean,
-they totally do not look right yet, but they are at least showing up. To make that a
-little bit better, I'm going to go to the design tab here and let's wrap this in a
-container.
+Let's try it! Publish this layout... then edit the Homepage Layout. Oh, and we
+can delete this old grid layout we were playing with earlier.
 
-Perfect.
+Below, we're currently rendering the `featured_skills` Twig block. But in reality,
+if you looked at our template, those are totally hardcoded!
 
-They at least kind show up in the middle now, but you know, we really want them to
-render like this, but we're gonna work on that in a few minutes. But first, what
-about a slash skills page that shows all of the skills? Well, the Contentful
-integration didn't give us this url, which is no problem. So we'll just create it
-ourselves though. Thinking outside of the box, we could create a page content, type
-in Contentful, and then create a skills page that becomes a slash skills URL on our
-site. That might be how you would do things if you in a normal cms, but we'll create
-the page the old fashioned way. After all, layouts is really about helping us
-organize how existing pages look. It's not really about adding dynamic pages. That's
-a job for a cms. All right, so let's go over and open up source controller. How about
-main controller? I'll copy the route into action Right above this, the I'll be slash
-skills, we'll call it app underscore skills and rename the method to skills. Then for
-the template main slash skills dot htl twig, and in the template directory main,
-let's create that. So skills dot htl twig. And we're gonna start with the smallest
-thing that we could possibly need, which is that we extend that NG layouts dot layout
-template.
+## Adding A Grid of Skills
 
-Cool. While we're in here, let's open base dot html twig and link to this. So I'll
-search for all skills. Perfect. There's our link. Now I can do a curly, Curly path
-app underscore skills. Sweet. All right, refresh, try that top link and it works all
-right to actually put content onto this page. We could also do that manually inside
-of our code. There's nothing stopping us from doing that. The content full library we
-installed earlier actually as a client interface service, which we could use to then
-go fetch all of these skills from Contentful, pass those door template and render
-them. Or we could cheat and let layouts query for the list of techniques for us.
-That's what we're gonna do. But before we do that, go back into skills that HTML twig
-and add a black TI block title. Say all skills and the block. This, as you probably
-know, controls what shows up on the top of the tab. I'm doing that here cuz there's
-no place in layouts. The title block is actually not something you can control via
-layout. So we're gonna do it here. All right, now I'm going to hit publish on our
-homepage layout.
+No problem! Add a Grid block... and set it to a "Manual Connection". Check this
+out! We can now choose between manually selecting "Contentful entries" or recipes!
+And when we click "Add Items", the content browser already works!
 
-Let's create a new layout. I'll do layout two, we'll call it skills list layout. And
-I'm just gonna start with the basic stuff here. You guys know the drill. We're gonna
-link the header zone, we're gonna link the footer zone. And then just to give us a
-start here, I'm gonna do that same kind of hero wrapper grid we've been doing. So I
-have a column, we'll give it a hero wrapper class. And inside of that I'll add a
-title, all skills. And just to make things even cooler, we'll even add a little text
-block right below that with some content. All right, let's publish that layout. And
-then of course, now we have this layout, we need to link it to our slash skills page.
-So we're gonna go over here and hit add new mapping. Let's link this to the skills
-list layout. Then I'll go to details, and then we can, we can map this via request I,
-uh, route name, whatever. I'm gonna use path info slash skills. So this will match if
-the URL is exactly slash skills. Hit save changes. And let's see how our first
-attempt was. And it was good. All right, the page is coming to life.
+Select a few of these... good... then publish this. Refresh. Um... ok! They *do*
+render... but just the title. Good start. to make this a *tiny* bit better, go
+to the "Design" tab here and wrap this in a container.
 
-All right, now let's get to the good stuff. Head back to that layout, edit it, and
-then below.
+That should, at least, give us some gutters. There we go. Ultimately, we want
+these to render like the hardcoded skills below them. And we're going to work on
+that in a few minutes.
 
-Oops.
+## Adding a /skills Pae
 
-Oh, actually I want skills list layout. So edit that. And below that column, let's
-add a new grid. In this time I'm gonna change from a manual collection to a dynamic
-collection. And we use something called content full search. That's kind of the main
-is one, But you also say, I could choose latest recipes here. Content full references
-is something different. So content, full search, this is a great one. You can choose,
-uh, which content types you wanna show. Like all of them, we wanna show just skills.
-We can sort them, we can even do a search term if we want to, and then skip items,
-and then we will, and even limit the items. Awesome. And then you can also add more
-manual items if you want to, but that doesn't make any sense here. All right, let's
-try, let's see what that looks like.
+But before we get there, what about a `/skills` page that lists *all* of the skills?
+Well, the Contentful integration did *not* give us this URL. But, no problem! We
+can create it ourselves in Symfony!
 
-Refresh, and, okay, that doesn't look good yet, but it's getting closer. One thing I
-could have done, like I've done before, is give that a container so it looks slightly
-better. But we can see the problem here. This obviously needs to be styled a lot
-better. And on the homepage we have the same problem. That's where it's, where it's
-rendering these same skill items in a very plain way. So clearly we need to customize
-that. But to think about it even further, we're probably gonna want these skill items
-to look one way on the homepage and a different way here on the all skills page. So
-next, we're gonna start learning the very important topic of how we can override and
-customize the templates from layouts so that we can make things look exactly like we
-want.
+Well, actually, we *could* do this entirely in Contentful! We could create a
+"Page" content type, create a "Skills" page, which could become `/skills`, *then*
+map that to a Layout. This is the type of thing you'd normally do when you have
+a CMS at your fingertips
 
+But we'll create this page the manual way. After all, Layouts is really about helping
+organize how *existing* pages look... it's not really about adding *dynamic* pages.
+That's a job for a CMS.
+
+In your editor, open up `src/Controller/MainController.php`. Copy the `homepage()`
+action, paste, change to `/skills`. call it `app_skills` and rename the *method*
+to `skills()`. For the template, render `main/skills.html.twig`.
+
+Now, in the `templates.main`, create that: `skills.html.twig`. Let's start with
+the *smallest* possible thing: extend `nglayouts.layoutTemplate`.
+
+Cool. While we're here, open `base.html.twig` and link to this. Search for "Skills".
+There's the link. Set the `href` to `{{ path('app_skills') }}`.
+
+I like it! Refresh, try the link in the header and... the page works!
+
+## Adding Content Manually?
+
+To put *content* onto this page, we could *also* do that manually inside of our
+code. There's *nothing* stopping us from doing that. The Contentfull library we
+installed earlier has a `ClientInterface` service that we could use to fetch all
+of these skills from Contentful.
+
+But *this* time, let's take the easy way out and let *layouts* fetch the
+skills *for* us via a layout. Oh, but before we do that, back in `skills.html.twig`,
+and add a `block title`, write "All Skills" and then `endblock`.
+
+This, as you probably know, controls what shows up on the top of the tab. I'm doing
+this *here* because the `title` block is actually 8 something you can control via
+Layouts. Remember: everything we build in our layout becomes part of the *block*
+called `layout`.
+
+## Adding the Skill List Layout
+
+Ok, hit "Publish" on the Homepage Layout... and then create a *new* layout. I'll
+use my favorite "Layout 2" and call it "Skills List Layout".
+
+You know the drill at this point. Start by linking the header zone... and the
+footer zone. Then, let's build another hero. Add a column, give it a `hero-wrapper`,
+then put a "Title" block inside with "All Skills". To be even cooler, add a text
+block below with some intro content.
+
+Nice start! Publish the layout... so we can go link it to the `/skills` page.
+Hit "Add New Mapping" and link this to the "Skills List Layout". Then go to
+Details... and this item I'll map via the Path Info, set to `/skills`.  Hit save
+changes.
+
+Let's go see how our first attempt looks. And... not bad!
+
+## Adding the Skills Grid
+
+*Now* let's add the *important* stuff. Head back to the layouts admin and edit
+this layout.
+
+Below the column, add a new Grid. Change this from a manual collection to a dynamic
+collection. The Contentful package gives us *two* new query types, or ways to
+"fetch" data from Contentful. Use "Contentful Search"., that's the main one.
+
+This allows you to choose *which* content types to show, like all of them... or
+just skills. We can then sort them, add a search, skip items or limit them. It's
+*everything* we want, out-of-the-bx.
+
+What does it look like? Hit Publish. I bet you can guess. Yup! It "works"... by
+printing out the title of each skill. Oh, let me at least add that "container"
+class... to get the left and right margin.
+
+But, this *obviously* is not what we want: we need to be able to *style* this
+content and print out more fields than just the title. We have the same problem
+on the homepage.
+
+Actually, this is even *more* complex than it seems! When we customize how a
+grid of skills renders, we need to be able to make it look *one* way on the homepage,
+and a *different* way on the "Skills" page, probably larger and with more data.
+
+Next: let's start learning the very important topic of how we can override and
+customize the templates from Layouts so that we can make things look exactly like
+we want.
