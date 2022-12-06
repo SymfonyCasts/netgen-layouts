@@ -1,0 +1,581 @@
+WEBVTT
+
+00:00:01.126 --> 00:00:03.836 align:middle
+Bien, veamos en qué consiste Layouts. En
+
+00:00:04.376 --> 00:00:09.356 align:middle
+este capítulo, crearemos y
+utilizaremos, paso a paso, un "diseño",
+
+00:00:09.656 --> 00:00:13.276 align:middle
+aprendiendo cómo funciona
+exactamente la magia de los Diseños.
+
+00:00:13.886 --> 00:00:19.796 align:middle
+Para ver la sección de administración de Layouts,
+dirígete a /nglayouts/admin y encontrarás...
+
+00:00:20.226 --> 00:00:21.846 align:middle
+¡un formulario de acceso!
+
+00:00:22.446 --> 00:00:25.386 align:middle
+El formulario de acceso no tiene
+nada que ver con los Diseños...
+
+00:00:25.556 --> 00:00:30.486 align:middle
+es sólo que el área de administración de
+los Diseños requiere que te identifiques...
+
+00:00:30.586 --> 00:00:33.676 align:middle
+y ya he añadido un formulario de
+inicio de sesión a nuestro sitio.
+
+00:00:34.016 --> 00:00:36.156 align:middle
+¡Incluso hay un usuario en la base de datos!
+
+00:00:36.796 --> 00:00:41.686 align:middle
+Inicia sesión con
+doggo@barkbite.com, contraseña woof.
+
+00:00:41.686 --> 00:00:43.266 align:middle
+Y cuando lo enviamos...
+
+00:00:43.686 --> 00:00:45.196 align:middle
+¡acceso denegado!
+
+00:00:45.696 --> 00:00:49.876 align:middle
+No te preocupes: haz clic abajo en el icono de seguridad
+de la barra de herramientas de depuración web...
+
+00:00:49.876 --> 00:00:51.556 align:middle
+y ve a "Decisión de acceso".
+
+00:00:52.856 --> 00:00:59.686 align:middle
+Sí: se nos denegó el acceso porque
+buscaba un rol llamado ROLE_NGLAYOUTS_ADMIN.
+
+00:01:00.376 --> 00:01:04.406 align:middle
+Para acceder al área de administración
+de diseños, necesitamos tener este rol.
+
+00:01:04.916 --> 00:01:10.256 align:middle
+La forma más sencilla de añadirlo
+es ir a config/packages/security.yaml.
+
+00:01:10.846 --> 00:01:15.566 align:middle
+El usuario con el que hemos
+iniciado sesión tiene ROLE_ADMIN.
+
+00:01:15.796 --> 00:01:21.316 align:middle
+Así que, bajo role_hierarchy dale también
+a nuestro usuario ROLE_NGLAYOUTS_ADMIN:
+
+00:01:22.056 --> 00:01:25.806 align:middle
+Y ahora si volvemos a hacer clic, ¡tachán!
+
+00:01:26.206 --> 00:01:28.686 align:middle
+¡Bienvenido a la sección de
+administración de layouts!
+
+00:01:29.296 --> 00:01:31.226 align:middle
+Para entender lo que hace Layouts...
+
+00:01:31.486 --> 00:01:33.526 align:middle
+lo mejor es verlo en acción.
+
+00:01:33.906 --> 00:01:35.506 align:middle
+Empieza en esta sección de Diseños...
+
+00:01:35.726 --> 00:01:37.946 align:middle
+y haz clic para crear un nuevo diseño.
+
+00:01:38.976 --> 00:01:42.796 align:middle
+Esto nos muestra unos seis tipos de diseño
+diferentes entre los que podemos elegir. Como
+
+00:01:43.436 --> 00:01:49.296 align:middle
+verás, son mucho menos importantes de
+lo que parecen al principio, porque,
+
+00:01:49.406 --> 00:01:53.846 align:middle
+una vez que estás en una maqueta,
+puedes hacer lo que quieras,
+
+00:01:54.036 --> 00:01:56.476 align:middle
+incluso hacer flotar cosas
+a izquierda y derecha.
+
+00:01:57.056 --> 00:01:58.916 align:middle
+Yo suelo elegir el "Diseño 2".
+
+00:01:59.646 --> 00:02:03.226 align:middle
+Llámalo "Diseño de página de inicio" porque
+pienso utilizarlo en nuestra página de inicio.
+
+00:02:03.736 --> 00:02:06.796 align:middle
+Y... ¡bienvenido al editor de diseño!
+
+00:02:07.346 --> 00:02:11.266 align:middle
+Visita rápida: estos elementos del
+lado izquierdo se llaman "bloques",
+
+00:02:11.456 --> 00:02:16.796 align:middle
+y hay muchos tipos diferentes, desde simples
+bloques de título a mapas de Google...
+
+00:02:16.966 --> 00:02:23.116 align:middle
+hasta cosas más complejas como listas y cuadrículas
+en las que puedes mostrar colecciones dinámicas
+
+00:02:23.116 --> 00:02:25.426 align:middle
+de cosas, como recetas destacadas.
+
+00:02:26.176 --> 00:02:30.896 align:middle
+Lo principal que "hacemos" en esta página
+es elegir un bloque de la izquierda...
+
+00:02:30.896 --> 00:02:34.436 align:middle
+y arrastrarlo a una de las "zonas" del centro.
+
+00:02:35.076 --> 00:02:37.766 align:middle
+Coge un bloque "Título" y arrástralo
+a algún lugar de la página...
+
+00:02:37.886 --> 00:02:39.506 align:middle
+y dale un texto.
+
+00:02:41.076 --> 00:02:45.656 align:middle
+¡Genial! Es un comienzo
+modesto, pero, ¡bastante bueno!
+
+00:02:45.656 --> 00:02:48.106 align:middle
+En la parte superior derecha,
+pulsa "Publicar diseño".
+
+00:02:49.026 --> 00:02:53.206 align:middle
+Y ahora que tenemos este nuevo
+diseño, abre una segunda pestaña
+
+00:02:53.206 --> 00:02:56.056 align:middle
+y ve a la página de inicio
+para descubrir que...
+
+00:02:56.606 --> 00:02:59.026 align:middle
+¡no ha cambiado absolutamente nada!
+
+00:02:59.526 --> 00:03:01.686 align:middle
+Permíteme que reorganice mis pestañas. En
+
+00:03:02.126 --> 00:03:08.376 align:middle
+cualquier caso, nada ha cambiado porque, una
+vez que tienes un diseño, necesitas asign arlo
+
+00:03:08.376 --> 00:03:11.276 align:middle
+a una página o conjunto
+de páginas específico.
+
+00:03:11.566 --> 00:03:14.436 align:middle
+Ese es el trabajo de la
+sección de mapeo del diseño.
+
+00:03:15.166 --> 00:03:18.836 align:middle
+Estas son realmente las dos únicas secciones
+importantes del área de administración.
+
+00:03:19.826 --> 00:03:23.026 align:middle
+Aquí, añade una nueva
+asignación y luego ve a Detalles.
+
+00:03:24.146 --> 00:03:28.836 align:middle
+Hay varias formas de asignar un
+diseño a una URL específica.
+
+00:03:29.276 --> 00:03:35.346 align:middle
+Puedes utilizar, por ejemplo, la información de
+ruta, que es un término elegante que significa
+
+00:03:35.346 --> 00:03:38.126 align:middle
+"la URL, pero sin parámetros de consulta".
+
+00:03:38.626 --> 00:03:43.116 align:middle
+O puedes utilizar un prefijo de información
+de ruta, como utilizar este diseño
+
+00:03:43.116 --> 00:03:46.416 align:middle
+para todas las URL que
+empiecen por "/productos".
+
+00:03:47.006 --> 00:03:51.256 align:middle
+O incluso puedes asignar un diseño
+a un nombre de ruta específico.
+
+00:03:51.826 --> 00:03:52.626 align:middle
+Vamos a intentarlo.
+
+00:03:52.916 --> 00:03:54.016 align:middle
+Pulsa "Añadir objetivo".
+
+00:03:54.416 --> 00:04:01.166 align:middle
+Entonces... vamos a buscar el nombre de ruta de nuestra
+página de inicio: src/Controller/MainController.php.
+
+00:04:01.166 --> 00:04:07.066 align:middle
+Aquí está: app_homepage: Vuelve
+atrás, pega y dale a "Guardar objetivo".
+
+00:04:07.066 --> 00:04:13.116 align:middle
+Más adelante hablaremos de otras formas de
+mapear o "activar" una ruta para las páginas.
+
+00:04:13.346 --> 00:04:16.806 align:middle
+Pero la información sobre rutas y
+caminos es la más sencilla y flexible.
+
+00:04:17.016 --> 00:04:23.496 align:middle
+Dicen Si la ruta o URL actual coincide con
+lo que tenemos aquí, utiliza este diseño.
+
+00:04:24.216 --> 00:04:25.576 align:middle
+Pulsa Guardar cambios.
+
+00:04:26.496 --> 00:04:31.646 align:middle
+Para elegir qué maquetación va con
+este mapeo, pulsa "Vincular maquetación"
+
+00:04:31.646 --> 00:04:34.236 align:middle
+y selecciona el único
+"Diseño de página de inicio".
+
+00:04:34.726 --> 00:04:41.406 align:middle
+¡Estupendo! Ahora, cuando vayamos a la página de
+inicio, se utilizará el diseño de la página de inicio.
+
+00:04:41.856 --> 00:04:44.466 align:middle
+Pero... ¿qué significa eso?
+
+00:04:45.206 --> 00:04:46.036 align:middle
+Vamos a averiguarlo
+
+00:04:46.356 --> 00:04:47.596 align:middle
+Actualiza y...
+
+00:04:48.426 --> 00:04:50.596 align:middle
+¡seguimos sin ver ninguna diferencia!
+
+00:04:50.816 --> 00:04:53.116 align:middle
+¡Es la misma página estática de Symfony!
+
+00:04:53.706 --> 00:04:57.906 align:middle
+Ah, eso es porque nos hemos saltado
+un paso importante de la instalación.
+
+00:04:58.166 --> 00:05:04.236 align:middle
+¡Culpa mía! Ve a abrir la plantilla de esta
+página: templates/main/homepage.html.twig.
+
+00:05:05.136 --> 00:05:11.436 align:middle
+Ahora mismo, estamos ampliando base.html.twig:
+Y esa plantilla, como de costumbre,
+
+00:05:11.576 --> 00:05:16.446 align:middle
+tiene un bloque llamado body en el medio: Así
+que es una configuración súper tradicional.
+
+00:05:17.216 --> 00:05:24.866 align:middle
+Ahora, cambia el extends por una variable
+dinámica llamada nglayouts.layoutTemplate:
+
+00:05:26.106 --> 00:05:26.946 align:middle
+Prueba de nuevo la página.
+
+00:05:28.106 --> 00:05:30.326 align:middle
+¡Error! ¡Eso es un progreso!
+
+00:05:30.646 --> 00:05:33.376 align:middle
+Dice Diseño de página base, no especificado.
+
+00:05:33.716 --> 00:05:38.816 align:middle
+Para representar la página con Layouts, especifica
+el diseño de página base con esta configuración.
+
+00:05:39.676 --> 00:05:42.006 align:middle
+Todo esto tendrá más
+sentido dentro de un minuto.
+
+00:05:42.406 --> 00:05:47.466 align:middle
+Lo que quiere que hagamos es abrir
+config/packages/ y crear un nuevo archivo
+
+00:05:47.696 --> 00:05:52.716 align:middle
+-que puede llamarse como quieras-
+pero llamémoslo netgen_layouts.yaml.
+
+00:05:53.856 --> 00:06:03.176 align:middle
+Dentro, añade netgen_layouts y, debajo,
+pagelayout ajustado a nuestro base.html.twig:
+
+00:06:03.976 --> 00:06:05.806 align:middle
+Explicaré todo esto en un minuto.
+
+00:06:06.466 --> 00:06:07.866 align:middle
+Si refrescamos ahora...
+
+00:06:08.576 --> 00:06:09.726 align:middle
+¡el mismo error!
+
+00:06:10.116 --> 00:06:13.056 align:middle
+Es posible que Symfony no haya visto
+mi nuevo archivo de configuración...
+
+00:06:13.226 --> 00:06:18.196 align:middle
+así que voy a borrar la caché
+para asegurarme: Y ahora...
+
+00:06:18.866 --> 00:06:20.736 align:middle
+¡sí! ¡Funciona!
+
+00:06:21.186 --> 00:06:25.286 align:middle
+Excepto que... ¡sigue siendo
+la misma página estática!
+
+00:06:25.846 --> 00:06:30.586 align:middle
+Pero, por primera vez, abajo, en la
+barra de herramientas de depuración web,
+
+00:06:30.806 --> 00:06:35.236 align:middle
+se muestra que se está utilizando
+el "Diseño de página de inicio".
+
+00:06:35.546 --> 00:06:38.596 align:middle
+Así que se ha dado cuenta de que
+el diseño debería utilizarse...
+
+00:06:38.816 --> 00:06:41.536 align:middle
+pero no parece que lo esté mostrando.
+
+00:06:41.536 --> 00:06:45.536 align:middle
+Para solucionarlo, tenemos
+que hacer una última cosa...
+
+00:06:45.946 --> 00:06:51.276 align:middle
+luego retrocederemos y explicaremos lo
+que está pasando y lo genial que es.
+
+00:06:52.076 --> 00:06:57.726 align:middle
+En base.html.twig, alrededor de {% block
+body %}, añade {% block layout %}...
+
+00:06:57.726 --> 00:07:02.446 align:middle
+y después de {% endblock
+%}: Actualiza una vez más.
+
+00:07:02.866 --> 00:07:04.286 align:middle
+Y... ¡guau!
+
+00:07:04.556 --> 00:07:06.096 align:middle
+¡Nuestra página ha desaparecido!
+
+00:07:06.576 --> 00:07:09.046 align:middle
+Vale, aún tenemos el nav y el footer...
+
+00:07:09.176 --> 00:07:15.326 align:middle
+que vienen de arriba y de abajo de los bloques
+de base.html.twig, ¡pero el contenido real
+
+00:07:15.326 --> 00:07:20.396 align:middle
+de nuestra página ha desaparecido y ha sido
+sustituido por el bloque de título dinámico!
+
+00:07:20.876 --> 00:07:23.086 align:middle
+¿Qué magia negra es ésta?
+
+00:07:23.176 --> 00:07:28.986 align:middle
+En primer lugar, antes de explicarlo, permíteme
+decir que hay formas mucho más rápidas de empezar
+
+00:07:28.986 --> 00:07:32.096 align:middle
+con Netgen Layouts: tienen proyectos de inicio
+
+00:07:32.096 --> 00:07:37.086 align:middle
+para aplicaciones Symfony normales,
+aplicaciones Sylius y aplicaciones Ibexa CMS.
+
+00:07:37.086 --> 00:07:41.406 align:middle
+Pero hemos hecho todo este trabajo de
+configuración manualmente a propósito...
+
+00:07:41.796 --> 00:07:47.656 align:middle
+porque realmente quiero que entiendas cómo
+funcionan los Layouts: es sorprendentemente sencillo.
+
+00:07:47.656 --> 00:07:53.126 align:middle
+En primer lugar, nuestra página sigue
+accediendo a nuestra ruta normal - app_homepage -
+
+00:07:53.426 --> 00:08:00.036 align:middle
+y sigue ejecutando nuestro controlador normal
+y sigue renderizando nuestra plantilla normal.
+
+00:08:00.306 --> 00:08:03.116 align:middle
+No hay nada mágico.
+
+00:08:03.746 --> 00:08:07.726 align:middle
+Pero entonces, ampliamos
+nglayouts.layoutTemplate.
+
+00:08:08.236 --> 00:08:10.306 align:middle
+¿A qué apunta eso?
+
+00:08:11.056 --> 00:08:14.866 align:middle
+Si no hay ningún diseño
+asignado a una página concreta,
+
+00:08:15.296 --> 00:08:21.186 align:middle
+nglayouts.layoutTemplate se
+resolverá en base.html.twig.
+
+00:08:21.666 --> 00:08:27.936 align:middle
+Eso es gracias a la configuración que añadimos aquí:
+Pero si Layouts encuentra una asignación de diseño
+
+00:08:27.936 --> 00:08:34.736 align:middle
+para esta página, entonces nglayouts.layoutTemplate
+resuelve a una plantilla Layouts del núcleo.
+
+00:08:35.426 --> 00:08:41.346 align:middle
+En este caso, si pulsas Shift+Shift,
+se llamará layout2.html.twig...
+
+00:08:41.486 --> 00:08:43.496 align:middle
+ya que hemos seleccionado "Diseño 2".
+
+00:08:44.076 --> 00:08:51.896 align:middle
+Esto renderiza el diseño dinámico a través de estas
+etiquetas nglayouts_render_zone: cada una de ellas se refiere
+
+00:08:51.896 --> 00:08:55.616 align:middle
+a una sección -o "zona"- diferente
+dentro de nuestro diseño.
+
+00:08:57.476 --> 00:09:00.436 align:middle
+En cualquier caso, lo realmente importante es
+
+00:09:00.436 --> 00:09:05.196 align:middle
+que convierte el diseño en
+un bloque Twig llamado layout.
+
+00:09:05.826 --> 00:09:14.466 align:middle
+Luego extiende ngLayouts.pageLayoutTemplate,
+que resuelve a nuestro base.html.twig. El
+
+00:09:15.186 --> 00:09:20.086 align:middle
+resultado final es que nuestra página
+se renderiza con total normalidad
+
+00:09:20.236 --> 00:09:23.456 align:middle
+y sigue extendiendo base.html.twig...
+
+00:09:23.956 --> 00:09:30.976 align:middle
+pero se ha añadido un bloque llamado layout
+que contiene el contenido del diseño dinámico.
+
+00:09:31.456 --> 00:09:34.616 align:middle
+Por eso al principio no vimos
+ningún cambio en la página.
+
+00:09:35.106 --> 00:09:42.796 align:middle
+Hasta que incluimos {% block layout %} en
+base.html.twig, el diseño se estaba cargando...
+
+00:09:42.896 --> 00:09:45.666 align:middle
+sólo que no lo estábamos mostrando
+en ningún sitio. La conclusión
+
+00:09:45.666 --> 00:09:51.646 align:middle
+es la siguiente: si estás en una
+página que no está maquetada,
+
+00:09:52.026 --> 00:09:55.236 align:middle
+todo sigue exactamente igual que siempre.
+
+00:09:55.866 --> 00:09:58.876 align:middle
+Pero si estás en una página
+que se asigna a un diseño,
+
+00:09:59.246 --> 00:10:05.456 align:middle
+significa simplemente que ahora tienes un
+bloque llamado layout cuyo contenido es
+
+00:10:05.456 --> 00:10:08.436 align:middle
+igual a lo que tengas dentro de ese diseño.
+
+00:10:08.436 --> 00:10:14.446 align:middle
+Así que, como he dicho antes, no tenemos que añadir
+maquetaciones a todas las páginas de nuestro sitio:
+
+00:10:14.956 --> 00:10:17.976 align:middle
+podríamos añadirlo a la
+página de inicio y ¡listo!
+
+00:10:18.586 --> 00:10:25.876 align:middle
+Pero cada página que queramos que admita maquetaciones
+tiene que ampliar nglayouts.layoutTemplate. Lo
+
+00:10:26.476 --> 00:10:28.936 align:middle
+bueno es que, aunque ampliemos esto,
+
+00:10:29.316 --> 00:10:33.886 align:middle
+no ocurrirá nada a menos que asignemos
+realmente un diseño a esta página.
+
+00:10:33.936 --> 00:10:37.296 align:middle
+Así que no hay inconveniente
+en utilizarla en todas partes.
+
+00:10:38.156 --> 00:10:47.536 align:middle
+Actualizaré rápidamente login.html.twig para
+utilizarlo: luego list.html.twig y show.html.twig:
+
+00:10:47.816 --> 00:10:49.716 align:middle
+¡Realmente puedo moverme
+rápido cuando lo necesito!
+
+00:10:50.496 --> 00:10:56.386 align:middle
+De vuelta en el navegador, las páginas de lista de recetas y
+de presentación de recetas siguen teniendo el mismo aspecto...
+
+00:10:56.686 --> 00:10:59.016 align:middle
+porque no se ha resuelto el diseño.
+
+00:10:59.706 --> 00:11:03.286 align:middle
+Pero ahora están listas para
+utilizar maquetaciones, si queremos.
+
+00:11:03.966 --> 00:11:08.256 align:middle
+Ahora, por muy interesante que sea
+controlar dinámicamente el contenido
+
+00:11:08.256 --> 00:11:12.846 align:middle
+de la página de inicio,
+¡hemos hecho demasiado!
+
+00:11:13.216 --> 00:11:15.596 align:middle
+Todo nuestro contenido
+antiguo ha desaparecido. ¿Es
+
+00:11:16.146 --> 00:11:20.066 align:middle
+posible mezclar contenido dinámico con parte
+
+00:11:20.066 --> 00:11:23.376 align:middle
+del contenido estático de nuestra
+plantilla Twig de página de inicio?
+
+00:11:23.936 --> 00:11:25.016 align:middle
+Por supuesto que sí.
+
+00:11:25.266 --> 00:11:28.286 align:middle
+Y eso es gran parte de lo que
+hace especiales a las plantillas.
+
+00:11:28.986 --> 00:11:30.066 align:middle
+Eso a continuación
