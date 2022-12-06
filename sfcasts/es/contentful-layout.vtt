@@ -1,0 +1,381 @@
+WEBVTT
+
+00:00:01.066 --> 00:00:05.846 align:middle
+La integración de Contentful que acabamos de
+instalar ha añadido dos cosas a nuestro sitio.
+
+00:00:05.846 --> 00:00:11.556 align:middle
+En primer lugar, ha añadido una integración de
+Layouts: nuevos tipos de valores, tipos de consulta,
+
+00:00:11.596 --> 00:00:17.176 align:middle
+etc. para que podamos seleccionar nuestro contenido
+de Contentful en bloques de listas y cuadrículas. En
+
+00:00:17.556 --> 00:00:22.476 align:middle
+segundo lugar, ha añadido la posibilidad
+de que cada contenido de Contentful tenga su
+
+00:00:22.546 --> 00:00:25.596 align:middle
+propia URL y página en nuestro sitio.
+
+00:00:26.136 --> 00:00:29.826 align:middle
+La segunda parte no tiene
+nada que ver con los Diseños.
+
+00:00:29.926 --> 00:00:35.146 align:middle
+Hace un minuto, utilizamos este práctico
+comando contentful:routes para ver
+
+00:00:35.146 --> 00:00:39.526 align:middle
+que ahora debería haber una
+página en la URL /mashing.
+
+00:00:40.016 --> 00:00:46.866 align:middle
+Cuando fuimos allí, no nos dio un error
+404, pero no funcionó exactamente.
+
+00:00:47.296 --> 00:00:48.976 align:middle
+La página está casi vacía.
+
+00:00:49.566 --> 00:00:50.746 align:middle
+Veamos qué está pasando.
+
+00:00:51.256 --> 00:00:56.666 align:middle
+Haz clic en el icono Twig de la barra de herramientas de depuración
+web para averiguar qué plantillas se están renderizando.
+
+00:00:57.686 --> 00:00:58.836 align:middle
+Veamos aquí...
+
+00:00:59.376 --> 00:01:00.836 align:middle
+si bajamos un poco...
+
+00:01:01.136 --> 00:01:05.456 align:middle
+parece que se muestra
+@NetgenLayoutsContentful/contentful/content.html.twig. ¡
+
+00:01:05.456 --> 00:01:08.036 align:middle
+Esa
+
+00:01:08.496 --> 00:01:10.916 align:middle
+debe ser la plantilla de esta
+página! Vamos a comprobarlo.
+
+00:01:14.056 --> 00:01:17.896 align:middle
+Le daré a Shift+Shift y
+buscaré content.html.twig:
+
+00:01:18.626 --> 00:01:21.296 align:middle
+queremos la de layouts-contentful. Y...
+
+00:01:22.516 --> 00:01:23.656 align:middle
+¡genial! Esta
+
+00:01:24.076 --> 00:01:27.066 align:middle
+es la plantilla que está
+renderizando esa página.
+
+00:01:27.656 --> 00:01:30.166 align:middle
+Imprime content.name... pero
+
+00:01:30.446 --> 00:01:33.376 align:middle
+en realidad nunca la vemos. Ah, eso es
+
+00:01:34.156 --> 00:01:38.506 align:middle
+porque la renderiza en un
+block llamado content. Éste
+
+00:01:39.176 --> 00:01:42.656 align:middle
+acaba extendiendo base.html.twig... y
+
+00:01:43.016 --> 00:01:48.786 align:middle
+como nuestra plantilla base nunca renderiza
+block content, no vemos nada. De nuevo,
+
+00:01:49.426 --> 00:01:55.206 align:middle
+esta parte de Contentful en la que obtienes
+una URL que renderiza un controlador, que
+
+00:01:55.506 --> 00:01:57.726 align:middle
+a su vez renderiza esta plantilla...
+
+00:01:57.986 --> 00:02:00.216 align:middle
+no tiene nada que ver con los Diseños. Es
+
+00:02:00.616 --> 00:02:06.696 align:middle
+sólo una forma agradable de exponer cada contenido de
+Contentful como una página de nuestro sitio. Así que,
+
+00:02:06.696 --> 00:02:14.366 align:middle
+sin relación con Layouts, si quisiéramos,
+podríamos reemplazar esta plantilla en
+
+00:02:14.366 --> 00:02:16.806 align:middle
+nuestra aplicación y
+personalizarla para que funcione.
+
+00:02:17.346 --> 00:02:21.896 align:middle
+Podríamos cambiarla para utilizar block
+body y aprovechar esta variable content, que
+
+00:02:22.206 --> 00:02:26.216 align:middle
+representa el contenido, para
+mostrar todos los campos. Pero...
+
+00:02:26.796 --> 00:02:28.376 align:middle
+espera un momento. ¿No es
+
+00:02:28.856 --> 00:02:31.146 align:middle
+ese el objetivo de Layouts? Los diseños
+
+00:02:31.806 --> 00:02:37.686 align:middle
+nos permiten crear páginas dinámicamente, en
+lugar de escribirlas completamente en Twig. Ahora
+
+00:02:38.546 --> 00:02:41.306 align:middle
+mismo, esta página no está
+vinculada a ningún diseño. Pero
+
+00:02:41.866 --> 00:02:46.726 align:middle
+si la vinculáramos, podríamos empezar a
+crear la página utilizando los datos de
+
+00:02:46.726 --> 00:02:51.796 align:middle
+la habilidad Contentful correspondiente, en
+este caso, de la habilidad "Mashing". Dirígete
+
+00:02:52.706 --> 00:02:58.106 align:middle
+a nuestra sección de administración, publica ese
+diseño y, a continuación, crea un nuevo diseño.
+
+00:03:01.286 --> 00:03:03.466 align:middle
+Lo llamaré "Diseño de
+habilidad individual"... y
+
+00:03:03.936 --> 00:03:05.616 align:middle
+elige "Diseño 2". Con el tiempo,
+
+00:03:06.676 --> 00:03:10.366 align:middle
+conseguiremos que se parezca
+más al "Diseño 5"... pero
+
+00:03:11.146 --> 00:03:14.556 align:middle
+podemos hacerlo más adelante mediante
+los bloques de columnas. Ésa es
+
+00:03:15.206 --> 00:03:19.396 align:middle
+una de las razones por las que me gusta la
+"Presentación 2": es bastante sencilla, y
+
+00:03:19.616 --> 00:03:24.836 align:middle
+podemos hacerla más compleja más adelante
+con las herramientas que ya tenemos. Bien,
+
+00:03:25.636 --> 00:03:27.156 align:middle
+empieza como siempre. Cierra
+
+00:03:27.546 --> 00:03:31.606 align:middle
+la barra de herramientas de depuración web para que
+podamos vincular la cabecera a la cabecera compartida... y
+
+00:03:34.636 --> 00:03:36.646 align:middle
+nuestro pie de página al pie de
+página compartido. Estupendo.
+
+00:03:41.276 --> 00:03:48.746 align:middle
+Luego, para empezar, añade un
+bloque Título, escribe algo... y
+
+00:03:48.996 --> 00:03:50.546 align:middle
+publica el diseño. A continuación, tenemos
+
+00:03:53.836 --> 00:03:57.116 align:middle
+que asignar este diseño
+a esa página. Hasta ahora
+
+00:03:57.206 --> 00:04:05.216 align:middle
+, hemos mapeado maquetaciones por el nombre de la ruta o por
+la URL, también conocida como "Información de la ruta".
+
+00:04:05.946 --> 00:04:08.196 align:middle
+Podríamos volver a hacerlo aquí. Pero, como
+
+00:04:08.616 --> 00:04:15.846 align:middle
+verás, lo que realmente queremos hacer es utilizar este
+diseño para todas las páginas de Skills. Dentro de unos
+
+00:04:16.816 --> 00:04:21.596 align:middle
+minutos, cambiaremos la URL
+de estas páginas de algo como
+
+00:04:21.596 --> 00:04:26.426 align:middle
+/mashing a /skills/mashing. Cuando lo hagamos
+
+00:04:26.906 --> 00:04:31.436 align:middle
+(permíteme añadir una nueva
+asignación aquí y pulsar detalles),
+
+00:04:32.696 --> 00:04:38.186 align:middle
+podremos utilizar el "Prefijo de información
+de ruta" para asignar esta disposición a
+
+00:04:38.186 --> 00:04:41.486 align:middle
+cualquier URL que empiece por /skills/. Pero,
+
+00:04:42.116 --> 00:04:49.076 align:middle
+algo que puede añadirse a los Diseños
+es otra forma de mapear o resolver qué
+
+00:04:49.166 --> 00:04:52.136 align:middle
+diseño debe utilizarse en cada página. Y,
+
+00:04:52.776 --> 00:05:00.526 align:middle
+¡sí! El bundle Contentful añadió dos nuevos:
+Entrada Contentful y Espacio Contentful. Cuando
+
+00:05:01.356 --> 00:05:07.316 align:middle
+vamos a una de estas páginas de Contentful,
+la ruta dinámica le dice a Symfony a qué
+
+00:05:07.356 --> 00:05:12.586 align:middle
+Contentful Entry - que es la pieza
+individual de contenido en Contentful - y
+
+00:05:12.926 --> 00:05:17.206 align:middle
+a qué Contentful Space
+corresponde esta página. Gracias
+
+00:05:18.156 --> 00:05:23.866 align:middle
+a esto, podemos aprovechar uno de estos nuevos objetivos
+para que coincida con la entrada o el espacio. Por
+
+00:05:24.416 --> 00:05:29.606 align:middle
+ejemplo, podríamos utilizar la Entrada Contentful para
+mapear un diseño específico a un elemento específico en
+
+00:05:29.716 --> 00:05:32.406 align:middle
+Contentful. Literalmente,
+
+00:05:32.986 --> 00:05:38.786 align:middle
+podríamos decir Si el Contenido actual es
+específicamente esta habilidad "Machacar"
+
+00:05:38.786 --> 00:05:41.846 align:middle
+entonces utiliza este diseño. O
+
+00:05:42.566 --> 00:05:48.206 align:middle
+podríamos hacer lo que yo voy a hacer:
+mapear a través del Espacio Contentful.
+
+00:05:49.236 --> 00:05:51.976 align:middle
+Sólo tenemos un Espacio, así que es
+bastante fácil. Básicamente, estamos
+
+00:05:52.406 --> 00:05:57.606 align:middle
+diciendo Si estamos en cualquier
+página dinámica de Contentful,
+
+00:05:57.866 --> 00:06:00.486 align:middle
+quiero que mapees a este diseño.
+
+00:06:01.076 --> 00:06:02.066 align:middle
+Guardemos esto... y luego
+
+00:06:02.506 --> 00:06:05.736 align:middle
+vinculemos este diseño al "Diseño
+de habilidad individual". Pulsa
+
+00:06:07.286 --> 00:06:09.036 align:middle
+"Confirmar" y... ¡listo! Ve
+
+00:06:09.456 --> 00:06:12.616 align:middle
+, actualiza y...
+
+00:06:13.076 --> 00:06:15.006 align:middle
+¡funciona! ¡Sí! Como he
+
+00:06:15.606 --> 00:06:19.966 align:middle
+mencionado antes, en realidad
+tenemos dos tipos de contenido en
+
+00:06:19.966 --> 00:06:24.286 align:middle
+Contentful: Habilidades
+y Anuncios. Los anuncios
+
+00:06:24.286 --> 00:06:28.396 align:middle
+no deben tener su propia página,
+sólo las habilidades. Vamos a
+
+00:06:28.856 --> 00:06:33.746 align:middle
+incrustar anuncios en algunas páginas
+existentes un poco más adelante.
+
+00:06:34.416 --> 00:06:36.476 align:middle
+Vuelve a los detalles de la
+vinculación del diseño. Además del
+
+00:06:37.186 --> 00:06:42.136 align:middle
+Espacio Contentful, podemos bajar
+aquí a una lista de condiciones y
+
+00:06:42.386 --> 00:06:45.086 align:middle
+seleccionar "Tipos de contenido
+Contentful". Las condiciones
+
+00:06:46.136 --> 00:06:49.716 align:middle
+son una forma de hacer que tu
+concordancia sea más específica. Añade
+
+00:06:50.516 --> 00:06:51.506 align:middle
+esa condición. Y,
+
+00:06:51.766 --> 00:06:57.066 align:middle
+esto es un poco difícil de ver, pero podemos seleccionar
+"Habilidad" o "Anuncio". Selecciona "Habilidad
+
+00:06:58.256 --> 00:07:01.416 align:middle
+", guarda los cambios y... ¡listo!
+
+00:07:01.696 --> 00:07:08.696 align:middle
+Ahora sólo coincidirá si vamos a una URL de
+Contentful que esté mostrando una habilidad. En
+
+00:07:09.956 --> 00:07:14.366 align:middle
+la línea de comandos, puedes
+ver que tenemos un anuncio... es
+
+00:07:14.576 --> 00:07:16.576 align:middle
+esta URL de aspecto gracioso. Sí,
+
+00:07:17.176 --> 00:07:22.376 align:middle
+ahora mismo, el anuncio está disponible
+como página en nuestro sitio.
+
+00:07:23.146 --> 00:07:24.876 align:middle
+Lo arreglaremos en unos minutos. Pero, como
+
+00:07:25.406 --> 00:07:32.036 align:middle
+mínimo, si fuéramos a esa URL
+rara, la página funcionaría... pero
+
+00:07:32.286 --> 00:07:35.716 align:middle
+no coincidiría con ningún diseño
+gracias a nuestro mapeo. Así que,
+
+00:07:36.046 --> 00:07:38.076 align:middle
+básicamente, estaría en blanco. Así que
+
+00:07:39.116 --> 00:07:42.666 align:middle
+ahora tenemos control sobre las
+páginas de Contentful. ¡Genial!
+
+00:07:42.876 --> 00:07:44.126 align:middle
+Aunque... lo único que estamos
+
+00:07:44.306 --> 00:07:47.256 align:middle
+renderizando es un título manual. Snooze.
+
+00:07:47.426 --> 00:07:54.886 align:middle
+Lo siguiente: Hagamos nuestro diseño más inteligente
+mostrando contenido real de la habilidad correspondiente

@@ -1,0 +1,369 @@
+WEBVTT
+
+00:00:01.086 --> 00:00:07.786 align:middle
+Si añadiéramos cinco entidades más y
+quisiéramos poder seleccionarlas como elementos
+
+00:00:07.836 --> 00:00:14.166 align:middle
+en la administración de Diseños, podríamos añadir otros
+cinco tipos de valores, tipos de consulta y vistas de elementos.
+
+00:00:14.276 --> 00:00:18.726 align:middle
+Ahora que sabemos lo que estamos
+haciendo, es un proceso bastante rápido
+
+00:00:18.906 --> 00:00:21.806 align:middle
+y nos daría mucho poder en nuestro sitio.
+
+00:00:22.206 --> 00:00:29.356 align:middle
+Pero una de las cosas bonitas de los Diseños es que
+nuestros tipos de valor pueden venir de cualquier parte:
+
+00:00:29.756 --> 00:00:37.726 align:middle
+una Entidad Doctrine, datos de una API externa,
+datos de un almacén Sylius o de Ibexa CMS. De
+
+00:00:38.516 --> 00:00:45.776 align:middle
+hecho, sistemas como Sylius e Ibexa ya
+tienen paquetes que hacen todo el trabajo
+
+00:00:45.776 --> 00:00:49.086 align:middle
+de integrar y añadir los
+tipos de valor por ti.
+
+00:00:50.056 --> 00:00:54.426 align:middle
+Una de las grandes piezas que faltan
+en nuestro sitio son las habilidades.
+
+00:00:55.096 --> 00:01:02.026 align:middle
+Las habilidades de la página de inicio están codificadas y el
+enlace "Todas las habilidades" ¡ni siquiera va a ninguna parte!
+
+00:01:02.946 --> 00:01:08.416 align:middle
+Podríamos haber optado por almacenar estas habilidades
+localmente a través de otra Entidad Doctrine.
+
+00:01:08.746 --> 00:01:15.646 align:middle
+Pero en lugar de eso, vamos a cargarlas desde una API
+externa a través de un servicio llamado "Contentful".
+
+00:01:16.476 --> 00:01:19.566 align:middle
+Me dirigiré a Contentful.com
+e iniciaré sesión.
+
+00:01:22.936 --> 00:01:29.336 align:middle
+Esto me lleva a un espacio "Contentful"
+llamado "Bark & Bake" que ya he creado.
+
+00:01:30.246 --> 00:01:32.156 align:middle
+¡Contentful es increíble!
+
+00:01:32.536 --> 00:01:36.066 align:middle
+Es básicamente un CMS como servicio.
+
+00:01:36.466 --> 00:01:40.926 align:middle
+Nos permite crear diferentes tipos de
+contenido llamados "modelos de contenido".
+
+00:01:41.686 --> 00:01:47.156 align:middle
+Ahora mismo, tengo un modelo de contenido
+llamado "Habilidad" y otro llamado "Anuncio".
+
+00:01:47.156 --> 00:01:53.006 align:middle
+Si hiciéramos clic en ellos, podríamos introducir
+contenido a través de una interfaz superamigable.
+
+00:01:53.816 --> 00:01:57.736 align:middle
+Ya he creado 5 habilidades, cada
+una con un montón de datos.
+
+00:01:57.736 --> 00:02:01.536 align:middle
+Así que, aquí creas y mantienes tu contenido.
+
+00:02:02.036 --> 00:02:08.336 align:middle
+Luego Contentful tiene una API restful que
+podemos utilizar para obtener todo esto.
+
+00:02:09.026 --> 00:02:10.596 align:middle
+Contentful es genial.
+
+00:02:10.986 --> 00:02:14.946 align:middle
+Pero el objetivo de esto no es
+enseñarte sobre Contentful.
+
+00:02:15.556 --> 00:02:20.986 align:middle
+No Se trata de mostrarte cómo podemos obtener
+contenido para los diseños desde cualquier lugar. Por
+
+00:02:21.616 --> 00:02:25.626 align:middle
+ejemplo, si queremos cargar
+"habilidades" de Contentful,
+
+00:02:26.066 --> 00:02:31.656 align:middle
+podríamos crear manualmente un nuevo tipo de
+valor y hacer todo el trabajo que hicimos antes,
+
+00:02:32.046 --> 00:02:37.666 align:middle
+excepto hacer peticiones a la API de Contentful
+en lugar de consultar la base de datos.
+
+00:02:38.466 --> 00:02:41.066 align:middle
+¡Pero! ¡Ni siquiera necesitamos hacer eso!
+
+00:02:41.546 --> 00:02:46.526 align:middle
+¿Por qué? Porque Layouts ya tiene
+un bundle compatible con Contentful.
+
+00:02:47.146 --> 00:02:51.996 align:middle
+Ese bundle añade el tipo de valor, algunos
+tipos de consulta, las vistas de elementos
+
+00:02:52.236 --> 00:02:55.866 align:middle
+e incluso la integración del
+navegador de contenido por nosotros.
+
+00:02:56.156 --> 00:02:58.356 align:middle
+Woh. ¡Vamos a cogerlo!
+
+00:02:58.466 --> 00:03:01.486 align:middle
+Ve a tu terminal y ejecuta:
+
+00:03:01.746 --> 00:03:09.446 align:middle
+composer require netgen/layouts-contentful
+-W El -W está ahí sólo porque,
+
+00:03:09.766 --> 00:03:15.846 align:middle
+al menos al grabar esto, Compos er
+necesita poder degradar un pequeño paquete
+
+00:03:15.846 --> 00:03:17.926 align:middle
+para contentar a todas las dependencias.
+
+00:03:18.346 --> 00:03:20.036 align:middle
+Esa bandera le permite hacerlo.
+
+00:03:21.156 --> 00:03:28.466 align:middle
+De acuerdo La receta de este paquete ha añadido un nuevo
+archivo de configuración: config/packages/contentful.yaml:
+
+00:03:29.036 --> 00:03:32.566 align:middle
+Y éste lee dos nuevas variables de entorno...
+
+00:03:32.876 --> 00:03:35.136 align:middle
+que viven en .env:
+
+00:03:37.136 --> 00:03:43.086 align:middle
+Ya que estamos aquí, actualicemos estos valores
+para que apunten a mi espacio Contentful.
+
+00:03:43.856 --> 00:03:47.396 align:middle
+Copia las claves del bloque de código
+de esta página y pégalas aquí.
+
+00:03:48.026 --> 00:03:50.416 align:middle
+Aquí está mi CONTENTFUL_SPACE_ID...
+
+00:03:50.416 --> 00:03:57.386 align:middle
+y mi CONTENTFUL_ACCESS_TOKEN, que nos
+dará acceso de lectura a mi espacio:
+
+00:03:57.386 --> 00:04:03.896 align:middle
+Vale, la integración Layouts + Contentful
+nos da dos cosas muy separadas, y es
+
+00:04:04.226 --> 00:04:08.746 align:middle
+súper importante entender la
+diferencia para que todo quede claro.
+
+00:04:08.746 --> 00:04:15.516 align:middle
+En primer lugar, el paquete añade una
+integración entre Layouts y Contentful.
+
+00:04:15.856 --> 00:04:19.956 align:middle
+Esto significa que añade nuevos tipos
+de valores, nuevos tipos de consulta
+
+00:04:20.236 --> 00:04:23.776 align:middle
+y todas las demás cosas que
+acabamos de añadir para Doctrine. En
+
+00:04:24.456 --> 00:04:29.496 align:middle
+otras palabras, podemos añadir
+instantáneamente las competencias o anuncios
+
+00:04:29.496 --> 00:04:33.306 align:middle
+de Contentful en bloques
+de lista o cuadrícula.
+
+00:04:33.826 --> 00:04:37.956 align:middle
+Eso es genial, y lo veremos pronto.
+
+00:04:37.956 --> 00:04:44.256 align:middle
+La segunda cosa que añade la integración de
+Contentful no tiene nada que ver con Layouts.
+
+00:04:44.776 --> 00:04:46.426 align:middle
+Son las rutas dinámicas.
+
+00:04:46.806 --> 00:04:53.336 align:middle
+Añade un sistema para que cada "elemento" de
+Contentful esté disponible a través de su propia URL.
+
+00:04:53.936 --> 00:04:59.836 align:middle
+Literalmente, todas estas habilidades tendrán
+al instante su propia página en nuestro sitio.
+
+00:05:00.326 --> 00:05:05.736 align:middle
+Esto no tiene nada que ver con Layouts, que trata de controlar
+el diseño de las páginas existentes en tu sitio, no de
+
+00:05:05.736 --> 00:05:10.206 align:middle
+añadir páginas nuevas.
+
+00:05:10.596 --> 00:05:17.936 align:middle
+Pero, como Contentful es un CMS, es bueno
+tener una página para cada contenido.
+
+00:05:18.956 --> 00:05:23.806 align:middle
+Para poner en funcionamiento las rutas dinámicas,
+entra en el directorio config/packages/
+
+00:05:24.316 --> 00:05:27.456 align:middle
+y añade un nuevo archivo
+llamado cmf_routing.yaml.
+
+00:05:27.456 --> 00:05:35.646 align:middle
+CMF Routing es un paquete que Contentful utiliza
+entre bastidores para añadir las rutas dinámicas.
+
+00:05:35.646 --> 00:05:37.256 align:middle
+Pego aquí un poco de configuración:
+
+00:05:37.846 --> 00:05:38.946 align:middle
+Es feo...
+
+00:05:39.226 --> 00:05:44.936 align:middle
+pero esta parte no tiene nada que ver con
+Layouts, así que no importa demasiado.
+
+00:05:45.506 --> 00:05:52.456 align:middle
+Se trata de permitir que Contentful añada
+automáticamente URL dinámicas a nuestro sitio.
+
+00:05:53.046 --> 00:05:55.876 align:middle
+Este sistema de rutas almacena
+las rutas en la base de datos...
+
+00:05:56.346 --> 00:05:59.406 align:middle
+y eso significa que necesitamos
+una nueva base de datos.
+
+00:06:00.216 --> 00:06:06.126 align:middle
+Dirígete a tu consola y ejecuta:
+symfony console make:migration Y...
+
+00:06:06.126 --> 00:06:07.296 align:middle
+Me aparece un error.
+
+00:06:07.476 --> 00:06:10.606 align:middle
+Grosero. Probemos a borrar la caché...
+
+00:06:11.016 --> 00:06:12.486 align:middle
+puede que haya pasado algo raro...
+
+00:06:12.486 --> 00:06:14.936 align:middle
+o aún no ha visto mi nuevo
+archivo de configuración.
+
+00:06:15.506 --> 00:06:17.026 align:middle
+Una vez que se borre la caché...
+
+00:06:17.556 --> 00:06:18.926 align:middle
+Volveré a hacer la migración:
+
+00:06:19.656 --> 00:06:20.166 align:middle
+Esta vez...
+
+00:06:20.546 --> 00:06:26.676 align:middle
+¡perfecto! Abre el directorio
+migrations/, busca ese archivo y...
+
+00:06:27.076 --> 00:06:27.806 align:middle
+¡se ve bien!
+
+00:06:28.376 --> 00:06:32.266 align:middle
+Tenemos unas cuantas tablas que contienen
+información sobre nuestros datos de Contentful...
+
+00:06:32.666 --> 00:06:35.476 align:middle
+y unas cuantas para almacenar
+esas rutas dinámicas.
+
+00:06:37.376 --> 00:06:42.616 align:middle
+Ahora ejecuta: symfony console
+doctrine:migrations:migrate Y...
+
+00:06:43.226 --> 00:06:46.576 align:middle
+¡woohoo! Tenemos las nuevas
+tablas que necesitamos. Por último
+
+00:06:46.666 --> 00:06:51.596 align:middle
+, podemos ejecutar un comando
+para cargar todo nuestro contenido
+
+00:06:51.596 --> 00:06:54.886 align:middle
+desde Contentful y crear esas rutas dinámicas.
+
+00:06:55.526 --> 00:07:00.386 align:middle
+Una vez más, se trata de una funcionalidad
+que no tiene nada que ver con los Diseños.
+
+00:07:01.086 --> 00:07:06.716 align:middle
+Ejecuta: symfony console contentful:sync Y...
+
+00:07:07.176 --> 00:07:07.806 align:middle
+¡precioso!
+
+00:07:08.146 --> 00:07:09.946 align:middle
+Cargó seis elementos.
+
+00:07:10.726 --> 00:07:15.936 align:middle
+En producción puedes configurar un webhook para
+que tu sitio se sincronice instantáneamente
+
+00:07:15.936 --> 00:07:18.786 align:middle
+con cualquier cambio que hagas en Contentful.
+
+00:07:19.356 --> 00:07:23.086 align:middle
+Pero mientras estamos desarrollando,
+ejecutar este comando funciona bien.
+
+00:07:23.846 --> 00:07:30.616 align:middle
+El resultado de este comando es que cada contenido
+de Contentful tiene ahora su propia página
+
+00:07:31.186 --> 00:07:36.806 align:middle
+Para verlas, ejecuta: symfony
+console contentful:routes Y...
+
+00:07:37.136 --> 00:07:41.826 align:middle
+¡impresionante! Parece que
+tengo una URL llamada /mashing.
+
+00:07:42.746 --> 00:07:43.706 align:middle
+¡Vamos a comprobarlo!
+
+00:07:44.196 --> 00:07:47.946 align:middle
+Vuelve a nuestro sitio,
+navega hasta /mashing y...
+
+00:07:48.516 --> 00:07:50.866 align:middle
+¡funciona! Más o menos.
+
+00:07:51.426 --> 00:07:54.476 align:middle
+Está aquí, pero la parte
+central está vacía.
+
+00:07:54.476 --> 00:08:02.586 align:middle
+Hablemos de lo que ocurre a continuación y de cómo
+podemos aprovechar los Diseños para dar vida a esta página
