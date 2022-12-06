@@ -17,7 +17,7 @@ out what templates are being rendered. Let's see here... if we go down a bit...
 it apparently renders `@NetgenLayoutsContentful/contentful/content.html.twig`.
 That must be the template for this page! Let's go check it out.
 
-I'll hit Shift+Shift and search for `content.html.twig`: we want the one from
+I'll hit `Shift`+`Shift` and search for `content.html.twig`: we want the one from
 `layouts-contentful`. And... *cool*! This is the template that's rendering
 that page. It prints `content.name`... but we never actually *see* that. Ah, that's
 because it renders it into a `block` called `content`. This eventually extends
@@ -77,7 +77,7 @@ one Space, so it's pretty easy. Basically, we're saying:
 
 > If we are on *any* dynamic Contentful page, I want you to map to this layout.
 
-Let's save this... then link this layout to the "Individual skill" layout. Hit
+Let's save this... then link this layout to the "Individual Skill Layout". Hit
 "Confirm" and... good! Head over, refresh and... it works! Yes!
 
 ## Mapping to a Specific Content Type
