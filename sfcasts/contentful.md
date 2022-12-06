@@ -1,7 +1,7 @@
 # Contentful: Loading Data from an External CMS
 
 If we added five more entities and we wanted to be able to select those as items
-in the layouts admin, we could add five more value types, query types, and item views.
+in the Layouts admin, we could add five more value types, query types, and item views.
 Now that we know what we're doing, it's a pretty quick process and would give us a
 *lot* of power on our site.
 
@@ -18,7 +18,7 @@ But *instead*, we're going to load them from an external API via a service calle
 
 ## Hello Contentful!
 
-I'll head over to Contentful.com and log in. This takes me to a "Contentful space"
+I'll head over to Contentful.com and log in. This takes me to a "Contentful" space
 called "Bark & Bake" that I've already created. Contentful is *awesome*! It's
 basically a CMS as a service. It allows us to create different *types* of content
 called "content models". Right now, I have a content model called "Skill" and another
@@ -53,13 +53,20 @@ able to downgrade one small package to make all the dependencies happy. That fla
 allows it to do that.
 
 Ok! The recipe for this package added a new config file:
-`config/packages/contentful.yaml`. And *this* reads two new environment variables...
-which live in `.env`.
+`config/packages/contentful.yaml`:
+
+[[[ code('e2e15fc0f4') ]]]
+
+And *this* reads two new environment variables... which live in `.env`:
+
+[[[ code('e02c9c2595') ]]]
 
 While we're here, let's update these values to point at *my* Contentful space.
 Copy the keys from the code block on this page and paste them here. Here's my
 `CONTENTFUL_SPACE_ID`... and my `CONTENTFUL_ACCESS_TOKEN`, which will give us
-read access to my space.
+read access to my space:
+
+[[[ code('fe36bf9250') ]]]
 
 ## Contentful + Layouts
 
@@ -83,7 +90,10 @@ pages.
 But, since Contentful is a CMS, it *is* nice to have a page for each piece of
 content. To get the dynamic routes working, go into the `config/packages/` directory
 and add a new file called `cmf_routing.yaml`. CMF Routing is a package that Contentful
-uses behind the scenes to add the dynamic routes. I'll paste some config here.
+uses behind the scenes to add the dynamic routes. I'll paste some config here:
+
+[[[ code('429d1d05f7') ]]]
+
 It's ugly... but this part doesn't have anything to do with Layouts, so it
 doesn't matter too much. This is *all about* allowing Contentful to automatically
 add dynamic URLs to our site.
@@ -102,10 +112,19 @@ happened... or it didn't see my new config file yet.
 php bin/console cache:clear
 ```
 
-Once the cache clears... I'll make the migration again. This time... perfect!
-Open the `migrations/` directory, find that file and... it looks good! We have
-a few tables that hold info about our Contentful data... and a few to store
-those dynamic routes.
+Once the cache clears... I'll make the migration again:
+
+```terminal-silent
+symfony console make:migration
+```
+
+This time... perfect! Open the `migrations/` directory, find that file and...
+it looks good!
+
+[[[ code('8225b80524') ]]]
+
+We have a few tables that hold info about our Contentful data... and a few
+to store those dynamic routes.
 
 *Now* run:
 
