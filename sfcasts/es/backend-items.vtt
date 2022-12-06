@@ -1,0 +1,274 @@
+WEBVTT
+
+00:00:01.036 --> 00:00:03.716 align:middle
+Nuestro Navegador de Contenidos
+funciona más o menos.
+
+00:00:04.016 --> 00:00:05.746 align:middle
+Podemos ver nuestra única ubicación...
+
+00:00:05.806 --> 00:00:08.406 align:middle
+sólo que aún no tenemos
+ningún resultado. Eso es
+
+00:00:09.346 --> 00:00:12.776 align:middle
+porque, para cualquier ubicación
+seleccionada, el Navegador de Contenidos
+
+00:00:13.026 --> 00:00:15.516 align:middle
+llama a getSubItems().
+
+00:00:16.136 --> 00:00:18.236 align:middle
+Nuestro trabajo aquí es
+devolver los resultados.
+
+00:00:18.466 --> 00:00:20.476 align:middle
+En este caso, todas nuestras recetas.
+
+00:00:21.106 --> 00:00:26.346 align:middle
+Si tuviéramos varias ubicaciones,
+como recetas divididas en categorías,
+
+00:00:26.526 --> 00:00:30.006 align:middle
+podríamos utilizar la variable
+$location para devolver el subconjunto.
+
+00:00:30.446 --> 00:00:32.986 align:middle
+Pero vamos a consultar y
+devolver todas las recetas.
+
+00:00:33.576 --> 00:00:37.456 align:middle
+Para ello, ve a la parte superior
+de la clase y crea un constructor
+
+00:00:38.006 --> 00:00:41.366 align:middle
+con private RecipeRepository $recipeRepository:
+
+00:00:42.906 --> 00:00:51.836 align:middle
+Luego, aquí abajo en getSubItems(), di $recipes =
+$this->recipeRepository y utiliza el mismo método
+
+00:00:51.896 --> 00:00:56.106 align:middle
+de antes:
+->createQueryBuilderOrderedByNewest().
+
+00:00:57.016 --> 00:00:59.756 align:middle
+A continuació n añade
+->setFirstResult($offset)...
+
+00:01:00.616 --> 00:01:02.836 align:middle
+y ->setMaxResults($limit).
+
+00:01:03.856 --> 00:01:07.476 align:middle
+El Navegador de Contenidos viene
+con la paginación incorporada.
+
+00:01:07.816 --> 00:01:12.786 align:middle
+Nos pasa el desplazamiento y el límite de
+la página en la que se encuentre el usuario,
+
+00:01:12.946 --> 00:01:16.856 align:middle
+lo introducimos en la
+consulta y todos contentos.
+
+00:01:16.856 --> 00:01:19.876 align:middle
+Termina con getQuery() y getResult():
+
+00:01:21.376 --> 00:01:24.536 align:middle
+Observa que getSubItems()
+devuelve un iterable...
+
+00:01:25.076 --> 00:01:30.316 align:middle
+en realidad se supone que es un
+iterable de algo llamado ItemInterface.
+
+00:01:31.036 --> 00:01:34.416 align:middle
+Así que no podemos devolver
+simplemente estos objetos Recipe.
+
+00:01:35.026 --> 00:01:42.826 align:middle
+En lugar de eso, en src/ContentBrowser/, crea
+otra clase llamada, ¿qué tal RecipeBrowserItem.
+
+00:01:42.826 --> 00:01:48.636 align:middle
+Haz que implemente ItemInterface
+-la de Netgen\ContentBrowser -
+
+00:01:49.326 --> 00:01:51.956 align:middle
+y genera los cuatro métodos que necesita:
+
+00:01:52.686 --> 00:01:57.036 align:middle
+Esta clase será una pequeña
+envoltura de un objeto Recipe.
+
+00:01:57.786 --> 00:02:02.766 align:middle
+Observa: añade un método __construct()
+con private Recipe $recipe:
+
+00:02:04.736 --> 00:02:12.776 align:middle
+Ahora, para getValue(), esto debería devolver el
+"identificador", así que return $this->recipe->getId().
+
+00:02:14.256 --> 00:02:20.366 align:middle
+Para getName(), sólo necesitamos algo visual que
+podamos mostrar, como $this->recipe->getName().
+
+00:02:21.726 --> 00:02:24.106 align:middle
+Y para isVisible(), return true.
+
+00:02:24.866 --> 00:02:28.676 align:middle
+Esto es útil si un Recipe
+puede estar publicado o no.
+
+00:02:29.316 --> 00:02:32.396 align:middle
+Tenemos una situación
+similar con isSelectable():
+
+00:02:32.926 --> 00:02:37.796 align:middle
+Si tuvieras un conjunto de reglas en las
+que quisieras mostrar ciertas recetas
+
+00:02:38.016 --> 00:02:42.186 align:middle
+pero hacer que no se pudieran
+seleccionar, podrías return false aquí.
+
+00:02:42.756 --> 00:02:43.946 align:middle
+Y... ¡ya está!
+
+00:02:44.046 --> 00:02:44.916 align:middle
+¡Ha sido fácil! De
+
+00:02:45.536 --> 00:02:48.126 align:middle
+vuelta a nuestra clase backend, necesitamos
+
+00:02:48.126 --> 00:02:52.706 align:middle
+convertir estos objetos Recipe
+en objetos RecipeBrowserItem.
+
+00:02:53.426 --> 00:02:55.306 align:middle
+Podemos hacerlo con array_map().
+
+00:02:56.106 --> 00:03:02.296 align:middle
+Volveré a utilizar la elegante sintaxis fn(),
+que recibirá un argumento Recipe $recipe,
+
+00:03:02.466 --> 00:03:06.536 align:middle
+seguido de => new
+RecipeBrowserItem($recipe).
+
+00:03:07.936 --> 00:03:10.286 align:middle
+Para el segundo arg, pasa $recipes:
+
+00:03:11.546 --> 00:03:16.566 align:middle
+Es una forma elegante de decir
+Recorre todas las recetas del sistema,
+
+00:03:16.826 --> 00:03:23.046 align:middle
+crea un nuevo RecipeBrowserItem para cada una de
+ellas y devuelve esa nueva matriz de elementos.
+
+00:03:23.106 --> 00:03:25.726 align:middle
+Muy bien, ¡vamos a ver qué aspecto tiene!
+
+00:03:26.116 --> 00:03:33.246 align:middle
+Actualiza el diseño, haz clic en la
+Rejilla, vuelve a "Añadir elementos" y...
+
+00:03:33.696 --> 00:03:36.426 align:middle
+¡ya está! ¡Vemos diez elementos!
+
+00:03:37.376 --> 00:03:39.826 align:middle
+Pero deberíamos tener varias páginas.
+
+00:03:40.486 --> 00:03:44.766 align:middle
+Ah, eso es porque seguimos devolviendo
+0 desde getSubItemsCount().
+
+00:03:45.156 --> 00:03:45.866 align:middle
+Vamos a arreglarlo.
+
+00:03:46.436 --> 00:03:47.866 align:middle
+Roba la consulta de arriba... pega
+
+00:03:49.046 --> 00:03:55.396 align:middle
+, devuelve esto, quita
+setFirstResult() y setMaxResults(),
+
+00:03:55.836 --> 00:04:03.486 align:middle
+añade ->select('COUNT(recipe.id)'), y
+luego llama a getSingleScalarResult() al final:
+
+00:04:04.696 --> 00:04:07.876 align:middle
+Y así, cuando actualicemos...
+
+00:04:08.726 --> 00:04:10.326 align:middle
+y abrimos el Navegador de Contenidos...
+
+00:04:11.736 --> 00:04:13.656 align:middle
+¡ya tenemos páginas!
+
+00:04:14.626 --> 00:04:17.296 align:middle
+Vale, pero ¿podemos buscar recetas?
+
+00:04:18.006 --> 00:04:18.886 align:middle
+Por supuesto.
+
+00:04:19.326 --> 00:04:21.976 align:middle
+Podemos aprovechar search() y searchCount().
+
+00:04:22.816 --> 00:04:23.616 align:middle
+Esto es muy sencillo.
+
+00:04:23.786 --> 00:04:31.396 align:middle
+Roba toda la lógica de getSubItems(),
+pégala en search() y pasa $searchText
+
+00:04:31.396 --> 00:04:35.676 align:middle
+al método QueryBuilder, que
+ya permite este argumento:
+
+00:04:36.536 --> 00:04:40.996 align:middle
+Si quieres tener un poco menos de
+duplicación de código, podrías aislar esto
+
+00:04:40.996 --> 00:04:43.136 align:middle
+en un método private en la parte inferior.
+
+00:04:44.246 --> 00:04:46.716 align:middle
+Copia también la lógica del
+otro método de recuento...
+
+00:04:47.166 --> 00:04:51.036 align:middle
+pégala en searchCount(), y
+pásala también a $searchText:
+
+00:04:52.436 --> 00:04:56.606 align:middle
+Y así, si nos movemos hacia
+aquí e intentamos buscar...
+
+00:04:57.046 --> 00:04:59.646 align:middle
+funciona. ¡Estupendo!
+
+00:05:00.766 --> 00:05:06.986 align:middle
+Muy bien - selecciona algunos
+elementos, pulsa "Confirmar" y...
+
+00:05:07.676 --> 00:05:09.766 align:middle
+¡oh no! ¡Se rompe!
+
+00:05:10.146 --> 00:05:11.816 align:middle
+Sigue diciendo "Cargando".
+
+00:05:12.566 --> 00:05:17.096 align:middle
+Si miras abajo en la barra de herramientas
+de depuración web, tenemos un error 400.
+
+00:05:17.526 --> 00:05:25.216 align:middle
+Vaya. Cuando abrimos eso, vemos El cargador de valores
+para el tipo de valor doctrine_recipe no existe.
+
+00:05:25.776 --> 00:05:31.616 align:middle
+Sólo nos falta una pieza final: Una clase muy sencilla
+llamada "cargador de valores". Eso a continuación
+
+00:05:31.946 --> 00:05:32.976 align:middle
