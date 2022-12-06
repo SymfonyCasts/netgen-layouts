@@ -17,13 +17,18 @@ promise!
 ## Creating & Tagging the Value Loader
 
 Inside the `src/Layouts/` directory, create a new class called `RecipeValueLoader`,
-make it implement `ValueLoaderInterface` and generate the two methods it needs. These
-are pretty simple. But, before we fill them in, go back to the Ajax endpoint, and
-refresh to see... the exact same error. Why? Like we've seen with other things, we
-need to "associate" this `RecipeValueLoader` with our `doctrine_recipe` value type.
+make it implement `ValueLoaderInterface` and generate the two methods it needs:
+
+[[[ code('7cce1d8148') ]]]
+
+These are pretty simple. But, before we fill them in, go back to the Ajax endpoint,
+and refresh to see... the exact same error. Why? Like we've seen with other things,
+we need to "associate" this `RecipeValueLoader` with our `doctrine_recipe` value type.
 How? No surprise! With a tag. Say `#[AutoconfigureTag()]` and this time it's called
 `netgen_layouts.cms_value_loader`. For the second argument, pass `value_type`
-set to `doctrine_recipe`.
+set to `doctrine_recipe`:
+
+[[[ code('c159ed4925') ]]]
 
 Perfecto! If we reload now... better! That error is because we haven't actually filled
 in the logic yet.
@@ -32,12 +37,15 @@ in the logic yet.
 
 Very simply, we need to take the ID and return the `Recipe` object. To do that,
 create a constructor that accepts a `RecipeRepository $recipeRepository` argument.
-And... let me clean things up.
+And... let me clean things up:
+
+[[[ code('cc9b050ad5') ]]]
 
 Now, down here, return `$this->recipeRepository->find()` and pass `$id`.
-
 For `loadByRemoteId()`, which we only need if we're using the import feature to
-move content across databases, just `return $this->load($id)`.
+move content across databases, just `return $this->load($id)`:
+
+[[[ code('b35971e7e8') ]]]
 
 And now... the Ajax call works! More importantly, if we refresh the entire layouts
 admin... yes! Look at our grid! We have four manual items! That is awesome! We can
@@ -54,7 +62,7 @@ So we now have the power to select manual items via the content browser... thoug
 when we originally add the config for all of this, we set a preview template...
 but never created it!
 
-Let's open the content browser again. So on the manual grid, hit "Add Items". The
+Let's open the content browser again. So on the manual grid, hit "Add items". The
 preview template powers the preview mode up here. If we click an item, it shows us
 a preview. Well, it *would*... except that we haven't actually *added* that template.
 
@@ -66,12 +74,16 @@ if you have a *hierarchy* of locations.
 We also skipped `loadItem()`. *This* is used for the preview. It will pass us the
 ID of the thing that's loaded and we need to return an `ItemInterface`. So very
 simply, we can return a `new RecipeBrowserItem()` - that's the little class that
-wraps around the `Recipe` - passing `$this->recipeRepository->find($value)`.
+wraps around the `Recipe` - passing `$this->recipeRepository->find($value)`:
+
+[[[ code('ad54a52f5a') ]]]
 
 Cool! The only other thing we need to do is... actually create the preview template!
 In `templates/nglayouts/`, add a new directory called `content_browser/`, and inside,
 a new file called `recipe_preview.html.twig`. To start, just print the
-`dump()` function.
+`dump()` function:
+
+[[[ code('6205077d71') ]]]
 
 The cool thing is, we don't even need to refresh. As long as we click on an
 item that we haven't *already* clicked on... it works! And look at this `item`
@@ -80,12 +92,16 @@ right here.
 
 That's great... except that `RecipeBrowserItem` doesn't have a way for us
 to *get* the actual `Recipe` object. Fortunately, we can fix that ourselves.
-After all, this is *our* class! I'll go to Code -> Generate to generate a
-`getRecipe()` method.
+After all, this is *our* class! I'll go to "Code"->"Generate" to generate a
+`getRecipe()` method:
 
-Now, in the template, we can say `item.recipe.name`. And to make this
+[[[ code('d9670de56b') ]]]
+
+Now, in the template, we can say `{{ item.recipe.name }}`. And to make this
 fancier, add an `<img` whose `src` is set to `item.recipe.imageUrl`... also with
-an `alt` attribute.
+an `alt` attribute:
+
+[[[ code('49417536d9') ]]]
 
 Once again, we don't need to refresh. If you click on an item that you've already
 previewed, it'll load it from memory. But if you click a new one... yeah! There's
