@@ -1,23 +1,25 @@
 # Content Browser
 
 We can *now* embed lists, grids, or thumb galleries of recipes into *any* layout
-dynamically. That's *super* cool. And we could always create more query types to,
+dynamically. That's *super* cool! And we could always create more query types to,
 for example, choose between the *latest* recipes or *most popular* recipes.
 
 But what about being able to *manually* select recipes? Maybe we want to feature
-four *specific* recipes on the homepage. In the layouts area, on the grid, if you
-change the Collection type, we *can* switch to "Manual collection". But then...
+four *specific* recipes on the homepage. In the Layouts area, on the grid, if you
+change the "Collection type", we *can* switch to "Manual collection". But then...
 we can't actually select any items.
 
 ## Enabling Manual Items in the Config
 
 To allow items (in our case, *recipes*) to be selected manually, we first need
-to allow that in the config. Earlier, when we created the `value_types` key, we
-set `manual_items` to `false`. Change that to `true`.
+to allow that in the config. Earlier, when we created the `value_types` config,
+we set `manual_items` to `false`. Change that to `true`:
+
+[[[ code('3aa8d843eb') ]]]
 
 And now, when we try the page, we're greeted with an error!
 
-> Netgen Content Browser backend for `doctrine_recipe` value type does not exist
+> Netgen Content Browser backend for `doctrine_recipe` value type does not exist.
 
 Yep! We need to implement a class that helps Layouts *browse* our recipes. That's
 called a "content browser".
@@ -31,19 +33,26 @@ for browsing and selecting items.
 Since the content browser lives in a different bundle, it's not *required*, but I'm
 going to configure this with a new config file called `netgen_content_browser.yaml`.
 Inside, set the root key to `netgen_content_browser` to configure the
-"NetgenContentBrowserBundle".
+"NetgenContentBrowserBundle":
+
+[[[ code('1c69ac62ff') ]]]
 
 Inside of *this*, we get to describe all of the different "manual things" that we
 want to be able to browse. To do that, add an `item_types` key, and, for the first
 item, go grab the value type's internal name - `doctrine_recipe` - so that these
 match, paste, then give this a name. How about... `Recipes` with a cute strawberry
-icon.
+icon:
+
+[[[ code('e9dc48c00b') ]]]
 
 The only other thing we need here is a `preview` key with a `template` sub-key,
-which I'll set to `nglayouts/content_browser/recipe_preview.html.twig`. Oh! And make
-sure you spell "template" correctly. Whoops! Anyways, we're setting this `preview`
-`template` because the configuration *requires* us to... but we'll worry about
-*creating* that template later.
+which I'll set to `nglayouts/content_browser/recipe_preview.html.twig`:
+
+[[[ code('49389371b1') ]]]
+
+Oh! And make sure you spell "template" correctly. Whoops! Anyways, we're setting
+this `preview.template` because the configuration *requires* us to... but we'll
+worry about *creating* that template later.
 
 ## Creating the Backend Class
 
@@ -53,9 +62,14 @@ simple process, but it *does* require a few different classes.
 
 In the `src/` directory, let's create a new directory called `ContentBrowser/`...
 and inside of that, a PHP class called `RecipeBrowserBackend`. This needs
-to implement `BackendInterface`: the one from `Netgen\ContentBrowser\Backend`.
-Then, go to Code Generate (or "command" + "N" on a Mac) to implement the *nine*
-methods this needs! Don't worry: it's not as bad as it looks.
+to implement `BackendInterface`: the one from `Netgen\ContentBrowser\Backend`:
+
+[[[ code('5d5db8af16') ]]]
+
+Then, go to "Code"->"Generate" (or `Command`+`N` on a Mac) to implement the *nine*
+methods this needs! Don't worry: it's not as bad as it looks:
+
+[[[ code('11375f812d') ]]]
 
 *Finally*, to *link* this backend class to the item type in our config, we need
 to give this service a tag. We'll do this the same way we did earlier for the
@@ -65,9 +79,11 @@ tag name is `netgen_content_browser.backend`, and instead of `type`, use
 `item_type`. Set this to the key we have in the config: `doctrine_recipe`. Paste
 and... cool!
 
+[[[ code('9ab7ac990b') ]]]
+
 *This* time when we refresh... the error is *gone*. Let's temporarily add a new Grid
 to the layout... and choose "Manual collection". Now... check it out! Because we
-have a backend, we see an "Add Items" button! And when we click it... it *fails*.
+have a backend, we see an "Add items" button! And when we click it... it *fails*.
 That shouldn't be too surprising... since our backend class is still completely empty.
 If you want to see the *exact* error, you could open up the AJAX call.
 
@@ -85,12 +101,16 @@ this looks like in the UI in a few minutes.
 To get this working, inside `src/ContentBrowser/`, we need to create a class that
 represents a location. I'll call it `BrowserRootLocation`. This class... isn't super
 interesting: it's just some low-level plumbing that we *must* have. Make this
-implement `LocationInterface`, and below, generate the three methods we need.
+implement `LocationInterface`, and below, generate the three methods we need:
+
+[[[ code('a77c52d614') ]]]
 
 Again, this class will represent the one and only "location". So for
 `getLocationId()`, we can return *anything*. I'm going to `return 0`. You'll see
 how that's used in a second. For `getName()`, this is what will be displayed in the
-admin section. I'll `return 'All'`. And for `getParentId()`, `return null`.
+admin section. I'll `return 'All'`. And for `getParentId()`, `return null`:
+
+[[[ code('c22394843d') ]]]
 
 If you have a more complex system with multiple sub-directories, you could create a
 *hierarchy* of locations.
@@ -98,27 +118,38 @@ If you have a more complex system with multiple sub-directories, you could creat
 All right, let's update our backend class to use this. Up here, `getSections()`
 will be called as *soon* as the user opens up the content browser. Our job is to
 return all of the root "directories" - or "locations". We have just one:
-`return [new BrowserRootLocation()]`.
+`return [new BrowserRootLocation()]`:
+
+[[[ code('b10415bc94') ]]]
 
 After this is called, the content browser will call `getLocationId()` on each
 one and make an AJAX request to get more information about them. For us, this will
-happen just *one* time where the id is `0`. It looks weird, but all we need to do
+happen just *one* time where the ID is `0`. It looks weird, but all we need to do
 is return that same location: `if ($id === '0')`, then
-`return new BrowserRootLocation()`.
+`return new BrowserRootLocation()`:
+
+[[[ code('688d1810bb') ]]]
 
 Notice I'm using `'0'` as a string, but... in `getLocationId()` we returned
-an integer. That's because the id will be passed into JavaScript and used in an
-Ajax call. By the time it gets here, it'll be a string. A small detail to keep in
-mind.
+an integer:
+
+[[[ code('2da9792ead') ]]]
+
+That's because the id will be passed into JavaScript and used in an Ajax call.
+By the time it gets here, it'll be a string. A small detail to keep in mind.
 
 At the end, just in case `throw` a `new \InvalidArgumentException()` and pass
-a message about an invalid location.
+a message about an invalid location:
+
+[[[ code('9b451f62e0') ]]]
 
 Ok! So our backend has *one* location. For the other methods, let's return the
 *simplest* thing possible. Leave `loadItem()` empty for a moment, for
 `getSubLocations()`, `return []`, for `getSubLocationsCount()`, `return 0`, for
 `getSubItems()`, `return []`, for `getSubItemsCount()`, `return 0`, for `search()`,
-`return []`... and *finally*, for `searchCount()`, `return 0`.
+`return []`... and *finally*, for `searchCount()`, `return 0`:
+
+[[[ code('1e0c025168') ]]]
 
 *Phew*... We'll talk about each of those methods later. *But* our backend class is
 at least *somewhat* functional now.
