@@ -14,7 +14,7 @@ one of these, refresh, and click on the Twig icon on the web debug toolbar. Down
 at the bottom, we see the whole tree. And if we look closely, ah ha! Apparently
 there's a template called `block/title.html.twig`!
 
-Layouts itself *also* has a really nice web debug toolbar section. Of you go to
+Layouts itself *also* has a really nice web debug toolbar section. If you go to
 "Rendered blocks", it shows "Block definition: title", "Text", "List", and
 "Footer". And, as we saw, the Title is rendered by `title.html.twig`.
 
@@ -25,14 +25,14 @@ directories. Layouts has a concept of *themes*, though we won't need to create
 *multiple* themes unless we're building some sort of multi-site application. In our
 case, we're just going to use the one *built-in* theme called `standard`.
 
-But themes are still important, because anything *inside* of a theme can be easily
+But themes *are* still important, because anything *inside* of a theme can be easily
 overridden by putting a template in *just* the right location. We're going to use
 that convention to override the Title template.
 
 ## Overriding the Title Template
 
 Let's do it! First, in the `templates/` directory, make sure you have an `nglayouts/`
-subdirectory. Inside of that, add a new on called `themes/`... followed by a
+subdirectory. Inside of that, add a new one called `themes/`... followed by a
 *another* subdirectory called `standard/`. You may have noticed that we're matching
 the structure that's over here: `nglayouts/themes/standard/`.
 
@@ -49,35 +49,37 @@ to clear the cache.
 php bin/console cache:clear
 ```
 
-With that behind us, try the page again. Woohoo! *We* now control how the Title
-block renders!
+Do that... then with that behind us, try the page again. Woohoo! *We* now control
+how the Title block renders! The power!
 
 ## Making the Title Template More Realistic
 
-Okay, but even if we want to customize how the Title renders... we *don't* want to
-start from scratch. It would be better to *reuse* part of the core template, or
-at least use it as a reference.
+Okay, but even if we want to customize how the Title renders... we probably *don't*
+want to start from scratch. It would be better to *reuse* part of the core template,
+or at least use it as a reference.
 
 Hit "shift" + "shift", search for `title.html.twig`, and select "Include non-project
 items". Open the core one from `nglayouts/themes/`.
 
-Wow. There is *a lot* going on here... including the fact that this extends a template
-called `block.html.twig`. I'll open that up.
+Wow. There is *a lot* going on here... including the fact that this extends another
+template: `block.html.twig`. Open that up.
 
 This contains a *lot* of base functionality, like reading the dynamic `css_class`
-variable, which are the CSS classes we entered into the admin, as well as handling
+variable, which contains any CSS classes we enter into the admin. It also handles
 if there's a container or not. That's useful stuff!
 
-In `title.html.twig`, it also handles whether the title is a link and other details.
-We *could* totally replace this template and ignore all this stuff if we wanted to.
-But instead, I'm going to copy the core template, paste it into mine... and just
-to prove that we can, let's remove that `title` class.
+In `title.html.twig`, it has code for whether or not the title is a link and other
+stuff. We *could* totally replace this template and ignore all this if we wanted to.
+But instead, copy the core template, paste it into our version... and just to
+prove that we can, let's remove that `title` class.
 
-Coo.. Head go over, refresh and... it goes back to how it looked before. But down
+Cool! Now go over, refresh and... it goes back to how it looked before. But down
 here, that `title` class on the `<h1>` is gone!
 
 So the simplest way to control how something looks is to find the template that
-renders it and override it completely using this `themes/` directory structure. \
+renders it and override it completely using this `themes/` directory structure.
 
 Let's use that trick *again* next to customize what it looks like when you render
-an "asset" field from Contentful, like this skill image field.
+an "asset" field from Contentful, like this skill image field. But along the way,
+we're going to deep dive into a some massively important concepts: block views
+and view types.
