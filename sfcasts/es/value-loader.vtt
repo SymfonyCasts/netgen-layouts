@@ -1,0 +1,349 @@
+WEBVTT
+
+00:00:01.016 --> 00:00:04.646 align:middle
+Así que nuestro navegador de
+contenidos funcionaba de maravilla...
+
+00:00:04.986 --> 00:00:07.026 align:middle
+hasta que seleccionamos un elemento.
+
+00:00:07.566 --> 00:00:13.166 align:middle
+En ese momento, eligió hacer
+una cosa extraña: ¡explotar!
+
+00:00:13.746 --> 00:00:20.596 align:middle
+La llamada Ajax que falló dice: El cargador de valores
+para el tipo de valor doctrine_recipe no existe.
+
+00:00:21.406 --> 00:00:27.196 align:middle
+Para repasar: tenemos un tipo de valor
+personalizado llamado doctrine_recipe,
+
+00:00:27.516 --> 00:00:33.016 align:middle
+que creamos para poder añadir cuadrículas
+y listas de entidades Recipe. Para
+
+00:00:33.706 --> 00:00:40.206 align:middle
+que esto funcione, tenemos (1): un conversor
+de valores para convertir los objetos Recipe
+
+00:00:40.206 --> 00:00:42.506 align:middle
+a un formato que entiendan los diseños.
+
+00:00:43.016 --> 00:00:47.476 align:middle
+(2) una clase de consulta que nos
+permita utilizar colecciones dinámicas.
+
+00:00:47.946 --> 00:00:52.576 align:middle
+(3) una clase de backend de navegador para
+permitirnos seleccionar elementos manuales.
+
+00:00:53.076 --> 00:00:59.306 align:middle
+Y ahora (4), necesitamos un cargador de
+valores que sea capaz de tomar el "id"
+
+00:00:59.306 --> 00:01:04.806 align:middle
+de estos elementos seleccionados manualmente
+y convertirlos en objetos Recipe.
+
+00:01:05.306 --> 00:01:10.036 align:middle
+Esta será la última "cosa" que necesitaremos
+para nuestro tipo de valor, ¡lo prometo!
+
+00:01:10.986 --> 00:01:15.556 align:middle
+Dentro del directorio src/Layouts/, crea
+una nueva clase llamada RecipeValueLoader,
+
+00:01:16.636 --> 00:01:22.376 align:middle
+haz que implemente ValueLoaderInterface
+y genera los dos métodos que necesita:
+
+00:01:23.076 --> 00:01:24.256 align:middle
+Son bastante sencillos.
+
+00:01:24.686 --> 00:01:31.026 align:middle
+Pero, antes de rellenarlos, vuelve a
+la ruta Ajax, y actualiza para ver...
+
+00:01:31.406 --> 00:01:33.496 align:middle
+exactamente el mismo error.
+
+00:01:34.076 --> 00:01:41.316 align:middle
+¿Por qué? Como hemos visto con otras cosas,
+necesitamos "asociar" este RecipeValueLoader
+
+00:01:41.536 --> 00:01:44.606 align:middle
+con nuestro tipo de valor doctrine_recipe.
+
+00:01:45.376 --> 00:01:47.166 align:middle
+¿Cómo? Sin sorpresas
+
+00:01:47.436 --> 00:01:48.846 align:middle
+Con una etiqueta.
+
+00:01:49.716 --> 00:01:55.826 align:middle
+Digamos #[AutoconfigureTag()] y esta vez
+se llama netgen_layouts.cms_value_loader.
+
+00:01:56.496 --> 00:02:00.896 align:middle
+Para el segundo argumento, pasa
+value_type ajustado a doctrine_recipe:
+
+00:02:01.646 --> 00:02:04.296 align:middle
+¡Perfecto! Si recargamos ahora...
+
+00:02:05.256 --> 00:02:10.236 align:middle
+¡mejor! Ese error se debe a que
+aún no hemos rellenado la lógica.
+
+00:02:11.006 --> 00:02:15.766 align:middle
+Muy sencillo, necesitamos tomar
+el ID y devolver el objeto Recipe.
+
+00:02:16.316 --> 00:02:22.836 align:middle
+Para ello, crea un constructor que acepte un
+argumento RecipeRepository $recipeRepository.
+
+00:02:23.546 --> 00:02:25.206 align:middle
+Y... déjame limpiar las cosas:
+
+00:02:25.946 --> 00:02:32.636 align:middle
+Ahora, aquí abajo, devuelve
+$this->recipeRepository->find() y pasa $id.
+
+00:02:33.306 --> 00:02:40.076 align:middle
+Para loadByRemoteId(), que sólo necesitamos si vamos a
+utilizar la función de importación para mover contenido
+
+00:02:40.076 --> 00:02:44.396 align:middle
+entre bases de datos, sólo
+return $this->load($id):
+
+00:02:45.246 --> 00:02:46.226 align:middle
+Y ahora...
+
+00:02:48.006 --> 00:02:49.926 align:middle
+¡la llamada Ajax funciona!
+
+00:02:50.376 --> 00:02:54.856 align:middle
+Y lo que es más importante, si actualizamos
+todo el administrador de diseños...
+
+00:02:55.326 --> 00:02:57.036 align:middle
+¡sí! ¡Mira nuestra cuadrícula!
+
+00:02:57.246 --> 00:02:59.456 align:middle
+¡Tenemos cuatro elementos manuales!
+
+00:02:59.776 --> 00:03:01.316 align:middle
+¡Eso es genial!
+
+00:03:01.946 --> 00:03:07.596 align:middle
+Podemos reordenarlos si queremos,
+añadir más, eliminarlos, lo que sea.
+
+00:03:08.246 --> 00:03:15.036 align:middle
+Prueba a publicar esta página y
+luego a recargar la página de inicio.
+
+00:03:16.676 --> 00:03:17.576 align:middle
+¡Ahí están!
+
+00:03:18.126 --> 00:03:21.446 align:middle
+Aunque faltan nuestras "últimas recetas".
+
+00:03:22.076 --> 00:03:26.976 align:middle
+¡Vaya! Creo que accidentalmente también
+cambié esto a una colección manual.
+
+00:03:27.676 --> 00:03:38.756 align:middle
+Vuelve a cambiarla a una colección
+dinámica, se ve bien, publica y....
+
+00:03:38.756 --> 00:03:42.306 align:middle
+ahora... genial: todo ha vuelto.
+
+00:03:43.076 --> 00:03:47.586 align:middle
+Así que ahora podemos seleccionar elementos
+manuales a través del navegador de contenidos...
+
+00:03:48.006 --> 00:03:54.696 align:middle
+aunque cuando añadimos originalmente la configuración para
+todo esto, establecimos una plantilla de vista previa...
+
+00:03:55.046 --> 00:03:56.906 align:middle
+¡pero nunca la creamos!
+
+00:03:57.646 --> 00:03:59.486 align:middle
+Abramos de nuevo el navegador de contenidos.
+
+00:03:59.946 --> 00:04:03.056 align:middle
+Entonces, en la rejilla manual,
+pulsa "Añadir elementos".
+
+00:04:03.836 --> 00:04:07.346 align:middle
+La plantilla de vista previa activa
+el modo de vista previa aquí arriba.
+
+00:04:08.286 --> 00:04:11.146 align:middle
+Si hacemos clic en un elemento,
+nos muestra una vista previa.
+
+00:04:11.716 --> 00:04:13.136 align:middle
+Bueno, lo haría...
+
+00:04:13.276 --> 00:04:16.836 align:middle
+excepto que en realidad no
+hemos añadido esa plantilla.
+
+00:04:17.696 --> 00:04:20.846 align:middle
+Para que esto funcione, tenemos
+que hacer dos pequeñas cosas.
+
+00:04:21.166 --> 00:04:23.796 align:middle
+Primero, abrir RecipeBrowserBackend.
+
+00:04:24.486 --> 00:04:26.196 align:middle
+Aquí nos hemos saltado algunos métodos. Por
+
+00:04:26.706 --> 00:04:31.726 align:middle
+ejemplo, omitimos getSubLocations()
+y getSubLocationsCount()
+
+00:04:32.076 --> 00:04:36.476 align:middle
+porque sólo son necesarios si
+tienes una jerarquía de ubicaciones.
+
+00:04:37.416 --> 00:04:39.126 align:middle
+También nos hemos saltado loadItem().
+
+00:04:39.716 --> 00:04:41.676 align:middle
+Se utiliza para la vista previa.
+
+00:04:41.676 --> 00:04:48.696 align:middle
+Nos pasará el ID de lo que se ha cargado
+y necesitamos devolver un ItemInterface.
+
+00:04:49.516 --> 00:04:55.946 align:middle
+Así de sencillo, podemos devolver un new
+RecipeBrowserItem() -que es la pequeña clase
+
+00:04:55.946 --> 00:05:02.276 align:middle
+que envuelve al Recipe - pasando
+$this->recipeRepository->find($value):
+
+00:05:03.216 --> 00:05:07.256 align:middle
+¡Genial! Lo único que
+nos queda por hacer es...
+
+00:05:07.256 --> 00:05:09.566 align:middle
+¡crear realmente la plantilla de vista previa!
+
+00:05:10.446 --> 00:05:16.366 align:middle
+En templates/nglayouts/, añade un nuevo
+directorio llamado content_browser/, y dentro,
+
+00:05:16.646 --> 00:05:20.126 align:middle
+un nuevo archivo llamado
+recipe_preview.html.twig.
+
+00:05:20.846 --> 00:05:23.266 align:middle
+Para empezar, sólo tienes que
+imprimir la función dump():
+
+00:05:24.076 --> 00:05:27.126 align:middle
+Lo bueno es que ni siquiera
+necesitamos actualizar.
+
+00:05:27.706 --> 00:05:32.026 align:middle
+Mientras hagamos clic en un elemento
+en el que no hayamos hecho ya clic...
+
+00:05:32.576 --> 00:05:39.396 align:middle
+¡funciona! Y mira esta variable item:
+es una instancia de RecipeBrowserItem...
+
+00:05:39.786 --> 00:05:43.496 align:middle
+así que una instancia de esta clase de aquí.
+
+00:05:44.306 --> 00:05:45.406 align:middle
+Eso está muy bien...
+
+00:05:45.906 --> 00:05:53.496 align:middle
+excepto que RecipeBrowserItem no tiene una
+forma de que obtengamos el objeto Recipe real.
+
+00:05:54.106 --> 00:05:56.826 align:middle
+Afortunadamente, podemos
+arreglarlo nosotros mismos.
+
+00:05:57.246 --> 00:05:59.936 align:middle
+Al fin y al cabo, ¡es nuestra clase!
+
+00:06:00.776 --> 00:06:04.636 align:middle
+Iré a "Código"->"Generar" para
+generar un método getRecipe(): Ahora, en
+
+00:06:05.506 --> 00:06:11.096 align:middle
+la plantilla, podemos decir
+{{ item.recipe.name }}.
+
+00:06:11.846 --> 00:06:18.646 align:middle
+Y para hacerlo más elegante, añade un <img
+cuyo src se establezca en item.recipe.imageUrl...
+
+00:06:19.256 --> 00:06:21.366 align:middle
+también con un atributo alt:
+
+00:06:22.236 --> 00:06:24.696 align:middle
+Una vez más, no necesitamos actualizar.
+
+00:06:25.406 --> 00:06:30.686 align:middle
+Si haces clic en un elemento que ya has
+previsualizado, lo cargará de la memoria.
+
+00:06:31.416 --> 00:06:32.746 align:middle
+Pero si haces clic en uno nuevo...
+
+00:06:33.346 --> 00:06:35.616 align:middle
+¡sí! ¡Ahí está nuestra vista previa!
+
+00:06:35.886 --> 00:06:37.026 align:middle
+Genial.
+
+00:06:38.076 --> 00:06:44.106 align:middle
+Vale, ya hemos terminado con los elementos manuales,
+el navegador de contenidos y todo esto. Por
+
+00:06:44.736 --> 00:06:51.816 align:middle
+cierto, hay una forma de añadir más columnas a esta
+tabla, como nombre de archivo, tamaño de archivo,
+
+00:06:51.816 --> 00:06:57.286 align:middle
+fecha de creación, etc. No vamos a
+hablar de eso, pero es totalmente posible.
+
+00:06:58.196 --> 00:07:05.526 align:middle
+Comprobación de estado: en este punto, tenemos la capacidad de
+añadir un diseño a cualquier página, reordenar el contenido
+
+00:07:05.526 --> 00:07:13.476 align:middle
+de la página, añadir título, texto, bloques HTML o
+incluso listas y cuadrículas de recetas dinámicas.
+
+00:07:13.876 --> 00:07:16.036 align:middle
+Eso es mucho poder.
+
+00:07:16.776 --> 00:07:19.236 align:middle
+¡Ahora quiero más poder!
+
+00:07:19.806 --> 00:07:25.756 align:middle
+Quiero que sea posible utilizar la cuadrícula y los bloques
+de lista para añadir otros elementos a nuestra página...
+
+00:07:26.256 --> 00:07:29.226 align:middle
+elementos que no viven en
+absoluto en nuestra base de datos.
+
+00:07:29.676 --> 00:07:30.646 align:middle
+Eso a continuación
