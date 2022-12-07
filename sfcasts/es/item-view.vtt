@@ -281,14 +281,15 @@ otras propiedades de Recipe
 canalizada en el filtro date
 
 00:06:11.556 --> 00:06:12.196 align:middle
-con Y-m-d: ¡Vamos a
+con Y-m-d:
 
 00:06:12.576 --> 00:06:17.246 align:middle
-comprobarlo! Muévete,
+¡Vamos a comprobarlo! Muévete,
 
 00:06:17.686 --> 00:06:22.986 align:middle
 refresca y... ¡ya está! Puedes hacer esto
-más elegante si quieres, pero esto nos servirá
+más elegante si quieres, pero esto nos servirá.
 
 00:06:23.686 --> 00:06:27.116 align:middle
-. Siguiente: vamos a crear el frontend
+A continuación: vamos a crear la vista 
+de artículos del frontend.
