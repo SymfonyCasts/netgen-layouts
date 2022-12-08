@@ -58,7 +58,7 @@ Bien: tenemos nuestro `item_view` para nuestro `doctrine_recipe` para el área d
 
 Bien, vuelve a tu navegador, actualiza el administrador de diseños y... ¡funciona! Y, aparentemente, tenemos acceso a varias variables. La más importante es `item`. ¡Se trata de un objeto `CmsItem` de Layouts... y tiene una propiedad llamada `object` establecida a nuestro `Recipe`!
 
-¡Vamos a utilizarla! Digamos `{{ item.object.name }}`, luego una tubería, y... imprimamos también una fecha: `{{ item.object.createdAt }}` - una de las otras propiedades de `Recipe` canalizada en el filtro `date` con `Y-m-d`:
+¡Vamos a utilizarlo! Digamos `{{ item.object.name }}`, luego una tubería, y... imprimamos también una fecha: `{{ item.object.createdAt }}` - una de las otras propiedades de `Recipe` canalizada en el filtro `date` con `Y-m-d`:
 
 [[[ code('ec94a08b43') ]]]
 
