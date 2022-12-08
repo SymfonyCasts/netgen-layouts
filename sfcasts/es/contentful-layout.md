@@ -40,10 +40,11 @@ Guardemos esto... y luego vinculemos este diseño al "Diseño de habilidad indiv
 
 Como he mencionado antes, en realidad tenemos dos tipos de contenido en Contentful: Habilidades y Anuncios. Los anuncios no deben tener su propia página, sólo las habilidades. Vamos a incrustar anuncios en algunas páginas existentes un poco más adelante.
 
-Vuelve a los detalles de la vinculación del diseño. Las condiciones son una forma de hacer que tu vinculación sea más específica. Añade esa condición. Y, esto es un poco difícil de ver, pero podemos seleccionar "Habilidad" o "Anuncio". Selecciona "Habilidad", guarda los cambios y... ¡genial! Ahora sólo coincidirá si vamos a una URL de Contentful que esté mostrando una habilidad.
+Vuelve a los detalles de la vinculación del diseño.  Además del espacio Contentful, podemos bajar
+aquí a una lista de condiciones y seleccionar "Tipos de contenido Contentful". Las condiciones son una forma de hacer que tu vinculación sea más específica. Añade esa condición. Y, esto es un poco difícil de ver, pero podemos seleccionar "Habilidad" o "Anuncio". Selecciona "Habilidad", guarda los cambios y... ¡genial! Ahora sólo coincidirá si vamos a una URL de Contentful que esté mostrando una habilidad.
 
 En la línea de comandos, puedes ver que tenemos un anuncio... es esta URL de aspecto gracioso. Sí, ahora mismo, el anuncio está disponible como página en nuestro sitio. Lo arreglaremos en unos minutos. Pero, como mínimo, si fuéramos a esa URL rara, la página funcionaría... pero no coincidiría con ningún diseño gracias a nuestro mapeo. Así que, básicamente, estaría en blanco.
 
 Así que ahora tenemos control sobre las páginas de Contentful. ¡Genial! Aunque... lo único que estamos renderizando es un título manual. Snooze.
 
-Lo siguiente: Hagamos nuestro diseño más inteligente mostrando contenido real de la habilidad correspondiente.
+A continuación: Hagamos nuestro diseño más inteligente mostrando contenido real de la habilidad correspondiente.
