@@ -325,17 +325,17 @@ Contentful". Las condiciones
 
 00:06:46.136 --> 00:06:49.716 align:middle
 son una forma de hacer que tu
-concordancia sea más específica. Añade
+vinculación sea más específica. Añade
 
 00:06:50.516 --> 00:06:51.506 align:middle
 esa condición. Y,
 
 00:06:51.766 --> 00:06:57.066 align:middle
 esto es un poco difícil de ver, pero podemos seleccionar
-"Habilidad" o "Anuncio". Selecciona "Habilidad
+"Habilidad" o "Anuncio". Selecciona "Habilidad",
 
 00:06:58.256 --> 00:07:01.416 align:middle
-", guarda los cambios y... ¡listo!
+guarda los cambios y... ¡genial!
 
 00:07:01.696 --> 00:07:08.696 align:middle
 Ahora sólo coincidirá si vamos a una URL de
@@ -377,5 +377,5 @@ Aunque... lo único que estamos
 renderizando es un título manual. Snooze.
 
 00:07:47.426 --> 00:07:54.886 align:middle
-Lo siguiente: Hagamos nuestro diseño más inteligente
+A continuación: Hagamos nuestro diseño más inteligente
 mostrando contenido real de la habilidad correspondiente
