@@ -13,9 +13,9 @@ if you looked at our template, those are totally hardcoded!
 
 ## Adding A Grid of Skills
 
-No problem! Add a Grid block... and set it to a "Manual Collection". Check this
-out! We can now choose between manually selecting "Contentful entries" or recipes!
-And when we click "Add Items", the content browser already works!
+No problem! Add a Grid block... which is already set it to a "Manual Collection".
+But check this out! We can now choose between manually selecting "Contentful
+entries" or recipes! And when we click "Add Items", the content browser already works!
 
 Select a few of these... good... then publish this. Refresh. Um... ok! They *do*
 render... but just the title. Good start. To make this a *tiny* bit better, go
