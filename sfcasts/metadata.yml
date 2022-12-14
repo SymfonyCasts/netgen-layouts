@@ -21,6 +21,7 @@ chapters:
     - block-views
     - item-views
     - prepend-config
+    - item-template
     - new-block-view
     - item-view-type
     - block-plugin
