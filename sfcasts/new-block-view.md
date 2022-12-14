@@ -1,60 +1,13 @@
-# New Block View
+# Custom Block View
 
 Coming soon...
 
-Let's create a layout for our individual recipes so that we can customize this page a
-bit more. This is the cool thing. We just create new layouts on the fly. So let me go
-back, We'll hit new layouts. I'll use my favorite layout too, individual recipe
-layout. And y'all know the drill. At this point, we're gonna start by linking our
-header and footer zones. Cool. And then because we're gonna be applying this to just
-a normal page that we've already built, we can go down here and use this full view,
-which renders the uh, twig block called body. So that's a great start. We'll hit
-publish. Actually, let's publish normal. So we can go back to the mapping, add a new
-mapping, link it to our individual recipe layout and the hit details. And I will just
-link this via the path info. Actually, let's use the route on this one. Okay. App
-target. And then the name of this route, if you go to source controller, recipe
-controller is app recipes show. So I'll put that there. Hit save, Save changes, and
-let's try it. We shouldn't see any difference yet and we don't, but we can see that
-we are using our lap,
+So here's the plan. We are gonna
+add a new view type here called featured grid. Then we're gonna map that to a template
+via the block views. So step one is to add the new view type right here. So over
+oop
 
-Right? Cool. To spice this page up a little bit, looking a little thin, let's go back
-to layouts. Edit our individual recipe layout. And I'm thinking what we can do here
-is actually do two columns. Let's put our full view into that column. And then over
-here on the right I'm going to do a grid. And we are gonna make this a dynamic grid.
-We're gonna pull from content full. And then just like we did before, we'll grab
-skills. We'll kind of do the newest ones and we'll limit it to three. All right. If
-we publish and continue editing that, then refresh. Whoa, things went crazy easy.
-Let's wrap that in a container that looks no better. Okay. Big reset here. All right,
-let's go back. Let's go to layouts. Let's edit our individual recipe layout. And
-after our full view, let's add a grid and we'll put like, you know, a few, uh, do a
-dynamic collection here of content full search. And what we'll do is we'll just list
-some skills here. We'll do create it at descending, we'll limit it to three items,
-publishing, continue editing and awesome. It's cool that we can just do that and put
-that anywhere
 
-Though. Let me do the wrap and container. There we go. It works. But here's the
-trick. I wanna customize how this grid looks. I wanna have one big recipe on the left
-and then two smaller recipes on the right. But I do not wanna change how the grid
-looks on other parts of our site, like on the homepage. So the question is how can we
-change J how this grid renders on just this page right now, if you look at a grid and
-go to design, a grid block is really just a list block that has two view types list
-in grid, we can create a third view type head over your terminal and run bin console,
-debug config, nain layouts of course, and then view block view. So this will be the
-configuration for how blocks are rendered. Oh, wanna make sure you spell net again
-correctly. Perfect. Now let's find the default up here. If you scroll down a little
-bit, uh, here we go. Here are the two view types for the list in the grid. As I
-mentioned, it turns out that these are actually both part of the same block called
-list. They are just two different view types. One called list and one called grid.
-
-And to see where that is all defined, let's run a different con. Run that same
-command, but instead of view block views, run block unders definitions. So block
-views is where you define how blocks look. Block definitions is where you define what
-the blocks are themselves. So every root key on this config is a different block that
-we can use inside the admin area. So find one called list. There it is. So name list
-and check out under view types. Here are the two view types, list and grid. So here's
-the plan. We are gonna add a new view type here called featured grid. Then we're
-gonna map that to a template via the block views. So step one is to add the new view
-type right here. So over oops.
 
 Okay,
 
@@ -134,4 +87,3 @@ site. If you go to the all skills page, things still don't look quite right
 On this layout. We're using a grid to render the items, but, but for the all skills
 page and just this one situation, I really want each item to render in a different
 way. Let's learn how to do that next.
-
