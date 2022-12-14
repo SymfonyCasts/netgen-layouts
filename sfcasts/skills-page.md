@@ -13,7 +13,7 @@ if you looked at our template, those are totally hardcoded!
 
 ## Adding A Grid of Skills
 
-No problem! Add a Grid block... and set it to a "Manual Connection". Check this
+No problem! Add a Grid block... and set it to a "Manual Collection". Check this
 out! We can now choose between manually selecting "Contentful entries" or recipes!
 And when we click "Add Items", the content browser already works!
 
