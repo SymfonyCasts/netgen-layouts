@@ -52,7 +52,7 @@ Bien, pulsa "Publicar" en el Diseño de la página de inicio... y crea un nuevo 
 
 Ya sabes cómo funciona. Empieza por enlazar la zona de cabecera... y la zona de pie de página. A continuación, vamos a crear otro héroe. Añade una columna, dale una clase `hero-wrapper` y pon dentro un bloque "Título" con "Todas las habilidades". Para molar aún más, añade un bloque de texto debajo con algún contenido de introducción.
 
-¡Buen comienzo! Publica la maquetación... así podremos ir a enlazarla a la página `/skills`. Pulsa "Añadir nueva maquetación" y enlaza esto a la "Maquetación de la lista de habilidades". Luego ve a "Detalles". Esta vez mapearé a través de la Información de la Ruta, establecida en `/skills`. Pulsa Guardar cambios.
+¡Buen comienzo! Publica la maquetación... para que podamos ir a enlazarla a la página `/skills`. Pulsa "Añadir nueva maquetación" y enlaza esto a la "Maquetación de la lista de habilidades". Luego ve a "Detalles". Esta vez mapearé a través de la Información de la Ruta, establecida en `/skills`. Pulsa Guardar cambios.
 
 Vamos a ver cómo queda nuestro primer intento. Y... ¡no está mal!
 
