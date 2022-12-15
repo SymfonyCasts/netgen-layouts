@@ -1,89 +1,117 @@
 # Custom Block View
 
-Coming soon...
+So here's the plan. We're going to add a new "view type" to the list block
+definition. Then we're going to map that to a *template* via `block_views`.
 
-So here's the plan. We are gonna
-add a new view type here called featured grid. Then we're gonna map that to a template
-via the block views. So step one is to add the new view type right here. So over
-oop
+## Updating the "Block Definition"
 
+For step 1, open our `netgen_layouts.yaml` file and, really anywhere, add
+`block_definitions`. This config can be used to create totally *new* blocks or
+change options on *existing* blocks, which is what *we* want. To do that, we
+need to repeat the config here: `list` & `view_types`. So, `list` `view_types`
+and then add the new one. Let's call it `one_by_two` - that key can be anything -
+and give it a name: `1x2 Featured Grid`.
 
+*Just* by doing that, if we go over and refresh the admin area... and click down
+on the grid, we have a new view type! If we change to it... nothing renders in
+the admin area. And if we hit "Publish and Continue" editing... over on the
+frontend... *also* nothing renders. Yay!
 
-Okay,
+Click the Layouts link in the web toolbar and... near the bottom, ah. It's rendering
+`invalid_block.html.twig`. The block definition *is* `list` and the view type
+*is* `1x2 Featured Grid`. The problem is that we haven't, yet, defined a "block view"
+for that combination. So, it falls back to "invalid block".
 
-So over in our neck and layouts, config, doesn't matter where, but I'm gonna do it up
-here on top. Add block underscore definitions. Now under this config, this is also
-where you would create new blocks, but you can also um, modify existing blocks. So
-I'm gonna basically repeat the config here list then view types. So list view types,
-and then we can create the one we want. So I'm gonna call mine one by two. And then
-the only thing we need below is a name one by two featured grid. So just by doing
-that, if we go over and refresh our admin area and click down on grid, we have a new
-view type we change to it. You can see nothing renders here if we hit publish and
-continue editing on the front end. Also, nothing renders if you look in the web
-toolbar for layouts and go to the near the bottom, you can see it's rendering invalid
-block this block definition list view type one by two featured grid. But the problem
-is that we haven't defined a block view for this combination yet, so it just falls
-back to invalid block.
+## Adding the Admin Block View
 
-All right, so over here under view, we have already created several item views. We're
-now down here going to create a block view section. And under here I'm actually gonna
-register both an admin block view and a front end block view. Cause you see right now
-in the admin area, it just renders nothing. I'm not too worried about the admin view.
-I'm actually just gonna reuse the normal grid view. It's close enough. So do that.
-I'll use the app key. We know app means admin and then this key does not matter at
-all. And then template. And if you looked it up, you'd find that the name of the
-template that if you looked in the config is this path right here. Oh, I only need
-one as symbol. Then below we're gonna say match. And then we need is block definition
-list and block slash view type set to one by two, making sure that this matches what
-we have up here under our block definition. And if you didn't know what config used
-for the match here, you can use your debug config for block view and find some
-similar block and see what kind of match stuff it's using.
+Ok, under `view`, we've already created several "item views". *Now* add `block_view`
+so we can create our first of *those*. We're going to register both an admin
+view as well as a frontend view. Because... in the admin area, it currently
+renders nothing. Add `app` for the admin and the next key doesn't matter. For the
+template, because the admin view isn't too important, let's re-use the core admin
+"grid" template, which you could find via the `debug:config` command. It's
+`@NetgenLayoutsStandard/app/block/list/grid.html.twig`.
 
-All right, so that actually fixes the admin area or should. Beautiful. Then for the
-front, for the front end, let's duplicate that entire section. We'll use default for
-the front end key. This key is fine, doesn't matter. We use our nng layouts slash
-block slash how about list slash one by two underscore list, do H team of that twig.
-We can make that path whatever we want. And this stuff down here is still perfect. So
-down in our templates directory we have templates, N layouts, themes standard. Then
-we have block. Then I'll create a sub directory called list. Then inside of there,
-the template one by two list dot html twig. And we'll start by saying one by two.
-Sweet. Let's check and see if that works over on the front end. I'll go back refresh
-and it does, Here's our tiny little one by two sitting over here. All right, so to
-bring that to life. So how can we bring that to life? Well, the first thing I would
-look at is probably what the core grid template looks like. So grid H two of that
-twig. We want the one from theme standard and it gives you an idea of kind of like
-what this normally looks like. And there's a lot of kind of special stuff in here
-that you may wanna keep or may not want to keep.
+*Now* add `match`. We want to use this template if `block\definition` is `list`
+*and* `block\view_type` is `one_by_two`... making sure that this matches the key
+we used earlier under the block definition.
 
-But the most important thing here is this collection html where you loop over this
-collections collection identifier. Collection identifier is just the word default. So
-loops over collections dot default, and then it includes a template. Template name
-and template name is going to be set to grid slash kind of number of columns, HTML,
-that twig. So if we have for example, three columns, we can look up three_columns.ht,
-that twig. And what this does is just put the diviv and use this NNG layouts render
-result. So it's basically looping over something and calling this NG render result on
-each one. So I'm gonna use that in here. I'm just gonna paste in some code in here.
-So we're doing basically the same thing. We're extending block that H two L that twig
-just like the core one does. And then we are looping over that collections do default
-adding whatever kind of diviv we need here and then using the engine layout to render
-result. And this is what renders the item template. So this is effectively a simpler
-way of just re uh, doing that, um, a normal grid. So for you to refresh. Awesome. So
-we're kind of back to our normal grid
+How did I know to use `block\definition` and `block\view_type`? By using our favorite
+`debug:config` command! That's always a good guide to follow.
 
-Now to kind of customize this again, I'm gonna pace over it again. And what I'm doing
-here is instead of looping, I'm just rendering the zero result in the first spots,
-the one result here and the two result here. So just a little more custom and that
-gives me the result I want. Awesome. Now, because we have not included all of the
-custom stuff that's inside of here, and for example, the number of columns is
-something that we can configure inside of our configuration here that is not relevant
-at all to this block. And you can see it's being used in the parent template here,
-but we are not using that here. If we wanted to, I go back and run the block
-definitions and search for one by two, we could configure this valid parameters thing
-here and you can actually, like you could see with list, set that with an exclamation
-point to actually remove certain configuration, like number of columns. I won't do
-that, but you can see how it's done right here. All right, so heading back to our
-site. If you go to the all skills page, things still don't look quite right
+Anyways, that should fix the admin area. And... it does!
 
-On this layout. We're using a grid to render the items, but, but for the all skills
-page and just this one situation, I really want each item to render in a different
-way. Let's learn how to do that next.
+## Frontend Block View
+
+For the frontend view, duplicate that entire section... but use `default`. This
+key is fine, it doesn't matter, and change the template to, how about,
+`@nglayouts/block/list/one_by_two_list.html.twig`. The match section is
+perfect already.
+
+Ok, let's go make that template! We already have
+`templates/nglayouts/themes/standard/block/`... so, create the new `list` subdirectory
+then the file: `one_by_two_list.html.twig`. Start by saying `1x2`.
+
+Let's check it! Over on the frontend, refresh and... there's our tiny 1x2!
+
+## Customizing the Frontend Template
+
+Let's bring this to life! Because this renders a "list" block, our template probably
+has access to some variable that represents the "items". To cheat, which is *always*
+a good choice for developers, let's peek at the core grid template:
+`grid.html.twig` from the themes directory.
+
+Wow! Like many core templates, there's a lot of stuff in here! You can choose what
+you want to keep or get rid of. The most important thing is this `collection_html`
+variable: they loop over `collections[collection_identifier]`... where
+`collection_identifier` is actually just the word `default`. So it loops over
+`collections.default`. Then it includes a template. That `templateName` variable
+will be set to something like `grid/` the number of columns `.html.twig`. For
+example, if the grid is configured to use 3 columns, it would use
+`3_columns.html.twig`. That template adds the `div` needed for each column in a
+3 column setup... and then calls `nglayouts_render_result()`. *That* renders
+the "item".
+
+Anyways, if you zoom out, the template basically loops over the `collections`
+variable and calls `nglayouts_render_result()` on each one.
+
+Back in our template, I'm going to paste in some code that does something similar.
+Yup, we extend `block.html.twig`, just like the core template does, then loop
+over `collections.default`, add a div and render each item. So this is effectively
+a simpler version of what a grid does.
+
+And what does it look like? Refresh and... yup! It looks like a grid!
+
+But remember the goal: one big skill on the left with two smaller skills on the
+right. To make that happen, I'll paste in version 2 of my template. Nothing
+special here. Instead of looping, this renders the 0 key, then the 1 and 2 keys.
+
+And now... yes! That's *exactly* what I wanted!
+
+Though, I'll give you the same warning I gave earlier when we were overriding
+core "item" templates. We are *not* including all of the custom stuff that lives in
+the core template. If you need to support a custom option, make sure to include that
+code.
+
+## Hiding Block Options for a Block View Type
+
+And actually, one thing in here - the number of columns - is *not* something we
+need. This is something that we can configure for the block... but it's not
+relevant at *all* when using our new view type.
+
+Could we... hide that option when using our view type? Yep! Head back to your
+terminal and debug the `block_definitions` config again:
+
+```terminal-silent
+php bin/console debug:config netgen_layouts block_definitions
+```
+
+Search for `one_by_two`. We *could* configure this `valid_parameters` key to
+*remove* an option from the block. The `list` view type does exactly that.
+I won't do it, but that's how it's done.
+
+Ok, head back to the site and go to the "All Skills" page. Yea... things still don't
+look right. On this layout, we're using a grid to render the items. And, that grid
+looks ok on *other* pages but not here, where the skills are meant to be the
+*main* content on the page. Next, let's learn how we can customize how these
+*items* render for *just* this grid.
