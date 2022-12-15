@@ -1,67 +1,25 @@
 # Item View Type
 
-Coming soon...
+The Grid of skills on the `/skills` page looks *terrible*. Let's go find the layout for that - Skills List Layout. Awesome. So this is a *normal* Grid that we're using, and it's rendering like any other Grid on the system. I want to *customize* this, but I don't necessarily want the Grid block itself to render differently. Having them tiled like this is perfectly fine for our purposes. What I *really* want is for each *item* to render differently, but *just* in this case.
 
-The grid of skills looks terrible on the slash skills page. Let's go and find the
-layout for that skills list layout. Awesome. So you're using this normal grid and so
-it's normally like rendering like any other grid on the system. I wanna customize
-this, but it's not that I want the grid block itself to render differently. Having
-them tiled like this is perfectly okay. What I really want is for each item to render
-differently, but just in this case, head of your terminal and run bin console, debug,
-config, neck and layouts, block definitions. Once again, the config for all the
-blocks in our system. Now check this out. One piece of config we haven't talked about
-yet is called item view types. So for each block view type like one by two list or
-grid, there's also an item view types. And in every single case right now, there's a
-pre-built one in here called standard. So it turns out for a, it's not super common,
-but for a given view type like one by two or list, you can actually specify multiple
-ways to render the item inside of that block view. And those are called item view
-types. Standard is the default and that means it's gonna render the normal whatever
-the normal item you type is. So here's our goal for the existing grid item view type,
-we're gonna add an extra item view type.
+Head over to your terminal and run:
 
-All right. To do that over in our configuration up here, we're gonna go to, there we
-go, our block definitions. So we have list view types one by two. And now we're going
-to add grid here. So we're gonna be modifying the existing grid view type, and we're
-gonna be specifying item view types onto this. And I'm gonna create a new one called
-skill big view. You'll see how we use that key in a second, and then we'll give it a
-name. How about skills? Big view. Cool. Now as soon as we do that, if we go refresh
-the admin area and click down here on the grid, make sure we're on the design tab, we
-now have a new item view type standard or normal one or the skills big view. If we
-select it and hit publish and continue editing and refresh, absolutely nothing is
-different. That's because we now need a new item view that will match this. So scroll
-down to our item views under underscore defaults and put this new item view above our
-other content full entry skill. The reason once again, is order. We want our new one
-to match first. Actually, let me copy the existing one. We have here,
+```terminal
+./bin/console debug:config netgen_layouts
+block_definitions
+```
 
-I'll call it con slash entry skill big view, but that could be called anything. We'll
-change the template to skill underscore, big view dot HTM on that twig. And we still
-want these same value type, Contentful entry and content type skill. But then there's
-another one we can use here called item slash view type set to the key that we used
-earlier. Skill big view. So the idea is that if we selected this as our item view
-type, then it's going to, when we hit this match, when we hit this here, all of three
-of these things will match into the work. If we didn't select that and our view type
-is standard, it would not match this, but it would still match this one down here.
-All right, let's go outta the temple for that. It's down in our item directory
-content full entry. And we'll have a new one here called skill big view HTML Twig.
-And I'll just say big view. And then over on the front end, actually, just make sure
-I actually published that. It works. Awesome. So now the rest is easy. We can just
-customize that however we want. We've already done this a few times, so I'm just
-gonna paste in some content. It's uh, routing to it using the fields. It's very
-similar to what we had before,
+This is, as we learned, the *config* for all of the blocks in our system. Check this out! One piece of config we haven't talked about yet is called `item_view_types`. For each block view type, like `one_by_two`, `list`, or `grid`, there's also `item_view_types`. And every single case that we have right now has a pre-built one called `Standard`. It's not *super* common, but for a given view type like `one_by_two` or `list`, you can actually specify *multiple* ways to render the *item* inside of that block view, and those are called `item_view_types`. This `Standard` is the default, and that means it's going to render whatever the normal `item_view_type` is. So here's our goal: For the existing Grid `item_view_types`, we're going to add an *extra* item view type.
 
-But that is the look that we want on this site. More information. So cool. And also
-now that we have have, now that our grid view type has multiple item views configured
-below it. So this is thanks to our configuration up here, we now have the power on an
-item by item basis to override that. So I'm not gonna do it, but see overrides slot
-view type. This basically says, Hey, for whatever the first item is on the list, I
-actually wanna change that to use the standard view type. So I'll hit publish and
-continue editing. Now you can see that just the first item uses the standard view
-type. So that's obviously not what we want in this case. So I'm gonna go back and hit
-no override, but that is a very powerful concept. All right, next one common problem
-on our site with layouts is working with vertical vertical spacing, just making sure
-the spacing is right between all of our components. Now obviously we can do that by
-adding CSS classes to our individual blocks, but wouldn't it be nice if every block
-in the system just had a nice little drop down here where we could select top and
-bottom margin automatically? How can we make a modification to an existing block or
-even all blocks? That's the job of eight block plugin. And that's next.
+To do that, over in our configuration, we're going to find our `block_definitions`. We currently have `list`, `view_types`, and `one_by_two`. *Now* we're going to add `grid` here, since we're going to be modifying the *existing* Grid view type, and we're going to be specifying `item_view_types` *onto* this. Let's create a new one called `skill_big_view`. You'll see how we use that key in a second. *Then* we'll give it a `name`. How about `skills_big_view`. Cool! As soon as we do that, if we go refresh the admin area and click down here on the Grid... making sure we're on the Design tab... we now have a new "Item view type". There's "Standard", which is the default view type, and then we see our new "Skills Big View". If we select it, hit "Publish and continue editing", and refresh... absolutely *nothing* is different. That's because we now need a new item view that will match this. Scroll down to our item views under `default`, copy this `contentful_entry/skill`, and paste it above.
 
+The reason we're putting it here, once again, is *order*. We want our new one to match first. I'll call the new one `contentful_entry/skill_big_view`, but we *could* call this anything. Now change the template to `@nglayouts/item/contentful_entry/skill_big_view.html.twig`. And we still want the same `item\value_type: contentful_entry` and `contentful\content_type: skill`, but there's *another* one we can use here called `item\view_type` set to the key that we used earlier: `skill_big_view`. The reason we're doing this is, if we select this as our `item\view_type`, when we hit this `match`, *all three* of these things will match into the work. If we *didn't* select that and our view type is `Standard`, it wouldn't match *this*, but it would *still* match this one down here.
+
+Let's go add the template for that. It's down in `/item/contentful_entry`. We'll add a new one here called `skill_big_view.html.twig`, and inside, I'll just say `BIG VIEW`. Then, over on the frontend, I'll just make sure I published that first, and... it works! Awesome! The rest is easy. We can now customize this however we want. We've already done that a few times, so I'm just going make this quick and paste in some content where we're routing to it using the fields. It's very similar to what we had before, but that's the look that we're going for on this site - more information. *Cool*. Also, now that our Grid view type has multiple `item_views` configured below it, thanks to our configuration up here, we have the power, on an item-by-item basis, to override that. I'm not going to do this, but see "Override slot view type"? This basically says:
+
+`Hey! I want to change whatever the first item on
+the list is to use the Standard view type.`
+
+I'll hit "Publish and continue editing" and now... you can see that just the *first* item uses the Standard view type. That's obviously not what we want in this case, so I'm going to go back and hit "No overrides". *That* is a very powerful concept.
+
+Okay, one common problem on our site with Layouts is working with vertical spacing - just making sure the spacing is right between all of our components. We *could* do that by adding CSS classes to our individual blocks. But wouldn't it be nice if every block in the system just had a nice little drop down here where we could select the top and bottom margins automatically? How can we make a modification to an *existing* block, or even *all* blocks? That's the job of a *block plugin*, and that's *next*.
