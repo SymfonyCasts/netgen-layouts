@@ -42,13 +42,19 @@ That's a job for a CMS.
 
 In your editor, open up `src/Controller/MainController.php`. Copy the `homepage()`
 action, paste, change to `/skills`, call it `app_skills` and rename the *method*
-to `skills()`. For the template, render `main/skills.html.twig`.
+to `skills()`. For the template, render `main/skills.html.twig`:
+
+[[[ code('970de0c503') ]]]
 
 Now, in the `templates/main/` directory, create that: `skills.html.twig`. Let's
-start with the *smallest* possible thing: extend `nglayouts.layoutTemplate`.
+start with the *smallest* possible thing: extend `nglayouts.layoutTemplate`:
+
+[[[ code('3b3d641f6d') ]]]
 
 Cool. While we're here, open `base.html.twig` and link to this. Search for "Skills".
-There's the link. Set the `href` to `{{ path('app_skills') }}`.
+There's the link. Set the `href` to `{{ path('app_skills') }}`:
+
+[[[ code('89d6d3e4a7') ]]]
 
 I like it! Refresh, try the link in the header and... the page works!
 
@@ -61,7 +67,9 @@ controller.
 
 But instead, let's take the easy way out and let *layouts* fetch the skills *for*
 us. Oh, but before we do that, back in `skills.html.twig`, add a
-`block title`, write "All Skills" and then `endblock`.
+`{% block title %}`, write "All Skills" and then `{% endblock %}`:
+
+[[[ code('6587b84fd7') ]]]
 
 This, as you probably know, controls the page's title. I'm doing this *here*
 because the `title` block is actually *not* something you can control via Layouts.
@@ -73,9 +81,9 @@ Remember: everything we build in our layout becomes part of a *block* called
 Ok, hit "Publish" on the Homepage Layout... and then create a *new* layout. I'll
 use my favorite "Layout 2" and call it "Skills List Layout".
 
-You know the drill. Start by linking the header zone... and the
-footer zone. Then, let's build another hero. Add a column, give it a `hero-wrapper`
-class, then put a "Title" block inside with "All Skills". To be even cooler, add
+You know the drill. Start by linking the header zone... and the footer zone.
+Then, let's build another hero. Add a column, give it a `hero-wrapper` class,
+then put a "Title" block inside with "All Skills". To be even cooler, add
 a text block below with some intro content.
 
 Nice start! Publish the layout... so we can go link it to the `/skills` page.
@@ -98,7 +106,7 @@ This allows you to choose *which* content types to show, like all of them... or
 just skills. We can then sort them, add a search, skip items or limit them. It's
 *everything* we want, out-of-the-box!
 
-What does it look like? Hit Publish. I bet you can guess. Yup! It "works"... by
+What does it look like? Hit "Publish". I bet you can guess. Yup! It "works"... by
 printing out the title of each skill. Oh, let me at least add that "container"
 class... to get the left and right margin.
 

@@ -11,14 +11,18 @@ to Contentful, not Layouts. But... I really want to fix it.
 
 Over in the `src/Layouts/` directory, create a new class called `ContentfulSlugger`.
 Make this implement `EntrySluggerInterface`... and then generate the one method
-we need: `getSlug()`.
+we need: `getSlug()`:
+
+[[[ code('d59c8a45d0') ]]]
 
 We're going to set things up so that this method is called when the dynamic URLs
 for *all* Contentful entries are being created. It will allow *us* to control the
 "slug", which is really the URL for each item.
 
 To make life easier, use `FilterSlugTrait` to get access to a method we'll use in
-a minute.
+a minute:
+
+[[[ code('c95eae1b9f') ]]]
 
 Ok, on Contentful, we have both Skills and Advertisements. But we don't really want
 advertisements to have their own page. Unfortunately, with the Contentful integration,
@@ -29,13 +33,20 @@ Anyways, this method will be passed both skills *and* advertisements. Use the ne
 PHP `match()` function to match `$contentfulEntry->getContentType()->getId()`.
 That will return the internal name for each type, which you can find in Contentful.
 If it's `skill`, return `/skills/` then `$this->filtersSlug()` - that comes from
-the trait - passing `$contentfulEntry->get('title')`.
+the trait - passing `$contentfulEntry->get('title')`:
 
-For `advertisement`, return `/_ad` for all of them. At least, at *this* point,
-only *one* ad could ever have a page on our site: if the user went to `/_ad`,
-it would match the first one.
+[[[ code('38236b5cbb') ]]]
 
-At the bottom, throw a new Exception with "Invalid Type".
+For `advertisement`, return `/_ad` for all of them:
+
+[[[ code('396457a084') ]]]
+
+At least, at *this* point, only *one* ad could ever have a page on our site:
+if the user went to `/_ad`, it would match the first one.
+
+At the bottom, throw a new Exception with "Invalid Type":
+
+[[[ code('23cf8d8b24') ]]]
 
 So, yes, at this point, advertisements *will* still have their own page. There's
 no way to turn that off out-of-the-box. But if you care enough, I would map all
@@ -48,17 +59,21 @@ precedence over the dynamic one.
 To tell Contentful to use our slugger, we need to, of course, give it tag! Add
 `#[AutoconfigureTag]` and this one is called `netgen_layouts.contentful.entry_slugger`.
 This also needs a `type` option... which you can set to *any* string. Let's use
-`default_slugger`.
+`default_slugger`:
+
+[[[ code('22d6c08c21') ]]]
 
 How is that used? In `config/packages/`, we need to create a new config file for
 the layouts contentful package. Let's call it `netgen_layouts_contentful.yaml`.
 
 Repeat that for the root key. Below, add `entry_slug_type`, then `default` set
-to the type we used in our tag: `default_slugger`.
+to the type we used in our tag: `default_slugger`:
+
+[[[ code('78454fef7a') ]]]
 
 This funny syntax says:
 
-> For *every* content type in contentful, use `default_slugger` when generating
+> For *every* content type in Contentful, use `default_slugger` when generating
 > the URL. So, use our `ContentfulSlugger`.
 
 Ok, done! But... this is *not* called when we reload the page. Nope. This is called
@@ -107,7 +122,7 @@ And *now* check the routes:
 symfony console contentful:routes
 ```
 
-Yes! The URL is `/skills/mashing`! So, over on `/mashing`, we get a good old
+Yes! The URL is `/skills/mashing`! So, over on `/mashing`, we get a good-old
 fashioned 404. But `/skills/mashing` works.
 
 Next: we don't yet have a page that lists *all* of the skills. Let's fix that!

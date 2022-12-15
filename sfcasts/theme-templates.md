@@ -39,7 +39,9 @@ the structure that's over here: `nglayouts/themes/standard/`.
 Inside of *this*, since the target template is named `block/title.html.twig`, if
 we create that *same* path, *our* `title.html.twig` will win. Do it: add another
 directory called `block/` and a new file inside: `title.html.twig`. To see if it
-works, just write some dummy text.
+works, just write some dummy text:
+
+[[[ code('a63c8ee8e8') ]]]
 
 Let's try this thing! Go back to the Skills page, refresh, and... absolutely *nothing*
 happens. That's because the first time we create this `themes/` directory, we need
@@ -58,7 +60,7 @@ Okay, but even if we want to customize how the Title renders... we probably *don
 want to start from scratch. It would be better to *reuse* part of the core template,
 or at least use it as a reference.
 
-Hit "shift" + "shift", search for `title.html.twig`, and select "Include non-project
+Hit `Shift`+`Shift`, search for `title.html.twig`, and select "Include non-project
 items". Open the core one from `nglayouts/themes/`.
 
 Wow. There is *a lot* going on here... including the fact that this extends another
@@ -70,8 +72,13 @@ if there's a container or not. That's useful stuff!
 
 In `title.html.twig`, it has code for whether or not the title is a link and other
 stuff. We *could* totally replace this template and ignore all this if we wanted to.
-But instead, copy the core template, paste it into our version... and just to
-prove that we can, let's remove that `title` class.
+But instead, copy the core template, paste it into our version:
+
+[[[ code('7c0600c978') ]]]
+
+And just to prove that we can, let's remove that `title` class:
+
+[[[ code('3954decadb') ]]]
 
 Cool! Now go over, refresh and... it goes back to how it looked before. But down
 here, that `title` class on the `<h1>` is gone!
@@ -81,5 +88,5 @@ renders it and override it completely using this `themes/` directory structure.
 
 Let's use that trick *again* next to customize what it looks like when you render
 an "asset" field from Contentful, like this skill image field. But along the way,
-we're going to deep dive into a some massively important concepts: block views
-and view types.
+we're going to deep dive into a some massively important concepts: *block views*
+and *view types*.
