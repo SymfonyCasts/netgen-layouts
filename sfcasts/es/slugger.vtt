@@ -1,0 +1,250 @@
+WEBVTT
+
+00:00:01.036 --> 00:00:04.976 align:middle
+Antes de seguir personalizando
+el aspecto de nuestro sitio,
+
+00:00:05.266 --> 00:00:13.636 align:middle
+quiero arreglar las URL de las habilidades para que,
+en lugar de /mashing, la página sea /skills/mashing.
+
+00:00:14.266 --> 00:00:20.706 align:middle
+Recuerda: el hecho de que nuestro contenido Contentful
+tenga instantáneamente URLs en nuestro sitio
+
+00:00:20.706 --> 00:00:23.366 align:middle
+proviene del paquete Contentful
+que instalamos antes.
+
+00:00:24.176 --> 00:00:28.086 align:middle
+Pero esa magia no tiene nada
+que ver con los Diseños.
+
+00:00:28.466 --> 00:00:34.376 align:middle
+Por tanto, personalizar esta URL también
+es específico de Contentful, no de Layouts.
+
+00:00:34.656 --> 00:00:36.756 align:middle
+Pero... Quiero arreglarlo.
+
+00:00:37.486 --> 00:00:42.706 align:middle
+En el directorio src/Layouts/, crea una
+nueva clase llamada ContentfulSlugger.
+
+00:00:42.706 --> 00:00:47.786 align:middle
+Haz que ésta implemente
+EntrySluggerInterface...
+
+00:00:47.976 --> 00:00:54.376 align:middle
+y genera el único método que necesitamos:
+getSlug(): Vamos a configurar las cosas para
+
+00:00:54.376 --> 00:01:01.216 align:middle
+que se llame a este método cuando se creen las
+URL dinámicas de todas las entradas de Contentful.
+
+00:01:01.726 --> 00:01:07.536 align:middle
+Nos permitirá controlar el "slug", que
+en realidad es la URL de cada elemento.
+
+00:01:08.526 --> 00:01:15.606 align:middle
+Para hacerte la vida más fácil, utiliza FilterSlugTrait para
+acceder a un método que utilizaremos dentro de un minuto: Vale,
+
+00:01:16.076 --> 00:01:20.256 align:middle
+en Contentful tenemos tanto
+Habilidades como Anuncios.
+
+00:01:20.496 --> 00:01:24.756 align:middle
+Pero en realidad no queremos que los
+anuncios tengan su propia página.
+
+00:01:25.326 --> 00:01:28.256 align:middle
+Por desgracia, con la
+integración de Contentful,
+
+00:01:28.576 --> 00:01:33.796 align:middle
+no hay forma de desactivar las URL
+para un tipo de contenido específico.
+
+00:01:33.796 --> 00:01:37.186 align:middle
+Hablaré de cómo solucionarlo en un minuto.
+
+00:01:37.776 --> 00:01:42.556 align:middle
+En cualquier caso, este método se pasará
+tanto a las habilidades como a los anuncios.
+
+00:01:43.016 --> 00:01:50.136 align:middle
+Utiliza la nueva función PHP match() para que coincida
+con $contentfulEntry->getContentType()->getId().
+
+00:01:51.116 --> 00:01:56.766 align:middle
+Eso devolverá el nombre interno de cada tipo,
+que puedes encontrar en Contentful. Si es
+
+00:01:57.386 --> 00:02:02.746 align:middle
+skill, devuelve /skills/ y
+luego $this->filtersSlug()
+
+00:02:03.306 --> 00:02:08.026 align:middle
+-que viene del rasgo- pasando
+$contentfulEntry->get('title'):
+
+00:02:09.146 --> 00:02:16.596 align:middle
+Para advertisement, devuelve /_ad para
+todos ello s: Al menos, en este punto,
+
+00:02:16.766 --> 00:02:19.796 align:middle
+sólo un anuncio podría tener
+una página en nuestro sitio:
+
+00:02:20.316 --> 00:02:24.496 align:middle
+si el usuario fuera a /_ad,
+coincidiría con el primero.
+
+00:02:25.326 --> 00:02:31.516 align:middle
+En la parte inferior, lanza una nueva Excepción
+con "Tipo no válido": Así que, sí, en este punto,
+
+00:02:31.646 --> 00:02:34.556 align:middle
+los anuncios seguirán
+teniendo su propia página.
+
+00:02:35.026 --> 00:02:37.986 align:middle
+No hay forma de desactivar
+eso desde el principio.
+
+00:02:38.086 --> 00:02:41.746 align:middle
+Pero si te importa lo suficiente,
+yo asignaría todos los anuncios
+
+00:02:41.746 --> 00:02:45.336 align:middle
+a la misma URL o patrón de URL de esta forma.
+
+00:02:45.676 --> 00:02:52.286 align:middle
+Luego crearía una ruta y un controlador
+con la misma URL y devolvería un 404.
+
+00:02:52.916 --> 00:02:56.846 align:middle
+Esa ruta tendrá prioridad sobre la dinámica.
+
+00:02:57.606 --> 00:03:03.266 align:middle
+Para decirle a Contentful que utilice nuestro baboso,
+necesitamos, por supuesto, ¡darle una etiqueta!
+
+00:03:03.926 --> 00:03:10.436 align:middle
+Añade #[AutoconfigureTag] y ésta se llamará
+netgen_layouts.contentful.entry_slugger.
+
+00:03:11.416 --> 00:03:13.476 align:middle
+Esto también necesita una opción type...
+
+00:03:13.636 --> 00:03:15.536 align:middle
+que puedes establecer en cualquier cadena.
+
+00:03:16.076 --> 00:03:20.596 align:middle
+Utilicemos default_slugger: ¿Cómo se utiliza?
+
+00:03:21.196 --> 00:03:26.566 align:middle
+En config/packages/, necesitamos crear un nuevo archivo
+de configuración para el paquete contentful de layouts.
+
+00:03:27.026 --> 00:03:30.146 align:middle
+Llamémoslo netgen_layouts_contentful.yaml.
+
+00:03:31.226 --> 00:03:33.366 align:middle
+Repite eso para la clave raíz.
+
+00:03:35.036 --> 00:03:43.506 align:middle
+A continuación, añade entry_slug_type, luego default ajustado
+al tipo que hemos utilizado en nuestra etiqueta: default_slugger:
+
+00:03:44.176 --> 00:03:49.146 align:middle
+Esta curiosa sintaxis dice Para cada
+tipo de contenido en Contentful,
+
+00:03:49.486 --> 00:03:53.186 align:middle
+utiliza default_slugger al generar la URL.
+
+00:03:53.576 --> 00:03:56.046 align:middle
+Así que utiliza nuestro ContentfulSlugger.
+
+00:03:57.146 --> 00:03:58.886 align:middle
+Vale, ¡listo! Pero...
+
+00:03:59.116 --> 00:04:02.186 align:middle
+esto no se llama cuando recargamos la página.
+
+00:04:02.546 --> 00:04:06.706 align:middle
+No. Se llama cuando "sincronizamos"
+nuestro contenido desde Contentful.
+
+00:04:07.476 --> 00:04:09.226 align:middle
+Bien, ¡vamos a resincronizar!
+
+00:04:10.186 --> 00:04:17.216 align:middle
+En tu terminal, ejecuta: symfony console contentful:sync
+Esto actualiza nuestra base de datos local
+
+00:04:17.216 --> 00:04:19.836 align:middle
+con los últimos datos de Contentful...
+
+00:04:20.076 --> 00:04:22.106 align:middle
+y funciona correctamente.
+
+00:04:22.516 --> 00:04:28.756 align:middle
+Pero cuando ejecutamos: symfony console
+contentful:routes ¡Las URL no cambiaron!
+
+00:04:29.406 --> 00:04:30.646 align:middle
+Esto es una peculiaridad...
+
+00:04:30.796 --> 00:04:35.266 align:middle
+o quizás una característica para que
+las páginas existentes no se rompan.
+
+00:04:35.656 --> 00:04:41.216 align:middle
+En cualquier caso, una vez que se importa una
+ruta por primera vez, su URL nunca cambia.
+
+00:04:41.746 --> 00:04:47.536 align:middle
+La forma más fácil de restablecer las cosas es
+eliminar la tabla de rutas y volver a importar todo.
+
+00:04:47.946 --> 00:04:49.556 align:middle
+Y esto es bastante divertido.
+
+00:04:49.846 --> 00:04:56.016 align:middle
+Podemos Ejecuta: symfony console
+doctrine:migrations:migrate current-1
+
+00:04:56.726 --> 00:05:00.096 align:middle
+Eso anulará la migración más reciente,
+
+00:05:00.336 --> 00:05:04.306 align:middle
+haciendo que se eliminen las
+tablas contentful y de rutas.
+
+00:05:05.326 --> 00:05:11.176 align:middle
+Vuelve a ponerlas con: symfony console
+doctrine:migrations:migrate Vuelve a sincronizar el contenido
+
+00:05:11.176 --> 00:05:15.976 align:middle
+: Y ahora comprueba las rutas: ¡Sí!
+
+00:05:16.196 --> 00:05:19.456 align:middle
+¡La URL es /skills/mashing!
+
+00:05:20.046 --> 00:05:25.336 align:middle
+Así, en /mashing, obtenemos
+un 404 a la antigua usanza.
+
+00:05:25.816 --> 00:05:28.986 align:middle
+Pero /skills/mashing funciona.
+
+00:05:29.916 --> 00:05:34.666 align:middle
+Siguiente: aún no tenemos una página
+que enumere todas las habilidades.
+
+00:05:35.186 --> 00:05:35.956 align:middle
+¡Vamos a arreglarlo!
