@@ -1,0 +1,442 @@
+WEBVTT
+
+00:00:01.016 --> 00:00:04.676 align:middle
+Ahora podemos incrustar listas, cuadrículas
+o galerías de recetas en miniatura
+
+00:00:04.676 --> 00:00:07.616 align:middle
+en cualquier diseño de forma dinámica.
+
+00:00:08.176 --> 00:00:09.316 align:middle
+¡Es genial!
+
+00:00:09.886 --> 00:00:14.346 align:middle
+Y siempre podemos crear más tipos
+de consulta para, por ejemplo,
+
+00:00:14.586 --> 00:00:19.166 align:middle
+elegir entre las últimas recetas
+o las recetas más populares.
+
+00:00:19.916 --> 00:00:23.606 align:middle
+Pero, ¿y si pudiéramos
+seleccionar recetas manualmente?
+
+00:00:24.086 --> 00:00:28.606 align:middle
+Quizá queramos destacar cuatro recetas
+concretas en la página de inicio. En el
+
+00:00:29.456 --> 00:00:33.946 align:middle
+área Diseños, en la rejilla, si
+cambias el "Tipo de colección",
+
+00:00:34.446 --> 00:00:37.326 align:middle
+podemos cambiar a "Colección manual".
+
+00:00:38.116 --> 00:00:39.216 align:middle
+Pero entonces...
+
+00:00:39.246 --> 00:00:41.986 align:middle
+no podemos seleccionar ningún elemento.
+
+00:00:42.906 --> 00:00:47.046 align:middle
+Para permitir que los elementos (en nuestro
+caso, las recetas) se seleccionen manualmente,
+
+00:00:47.526 --> 00:00:50.166 align:middle
+primero tenemos que permitirlo
+en la configuración.
+
+00:00:50.886 --> 00:00:57.436 align:middle
+Anteriormente, cuando creamos la configuración
+value_types, establecimos manual_items en false.
+
+00:00:58.206 --> 00:00:59.706 align:middle
+Cámbialo a true:
+
+00:01:00.546 --> 00:01:05.516 align:middle
+Y ahora, cuando intentamos acceder a
+la página, ¡nos aparece un error!
+
+00:01:06.146 --> 00:01:11.746 align:middle
+El backend del Navegador de Contenidos Netgen para
+el tipo de valor doctrine_recipe no existe. ¡Sí!
+
+00:01:12.146 --> 00:01:16.686 align:middle
+Necesitamos implementar una clase que ayude
+a los Layouts a navegar por nuestras recetas.
+
+00:01:17.276 --> 00:01:19.306 align:middle
+Eso se llama "navegador de contenido".
+
+00:01:20.146 --> 00:01:24.626 align:middle
+En realidad, añadir un navegador de contenidos
+se hace mediante un bundle completamente distinto,
+
+00:01:24.996 --> 00:01:28.046 align:middle
+que puedes utilizar fuera de Netgen Layouts.
+
+00:01:28.566 --> 00:01:33.086 align:middle
+Es útil si necesitas una interfaz agradable
+para navegar y seleccionar elementos.
+
+00:01:33.856 --> 00:01:38.016 align:middle
+Como el navegador de contenidos vive en
+un bundle diferente, no es necesario,
+
+00:01:38.376 --> 00:01:44.016 align:middle
+pero voy a configurarlo con un nuevo archivo de
+configuración llamado netgen_content_browser.yaml.
+
+00:01:44.776 --> 00:01:48.416 align:middle
+Dentro, establece la clave
+raíz en netgen_content_browser
+
+00:01:48.846 --> 00:01:52.246 align:middle
+para configurar el
+"NetgenContentBrowserBundle":
+
+00:01:53.146 --> 00:01:58.856 align:middle
+Dentro de éste, podemos describir
+todas las "cosas manuales" diferentes
+
+00:01:59.246 --> 00:02:01.616 align:middle
+que queremos poder navegar. Para ello
+
+00:02:02.456 --> 00:02:07.256 align:middle
+, añade una clave item_types
+y, para el primer elemento,
+
+00:02:07.546 --> 00:02:11.326 align:middle
+coge el nombre interno del tipo
+de valor - doctrine_recipe -
+
+00:02:11.516 --> 00:02:15.386 align:middle
+para que coincidan, pégalo y dale un nombre.
+
+00:02:16.046 --> 00:02:16.896 align:middle
+¿Qué te parece...
+
+00:02:16.976 --> 00:02:20.236 align:middle
+Recipes con un bonito icono de fresa: Lo
+
+00:02:21.076 --> 00:02:26.116 align:middle
+único que necesitamos aquí es una
+clave preview con una subclave template,
+
+00:02:26.396 --> 00:02:32.956 align:middle
+que pondré
+nglayouts/content_browser/recipe_preview.html.twig: ¡Oh!
+
+00:02:33.516 --> 00:02:36.786 align:middle
+Y asegúrate de escribir
+"plantilla" correctamente. ¡Ups! De
+
+00:02:37.046 --> 00:02:41.236 align:middle
+todas formas, estamos poniendo
+este preview.template porque la
+
+00:02:41.726 --> 00:02:45.106 align:middle
+configuración nos lo exige ... pero ya
+
+00:02:45.506 --> 00:02:48.466 align:middle
+nos preocuparemos de crear esa plantilla
+más adelante. Si nos dirigimos
+
+00:02:49.316 --> 00:02:51.116 align:middle
+y actualizamos... obtenemos
+
+00:02:51.446 --> 00:02:53.486 align:middle
+el mismo error. Eso es porque
+
+00:02:54.086 --> 00:02:59.886 align:middle
+necesitamos una clase backend que se conecte a
+este nuevo tipo de elemento. Crear un backend es
+
+00:03:00.616 --> 00:03:06.516 align:middle
+un proceso sencillo, pero requiere
+algunas clases diferentes. En el
+
+00:03:07.246 --> 00:03:11.426 align:middle
+directoriosrc/, vamos a crear un nuevo
+directorio llamado ContentBrowser/... y
+
+00:03:12.006 --> 00:03:16.466 align:middle
+dentro de él, una clase PHP
+llamada RecipeBrowserBackend. Ésta
+
+00:03:17.446 --> 00:03:22.546 align:middle
+necesita implementar BackendInterface: la de
+Netgen\ContentBrowser\Backend: A continuación, ve
+
+00:03:23.406 --> 00:03:30.846 align:middle
+a "Código"->"Generar" (o Command+N en Mac) para implementar
+los nueve métodos que necesita No te preocupes: no es tan
+
+00:03:31.356 --> 00:03:33.706 align:middle
+malo como parece: Por último,
+para vincular esta clase backend
+
+00:03:34.586 --> 00:03:38.866 align:middle
+al tipo de elemento en nuestra
+configuración, tenemos que dar a este
+
+00:03:39.346 --> 00:03:41.866 align:middle
+servicio una etiqueta. Haremos esto de la misma
+
+00:03:42.736 --> 00:03:48.556 align:middle
+forma que hicimos antes para el tipo de consulta:
+con AutoconfigureTag. De hecho, robaré este
+
+00:03:49.106 --> 00:03:53.186 align:middle
+AutoconfigureTag ya que estoy
+aquí... pegaré eso... y añadiré la
+
+00:03:53.646 --> 00:03:54.176 align:middle
+declaraciónuse
+
+00:03:54.516 --> 00:03:56.466 align:middle
+para ello. Esta vez, el nombre de la etiqueta
+
+00:03:57.306 --> 00:04:02.126 align:middle
+es netgen_content_browser.backend,
+y en lugar de type, utiliza
+
+00:04:02.746 --> 00:04:05.816 align:middle
+item_type. Ajústalo a la clave
+
+00:04:06.566 --> 00:04:11.086 align:middle
+que tenemos en la config: doctrine_recipe.
+Pega y... ¡genial! Esta vez
+
+00:04:11.776 --> 00:04:12.946 align:middle
+cuando
+
+00:04:13.376 --> 00:04:16.236 align:middle
+actualizamos... el error ha desaparecido.
+
+00:04:17.476 --> 00:04:19.356 align:middle
+Añadamos temporalmente una nueva
+
+00:04:20.016 --> 00:04:22.826 align:middle
+Rejilla al diseño... y elijamos
+"Colección manual". Ahora...
+
+00:04:23.616 --> 00:04:25.556 align:middle
+¡compruébalo! Como
+
+00:04:26.496 --> 00:04:28.026 align:middle
+tenemos un backend,
+
+00:04:28.446 --> 00:04:32.436 align:middle
+¡vemos un botón "Añadir elementos"!
+Y cuando hacemos clic en él...
+
+00:04:33.046 --> 00:04:34.526 align:middle
+falla. Eso no debería
+
+00:04:34.946 --> 00:04:38.946 align:middle
+sorprendernos demasiado...
+ya que nuestra clase backend
+
+00:04:39.106 --> 00:04:42.206 align:middle
+sigue estando completamente
+vacía. Si quieres ver
+
+00:04:42.946 --> 00:04:46.826 align:middle
+el error exacto, puedes abrir la llamada AJAX.
+El sistema del navegador de contenidos funciona
+
+00:04:47.626 --> 00:04:52.046 align:middle
+así: en estos métodos, describimos
+una "estructura de árbol", algo así
+
+00:04:52.246 --> 00:04:56.716 align:middle
+como un sistema de archivos. las "
+ubicaciones" son como directorios y los
+
+00:04:57.376 --> 00:05:03.536 align:middle
+"elementos" son como los "archivos" o, en
+nuestro caso, las recetas individuales.
+
+00:05:03.676 --> 00:05:06.456 align:middle
+Vamos a simplificar mucho las cosas
+
+00:05:07.346 --> 00:05:09.216 align:middle
+. En lugar de tener diferentes "directorios"
+
+00:05:09.636 --> 00:05:15.366 align:middle
+o "categorías" de recetas por las
+que puedes navegar, vamos a tener un
+
+00:05:15.736 --> 00:05:22.586 align:middle
+único directorio -o "ubicación"- en el que vivirán
+todas las recetas. Verás qué aspecto tiene esto
+
+00:05:23.246 --> 00:05:26.876 align:middle
+en la interfaz de usuario dentro de unos
+minutos. Para que esto funcione, dentro de
+
+00:05:27.816 --> 00:05:31.156 align:middle
+src/ContentBrowser/, tenemos que crear una
+
+00:05:31.606 --> 00:05:35.046 align:middle
+clase que represente una ubicación. La
+llamaré BrowserRootLocation. Esta clase... no
+
+00:05:35.716 --> 00:05:38.216 align:middle
+es superinteresante: es
+
+00:05:39.176 --> 00:05:40.076 align:middle
+sólo
+
+00:05:40.306 --> 00:05:46.406 align:middle
+un poco de fontanería de bajo nivel que debemos
+tener. Haz que implemente LocationInterface, y
+
+00:05:47.396 --> 00:05:53.346 align:middle
+a continuación, genera los tres métodos que
+necesitamos: De nuevo, esta clase representará
+
+00:05:54.216 --> 00:05:58.956 align:middle
+la única "ubicación". Así que
+para getLocationId(), podemos
+
+00:05:59.406 --> 00:06:03.316 align:middle
+devolver cualquier cosa. Voy a return 0.
+
+00:06:03.906 --> 00:06:05.386 align:middle
+Verás cómo se utiliza
+
+00:06:06.176 --> 00:06:08.186 align:middle
+en un segundo. Para getName(), esto es lo que
+
+00:06:09.056 --> 00:06:13.376 align:middle
+se mostrará en la sección de
+administración. Voy a return 'All'. Y para
+
+00:06:14.016 --> 00:06:15.496 align:middle
+getParentId(), return null:
+
+00:06:16.216 --> 00:06:18.756 align:middle
+Si tienes un sistema más
+
+00:06:19.736 --> 00:06:23.906 align:middle
+complejo con múltiples subdirectorios,
+podrías crear una jerarquía
+
+00:06:24.156 --> 00:06:27.256 align:middle
+de ubicaciones. Muy bien, actualicemos nuestra
+
+00:06:28.076 --> 00:06:31.246 align:middle
+clase backend para utilizar esto. Aquí
+arriba, getSections() será llamado en
+
+00:06:31.936 --> 00:06:38.196 align:middle
+cuanto el usuario abra el navegador de
+contenidos. Nuestro trabajo consiste en devolver
+
+00:06:38.926 --> 00:06:43.916 align:middle
+todos los "directorios" raíz, o "ubicaciones".
+Nosotros sólo tenemos uno: return
+
+00:06:44.476 --> 00:06:49.956 align:middle
+[new BrowserRootLocation()]: Después de
+llamar a esto, el navegador de contenidos
+
+00:06:50.836 --> 00:06:56.446 align:middle
+llamará a getLocationId() en cada uno
+de ellos y hará una petición AJAX
+
+00:06:56.896 --> 00:07:00.646 align:middle
+para obtener más información sobre
+ellos. En nuestro caso, esto ocurrirá
+
+00:07:01.366 --> 00:07:06.686 align:middle
+una sola vez cuando el ID sea
+0. Parece raro, pero todo lo que
+
+00:07:07.316 --> 00:07:15.886 align:middle
+tenemos que hacer es devolver esa misma ubicación: if ($id ===
+'0'), luego return new BrowserRootLocation(): Fíjate que estoy
+
+00:07:16.346 --> 00:07:19.486 align:middle
+utilizando '0' como
+
+00:07:20.356 --> 00:07:23.866 align:middle
+cadena, pero... en
+getLocationId() devolvimos un
+
+00:07:23.956 --> 00:07:27.516 align:middle
+entero: Eso es porque el id
+
+00:07:28.316 --> 00:07:33.736 align:middle
+se pasará a JavaScript y se utilizará
+en una llamada Ajax. Cuando llegue
+
+00:07:34.606 --> 00:07:36.986 align:middle
+aquí, será una cadena. Un
+pequeño detalle a tener en cuenta.
+
+00:07:37.486 --> 00:07:39.296 align:middle
+Al final, por
+
+00:07:40.156 --> 00:07:45.156 align:middle
+si acaso throw a new \InvalidArgumentException()
+y pasa un mensaje sobre
+
+00:07:45.526 --> 00:07:48.616 align:middle
+una ubicación no válida: ¡Vale!
+Así que nuestro backend tiene
+
+00:07:49.386 --> 00:07:52.586 align:middle
+una ubicación. Para los demás métodos,
+
+00:07:53.366 --> 00:07:57.496 align:middle
+devolvamos lo más sencillo posible.
+Deja loadItem() vacío por un momento
+
+00:07:58.346 --> 00:08:04.086 align:middle
+, para getSubLocations(), return [], para
+getSubLocationsCount(), return 0, para
+
+00:08:04.606 --> 00:08:10.886 align:middle
+getSubItems(), return [], para
+getSubItemsCount(), return 0, para
+
+00:08:11.416 --> 00:08:17.076 align:middle
+search(), return []... y finalmente,
+para searchCount(), return
+
+00:08:17.656 --> 00:08:21.286 align:middle
+0 : Uf... Hablaremos de cada uno de
+
+00:08:22.146 --> 00:08:25.716 align:middle
+esos métodos más adelante.
+Pero nuestra clase backend
+
+00:08:26.316 --> 00:08:30.456 align:middle
+ya es, al menos, algo funcional.
+Si volvemos a actualizar el
+
+00:08:31.446 --> 00:08:33.836 align:middle
+área de administración... hacemos
+clic en nuestra cuadrícula, y
+
+00:08:36.366 --> 00:08:40.116 align:middle
+vamos a "Añadir elementos"...
+¡se carga! ¡ Di "hola"
+
+00:08:40.706 --> 00:08:44.556 align:middle
+al navegador de contenido!
+Actualmente está vacío, pero
+
+00:08:45.046 --> 00:08:51.286 align:middle
+puedes ver el "Todo", que es de nuestra única
+ubicación. Todavía no hay elementos dentro...
+
+00:08:51.946 --> 00:08:54.306 align:middle
+porque tenemos que devolverlos
+
+00:08:54.816 --> 00:08:58.886 align:middle
+desde getSubItems(). Hagámoslo a continuación
