@@ -1,0 +1,382 @@
+WEBVTT
+
+00:00:00.386 --> 00:00:06.446 align:middle
+Gracias a la integración con Contentful,
+además de nuestro tipo de valor doctrine_recipe,
+
+00:00:06.696 --> 00:00:11.356 align:middle
+ahora tenemos un segundo tipo de valor
+que puede cargar cosas de Contentful.
+
+00:00:11.926 --> 00:00:14.806 align:middle
+Esto significa que podemos
+mostrar listas y cuadrículas
+
+00:00:14.856 --> 00:00:19.826 align:middle
+de competencias dentro de cualquier diseño,
+como aquí en nuestra página de inicio.
+
+00:00:20.266 --> 00:00:20.906 align:middle
+¡Vamos a probarlo!
+
+00:00:21.616 --> 00:00:22.606 align:middle
+Publica este diseño...
+
+00:00:22.916 --> 00:00:24.946 align:middle
+y edita el diseño de la página de inicio.
+
+00:00:27.736 --> 00:00:31.956 align:middle
+Ah, y podemos eliminar esta antigua cuadrícula
+con la que estábamos jugando antes.
+
+00:00:33.016 --> 00:00:38.096 align:middle
+Abajo, estamos representando el
+bloque Twig de featured_skills.
+
+00:00:38.276 --> 00:00:44.056 align:middle
+Pero en realidad, si miras nuestra
+plantilla, ¡están totalmente codificados!
+
+00:00:44.586 --> 00:00:45.286 align:middle
+¡No hay problema!
+
+00:00:45.716 --> 00:00:47.076 align:middle
+Añade un bloque Grid...
+
+00:00:47.906 --> 00:00:50.676 align:middle
+que ya está configurado
+como "Colección manual".
+
+00:00:51.216 --> 00:00:52.166 align:middle
+Pero ¡mira esto!
+
+00:00:52.376 --> 00:00:57.796 align:middle
+¡Ahora podemos elegir entre seleccionar
+manualmente "Entradas de contenido" o recetas!
+
+00:00:58.016 --> 00:01:02.946 align:middle
+Y cuando hacemos clic en "Añadir elementos",
+¡el navegador de contenidos ya funciona!
+
+00:01:03.626 --> 00:01:05.056 align:middle
+Selecciona unos cuantos...
+
+00:01:05.596 --> 00:01:07.606 align:middle
+bien... y luego publica esto.
+
+00:01:10.046 --> 00:01:12.516 align:middle
+Actualiza. Um...
+
+00:01:12.716 --> 00:01:14.956 align:middle
+¡bien! Se muestran...
+
+00:01:15.136 --> 00:01:16.306 align:middle
+pero sólo el título.
+
+00:01:16.666 --> 00:01:17.266 align:middle
+Buen comienzo.
+
+00:01:17.826 --> 00:01:21.296 align:middle
+Para hacerlo un poco mejor,
+ve a la pestaña "Diseño"...
+
+00:01:21.476 --> 00:01:23.026 align:middle
+y envuelve esto en un contenedor.
+
+00:01:23.506 --> 00:01:26.706 align:middle
+Eso debería, al menos,
+darnos algunos canalones.
+
+00:01:28.206 --> 00:01:28.886 align:middle
+Ya está.
+
+00:01:29.546 --> 00:01:34.236 align:middle
+En última instancia, queremos que se muestren
+como las habilidades codificadas que hay debajo.
+
+00:01:34.526 --> 00:01:36.796 align:middle
+Y vamos a trabajar en ello
+dentro de unos minutos.
+
+00:01:37.306 --> 00:01:44.296 align:middle
+Pero antes de llegar ahí, ¿qué tal una página
+/skills que enumere todas las habilidades?
+
+00:01:45.186 --> 00:01:49.206 align:middle
+Bueno, la integración de
+Contentful no nos dio esta URL.
+
+00:01:49.716 --> 00:01:50.826 align:middle
+Pero, ¡no hay problema!
+
+00:01:51.046 --> 00:01:53.756 align:middle
+¡Podemos crearla nosotros mismos en Symfony!
+
+00:01:54.706 --> 00:01:59.626 align:middle
+Bueno, en realidad, ¡podríamos
+hacerlo completamente en Contentful!
+
+00:02:00.506 --> 00:02:05.226 align:middle
+Podríamos crear un tipo de contenido
+"Página", crear una página "Habilidades ",
+
+00:02:05.466 --> 00:02:09.666 align:middle
+que podría convertirse en /skills,
+y luego asignarla a un Diseño.
+
+00:02:10.516 --> 00:02:15.486 align:middle
+Este es el tipo de cosas que harías
+normalmente cuando tienes un CMS a tu alcance
+
+00:02:15.946 --> 00:02:18.176 align:middle
+Pero crearemos esta página de forma manual.
+
+00:02:18.346 --> 00:02:24.386 align:middle
+Al fin y al cabo, los Diseños sirven para
+organizar el aspecto de las páginas existentes...
+
+00:02:24.866 --> 00:02:27.456 align:middle
+no se trata realmente de
+añadir páginas dinámicas.
+
+00:02:27.736 --> 00:02:29.066 align:middle
+Ese es un trabajo para un CMS.
+
+00:02:29.066 --> 00:02:34.806 align:middle
+En tu editor, abre
+src/Controller/MainController.php.
+
+00:02:36.136 --> 00:02:44.306 align:middle
+Copia la acción homepage(), pégala,
+cámbiala a /skills, llámala app_skills
+
+00:02:44.646 --> 00:02:46.886 align:middle
+y renombra el método a skills().
+
+00:02:46.926 --> 00:02:52.966 align:middle
+Para la plantilla, renderiza
+main/skills.html.twig: Ahora,
+
+00:02:53.036 --> 00:02:59.076 align:middle
+en el directorio templates/main/,
+crea esto: skills.html.twig.
+
+00:03:00.376 --> 00:03:08.176 align:middle
+Empecemos por lo más pequeño posible:
+extender nglayouts.layoutTemplate: Genial.
+
+00:03:08.636 --> 00:03:13.316 align:middle
+Ya que estamos aquí, abre
+base.html.twig y enlaza con esto.
+
+00:03:14.076 --> 00:03:15.136 align:middle
+Busca "Habilidades".
+
+00:03:15.716 --> 00:03:16.406 align:middle
+Ahí está el enlace.
+
+00:03:16.846 --> 00:03:23.036 align:middle
+Pon el href en {{
+path('app_skills') }}: ¡Me gusta!
+
+00:03:23.816 --> 00:03:27.906 align:middle
+Actualiza, prueba el enlace de la cabecera y...
+
+00:03:28.236 --> 00:03:29.286 align:middle
+¡la página funciona!
+
+00:03:30.076 --> 00:03:36.676 align:middle
+Para poner contenido en esta página, ¡también podríamos
+hacerlo manualmente escribiendo código en nuestra app!
+
+00:03:37.296 --> 00:03:43.656 align:middle
+La biblioteca Contentful que instalamos antes tiene
+un servicio ClientInterface que podríamos utilizar
+
+00:03:43.736 --> 00:03:47.196 align:middle
+para obtener todas estas competencias
+de Contentful en nuestro controlador.
+
+00:03:47.786 --> 00:03:54.436 align:middle
+Pero en lugar de eso, vamos a tomar el camino más fácil y
+dejar que los diseños obtengan las habilidades por nosotros.
+
+00:03:55.206 --> 00:04:01.756 align:middle
+Ah, pero antes de hacerlo, vuelve a
+skills.html.twig, añade un {% block title %},
+
+00:04:01.756 --> 00:04:06.256 align:middle
+escribe "Todas las habilidades"
+y luego {% endblock %}: Esto,
+
+00:04:06.496 --> 00:04:09.756 align:middle
+como probablemente sepas,
+controla el título de la página.
+
+00:04:10.256 --> 00:04:16.416 align:middle
+Hago esto aquí porque el bloque title en
+realidad no es algo que puedas controlar
+
+00:04:16.416 --> 00:04:17.316 align:middle
+a través de Maquetaciones.
+
+00:04:17.586 --> 00:04:23.266 align:middle
+Recuerda: todo lo que construimos en nuestro diseño
+pasa a formar parte de un bloque llamado layout.
+
+00:04:24.346 --> 00:04:26.866 align:middle
+Vale, pulsa "Publicar" en el
+Diseño de la página de inicio...
+
+00:04:27.196 --> 00:04:29.206 align:middle
+y crea un nuevo diseño.
+
+00:04:30.436 --> 00:04:34.906 align:middle
+Utilizaré mi "Diseño 2" favorito y lo
+llamaré "Diseño de lista de habilidades".
+
+00:04:37.136 --> 00:04:38.226 align:middle
+Ya conoces el procedimiento.
+
+00:04:38.606 --> 00:04:40.516 align:middle
+Empieza por enlazar la zona de cabecera...
+
+00:04:40.776 --> 00:04:45.006 align:middle
+y la zona de pie de página.
+
+00:04:49.506 --> 00:04:51.976 align:middle
+Luego, vamos a construir otro héroe.
+
+00:04:52.396 --> 00:05:01.876 align:middle
+Añade una columna, dale una clase hero-wrapper y pon
+dentro un bloque "Título" con "Todas las habilidades".
+
+00:05:03.906 --> 00:05:08.976 align:middle
+Para molar aún más, añade un bloque de texto
+debajo con algún contenido de introducción.
+
+00:05:08.976 --> 00:05:12.896 align:middle
+¡Buen comienzo!
+
+00:05:13.896 --> 00:05:14.876 align:middle
+Publica el diseño...
+
+00:05:15.096 --> 00:05:18.576 align:middle
+para que podamos ir a
+enlazarlo a la página /skills.
+
+00:05:21.606 --> 00:05:26.476 align:middle
+Pulsa "Añadir nueva asignación" y vincúlala
+al "Diseño de la lista de habilidades".
+
+00:05:29.136 --> 00:05:30.566 align:middle
+Luego ve a "Detalles".
+
+00:05:31.546 --> 00:05:37.446 align:middle
+Esta vez mapearé a través de la Información
+de la Ruta, establecida en /skills.
+
+00:05:39.006 --> 00:05:40.436 align:middle
+Pulsa "Guardar cambios".
+
+00:05:42.036 --> 00:05:44.986 align:middle
+Vamos a ver cómo queda nuestro primer intento.
+
+00:05:45.406 --> 00:05:46.896 align:middle
+Y... ¡no está mal!
+
+00:05:47.666 --> 00:05:50.966 align:middle
+Ahora vamos a añadir lo importante.
+
+00:05:50.966 --> 00:05:54.116 align:middle
+Vuelve al administrador de
+diseños y edita este diseño.
+
+00:05:56.406 --> 00:05:58.856 align:middle
+Debajo de la columna, añade
+una nueva Cuadrícula.
+
+00:06:01.206 --> 00:06:04.866 align:middle
+Cambia esto de una colección
+manual a una colección dinámica.
+
+00:06:06.576 --> 00:06:14.416 align:middle
+El paquete Contentful nos ofrece dos nuevos "tipos de
+consulta", o formas de "obtener" datos de Contentful.
+
+00:06:15.326 --> 00:06:16.806 align:middle
+Utiliza la "Búsqueda Contentful".
+
+00:06:16.956 --> 00:06:18.226 align:middle
+Es la principal.
+
+00:06:18.906 --> 00:06:23.696 align:middle
+Esto te permite elegir qué tipos
+de contenido mostrar, como todos...
+
+00:06:23.696 --> 00:06:24.906 align:middle
+o sólo las competencias.
+
+00:06:25.686 --> 00:06:31.236 align:middle
+Luego podemos ordenarlos, añadir una
+búsqueda, omitir elementos o limitarlos.
+
+00:06:31.566 --> 00:06:34.616 align:middle
+Es todo lo que queremos, ¡desde el principio!
+
+00:06:35.316 --> 00:06:36.736 align:middle
+¿Qué aspecto tiene?
+
+00:06:37.516 --> 00:06:38.446 align:middle
+Pulsa "Publicar".
+
+00:06:38.946 --> 00:06:40.116 align:middle
+Seguro que lo adivinas.
+
+00:06:41.416 --> 00:06:43.246 align:middle
+Sí, "funciona"...
+
+00:06:43.436 --> 00:06:45.796 align:middle
+imprimiendo el título de cada habilidad.
+
+00:06:46.606 --> 00:06:49.426 align:middle
+Oh, déjame al menos añadir
+la clase "contenedor"...
+
+00:06:49.686 --> 00:06:51.706 align:middle
+para obtener el margen izquierdo y derecho.
+
+00:06:52.046 --> 00:06:55.276 align:middle
+Pero, ¡obviamente esto no es lo que queremos!
+
+00:06:55.626 --> 00:07:01.176 align:middle
+Necesitamos poder darle estilo e
+imprimir más campos aparte del título.
+
+00:07:01.776 --> 00:07:04.216 align:middle
+Tenemos el mismo problema
+en la página de inicio.
+
+00:07:04.736 --> 00:07:08.276 align:middle
+Y en realidad, ¡esto es aún
+más complejo de lo que parece!
+
+00:07:08.926 --> 00:07:12.686 align:middle
+Cuando personalizamos cómo se muestra
+una cuadrícula de habilidades,
+
+00:07:12.786 --> 00:07:19.286 align:middle
+quiero poder hacer que esos elementos se vean de una
+manera en la página de inicio, y de otra diferente en la
+
+00:07:19.286 --> 00:07:23.906 align:middle
+página "Habilidades", probablemente
+más grandes y con más campos impresos.
+
+00:07:24.846 --> 00:07:29.846 align:middle
+A continuación: vamos a empezar a aprender el
+importantísimo tema de cómo podemos anular
+
+00:07:29.846 --> 00:07:35.846 align:middle
+y personalizar las plantillas de Diseños para que podamos
+hacer que las cosas se vean exactamente como queremos
