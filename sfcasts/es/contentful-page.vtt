@@ -1,0 +1,321 @@
+WEBVTT
+
+00:00:01.016 --> 00:00:05.496 align:middle
+Ahora tenemos control total sobre cómo
+se muestran las páginas de Contentful.
+
+00:00:06.006 --> 00:00:12.016 align:middle
+Eso es gracias al "diseño de habilidad individual" que hemos
+asignado a todas las páginas de "habilidad" de Contentful.
+
+00:00:12.436 --> 00:00:16.866 align:middle
+Pero... todo lo que tenemos
+es este título manual de h1.
+
+00:00:17.186 --> 00:00:22.766 align:middle
+¿Cómo podemos mostrar los datos reales de
+la habilidad de Contentful que estamos viendo?
+
+00:00:22.766 --> 00:00:29.346 align:middle
+En primer lugar, en el sitio de Contentful, si navego
+hasta "Modelo de contenido" y hago clic en "Skill",
+
+00:00:29.896 --> 00:00:33.246 align:middle
+puedes ver que cada Skill tiene 5 campos...
+
+00:00:33.396 --> 00:00:35.816 align:middle
+y cada campo tiene un nombre interno.
+
+00:00:36.276 --> 00:00:39.516 align:middle
+Es... casi más fácil ver esto a
+través de la vista previa JSON.
+
+00:00:40.476 --> 00:00:40.936 align:middle
+Allá vamos.
+
+00:00:41.476 --> 00:00:47.286 align:middle
+Así que hay un campo "Título", su nombre interno
+es title, "Descripción breve", "Técnica",
+
+00:00:47.776 --> 00:00:50.776 align:middle
+y algunos otros como "Imagen" y "Anuncio".
+
+00:00:52.376 --> 00:00:56.866 align:middle
+El anuncio es en realidad un enlace
+a ese otro tipo de contenido.
+
+00:00:57.736 --> 00:01:03.366 align:middle
+En cualquier caso, lo que realmente queremos hacer aquí
+arriba es imprimir el título de la habilidad en h1.
+
+00:01:03.366 --> 00:01:10.376 align:middle
+Afortunadamente, eso es posible, gracias a un nuevo
+tipo de bloque que ha añadido el bundle Contentful.
+
+00:01:11.066 --> 00:01:14.246 align:middle
+Está aquí abajo: "Campo
+de entrada Contentful".
+
+00:01:15.006 --> 00:01:17.656 align:middle
+Esto nos permite renderizar un único campo
+
+00:01:17.726 --> 00:01:20.866 align:middle
+de cualquier entrada de Contentful que
+se esté renderizando en ese momento.
+
+00:01:21.566 --> 00:01:22.416 align:middle
+¡Vamos a probarlo!
+
+00:01:22.496 --> 00:01:27.176 align:middle
+A continuación, borra el antiguo h1.
+
+00:01:27.176 --> 00:01:31.886 align:middle
+El nuevo bloque tiene una opción
+superimportante: identificador de campo.
+
+00:01:32.566 --> 00:01:35.576 align:middle
+Establécelo con el nombre
+interno del campo: title.
+
+00:01:36.066 --> 00:01:38.806 align:middle
+Y conviértelo en un h1.
+
+00:01:38.806 --> 00:01:43.126 align:middle
+Como siempre, la etiqueta del bloque
+es opcional, pero yo la incluiré.
+
+00:01:44.386 --> 00:01:50.426 align:middle
+¡Genial! Dale a publicar y
+sigue editando, muévete y...
+
+00:01:51.056 --> 00:01:53.016 align:middle
+¡sí! Es dinámico.
+
+00:01:53.016 --> 00:02:02.266 align:middle
+Si vamos a la URL de alguna otra habilidad,
+como /basic-chop, ¡también funciona!
+
+00:02:02.336 --> 00:02:05.206 align:middle
+Así que pongámonos más elegantes.
+
+00:02:05.616 --> 00:02:06.746 align:middle
+Añade una columna...
+
+00:02:07.056 --> 00:02:08.806 align:middle
+y mueve este título dentro.
+
+00:02:10.236 --> 00:02:12.716 align:middle
+¿Adivinas lo que voy a hacer?
+
+00:02:13.406 --> 00:02:17.666 align:middle
+Dale a la columna la misma clase
+hero-wrapper que hemos utilizado antes.
+
+00:02:18.096 --> 00:02:19.116 align:middle
+¿Y sabes qué más?
+
+00:02:19.476 --> 00:02:21.626 align:middle
+Cada habilidad tiene una "Breve descripción".
+
+00:02:22.116 --> 00:02:24.816 align:middle
+Vamos a añadir otro bloque de
+campo de entrada justo debajo.
+
+00:02:26.806 --> 00:02:30.186 align:middle
+Fíjate en que una opción de
+este bloque es "tipo de vista".
+
+00:02:30.896 --> 00:02:35.766 align:middle
+Pronto hablaremos más sobre esto, pero
+debería coincidir con el "tipo" del contenido
+
+00:02:35.856 --> 00:02:37.686 align:middle
+que estás extrayendo de Contentful.
+
+00:02:38.346 --> 00:02:43.506 align:middle
+Hasta ahora, tanto title como este
+shortDescription son tipos "cadena".
+
+00:02:43.986 --> 00:02:45.106 align:middle
+Deja esto como div.
+
+00:02:46.246 --> 00:02:47.106 align:middle
+¡Temporizador de pruebas!
+
+00:02:47.336 --> 00:02:49.206 align:middle
+Pulsa "Publicar y continuar editando".
+
+00:02:49.596 --> 00:02:52.296 align:middle
+Y... veamos cómo queda.
+
+00:02:52.296 --> 00:02:53.266 align:middle
+¡Me encanta!
+
+00:02:53.876 --> 00:02:54.706 align:middle
+¡Añadamos más!
+
+00:02:55.396 --> 00:02:56.986 align:middle
+Cada habilidad tiene una imagen.
+
+00:02:57.446 --> 00:03:02.466 align:middle
+Dentro de esa misma columna héroe, añade otro
+bloque de entrada Contentful en la parte inferior.
+
+00:03:05.346 --> 00:03:06.786 align:middle
+Se llamará image...
+
+00:03:07.106 --> 00:03:09.996 align:middle
+y el tipo será "activos referenciados".
+
+00:03:11.146 --> 00:03:13.436 align:middle
+Tienes que establecer una anchura y una altura.
+
+00:03:13.866 --> 00:03:15.676 align:middle
+Hagamos 200 por 200.
+
+00:03:17.476 --> 00:03:18.146 align:middle
+Publica eso...
+
+00:03:19.706 --> 00:03:22.056 align:middle
+actualiza y...
+
+00:03:22.306 --> 00:03:23.976 align:middle
+¡estamos en marcha!
+
+00:03:24.316 --> 00:03:29.056 align:middle
+Una última cosa: renderizar el
+contenido de la habilidad debajo de todo.
+
+00:03:29.786 --> 00:03:33.046 align:middle
+Por cierto, podríamos
+renderizarlo en la misma zona...
+
+00:03:33.146 --> 00:03:34.836 align:middle
+o utilizar la zona de abajo.
+
+00:03:35.416 --> 00:03:37.566 align:middle
+Las zonas no importan mucho
+en la mayoría de los casos.
+
+00:03:37.566 --> 00:03:41.376 align:middle
+Pero hagamos este punto más interesante.
+
+00:03:41.376 --> 00:03:46.236 align:middle
+Quiero representar el contenido de la habilidad
+a la izquierda y un anuncio a la derecha.
+
+00:03:47.086 --> 00:03:51.466 align:middle
+Para ello, utiliza por primera
+vez un bloque de 2 columnas.
+
+00:03:51.466 --> 00:03:57.206 align:middle
+Ajústalo a 66, 33 para que el lado
+izquierdo ocupe la mayor parte del espacio.
+
+00:03:58.626 --> 00:04:08.406 align:middle
+Añade un título a la parte izquierda y
+conviértelo en un h3 con el texto "La Técnica:".
+
+00:04:11.136 --> 00:04:13.806 align:middle
+Debajo, arrastra un campo
+de entrada de contenido.
+
+00:04:15.176 --> 00:04:15.926 align:middle
+Este...
+
+00:04:16.326 --> 00:04:17.946 align:middle
+si voy a comprobar mis campos...
+
+00:04:18.136 --> 00:04:21.426 align:middle
+se llama technique y
+contiene texto enriquecido.
+
+00:04:21.426 --> 00:04:26.256 align:middle
+Si lo modificaras en Contentful, verías
+un editor de texto enriquecido...
+
+00:04:26.506 --> 00:04:28.896 align:middle
+y el valor final es HTML.
+
+00:04:30.886 --> 00:04:35.746 align:middle
+Así que, escribe technique, mantenlo
+como div y selecciona Richtext.
+
+00:04:37.036 --> 00:04:41.686 align:middle
+Por último, a la derecha, añade un
+campo de entrada más en Contentful.
+
+00:04:43.226 --> 00:04:45.516 align:middle
+Vuelve a mirar el modelo de
+contenido para Habilidades...
+
+00:04:45.656 --> 00:04:47.036 align:middle
+y desplázate un poco hacia abajo.
+
+00:04:49.536 --> 00:04:55.276 align:middle
+El que queremos utilizar se llama advertisement,
+y es de tipo "Entrada referenciada".
+
+00:04:57.636 --> 00:05:03.386 align:middle
+Sí, si editaras una habilidad,
+elegirías el Anuncio de la lista
+
+00:05:03.386 --> 00:05:05.786 align:middle
+de Anuncios que tenemos en Contentful.
+
+00:05:06.076 --> 00:05:08.166 align:middle
+Es como una relación de base de datos.
+
+00:05:09.736 --> 00:05:13.756 align:middle
+De todas formas, introduce advertisement,
+pulsa "Publicar y continuar editando"...
+
+00:05:16.976 --> 00:05:18.236 align:middle
+actualiza y...
+
+00:05:19.026 --> 00:05:21.406 align:middle
+¡ok! Más o menos genial.
+
+00:05:21.856 --> 00:05:23.896 align:middle
+Necesitamos un contenedor para meterlos.
+
+00:05:24.546 --> 00:05:28.606 align:middle
+Ya tenemos una columna, así que
+pulsa "Envolver en contenedor".
+
+00:05:29.866 --> 00:05:30.986 align:middle
+Y... sí...
+
+00:05:31.456 --> 00:05:34.166 align:middle
+aunque a esto también le vendría
+bien algo de margen superior.
+
+00:05:34.906 --> 00:05:38.576 align:middle
+En esa misma columna, añade una clase: my-3.
+
+00:05:39.926 --> 00:05:40.896 align:middle
+Publica esto...
+
+00:05:41.346 --> 00:05:42.606 align:middle
+y vuelve a cargar.
+
+00:05:44.376 --> 00:05:45.496 align:middle
+¡Mucho mejor!
+
+00:05:45.886 --> 00:05:49.396 align:middle
+Aunque, el Anuncio sólo
+está imprimiendo una URL...
+
+00:05:49.666 --> 00:05:51.506 align:middle
+no renderizando un anuncio.
+
+00:05:51.976 --> 00:05:57.446 align:middle
+Eso es porque Contentful no sabe cómo
+renderizar el tipo de contenido "Anuncio".
+
+00:05:57.966 --> 00:05:59.206 align:middle
+Pronto lo solucionaremos.
+
+00:05:59.646 --> 00:06:05.866 align:middle
+Pero primero, vamos a arreglar nuestras páginas
+Skill anteponiendo a todas las URL el prefijo /skills

@@ -1,0 +1,244 @@
+WEBVTT
+
+00:00:01.016 --> 00:00:04.186 align:middle
+Ahora podemos añadir mucho
+contenido dinámico a nuestro sitio,
+
+00:00:04.486 --> 00:00:07.986 align:middle
+como estos bloques estáticos de
+aquí arriba, cuadrículas o listas.
+
+00:00:08.706 --> 00:00:14.646 align:middle
+Las cuadrículas y las listas pueden contener
+elementos de Contentful o de nuestra entidad Recipe.
+
+00:00:15.266 --> 00:00:21.826 align:middle
+Pero para que nuestro sitio brille de verdad, necesitamos
+flexibilidad sobre el aspecto de estas piezas.
+
+00:00:22.546 --> 00:00:26.356 align:middle
+Empecemos de forma sencilla, anulando
+la plantilla que muestra el aspecto del
+
+00:00:26.356 --> 00:00:30.166 align:middle
+bloque "Título" para toda nuestra aplicación.
+
+00:00:31.086 --> 00:00:32.156 align:middle
+Para ello...
+
+00:00:32.506 --> 00:00:38.556 align:middle
+primero tenemos que averiguar qué plantilla
+se encarga actualmente de mostrar este bloque.
+
+00:00:39.516 --> 00:00:44.846 align:middle
+Una forma fácil de averiguarlo es ir a una página
+que muestre uno de estos bloques, actualizarla
+
+00:00:45.126 --> 00:00:48.496 align:middle
+y hacer clic en el icono Tw ig de la
+barra de herramientas de depuración web.
+
+00:00:49.296 --> 00:00:52.916 align:middle
+Abajo, en la parte inferior,
+vemos todo el árbol.
+
+00:00:53.626 --> 00:00:57.906 align:middle
+Y si nos fijamos bien, ¡ah ja!
+
+00:00:57.906 --> 00:01:02.756 align:middle
+¡Parece que hay una plantilla
+llamada block/title.html.twig!
+
+00:01:03.606 --> 00:01:07.756 align:middle
+El propio Layouts también tiene una sección de la barra
+de herramientas de depuración web realmente bonita.
+
+00:01:08.356 --> 00:01:12.576 align:middle
+Si vas a "Bloques renderizados",
+muestra "Definición del bloque:
+
+00:01:12.576 --> 00:01:15.086 align:middle
+título", "Texto", "Lista" y "Pie".
+
+00:01:15.786 --> 00:01:20.916 align:middle
+Y, como hemos visto, el Título se
+renderiza mediante title.html.twig.
+
+00:01:21.816 --> 00:01:28.166 align:middle
+Observa que casi todas estas plantillas están
+dentro de los directorios themes/standard/.
+
+00:01:28.846 --> 00:01:33.096 align:middle
+Layouts tiene un concepto de
+temas, aunque no necesitaremos
+
+00:01:33.096 --> 00:01:38.486 align:middle
+crear varios temas a menos que estemos
+construyendo algún tipo de aplicación multisitio.
+
+00:01:39.326 --> 00:01:44.826 align:middle
+En nuestro caso, sólo vamos a utilizar
+el tema incorporado llamado standard.
+
+00:01:45.476 --> 00:01:52.346 align:middle
+Pero los temas siguen siendo importantes, porque cualquier
+cosa dentro de un tema puede ser fácilmente anulada
+
+00:01:52.386 --> 00:01:55.046 align:middle
+colocando una plantilla en el lugar adecuado.
+
+00:01:55.666 --> 00:01:59.426 align:middle
+Vamos a utilizar esa convención
+para anular la plantilla Título.
+
+00:02:00.306 --> 00:02:00.986 align:middle
+Hagámoslo
+
+00:02:01.476 --> 00:02:06.756 align:middle
+Primero, en el directorio templates/, asegúrate
+de que tienes un subdirectorio nglayouts/.
+
+00:02:07.316 --> 00:02:10.506 align:middle
+Dentro de él, añade uno
+nuevo llamado themes/...
+
+00:02:10.986 --> 00:02:14.226 align:middle
+seguido de otro subdirectorio
+llamado standard/.
+
+00:02:15.206 --> 00:02:18.546 align:middle
+Te habrás dado cuenta de que estamos
+igualando la estructura que hay
+
+00:02:18.546 --> 00:02:21.786 align:middle
+aquí: nglayouts/themes/standard/.
+
+00:02:22.586 --> 00:02:28.506 align:middle
+Dentro de esto, como la plantilla de
+destino se llama block/title.html.twig,
+
+00:02:28.976 --> 00:02:35.076 align:middle
+si creamos esa misma ruta,
+nuestro title.html.twig ganará.
+
+00:02:35.826 --> 00:02:43.016 align:middle
+Hazlo: añade otro directorio llamado block/
+y un nuevo archivo dentro: title.html.twig.
+
+00:02:43.996 --> 00:02:48.556 align:middle
+Para ver si funciona, escribe un
+texto ficticio: ¡Probemos esto!
+
+00:02:49.016 --> 00:02:52.766 align:middle
+Vuelve a la página Habilidades, actualiza y...
+
+00:02:53.106 --> 00:02:55.866 align:middle
+no pasa absolutamente nada.
+
+00:02:56.576 --> 00:03:02.036 align:middle
+Eso es porque la primera vez que creamos este
+directorio themes/, tenemos que borrar la caché.
+
+00:03:02.696 --> 00:03:03.116 align:middle
+Hazlo...
+
+00:03:03.706 --> 00:03:06.886 align:middle
+y, una vez hecho esto,
+vuelve a probar la página.
+
+00:03:07.586 --> 00:03:12.046 align:middle
+¡Yupi! ¡Ahora controlamos cómo
+se muestra el bloque Título!
+
+00:03:12.506 --> 00:03:13.486 align:middle
+¡El poder!
+
+00:03:14.446 --> 00:03:18.246 align:middle
+Vale, pero aunque queramos personalizar
+cómo se muestra el Título...
+
+00:03:18.586 --> 00:03:21.846 align:middle
+probablemente no queramos empezar de cero.
+
+00:03:22.426 --> 00:03:28.376 align:middle
+Sería mejor reutilizar parte de la plantilla
+principal, o al menos usarla como referencia.
+
+00:03:29.216 --> 00:03:35.706 align:middle
+Pulsa Shift+Shift, busca title.html.twig, y
+selecciona "Incluir elementos no del proyecto".
+
+00:03:36.446 --> 00:03:39.326 align:middle
+Abre la del núcleo desde nglayouts/themes/.
+
+00:03:40.206 --> 00:03:43.586 align:middle
+Vaya. Aquí pasan muchas cosas...
+
+00:03:44.176 --> 00:03:49.866 align:middle
+incluido el hecho de que amplía
+otra plantilla: block.html.twig.
+
+00:03:50.456 --> 00:03:51.146 align:middle
+Ábrela.
+
+00:03:53.376 --> 00:04:00.186 align:middle
+Contiene muchas funciones básicas, como
+leer la variable dinámica css_class,
+
+00:04:00.576 --> 00:04:04.886 align:middle
+que contiene las clases CSS
+que introduzcamos en el admin.
+
+00:04:05.656 --> 00:04:07.886 align:middle
+También gestiona si hay un contenedor o no.
+
+00:04:08.486 --> 00:04:09.906 align:middle
+¡Son cosas útiles!
+
+00:04:10.816 --> 00:04:17.236 align:middle
+En title.html.twig, tiene código para saber
+si el título es o no un enlace y otras cosas.
+
+00:04:17.946 --> 00:04:23.926 align:middle
+Podríamos sustituir totalmente esta
+plantilla e ignorar todo esto si quisiéramos.
+
+00:04:24.416 --> 00:04:31.276 align:middle
+Pero en lugar de eso, copiamos la plantilla principal y la
+pegamos en nuestra versión: Y sólo para demostrar que podemos,
+
+00:04:31.506 --> 00:04:34.866 align:middle
+eliminemos esa clase title: ¡Genial!
+
+00:04:35.606 --> 00:04:38.746 align:middle
+Ahora ve, actualiza y...
+
+00:04:39.386 --> 00:04:41.556 align:middle
+vuelve a tener el mismo aspecto que antes.
+
+00:04:42.246 --> 00:04:47.086 align:middle
+Pero aquí abajo, ¡la clase title
+de <h1> ha desaparecido!
+
+00:04:47.846 --> 00:04:53.736 align:middle
+Así que la forma más sencilla de controlar el aspecto
+de algo es encontrar la plantilla que lo renderiza
+
+00:04:54.186 --> 00:04:58.556 align:middle
+y anularla por completo utilizando
+esta estructura de directorios themes/.
+
+00:04:59.396 --> 00:05:04.506 align:middle
+Volvamos a utilizar este truco
+para personalizar el aspecto de un
+
+00:05:04.666 --> 00:05:09.206 align:middle
+campo "activo" de Contentful, como
+este campo de imagen de habilidad.
+
+00:05:09.946 --> 00:05:13.016 align:middle
+Pero por el camino, vamos a profundizar
+
+00:05:13.016 --> 00:05:18.696 align:middle
+en algunos conceptos de enorme importancia:
+las vistas en bloque y los tipos de vista
