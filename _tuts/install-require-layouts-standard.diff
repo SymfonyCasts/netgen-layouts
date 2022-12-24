@@ -1,3 +1,15 @@
+diff --git a/README.md b/README.md
+index 1f3f21a..8d53845 100644
+--- a/README.md
++++ b/README.md
+@@ -41,6 +41,7 @@ Next, build the database and the schema with:
+ # "symfony console" is equivalent to "bin/console"
+ # but its aware of your database container
+ symfony console doctrine:database:create --if-not-exists
++symfony console doctrine:migrations:migrate --configuration=vendor/netgen/layouts-core/migrations/doctrine.yml
+ symfony console doctrine:migrations:migrate
+ symfony console doctrine:fixtures:load
+ ```
 diff --git a/composer.json b/composer.json
 index d57736c..59b0e33 100644
 --- a/composer.json
