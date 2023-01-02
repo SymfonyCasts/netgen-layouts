@@ -2,7 +2,7 @@
 
 I'm *pretty* sure that our new `item_view` is configured correctly. We have
 `item\value_type: contentful_entry`, which I *know* is correct... and then we're
-using `contentful\content_type` set to `skills` so that this *only* affects skills.
+using `contentful\content_type` set to `skill` so that this *only* affects skills.
 
 But... it doesn't seem to be working on the frontend. Earlier, when we ran
 `debug:config`, we saw that the *problem* lies with the *order* of the config. Layouts
