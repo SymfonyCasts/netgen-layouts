@@ -1,0 +1,347 @@
+WEBVTT
+
+00:00:01.036 --> 00:00:05.066 align:middle
+Cuando se trata de personalización,
+puedes hacer mucho daño
+
+00:00:05.066 --> 00:00:10.086 align:middle
+mirando qué plantillas se están renderizando
+y utilizando el sistema de temas para anularlas.
+
+00:00:10.786 --> 00:00:15.676 align:middle
+Pero hay algunos casos en los que
+necesitarás ser aún más específico.
+
+00:00:16.516 --> 00:00:20.196 align:middle
+Por ejemplo, supongamos que queremos
+modificar la plantilla "elemento "
+
+00:00:20.276 --> 00:00:23.566 align:middle
+para ver cómo se muestra la cuadrícula
+de habilidades en la página de inicio.
+
+00:00:24.436 --> 00:00:28.586 align:middle
+Si compruebas aquí la barra de herramientas de
+depuración web y te desplazas hacia abajo...
+
+00:00:29.076 --> 00:00:31.026 align:middle
+Buscaré "contentful"...
+
+00:00:32.376 --> 00:00:33.456 align:middle
+ah, ya está.
+
+00:00:34.146 --> 00:00:36.416 align:middle
+Puedes ver grid.html.twig...
+
+00:00:36.986 --> 00:00:42.186 align:middle
+que muestra item/contentful_entry.html.twig.
+
+00:00:42.906 --> 00:00:46.876 align:middle
+Para personalizar el elemento,
+podríamos anular esa plantilla.
+
+00:00:47.286 --> 00:00:48.456 align:middle
+Muy fácil.
+
+00:00:49.246 --> 00:00:54.716 align:middle
+El problema es que, en Contentful,
+tenemos varios tipos de contenido:
+
+00:00:55.096 --> 00:00:57.436 align:middle
+tenemos Habilidades y Anuncios.
+
+00:00:58.076 --> 00:01:01.686 align:middle
+Así que si modificamos esta
+plantilla, la modificaremos
+
+00:01:01.686 --> 00:01:04.906 align:middle
+tanto para Habilidades como para Anuncios...
+
+00:01:05.246 --> 00:01:08.076 align:middle
+y probablemente queramos que
+tengan un aspecto diferente.
+
+00:01:08.446 --> 00:01:10.546 align:middle
+Entonces, ¿cómo podemos resolver esto?
+
+00:01:11.276 --> 00:01:17.766 align:middle
+Antes hemos ejecutado debug:config netgen_layouts view
+y hemos hablado de las dos secciones principales que hay
+
+00:01:17.766 --> 00:01:23.356 align:middle
+aquí debajo: block_view (que controla
+cómo se muestran los bloques) y item_view.
+
+00:01:24.246 --> 00:01:30.896 align:middle
+Como ya he dicho varias veces, algunos bloques,
+como Grid y List, muestran elementos individuales.
+
+00:01:31.716 --> 00:01:36.376 align:middle
+En esta configuración de item_view
+es donde definimos esas plantillas.
+
+00:01:36.916 --> 00:01:40.516 align:middle
+Y verás algunas claves raíz
+familiares: default para el frontend,
+
+00:01:40.936 --> 00:01:44.646 align:middle
+ajax para las llamadas
+AJAX y app para el admin.
+
+00:01:45.546 --> 00:01:49.216 align:middle
+Una vez más, esto utiliza
+la configuración match y...
+
+00:01:49.616 --> 00:01:52.646 align:middle
+¡eh! ¡Vemos nuestra entrada aquí!
+
+00:01:53.456 --> 00:01:55.416 align:middle
+¿Recuerdas recipes_default?
+
+00:01:56.006 --> 00:01:58.556 align:middle
+Lo configuramos dentro de nuestro
+archivo de configuración,
+
+00:01:59.076 --> 00:02:03.346 align:middle
+y es una de las dos plantillas de
+elementos reales que tenemos ahora:
+
+00:02:04.146 --> 00:02:09.796 align:middle
+Hay una para recetas, y luego Contentful tiene
+una para todos los elementos de Contentful.
+
+00:02:10.406 --> 00:02:16.556 align:middle
+Así que, de nuevo, podríamos anular esta
+plantilla a través del sistema de temas y listo.
+
+00:02:17.356 --> 00:02:23.446 align:middle
+Pero nuestro objetivo es anular esta plantilla sólo
+cuando el artículo sea una habilidad, como éste.
+
+00:02:24.016 --> 00:02:25.906 align:middle
+¿Y cómo lo hacemos?
+
+00:02:26.696 --> 00:02:32.986 align:middle
+Añadiendo nuestro propio item_view a esta lista
+que coincide con ese único tipo de contenido.
+
+00:02:33.796 --> 00:02:34.866 align:middle
+Hagámoslo
+
+00:02:35.616 --> 00:02:36.346 align:middle
+Por aquí... estamos
+
+00:02:36.776 --> 00:02:39.656 align:middle
+en item_view, default para el frontend
+
+00:02:40.046 --> 00:02:43.896 align:middle
+y tenemos la única entrada
+de antes: recipes_default.
+
+00:02:44.476 --> 00:02:45.726 align:middle
+Añadamos otra.
+
+00:02:46.376 --> 00:02:52.736 align:middle
+Llámala contentful_entry/skill, aunque esta
+clave en concreto no supone ninguna diferencia.
+
+00:02:53.546 --> 00:02:55.116 align:middle
+Debajo, pon template
+
+00:02:55.116 --> 00:03:02.316 align:middle
+a @nglayouts/item/contentful_entry,
+seguido de skill.html.twig:
+
+00:03:03.216 --> 00:03:07.816 align:middle
+Antes, utilizábamos nglayouts sin el @...
+
+00:03:07.816 --> 00:03:13.406 align:middle
+sólo porque te dije que nglayouts/ era
+un buen directorio para organizar cosas.
+
+00:03:14.346 --> 00:03:19.616 align:middle
+Internamente, Layouts utiliza @nglayouts
+en las rutas de sus plantillas.
+
+00:03:20.116 --> 00:03:21.636 align:middle
+¿Cuál es la diferencia?
+
+00:03:22.316 --> 00:03:26.256 align:middle
+Al añadir el @, nos estamos
+enganchando al sistema de temas.
+
+00:03:26.986 --> 00:03:30.886 align:middle
+Así, como tenemos un
+directorio templates/nglayouts/
+
+00:03:31.276 --> 00:03:35.996 align:middle
+con themes/standard/ dentro,
+utilizará nuestra plantilla.
+
+00:03:36.836 --> 00:03:41.046 align:middle
+Puedes utilizar @nglayouts
+o simplemente nglayouts.
+
+00:03:41.546 --> 00:03:43.766 align:middle
+Sólo quería que entendieras la diferencia
+
+00:03:44.006 --> 00:03:48.216 align:middle
+porque verás la sintaxis
+@nglayouts por todas partes.
+
+00:03:49.016 --> 00:03:52.216 align:middle
+La clave realmente importante aquí es match.
+
+00:03:52.856 --> 00:03:56.886 align:middle
+Queremos que coincida sólo cuando estemos
+trabajando con un contentful_entry.
+
+00:03:57.656 --> 00:04:00.166 align:middle
+Vale, copia match del config...
+
+00:04:00.946 --> 00:04:02.016 align:middle
+y pégalo.
+
+00:04:02.686 --> 00:04:04.696 align:middle
+Pero tenemos que ser más específicos.
+
+00:04:05.146 --> 00:04:10.486 align:middle
+También necesitamos coincidir sólo cuando
+el tipo de contenido sea una habilidad.
+
+00:04:11.076 --> 00:04:12.066 align:middle
+Pero, ¿cómo lo hacemos?
+
+00:04:12.576 --> 00:04:15.046 align:middle
+¿Qué comparadores hay disponibles?
+
+00:04:15.746 --> 00:04:17.686 align:middle
+Hay una lista básica...
+
+00:04:18.146 --> 00:04:22.856 align:middle
+pero ¿ha añadido Contentful algún
+comparador adicional que podamos aprovechar?
+
+00:04:23.506 --> 00:04:27.656 align:middle
+He aquí un pequeño truco para ver la
+verdadera lista de elementos de match.
+
+00:04:28.386 --> 00:04:31.186 align:middle
+Es un poco técnico, pero
+funciona de maravilla.
+
+00:04:31.786 --> 00:04:33.846 align:middle
+Ejecuta: php ./bin/console debug:container
+
+00:04:34.056 --> 00:04:40.846 align:middle
+--tag=netgen_layouts.view_matcher
+¿Qué hace esto?
+
+00:04:41.546 --> 00:04:45.826 align:middle
+Bueno, cualquiera puede crear un
+comparador personalizado, como foo\bar.
+
+00:04:46.476 --> 00:04:51.086 align:middle
+Para ello, creas una clase
+y le das esta etiqueta.
+
+00:04:51.856 --> 00:04:54.576 align:middle
+Buscando todos los servicios con esa etiqueta,
+
+00:04:55.016 --> 00:04:58.486 align:middle
+podemos encontrar todos los
+matchers existentes en el sistema.
+
+00:04:59.146 --> 00:05:01.656 align:middle
+Y... ¡mira qué lista!
+
+00:05:02.756 --> 00:05:07.626 align:middle
+Aquí hay uno interesante:
+contentful\content_type.
+
+00:05:08.376 --> 00:05:09.466 align:middle
+Seguro que podemos utilizarlo.
+
+00:05:10.216 --> 00:05:14.226 align:middle
+Inténtalo: contentful\content_type
+ajustado a skill:
+
+00:05:15.116 --> 00:05:16.936 align:middle
+Bien, vamos a crear la plantilla.
+
+00:05:17.586 --> 00:05:23.116 align:middle
+Dentro de themes/standard/, en lugar de block/,
+esta vez, crea un directorio llamado item/...
+
+00:05:24.576 --> 00:05:30.016 align:middle
+luego contentful_entry/,
+y luego skill.html.twig.
+
+00:05:30.776 --> 00:05:32.886 align:middle
+De momento pon un texto ficticio:
+
+00:05:33.806 --> 00:05:41.106 align:middle
+Vale, si esto funciona, cuando actualicemos, estos
+elementos -que son habilidades de Contentful-
+
+00:05:41.376 --> 00:05:44.656 align:middle
+deberían volver a renderizarse
+utilizando nuestra nueva plantilla.
+
+00:05:45.216 --> 00:05:46.706 align:middle
+Pero cuando lo intentamos...
+
+00:05:47.186 --> 00:05:49.656 align:middle
+no cambia absolutamente nada.
+
+00:05:49.986 --> 00:05:50.666 align:middle
+¿Qué ha ocurrido?
+
+00:05:51.586 --> 00:05:53.046 align:middle
+Vuelve a tu terminal y ejecuta de nuevo php
+
+00:05:53.346 --> 00:05:57.596 align:middle
+./bin/console debug:config
+netgen_layouts view.item_view .
+
+00:05:58.546 --> 00:05:59.436 align:middle
+Todo parece correcto...
+
+00:05:59.816 --> 00:06:01.596 align:middle
+excepto por el orden.
+
+00:06:02.346 --> 00:06:05.596 align:middle
+Éste de Contentful está
+al principio de la lista...
+
+00:06:06.126 --> 00:06:08.516 align:middle
+y los nuevos están al final.
+
+00:06:09.246 --> 00:06:09.946 align:middle
+¿Y adivina qué?
+
+00:06:10.386 --> 00:06:16.356 align:middle
+Cuando Layouts intenta averiguar qué plantilla
+debe mostrar, lee la lista de arriba a abajo
+
+00:06:16.736 --> 00:06:23.256 align:middle
+y encuentra la primera que coincide: exactamente
+como funciona el sistema de enrutamiento de Symfony.
+
+00:06:24.086 --> 00:06:31.026 align:middle
+Así, primero mira contentful_entry, ve
+que la value_type es contentful_entry...
+
+00:06:31.446 --> 00:06:32.776 align:middle
+y lo utiliza.
+
+00:06:33.466 --> 00:06:38.196 align:middle
+Nunca llega al contentful_entry/skill
+de la parte inferior.
+
+00:06:39.006 --> 00:06:44.156 align:middle
+Para solucionarlo, vamos a utilizar un
+elegante truco de configuración de prefijo.
+
+00:06:44.646 --> 00:06:46.256 align:middle
+Hagámoslo a continuación.
