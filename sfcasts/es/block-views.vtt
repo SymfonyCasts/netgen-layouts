@@ -1,0 +1,440 @@
+WEBVTT
+
+00:00:01.036 --> 00:00:03.756 align:middle
+Vamos a anular completamente otra plantilla.
+
+00:00:04.606 --> 00:00:06.826 align:middle
+Entra en la plantilla de
+Habilidades Individuales.
+
+00:00:07.426 --> 00:00:12.156 align:middle
+Aquí estamos utilizando una entrada de
+Contentful, que es un "Activo referenciado"...
+
+00:00:12.546 --> 00:00:15.486 align:middle
+y se muestra como esta etiqueta de imagen.
+
+00:00:16.046 --> 00:00:21.026 align:middle
+¡Genial! Este es un gran ejemplo
+de cómo un único tipo de bloque
+
+00:00:21.456 --> 00:00:27.946 align:middle
+-por ejemplo, el tipo de bloque "Campo de entrada
+Contentful"- puede tener varios tipos de Vista,
+
+00:00:28.176 --> 00:00:30.796 align:middle
+lo que básicamente significa
+"varias plantillas".
+
+00:00:31.446 --> 00:00:35.506 align:middle
+Cada uno de estos diferentes tipos de Vista
+será representado por una plantilla diferente.
+
+00:00:36.346 --> 00:00:41.436 align:middle
+En realidad vemos esto con muchos tipos de bloque
+diferentes, incluso con el tipo de bloque Rejilla.
+
+00:00:42.116 --> 00:00:44.516 align:middle
+Añadiré uno aquí abajo temporalmente.
+
+00:00:45.286 --> 00:00:50.896 align:middle
+Tiene un tipo de Vista que te permite
+cambiar entre Lista y Cuadrícula.
+
+00:00:51.646 --> 00:00:58.396 align:middle
+Sí, los bloques Lista y Cuadrícula son en
+realidad el mismo tipo de bloque internamente:
+
+00:00:58.776 --> 00:01:04.266 align:middle
+sólo tienen un tipo de Vista diferente, lo que significa
+que cada uno es representado por una plantilla diferente.
+
+00:01:04.846 --> 00:01:05.796 align:middle
+Adelante, borra eso.
+
+00:01:06.696 --> 00:01:11.296 align:middle
+En cualquier caso, cada tipo de bloque
+puede tener uno o más tipos de vista.
+
+00:01:11.776 --> 00:01:16.676 align:middle
+Y en realidad quiero profundizar un
+poco más en este concepto de "vistas".
+
+00:01:17.616 --> 00:01:18.956 align:middle
+Busca tu terminal y ejecuta: php
+
+00:01:19.086 --> 00:01:27.086 align:middle
+./bin/console debug:config netgen_layouts view
+Estoy depurando la configuración que podría vivir
+
+00:01:27.136 --> 00:01:32.016 align:middle
+bajo la tecla view debajo
+de la tecla netgen_layouts:
+
+00:01:32.876 --> 00:01:36.966 align:middle
+Cuando ejecutes esto, verás
+un montón de configuraciones.
+
+00:01:37.676 --> 00:01:45.396 align:middle
+Observa que hay varias claves raíz, como
+parameter_view, layout_view, y algunas otras.
+
+00:01:46.046 --> 00:01:53.176 align:middle
+Pero en realidad sólo h a y dos que
+nos interesen: block_view item_view, d
+
+00:01:53.646 --> 00:01:59.556 align:middle
+e la que hablaremos ahora, y , que controla cómo se
+muestran los elementos de una Lista o Cuadrícula. De
+
+00:02:00.306 --> 00:02:04.916 align:middle
+hecho, ya vimos esto antes, cuando personalizamos
+la representación de nuestro "elemento" Receta
+
+00:02:05.056 --> 00:02:07.986 align:middle
+dentro de una Lista o Cuadrícula.
+
+00:02:08.606 --> 00:02:11.216 align:middle
+Pronto hablaremos más de ello. De
+
+00:02:12.146 --> 00:02:21.296 align:middle
+todos modos, para ampliar las vistas de bloque, ejecuta el
+mismo comando, pero añade .block_view Las vistas de bloque,
+
+00:02:21.506 --> 00:02:26.496 align:middle
+en pocas palabras, controlan cómo se
+muestran los tipos de bloque completos.
+
+00:02:27.216 --> 00:02:30.446 align:middle
+Por ejemplo, podemos ver cómo se
+visualiza el "Bloque de título"...
+
+00:02:30.616 --> 00:02:34.436 align:middle
+o el "Bloque de texto", o cómo
+se visualiza el "Bloque de lista".
+
+00:02:35.106 --> 00:02:44.056 align:middle
+Esta configuración block_view puede tener
+varias claves debajo, como default, app, y ajax.
+
+00:02:44.536 --> 00:02:46.976 align:middle
+Y ya sabemos lo que significan.
+
+00:02:47.586 --> 00:02:53.576 align:middle
+default significa que se utilizan en el frontend , app
+significa que se utilizan en la sección de administración
+
+00:02:53.996 --> 00:03:00.446 align:middle
+y ajax, que no es tan común, se utiliza
+en el frontend para las llamadas AJAX.
+
+00:03:01.076 --> 00:03:07.606 align:middle
+Así que para anular la plantilla del frontend para
+un bloque, en realidad queremos decir que queremos
+
+00:03:07.606 --> 00:03:12.046 align:middle
+anular su "vista" de bloque bajo la
+clave default. Vamos... a ampliarlo
+
+00:03:12.666 --> 00:03:20.646 align:middle
+una vez más añadiendo .default:
+Estas son todas las vistas de bloque
+
+00:03:20.906 --> 00:03:22.886 align:middle
+que se utilizarán en el frontend.
+
+00:03:23.406 --> 00:03:27.146 align:middle
+Lo más complicado de éstas es la parte match.
+
+00:03:27.946 --> 00:03:32.556 align:middle
+Cuando defines una "vista de bloque", es
+bastante habitual definir la plantilla
+
+00:03:32.556 --> 00:03:35.916 align:middle
+que debe utilizarse cuando coinciden dos cosas.
+
+00:03:36.646 --> 00:03:41.046 align:middle
+Busca "list\grid": es un gran ejemplo.
+
+00:03:41.706 --> 00:03:49.096 align:middle
+Tiene dos elementos match: block\definition
+se establece en list porque,
+
+00:03:49.386 --> 00:03:56.456 align:middle
+técnicamente, el "Tipo de bloque" para los
+bloques Lista y Cuadrícula se llama list.
+
+00:03:57.156 --> 00:04:02.196 align:middle
+La segunda condición de coincidencia
+es block\view_type fijado en grid.
+
+00:04:02.986 --> 00:04:10.176 align:middle
+Juntos significan que si se está renderizando
+un bloque cuyo block\definition es list
+
+00:04:10.666 --> 00:04:15.466 align:middle
+y cuyo block\view_type es grid, utiliza esto.
+
+00:04:16.236 --> 00:04:21.726 align:middle
+Por cierto, ambas cosas pueden verse muy claramente
+desde la barra de herramientas de depuración web.
+
+00:04:22.406 --> 00:04:28.006 align:middle
+Ve a la página de inicio, haz clic en la barra de herramientas
+de depuración web Diseños, y ve a "Bloques renderizados".
+
+00:04:28.546 --> 00:04:29.406 align:middle
+Aquí abajo...
+
+00:04:29.916 --> 00:04:30.716 align:middle
+¡mira esto!
+
+00:04:31.036 --> 00:04:34.976 align:middle
+Puedes ver "Definición de bloque:
+¡Lista", "Tipo de vista: cuadrícula"!
+
+00:04:35.676 --> 00:04:38.056 align:middle
+Y luego apunta a la plantilla
+que se ha renderizado.
+
+00:04:38.056 --> 00:04:41.556 align:middle
+En este caso, se refiere a
+esta cuadrícula de aquí.
+
+00:04:42.856 --> 00:04:43.626 align:middle
+Entonces...
+
+00:04:43.676 --> 00:04:47.766 align:middle
+¿por qué se muestra el bloque
+Título en title.html.twig?
+
+00:04:48.376 --> 00:04:50.306 align:middle
+Podemos verlo en la configuración.
+
+00:04:50.876 --> 00:04:51.926 align:middle
+Busca "título"...
+
+00:04:52.566 --> 00:04:53.016 align:middle
+aquí está.
+
+00:04:53.616 --> 00:05:01.926 align:middle
+Esto dice: si el block\definition es title y el
+block\view_type es title, utiliza esta plantilla.
+
+00:05:02.756 --> 00:05:07.806 align:middle
+Este es un ejemplo de un tipo de Bloque
+que sólo tiene un tipo de Vista.
+
+00:05:08.316 --> 00:05:13.766 align:middle
+Así que, en la práctica, ésta es la vista que
+se utiliza para todos los bloques de título.
+
+00:05:14.716 --> 00:05:20.756 align:middle
+Bien, recordemos nuestro objetivo original:
+anular la plantilla que representa esta imagen.
+
+00:05:21.376 --> 00:05:28.236 align:middle
+Sabemos que se trata de un "Campo de entrada Contentful"
+y que tiene un tipo de vista "Activos referenciados".
+
+00:05:28.886 --> 00:05:30.886 align:middle
+Así que... ¡podemos encontrarlo aquí!
+
+00:05:31.546 --> 00:05:33.426 align:middle
+Busca "activos" y...
+
+00:05:34.046 --> 00:05:34.986 align:middle
+¡ahí está!
+
+00:05:35.616 --> 00:05:39.756 align:middle
+Así que si block\definition
+es contentful_entry_field
+
+00:05:40.316 --> 00:05:45.816 align:middle
+y block\view_type es assets,
+¡ésta es la plantilla!
+
+00:05:46.646 --> 00:05:52.756 align:middle
+Esto significa que si queremos anular sólo el tipo
+de vista assets de la entrada Contentful, ésa es
+
+00:05:53.176 --> 00:05:55.386 align:middle
+la plantilla que tenemos que anular.
+
+00:05:56.316 --> 00:06:00.906 align:middle
+Y sí, podríamos haberlo
+encontrado muy fácilmente y endo
+
+00:06:00.906 --> 00:06:04.716 align:middle
+a la barra de herramientas de depuración
+web y encontrando allí la plantilla.
+
+00:06:05.416 --> 00:06:09.236 align:middle
+Pero ahora entendemos un poco mejor
+cómo se representan los bloques
+
+00:06:09.636 --> 00:06:15.306 align:middle
+y cómo cada bloque puede tener varias vistas
+para que podamos elegir cómo se representan.
+
+00:06:15.966 --> 00:06:20.456 align:middle
+Más adelante, añadiremos un "tipo de
+vista" adicional a un bloque existente.
+
+00:06:21.396 --> 00:06:23.426 align:middle
+Bien, manos a la obra.
+
+00:06:23.886 --> 00:06:28.686 align:middle
+La ruta comienza con la normal
+nglayouts/themes/standard/,
+
+00:06:29.276 --> 00:06:32.666 align:middle
+luego necesitamos block/, seguida de esta ruta.
+
+00:06:33.406 --> 00:06:39.416 align:middle
+Así que dentro de nuestro directorio block/, crea un
+nuevo subdirectorio llamado contentful_entry_field/.
+
+00:06:40.216 --> 00:06:43.886 align:middle
+Y dentro de éste, un nuevo assets.html.twig.
+
+00:06:44.446 --> 00:06:47.056 align:middle
+Por ahora, sólo diré ASSET:
+
+00:06:47.986 --> 00:06:50.686 align:middle
+Vale Gira hacia el frontend y...
+
+00:06:51.136 --> 00:06:53.426 align:middle
+¡sí! ¡Lo ve al instante!
+
+00:06:53.686 --> 00:06:55.316 align:middle
+¡Ya tenemos el control!
+
+00:06:56.326 --> 00:07:01.106 align:middle
+Como antes, probablemente no
+queramos anular toda la plantilla.
+
+00:07:01.636 --> 00:07:05.906 align:middle
+En lugar de eso, abre la plantilla
+principal - assets.html.twig -
+
+00:07:06.506 --> 00:07:09.526 align:middle
+para que podamos robar, tomar prestado de ella.
+
+00:07:10.306 --> 00:07:12.886 align:middle
+Temporalmente, cópiala entera, pégala:
+
+00:07:13.526 --> 00:07:15.566 align:middle
+Y... ¡sí!
+
+00:07:15.976 --> 00:07:16.816 align:middle
+Funciona.
+
+00:07:17.666 --> 00:07:19.936 align:middle
+Contentful es bastante avanzado...
+
+00:07:20.406 --> 00:07:26.576 align:middle
+y puedes ver que admite campos que contienen
+una sola imagen, así como varias imágenes.
+
+00:07:27.216 --> 00:07:32.916 align:middle
+Puedes mantener esto tan flexible como quieras,
+pero también puedes hacerlo a tu gusto.
+
+00:07:33.646 --> 00:07:36.416 align:middle
+Voy a simplificar
+drásticamente esta plantilla...
+
+00:07:36.686 --> 00:07:39.246 align:middle
+y sustituirla por una imagen muy sencilla.
+
+00:07:39.806 --> 00:07:42.026 align:middle
+Para src, pegaré algo de código:
+
+00:07:42.836 --> 00:07:46.136 align:middle
+Todas las partes Twig de este código
+estaban antes en la plantilla.
+
+00:07:46.966 --> 00:07:52.356 align:middle
+Esto también muestra un superpoder de Contentful
+en el que puedes controlar el tamaño de la imagen.
+
+00:07:53.146 --> 00:07:58.916 align:middle
+Llamar a block.parameter() nos permite leer
+las opciones del administrador de diseños,
+
+00:07:59.346 --> 00:08:04.536 align:middle
+donde antes configuramos este bloque para
+que tuviera una anchura y una altura de 200.
+
+00:08:05.416 --> 00:08:06.516 align:middle
+¡Veamos qué aspecto tiene!
+
+00:08:06.976 --> 00:08:09.156 align:middle
+Actualiza. ¡Sí!
+
+00:08:09.376 --> 00:08:10.846 align:middle
+¡Parece que ha funcionado!
+
+00:08:11.586 --> 00:08:15.826 align:middle
+Pero quiero hacer una pequeña advertencia
+sobre la personalización de plantillas:
+
+00:08:16.276 --> 00:08:19.796 align:middle
+asegúrate de no perder la
+flexibilidad que necesitas.
+
+00:08:20.386 --> 00:08:26.516 align:middle
+Por ejemplo, sabemos que podemos añadir clases CSS
+adicionales a cualquier bloque a través del admin.
+
+00:08:27.266 --> 00:08:32.416 align:middle
+Si hiciéramos eso ahora,
+no funcionaría porque...
+
+00:08:32.576 --> 00:08:35.756 align:middle
+¡simplemente no renderizaríamos esas clases!
+
+00:08:36.246 --> 00:08:37.926 align:middle
+Y, eso podría estar bien.
+
+00:08:38.386 --> 00:08:43.066 align:middle
+Pero si quieres admitirlas, tendrás
+que asegurarte de añadirlas.
+
+00:08:43.776 --> 00:08:51.186 align:middle
+En este caso podemos decir class="{{ css_class
+}}", que es una de las variables que vimos antes.
+
+00:08:51.856 --> 00:08:57.826 align:middle
+Y ya que estamos aquí, añadamos también un
+atributo alt establecido en field.value.title:
+
+00:08:58.646 --> 00:08:59.976 align:middle
+Cuando probemos esto...
+
+00:09:01.116 --> 00:09:02.166 align:middle
+¡Me encanta! Ahí está
+
+00:09:03.146 --> 00:09:08.566 align:middle
+el atributo alt y ahí está nuestra
+clase, incluidas algunas clases principales
+
+00:09:08.566 --> 00:09:11.056 align:middle
+que Layouts siempre añade a esa variable.
+
+00:09:11.996 --> 00:09:18.666 align:middle
+Vale, acabamos de hablar de las vistas de bloque: cómo
+se configuran las plantillas para bloques enteros.
+
+00:09:19.386 --> 00:09:24.896 align:middle
+A continuación, vamos a hablar de las vistas de
+elementos: cómo personalizamos la plantilla que se utiliza
+
+00:09:25.176 --> 00:09:28.726 align:middle
+al mostrar un elemento dentro
+de una cuadrícula o lista.
+
+00:09:29.246 --> 00:09:32.096 align:middle
+Utilizaremos esto para dar estilo
+a nuestros elementos de habilidad.
