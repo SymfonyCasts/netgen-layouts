@@ -21,7 +21,7 @@ Earlier, we ran `debug:config netgen_layouts view` and talked about the two main
 sections under here - `block_view` (which controls how blocks render) and `item_view`.
 
 ```terminal-silent
-php bin/console debug:config netgen_layouts view.item_view
+php ./bin/console debug:config netgen_layouts view.item_view
 ```
 
 As I've said a few times, *some* blocks, like Grid and List, render individual
@@ -29,7 +29,10 @@ As I've said a few times, *some* blocks, like Grid and List, render individual
 see some familiar root keys: `default` for the frontend, `ajax` for AJAX calls,
 and `app` for the admin. Once again, this uses the `match` config and... hey! We
 see our entry in here! Remember `recipes_default`? We configured this inside of
-our config file, and it's one of the two *real* item templates we have right now.
+our config file, and it's one of the two *real* item templates we have right now:
+
+[[[ code('13766103ac') ]]]
+
 There's one for recipes, and then Contentful has one for *all* of the Contentful
 items.
 
@@ -44,7 +47,9 @@ Over here... we're under `item_view`, `default` for the frontend and we have the
 one entry from earlier: `recipes_default`. Let's add another. Call it
 `contentful_entry/skill`, though this particular key doesn't make any difference.
 Below that, set `template` to `@nglayouts/item/contentful_entry`, followed
-by `skill.html.twig`.
+by `skill.html.twig`:
+
+[[[ code('f2a3ae08af') ]]]
 
 Before, we were using `nglayouts` *without* the `@`... just because I told you
 that `nglayouts/` was a nice directory for organizing things. Internally, Layouts
@@ -69,7 +74,7 @@ Here's a little trick to see the *true* list of `match` items. It's a *little*
 technical, but works beautifully. Run:
 
 ```terminal
-php bin/console debug:container --tag=netgen_layouts.view_matcher
+php ./bin/console debug:container --tag=netgen_layouts.view_matcher
 ```
 
 What is this doing? Well, anyone can create a *custom* matcher - like `foo\bar`.
@@ -77,12 +82,16 @@ To *do* that, you create a class and give it this tag. By looking for all
 services *with* that tag, we can find *all* of the existing matchers in the system.
 
 And... look at that list! Oh, here's an interesting one: `contentful\content_type`.
-I bet we can use that. Try it: `contentful\content_type` set to `skill`.
+I bet we can use that. Try it: `contentful\content_type` set to `skill`:
+
+[[[ code('1b98f2ea3f') ]]]
 
 Okay, let's go create the template. Inside `themes/standard/`, instead of
 `block/`, this time, create a directory called `item/`... then
 `contentful_entry/`, and *then* `skill.html.twig`. Just put some dummy text for
-now.
+now:
+
+[[[ code('c8dec49b61') ]]]
 
 Ok, *if* this is working, when we refresh, these items - which are Contentful
 skills - *should* re-render using our new template. But when we try it...
@@ -93,7 +102,7 @@ absolutely *nothing* changes. What happened?
 Go back to your terminal and run
 
 ```terminal
-./bin/console debug:config netgen_layouts view.item_view
+php ./bin/console debug:config netgen_layouts view.item_view
 ```
 
 again. This all looks good... except for the *order*. This one from Contentful
