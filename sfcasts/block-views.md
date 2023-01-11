@@ -1,7 +1,7 @@
 # Block Views & View Types
 
 Let's override one other template completely. Go into the Individual Skill Layout.
-We're using a Contentful entry here, which is a "referenced asset"... and it's
+We're using a Contentful entry here, which is a "Referenced asset"... and it's
 rendering as this image tag. Cool!
 
 ## Block "View Types" / Templates
@@ -19,24 +19,27 @@ Anyway, every Block type can have one or more View types. And I actually want to
 a *little* deeper into this concept of "views". Find your terminal and run:
 
 ```terminal
-./bin/console debug:config netgen_layouts view
+php ./bin/console debug:config netgen_layouts view
 ```
 
 I'm debugging the configuration that could live under the `view` key
-below the `netgen_layouts` key. When you run this, you see a *ton* of
-config. Notice that there are several root keys, like `parameter_view`, `layout_view`,
-and a few others. But there are actually only *two* that we care about:
-`block_view`, which we'll talk about now, and `item_view`, which controls how the
-items in a List or Grid render. We actually saw this one earlier when we
-customized how our Recipe "item" rendered inside a List or Grid. We'll talk even
-*more* about those soon.
+below the `netgen_layouts` key:
+
+[[[ code('831b81bbff') ]]]
+
+When you run this, you see a *ton* of config. Notice that there are several
+root keys, like `parameter_view`, `layout_view`, and a few others. But there are
+actually only *two* that we care about: `block_view`, which we'll talk about now,
+and `item_view`, which controls how the items in a List or Grid render.
+We actually saw this one earlier when we customized how our Recipe "item" rendered
+inside a List or Grid. We'll talk even *more* about those soon.
 
 ## The Block View Config
 
 Anyways, to zoom in on the block views, run that same command, but add `.block_view`
 
 ```terminal-silent
-./bin/console debug:config netgen_layouts view.block_view
+php ./bin/console debug:config netgen_layouts view.block_view
 ```
 
 Block views, very simply, control how *entire* block types are rendered. For example,
@@ -53,7 +56,7 @@ under the `default` key.
 Let's... zoom in one more time by adding `.default`:
 
 ```terminal-silent
-./bin/console debug:config netgen_layouts view.block_view.default
+php ./bin/console debug:config netgen_layouts view.block_view.default
 ```
 
 ## The "match" config
@@ -62,7 +65,7 @@ These are all the block views that will be used on the frontend. The *trickiest*
 thing about these are the `match` part.
 
 When you define a "block view", it's pretty common to define the template that should
-be used when *two* things match. Search for "list/grid": this is a great
+be used when *two* things match. Search for "list\grid": this is a great
 example. This has *two* `match` items: `block\definition` is set to `list` because,
 *technically* the "Block type" for both the List and Grid blocks is called `list`.
 The second match condition is `block\view_type` set to `grid`.
@@ -102,7 +105,9 @@ Okay, so let's get to work. The path starts with the normal
 `nglayouts/themes/standard/`, *then* we need `block/`, followed by this path.
 So inside of our `block/` directory, create a *new* sub-directory called
 `contentful_entry_field/`. And inside of *that*, a new `assets.html.twig`. For
-now, I'll just say `ASSET`.
+now, I'll just say `ASSET`:
+
+[[[ code('c9fc9a0ef9') ]]]
 
 Ok! Spin over to the frontend and... yes! It *instantly* sees it! We're now in
 control!
@@ -111,13 +116,19 @@ control!
 
 Like before, we probably don't want to override the *entire* template. Instead,
 open the core template - `assets.html.twig` - so we can steal, um borrow from it.
-Temporarily, copy the whole thing, paste... and... yep! That works.
+Temporarily, copy the whole thing, paste:
+
+[[[ code('51c983bda4') ]]]
+
+And... yep! That works.
 
 Contentful is fairly advanced... and you can see that this supports fields that
 hold a single image as well as multiple images. You can keep this as flexible as you
 want, but you can *also* make it your own. I'm going to *drastically* simplify
 this template... and replace it with a very simple image. For the `src`, I'll
-paste in some code.
+paste in some code:
+
+[[[ code('038afc2340') ]]]
 
 All of the fancy Twig parts of this code were in the template before. This also
 shows off a Contentful superpower where you can control the image size. Calling
@@ -136,7 +147,9 @@ If we did that *right now*, it would *not* work because... we're simply not rend
 those classes! And, that might be fine. But if you *do* want to support that, you'll
 need to make sure to add it. In this case we can say `class="{{ css_class }}"`,
 which is one of the variables we saw earlier. And while we're here, let's also
-add an `alt` attribute set to `field.value.title`.
+add an `alt` attribute set to `field.value.title`:
+
+[[[ code('a241a5c6a7') ]]]
 
 When we try this... I love it! There's the `alt` attribute and *there's* our class,
 including some core classes that Layouts always adds to that variable.
