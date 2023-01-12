@@ -23,8 +23,8 @@ We shouldn't see any difference yet and... we don't. But we *can* see that it's
 using our layout!
 
 Let's spice this page up a bit! Go back to the layouts admin and edit the
-"Individual Recipe Layout". Add a new Grid and change it to a "Dynamic Collection"...
-that uses "Contentful Search. Load Skills, show the newest first and limit to 3.
+"Individual Recipe Layout". Add a new Grid and change it to a "Dynamic collection"...
+that uses "Contentful search". Load Skills, show the newest first and limit to 3.
 
 Ok, if we "Publish and continue editing"... then refresh... whoa! It's cool that
 we can just put those anywhere now. Though, let's wrap that in a container. And...
@@ -44,7 +44,7 @@ Click on the Grid and go to design tab. It turns out that a Grid is really just 
 Head over to your terminal and run:
 
 ```terminal
-php bin/console debug:config netgen_layouts view.block_view
+php ./bin/console debug:config netgen_layouts view.block_view
 ```
 
 Oh, but spell `netgen` correctly. This displays the configuration for how blocks

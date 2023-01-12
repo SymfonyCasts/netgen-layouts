@@ -10,11 +10,13 @@ For step 1, open our `netgen_layouts.yaml` file and, really anywhere, add
 change options on *existing* blocks, which is what *we* want. To do that, we
 need to repeat the config here: `list` & `view_types`. So, `list` `view_types`
 and then add the new one. Let's call it `one_by_two` - that key can be anything -
-and give it a name: `1x2 Featured Grid`.
+and give it a name: `1x2 Featured Grid`:
+
+[[[ code('f915c763bf') ]]]
 
 *Just* by doing that, if we go over and refresh the admin area... and click down
 on the grid, we have a new view type! If we change to it... nothing renders in
-the admin area. And if we hit "Publish and Continue" editing... over on the
+the admin area. And if we hit "Publish and continue editing"... over on the
 frontend... *also* nothing renders. Yay!
 
 Click the Layouts link in the web toolbar and... near the bottom, ah. It's rendering
@@ -34,7 +36,9 @@ template, because the admin view isn't too important, let's re-use the core admi
 
 *Now* add `match`. We want to use this template if `block\definition` is `list`
 *and* `block\view_type` is `one_by_two`... making sure that this matches the key
-we used earlier under the block definition.
+we used earlier under the block definition:
+
+[[[ code('ca2aa09e2d') ]]]
 
 How did I know to use `block\definition` and `block\view_type`? By using our favorite
 `debug:config` command! That's always a good guide to follow.
@@ -46,11 +50,15 @@ Anyways, that should fix the admin area. And... it does!
 For the frontend view, duplicate that entire section... but use `default`. This
 key is fine, it doesn't matter, and change the template to, how about,
 `@nglayouts/block/list/one_by_two_list.html.twig`. The match section is
-perfect already.
+perfect already:
+
+[[[ code('0aa857f379') ]]]
 
 Ok, let's go make that template! We already have
-`templates/nglayouts/themes/standard/block/`... so, create the new `list` subdirectory
-then the file: `one_by_two_list.html.twig`. Start by saying `1x2`.
+`templates/nglayouts/themes/standard/block/`... so, create the new `list`
+subdirectory then the file: `one_by_two_list.html.twig`. Start by saying `1x2`:
+
+[[[ code('6f5ab178f7') ]]]
 
 Let's check it! Over on the frontend, refresh and... there's our tiny 1x2!
 
@@ -59,7 +67,7 @@ Let's check it! Over on the frontend, refresh and... there's our tiny 1x2!
 Let's bring this to life! Because this renders a "list" block, our template probably
 has access to some variable that represents the "items". To cheat, which is *always*
 a good choice for developers, let's peek at the core grid template:
-`grid.html.twig` from the themes directory.
+`grid.html.twig` from the `themes/` directory.
 
 Wow! Like many core templates, there's a lot of stuff in here! You can choose what
 you want to keep or get rid of. The most important thing is this `collection_html`
@@ -75,16 +83,21 @@ the "item".
 Anyways, if you zoom out, the template basically loops over the `collections`
 variable and calls `nglayouts_render_result()` on each one.
 
-Back in our template, I'm going to paste in some code that does something similar.
+Back in our template, I'm going to paste in some code that does something similar:
+
+[[[ code('59127b2fa6') ]]]
+
 Yup, we extend `block.html.twig`, just like the core template does, then loop
-over `collections.default`, add a div and render each item. So this is effectively
+over `collections.default`, add a `div` and render each item. So this is effectively
 a simpler version of what a grid does.
 
 And what does it look like? Refresh and... yup! It looks like a grid!
 
 But remember the goal: one big skill on the left with two smaller skills on the
 right. To make that happen, I'll paste in version 2 of my template. Nothing
-special here. Instead of looping, this renders the 0 key, then the 1 and 2 keys.
+special here. Instead of looping, this renders the 0 key, then the 1 and 2 keys:
+
+[[[ code('c6deabab6f') ]]]
 
 And now... yes! That's *exactly* what I wanted!
 
@@ -103,7 +116,7 @@ Could we... hide that option when using our view type? Yep! Head back to your
 terminal and debug the `block_definitions` config again:
 
 ```terminal-silent
-php bin/console debug:config netgen_layouts block_definitions
+php ./bin/console debug:config netgen_layouts block_definitions
 ```
 
 Search for `one_by_two`. We *could* configure this `valid_parameters` key to

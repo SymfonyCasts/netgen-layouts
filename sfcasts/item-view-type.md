@@ -13,14 +13,14 @@ Head over to your terminal and run our favorite `debug:config` command, this tim
 looking at `block_definitions`:
 
 ```terminal-silent
-./bin/console debug:config netgen_layouts block_definitions
+php ./bin/console debug:config netgen_layouts block_definitions
 ```
 
 This is, as we learned, the *config* for all of the blocks in our system. And check
 this out! One piece of config we haven't talked about yet is `item_view_types`.
 For each "block view type", like `one_by_two`, `list`, or `grid`, there's also
 `item_view_types`. So far, *all* of these currently have a single one called
-`Standard`.
+`standard`.
 
 It's not *super* common, but for a given view type - like `one_by_two` or `list` -
 you can specify *multiple* ways to render the *items* inside of that view
@@ -35,7 +35,9 @@ To start, over in our configuration, find `block_definitions`. We currently have
 `list`, `view_types`, and `one_by_two`. *Now* add `grid` so we can override that
 existing view type. Add `item_view_types` with a new one called, how about,
 `skill_big_view`. You'll see how we use that key in a second. Also give this a
-human-readable name.
+human-readable name:
+
+[[[ code('ad1c53a9c0') ]]]
 
 What did that do? Refresh the admin area... click down on the Grid... and make
 sure you're on the "Design" tab. Hey! We have a new "Item view type" select!
@@ -56,7 +58,9 @@ to be able to match *before* the other one. Watch. Call this
 `@nglayouts/item/contentful_entry/skill_big_view.html.twig`. We *still* want to
 match when `item\value_type` is `contentful_entry` and `contentful\content_type`
 is `skill`... but *only* if the matcher called `item\view_type` equals the key
-we created earlier `skill_big_view`.
+we created earlier `skill_big_view`:
+
+[[[ code('9d54512cdc') ]]]
 
 Thanks to this, if the user selects this as their "Item View Type" for a grid
 of skills, then all *three* of these will match. But if the user chooses the default
@@ -64,7 +68,9 @@ of skills, then all *three* of these will match. But if the user chooses the def
 the one below.
 
 Let's go add the template. Inside `item/contentful_entry/`, create the new file:
-`skill_big_view.html.twig`. Inside, say `BIG VIEW`.
+`skill_big_view.html.twig`. Inside, say `BIG VIEW`:
+
+[[[ code('800ef5a024') ]]]
 
 Let's try it! Make sure the layout is published... then on the frontend...
 we got it! The rest is easy! Because we've already created several item view
