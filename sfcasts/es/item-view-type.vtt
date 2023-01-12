@@ -1,0 +1,310 @@
+WEBVTT
+
+00:00:01.016 --> 00:00:05.016 align:middle
+La cuadrícula de habilidades de la
+página /skills tiene un aspecto terrible.
+
+00:00:05.416 --> 00:00:09.846 align:middle
+Vamos a buscar el diseño para eso:
+Diseño de la lista de habilidades.
+
+00:00:11.646 --> 00:00:14.046 align:middle
+Vale, esto es una cuadrícula normal...
+
+00:00:14.166 --> 00:00:17.136 align:middle
+y se muestra como cualquier
+otra cuadrícula del sitio.
+
+00:00:17.186 --> 00:00:23.986 align:middle
+Quiero personalizarlo, pero no quiero que el propio
+bloque de cuadrícula se muestre de forma diferente:
+
+00:00:24.576 --> 00:00:27.346 align:middle
+tenerlos en mosaico así es genial.
+
+00:00:27.846 --> 00:00:32.336 align:middle
+Lo que realmente quiero es cambiar cómo se
+muestra cada elemento dentro de la cuadrícula...
+
+00:00:32.776 --> 00:00:35.386 align:middle
+pero sólo en esta situación.
+
+00:00:35.946 --> 00:00:36.966 align:middle
+¿Cómo podemos hacerlo?
+
+00:00:37.746 --> 00:00:42.256 align:middle
+Ve a tu terminal y ejecuta nuestro
+comando favorito debug:config,
+
+00:00:42.546 --> 00:00:47.536 align:middle
+esta vez en block_definitions:
+Esta es, como hemos aprendido,
+
+00:00:47.746 --> 00:00:50.446 align:middle
+la configuración de todos los
+bloques de nuestro sistema.
+
+00:00:50.886 --> 00:00:51.936 align:middle
+Y ¡mira esto!
+
+00:00:52.246 --> 00:00:57.256 align:middle
+Una parte de la configuración de la que
+aún no hemos hablado es item_view_types.
+
+00:00:57.256 --> 00:01:05.126 align:middle
+Para cada "tipo de vista de bloque", como one_by_two,
+list, o grid, existe también item_view_types.
+
+00:01:05.176 --> 00:01:09.826 align:middle
+Hasta ahora, todas ellas tienen
+una sola llamada standard.
+
+00:01:10.466 --> 00:01:16.326 align:middle
+No es muy común, pero para un determinado
+tipo de vista -como one_by_two o list -
+
+00:01:16.746 --> 00:01:21.926 align:middle
+puedes especificar múltiples formas de representar
+los elementos dentro de ese tipo de vista.
+
+00:01:22.646 --> 00:01:24.986 align:middle
+Éstas se denominan item_view_types.
+
+00:01:25.686 --> 00:01:30.696 align:middle
+Standard es la predeterminada, y significa que
+los elementos se mostrarán de la forma "normal".
+
+00:01:31.336 --> 00:01:39.236 align:middle
+Así que éste es nuestro objetivo: para el tipo de vista grid
+existente, vamos a añadir un nuevo "tipo de vista de elemento". A
+
+00:01:40.006 --> 00:01:44.356 align:middle
+grandes rasgos, esto nos permitirá,
+al configurar una cuadrícula,
+
+00:01:44.646 --> 00:01:47.606 align:middle
+elegir una forma diferente
+de mostrar los elementos.
+
+00:01:48.346 --> 00:01:52.056 align:middle
+Para empezar, en nuestra
+configuración, busca block_definitions.
+
+00:01:52.866 --> 00:01:56.356 align:middle
+Actualmente tenemos list,
+view_types, y one_by_two.
+
+00:01:57.016 --> 00:02:01.936 align:middle
+Ahora añade grid para que podamos
+anular ese tipo de vista existente.
+
+00:02:02.616 --> 00:02:07.736 align:middle
+Añade item_view_types con uno nuevo
+llamado, qué tal, skill_big_view.
+
+00:02:08.436 --> 00:02:10.466 align:middle
+Verás cómo utilizamos
+esa clave en un segundo.
+
+00:02:11.116 --> 00:02:13.426 align:middle
+Dale también un nombre legible por humanos:
+
+00:02:14.176 --> 00:02:15.776 align:middle
+¿Qué ha hecho eso?
+
+00:02:16.316 --> 00:02:17.636 align:middle
+Actualiza el área de administración...
+
+00:02:20.036 --> 00:02:21.196 align:middle
+haz clic abajo en la Rejilla...
+
+00:02:22.086 --> 00:02:24.386 align:middle
+y asegúrate de que estás
+en la pestaña "Diseño".
+
+00:02:25.306 --> 00:02:29.066 align:middle
+¡Tenemos un nuevo "Tipo de
+vista de artículo" seleccionado!
+
+00:02:29.566 --> 00:02:35.196 align:middle
+Aparece "Estándar", que es la predeterminada, ¡y
+luego nuestra nueva "Vista grande de habilidades"!
+
+00:02:35.196 --> 00:02:39.056 align:middle
+Selecciónala y pulsa "Publicar
+y continuar editando".
+
+00:02:39.806 --> 00:02:43.346 align:middle
+¿Qué cambiará esto en el
+frontend cuando actualicemos?
+
+00:02:43.996 --> 00:02:45.956 align:middle
+Absolutamente nada
+
+00:02:46.486 --> 00:02:51.366 align:middle
+Eso es porque ahora necesitamos una nueva
+"vista de elemento" que coincida con esto.
+
+00:02:52.246 --> 00:02:55.176 align:middle
+De vuelta a nuestra configuración,
+desplázate hasta item_views.
+
+00:02:55.916 --> 00:03:02.446 align:middle
+Debajo de default, copia la sección
+contentful_entry/skill y pégala arriba.
+
+00:03:03.316 --> 00:03:08.916 align:middle
+Lo ponemos arriba porque el orden es importante:
+necesitamos que esta nueva vista de elemento pueda coincidir
+
+00:03:09.076 --> 00:03:11.496 align:middle
+antes que la otra.
+
+00:03:12.176 --> 00:03:17.626 align:middle
+Observa. Llama a esto
+contentful_entry/skill_big_view y cambia la plantilla
+
+00:03:17.626 --> 00:03:24.516 align:middle
+a
+@nglayouts/item/contentful_entry/skill_big_view.html.twig.
+
+00:03:25.246 --> 00:03:29.696 align:middle
+Seguimos queriendo que coincida cuando
+item\value_type sea contentful_entry y
+
+00:03:30.076 --> 00:03:33.306 align:middle
+contentful\content_type sea skill... pero
+
+00:03:33.716 --> 00:03:40.946 align:middle
+sólo si el emparejador llamado item\view_type
+es igual a la clave que creamos antes
+
+00:03:40.946 --> 00:03:43.116 align:middle
+skill_big_view: Gracias
+
+00:03:43.116 --> 00:03:50.056 align:middle
+a esto, si el usuario selecciona este como su "Tipo de vista
+de elemento" para una cuadrícula de habilidades, entonces
+
+00:03:50.506 --> 00:03:53.566 align:middle
+los tres coincidirán. Pero
+
+00:03:54.116 --> 00:04:00.036 align:middle
+si el usuario elige el tipo de vista de elemento por defecto
+Standard, no coincidiría con esto... pero sí con lo de
+
+00:04:00.346 --> 00:04:02.916 align:middle
+abajo.
+
+00:04:02.916 --> 00:04:05.046 align:middle
+Vamos a añadir la plantilla. Dentro de
+
+00:04:05.546 --> 00:04:11.826 align:middle
+item/contentful_entry/, crea el nuevo
+archivo: skill_big_view.html.twig. Dentro,
+
+00:04:12.546 --> 00:04:14.506 align:middle
+digamos BIG VIEW: ¡Vamos a
+
+00:04:14.506 --> 00:04:16.246 align:middle
+probarlo!
+
+00:04:16.686 --> 00:04:18.406 align:middle
+Asegúrate de que la plantilla
+está publicada... luego
+
+00:04:18.946 --> 00:04:20.456 align:middle
+en el frontend...
+
+00:04:21.506 --> 00:04:22.406 align:middle
+¡ya lo tenemos! ¡ El
+
+00:04:22.836 --> 00:04:24.286 align:middle
+resto es fácil! Como
+
+00:04:24.806 --> 00:04:27.656 align:middle
+ya hemos creado varias plantillas
+de vistas de artículos...
+
+00:04:27.876 --> 00:04:29.696 align:middle
+Me limitaré a pegar el resto.
+
+00:04:30.016 --> 00:04:31.516 align:middle
+Aquí no hay nada nuevo. Pero
+
+00:04:32.236 --> 00:04:33.036 align:middle
+ahora... ¡sí!
+
+00:04:34.316 --> 00:04:36.956 align:middle
+Este es el aspecto que buscamos. Por
+
+00:04:37.776 --> 00:04:42.176 align:middle
+cierto, ahora que nuestra vista de bloque "Cuadrícula"
+tiene varios "tipos de vista de elemento" -esa es
+
+00:04:42.776 --> 00:04:46.626 align:middle
+nuestra configuración aquí
+arriba-, tenemos el poder,
+
+00:04:46.796 --> 00:04:50.006 align:middle
+elemento por elemento, de controlarlo. ¿Ves
+
+00:04:50.006 --> 00:04:52.906 align:middle
+este "Anular tipo de vista de ranura"? Esto
+
+00:04:53.476 --> 00:04:55.756 align:middle
+básicamente dice: ¡Yo
+Layouts! Quiero cambiar el
+
+00:04:56.106 --> 00:05:02.036 align:middle
+primer elemento de esta lista para que
+utilice el tipo de vista "Estándar".
+
+00:05:02.746 --> 00:05:06.816 align:middle
+Pulsaré "Publicar y continuar
+editando" y ahora ... ¡puedes
+
+00:05:08.146 --> 00:05:12.636 align:middle
+ver que sólo el primer elemento utiliza
+el tipo de vista Estándar! Eso...
+
+00:05:13.246 --> 00:05:20.006 align:middle
+obviamente no es lo que queremos en nuestro sitio, así
+que volveré atrás y utilizaré "Sin anulaciones". Pero
+
+00:05:20.586 --> 00:05:23.746 align:middle
+es un concepto muy potente. Y...
+
+00:05:24.576 --> 00:05:25.716 align:middle
+¡woh! ¡ Sólo
+
+00:05:26.076 --> 00:05:28.286 align:middle
+queda un capítulo! Un
+
+00:05:28.286 --> 00:05:32.616 align:middle
+problema común con los Diseños es trabajar
+con el espaciado vertical: simplemente
+
+00:05:33.046 --> 00:05:38.076 align:middle
+asegurarnos de que el espaciado es
+correcto entre todos nuestros componentes.
+
+00:05:38.876 --> 00:05:43.576 align:middle
+Podríamos controlarlo añadiendo clases CSS a
+los bloques individuales. Pero, ¿no estaría bien
+
+00:05:44.146 --> 00:05:48.356 align:middle
+que todos los bloques del sistema
+tuvieran un bonito desple gable
+
+00:05:48.356 --> 00:05:52.666 align:middle
+en el que pudiéramos seleccionar los márgenes
+superior e inferior automáticamente? ¿Cómo
+
+00:05:53.446 --> 00:05:59.406 align:middle
+podemos modificar un bloque existente, o incluso
+todos los bloques de nuestra aplicación? Ese es el
+
+00:06:00.146 --> 00:06:03.716 align:middle
+trabajo de un plugin de
+bloques, y Eso a continuación.
