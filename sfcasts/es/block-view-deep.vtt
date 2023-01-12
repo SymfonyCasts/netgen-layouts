@@ -1,0 +1,235 @@
+WEBVTT
+
+00:00:01.126 --> 00:00:03.876 align:middle
+Vamos a crear un diseño para nuestra
+página de "receta individual " para
+
+00:00:04.006 --> 00:00:06.116 align:middle
+poder personalizarla un poco más.
+
+00:00:06.646 --> 00:00:11.896 align:middle
+Me encanta que podamos crear nuevos diseños sobre la
+marcha, siempre que haya que modificar una página.
+
+00:00:12.716 --> 00:00:19.006 align:middle
+Añadimos un nuevo diseño, elegimos nuestro Diseño 2
+favorito y lo llamamos "Diseño de receta individual".
+
+00:00:20.736 --> 00:00:23.226 align:middle
+Y a estas alturas ya sabéis
+lo que hay que hacer.
+
+00:00:23.716 --> 00:00:26.046 align:middle
+Empieza por enlazar la zona del Encabezado...
+
+00:00:27.216 --> 00:00:28.476 align:middle
+luego la zona Pie de página.
+
+00:00:31.476 --> 00:00:36.506 align:middle
+¡Genial! Y luego, como vamos a
+aplicar esto a una página normal
+
+00:00:36.506 --> 00:00:40.986 align:middle
+que ya existe en Twig , añade
+un bloque "Vista completa ",
+
+00:00:41.206 --> 00:00:44.036 align:middle
+que renderizará el bloque
+body de nuestra plantilla.
+
+00:00:44.656 --> 00:00:45.806 align:middle
+Un comienzo sólido.
+
+00:00:46.406 --> 00:00:47.206 align:middle
+Pulsa "Publicar"...
+
+00:00:47.456 --> 00:00:49.456 align:middle
+para que podamos mapear esto.
+
+00:00:50.336 --> 00:00:55.076 align:middle
+Añade una nueva asignación, vincúlala a
+nuestro "Diseño de receta individual"...
+
+00:00:56.576 --> 00:00:58.226 align:middle
+y pulsa "Detalles".
+
+00:00:58.776 --> 00:01:01.316 align:middle
+esta vez, vamos a enlazar a
+través del nombre de la ruta.
+
+00:01:02.676 --> 00:01:08.076 align:middle
+Para el nombre de la ruta, abre
+src/Controller/RecipeController.php.
+
+00:01:08.076 --> 00:01:10.046 align:middle
+Aquí está: app_recipes_show.
+
+00:01:10.756 --> 00:01:14.816 align:middle
+Pégalo, pulsa "Guardar cambios" y...
+
+00:01:15.056 --> 00:01:16.726 align:middle
+¡probemos!
+
+00:01:16.726 --> 00:01:19.736 align:middle
+Aún no deberíamos ver ninguna diferencia y...
+
+00:01:19.736 --> 00:01:23.966 align:middle
+no la vemos. Pero podemos ver que
+está utilizando nuestro diseño
+
+00:01:24.616 --> 00:01:26.236 align:middle
+Bien, ¡vamos a animar un poco esta página !
+
+00:01:27.346 --> 00:01:32.916 align:middle
+Vuelve al administrador de diseños y
+edita el " Diseño de receta individual
+
+00:01:35.176 --> 00:01:41.056 align:middle
+". Añade una nueva Rejilla y cámbiala
+por una " Colección dinámica "...
+
+00:01:41.806 --> 00:01:43.996 align:middle
+que utilice "Contentful
+
+00:01:46.876 --> 00:01:51.226 align:middle
+Search". Como hicimos antes, carga
+Habilidades, muestra las más nuevas
+
+00:01:52.486 --> 00:01:55.386 align:middle
+primero y limita a 3. Vale, si
+
+00:01:55.536 --> 00:01:56.956 align:middle
+"Publicamos
+
+00:01:57.856 --> 00:02:02.206 align:middle
+y seguimos editando"... y luego actualizamos...
+¡guau! Es genial que ahora podamos
+
+00:02:03.146 --> 00:02:05.386 align:middle
+ponerlas en cualquier sitio. Aunque,
+
+00:02:09.336 --> 00:02:11.106 align:middle
+envolvamos eso y
+
+00:02:11.106 --> 00:02:14.756 align:middle
+contenedor. Y... ya está.
+
+00:02:15.206 --> 00:02:16.726 align:middle
+Hasta ahora, todo esto es
+
+00:02:17.306 --> 00:02:23.846 align:middle
+fácil. ¿Listo para la complicación? Quiero personalizar
+el aspecto de esta cuadrícula: Quiero tener una
+
+00:02:24.196 --> 00:02:27.166 align:middle
+receta grande a la izquierda y luego dos
+
+00:02:27.556 --> 00:02:32.116 align:middle
+recetas más pequeñas a la derecha. Pero no
+quiero cambiar el aspecto de la cuadrícula
+
+00:02:32.116 --> 00:02:34.316 align:middle
+en otras partes de nuestro
+
+00:02:35.266 --> 00:02:41.226 align:middle
+sitio, como en la página de inicio. Así que la pregunta
+es cómo: ¿podemos cambiar el aspecto de esta cuadrícula
+
+00:02:41.826 --> 00:02:44.426 align:middle
+sólo en esta página?
+Haz clic en la cuadrícula
+
+00:02:45.216 --> 00:02:48.786 align:middle
+y ve a la pestaña de diseño. Resulta
+que una cuadrícula es en realidad
+
+00:02:49.386 --> 00:02:53.906 align:middle
+un bloque "Lista" que tiene
+dos "tipos de vista": lista y
+
+00:02:55.146 --> 00:02:56.536 align:middle
+cuadrícula. Ve a tu terminal y
+
+00:02:56.536 --> 00:03:05.496 align:middle
+ejecuta: php bin/console debug:config netgen_layouts
+view.block_view Oh, pero escribe netgen
+
+00:03:06.746 --> 00:03:10.346 align:middle
+correctamente. Esto muestra la configuración
+de cómo se representan los bloques.
+
+00:03:10.486 --> 00:03:13.066 align:middle
+Busca la sección default
+
+00:03:13.386 --> 00:03:14.786 align:middle
+... y desplázate un poco hacia abajo.
+
+00:03:15.396 --> 00:03:19.446 align:middle
+Aquí: vemos los dos tipos de
+vista para los bloques de lista
+
+00:03:20.246 --> 00:03:24.716 align:middle
+y de cuadrícula. Como ya he dicho, resulta que
+
+00:03:24.716 --> 00:03:28.276 align:middle
+en realidad ambos forman parte del mismo
+
+00:03:28.776 --> 00:03:34.246 align:middle
+tipo de bloque llamado list. Sólo son dos tipos
+de vista diferentes: uno llamado list y otro
+
+00:03:35.186 --> 00:03:40.226 align:middle
+grid. Cuando cambias el "tipo de
+vista" en el administrador de diseños,
+
+00:03:40.226 --> 00:03:43.376 align:middle
+en realidad estás cambiando la
+plantilla que se utiliza para
+
+00:03:44.186 --> 00:03:50.566 align:middle
+representar ese bloque. Ejecuta
+ese mismo comando, pero en lugar de
+
+00:03:51.346 --> 00:03:56.006 align:middle
+view.block_views, marca block_definitions: En las
+definiciones de bloque es donde defines lo que
+
+00:03:56.476 --> 00:04:00.976 align:middle
+son realmente los bloques. Así que cada
+clave raíz de esta configuración representa
+
+00:04:00.976 --> 00:04:03.646 align:middle
+un bloque diferente que podemos utilizar dentro
+
+00:04:06.076 --> 00:04:09.386 align:middle
+del área de administración.
+Busca el que se llama list:
+
+00:04:09.916 --> 00:04:14.386 align:middle
+aquí está. Define cosas como qué campos
+de formulario se muestran en el área de
+
+00:04:14.386 --> 00:04:17.826 align:middle
+administración y qué "tipos de vista" tiene.
+
+00:04:18.476 --> 00:04:21.166 align:middle
+Tiene dos: lista y cuadrícula.
+
+00:04:21.836 --> 00:04:27.326 align:middle
+Layouts lee esta configuración para mostrar el elemento
+select de tipos de vista en el área de administración.
+
+00:04:27.876 --> 00:04:34.556 align:middle
+Luego, una vez que seleccionamos el tipo de vista,
+utiliza la configuración de block_views para saber qué
+
+00:04:34.756 --> 00:04:36.986 align:middle
+plantilla mostrar. Vale, basta
+de configuraciones profundas
+
+00:04:37.836 --> 00:04:40.806 align:middle
+y teoría. Vamos a darnos
+
+00:04:41.096 --> 00:04:46.186 align:middle
+una nueva forma de representar listas creando
+un nuevo tipo de vista. Eso a continuación.
