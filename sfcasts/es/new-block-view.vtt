@@ -1,0 +1,385 @@
+WEBVTT
+
+00:00:00.036 --> 00:00:01.996 align:middle
+Así que éste es el plan.
+
+00:00:02.316 --> 00:00:06.546 align:middle
+Vamos a añadir un nuevo "tipo de vista"
+a la definición del bloque de lista.
+
+00:00:06.936 --> 00:00:11.186 align:middle
+Luego vamos a asignarlo a una
+plantilla a través de block_views.
+
+00:00:11.306 --> 00:00:19.786 align:middle
+Para el paso 1, abre nuestro archivo netgen_layouts.yaml
+y, en cualquier lugar, añade block_definitions.
+
+00:00:20.876 --> 00:00:26.466 align:middle
+Esta configuración se puede utilizar para crear
+bloques totalmente nuevos o para cambiar opciones
+
+00:00:26.466 --> 00:00:29.896 align:middle
+de bloques existentes, que es lo que queremos.
+
+00:00:30.946 --> 00:00:35.656 align:middle
+Para ello, tenemos que repetir la
+configuración aquí: list & view_types.
+
+00:00:35.776 --> 00:00:39.786 align:middle
+Así que, list view_types
+y luego añade el nuevo.
+
+00:00:40.416 --> 00:00:44.216 align:middle
+Llamémoslo one_by_two -esa
+clave puede ser cualquier cosa-
+
+00:00:44.566 --> 00:00:48.016 align:middle
+y démosle un nombre: 1x2 Featured Grid:
+
+00:00:48.016 --> 00:00:53.646 align:middle
+Sólo con hacer eso, si vamos y
+actualizamos el área de administración...
+
+00:00:53.646 --> 00:01:01.026 align:middle
+y hacemos clic abajo en la cuadrícula,
+¡tenemos un nuevo tipo de vista!
+
+00:01:01.896 --> 00:01:03.316 align:middle
+Si cambiamos a ella...
+
+00:01:03.316 --> 00:01:05.606 align:middle
+no aparece nada en el área de administración.
+
+00:01:06.276 --> 00:01:08.856 align:middle
+Y si pulsamos "Publicar
+y continuar editando"...
+
+00:01:09.476 --> 00:01:10.716 align:middle
+en el frontend...
+
+00:01:11.566 --> 00:01:12.886 align:middle
+tampoco se muestra nada.
+
+00:01:13.156 --> 00:01:17.836 align:middle
+¡Sí! Haz clic en el enlace Diseños
+de la barra de herramientas web y...
+
+00:01:17.926 --> 00:01:19.806 align:middle
+cerca de la parte inferior, ah.
+
+00:01:20.266 --> 00:01:23.936 align:middle
+Se está mostrando invalid_block.html.twig.
+
+00:01:24.956 --> 00:01:31.096 align:middle
+La definición del bloque es list y
+el tipo de vista es 1x2 Featured Grid.
+
+00:01:31.696 --> 00:01:37.846 align:middle
+El problema es que aún no hemos definido
+una "vista de bloque" para esa combinación.
+
+00:01:38.036 --> 00:01:40.656 align:middle
+Así que vuelve a "bloque no válido".
+
+00:01:41.576 --> 00:01:46.026 align:middle
+Vale, en view, ya hemos creado
+varias "vistas de elemento".
+
+00:01:46.686 --> 00:01:51.506 align:middle
+Ahora añade block_view para que
+podamos crear la primera de ellas.
+
+00:01:52.586 --> 00:01:56.576 align:middle
+Vamos a registrar tanto una vista de
+administrador como una vista de frontend.
+
+00:01:57.026 --> 00:01:57.936 align:middle
+Porque...
+
+00:01:58.156 --> 00:02:01.766 align:middle
+en el área de administración,
+actualmente no se muestra nada.
+
+00:02:03.246 --> 00:02:07.026 align:middle
+Añade app para el admin y la
+siguiente clave no importa.
+
+00:02:07.106 --> 00:02:14.536 align:middle
+Para la plantilla, como la vista del administrador no es demasiado importante,
+vamos a reutilizar la plantilla "cuadrícula " del administrador principal
+
+00:02:14.536 --> 00:02:18.556 align:middle
+, que puedes encontrar mediante
+el comando debug:config. Es
+
+00:02:18.936 --> 00:02:24.856 align:middle
+@NetgenLayoutsStandard/app/block/list/grid.html.twig.
+Ahora
+
+00:02:26.486 --> 00:02:28.296 align:middle
+añade match.
+
+00:02:28.986 --> 00:02:38.506 align:middle
+Queremos utilizar esta plantilla si block\definition
+es list y block\view_type es one_by_two...
+
+00:02:39.216 --> 00:02:44.296 align:middle
+asegurándonos de que coincide con la clave que
+utilizamos antes en la definición del bloque: ¿Cómo
+
+00:02:45.066 --> 00:02:49.936 align:middle
+sabía que debía utilizar
+block\definition y block\view_type? ¡
+
+00:02:50.476 --> 00:02:53.946 align:middle
+Utilizando nuestro comando
+favorito debug:config!
+
+00:02:54.176 --> 00:02:56.266 align:middle
+Siempre es una buena guía
+a seguir. En cualquier caso,
+
+00:02:57.026 --> 00:03:00.136 align:middle
+esto debería arreglar el
+área de administración. Y...
+
+00:03:00.136 --> 00:03:02.246 align:middle
+¡lo hace! Para
+
+00:03:02.366 --> 00:03:06.636 align:middle
+la vista del frontend, duplica
+toda esa sección... pero
+
+00:03:06.786 --> 00:03:07.946 align:middle
+utiliza default. Esta
+
+00:03:08.716 --> 00:03:13.526 align:middle
+clave está bien, no importa, y cambia la plantilla a, qué tal,
+@nglayouts/block/list/one_by_two_list.html.twig. La sección de
+
+00:03:13.956 --> 00:03:19.496 align:middle
+coincidencias
+
+00:03:20.776 --> 00:03:22.896 align:middle
+ya es perfecta: Vale, ¡ vamos a
+
+00:03:23.786 --> 00:03:25.716 align:middle
+hacer esa plantilla! Ya
+
+00:03:26.406 --> 00:03:30.066 align:middle
+tenemos templates/nglayouts/themes/standard/block/...
+así que, crea
+
+00:03:30.876 --> 00:03:37.636 align:middle
+el nuevo subdirectorio list y luego el
+archivo: one_by_two_list.html.twig. Empieza
+
+00:03:38.916 --> 00:03:41.016 align:middle
+diciendo 1x2: ¡Vamos a comprobarlo
+
+00:03:41.936 --> 00:03:42.676 align:middle
+! En
+
+00:03:43.256 --> 00:03:47.416 align:middle
+el frontend, actualiza
+y... ¡ahí está nuestro
+
+00:03:47.666 --> 00:03:50.116 align:middle
+pequeño 1x2! ¡Vamos a darle
+
+00:03:50.726 --> 00:03:53.236 align:middle
+vida! Como esto
+
+00:03:53.236 --> 00:03:58.016 align:middle
+renderiza un bloque "lista", nuestra
+plantilla probablemente tenga acceso a alguna
+
+00:03:58.016 --> 00:04:01.146 align:middle
+variable que represente los
+"elementos". Para hacer trampas,
+
+00:04:01.576 --> 00:04:05.156 align:middle
+lo que siempre es una buena opción
+para los desarrolladores, echemos un
+
+00:04:05.636 --> 00:04:11.396 align:middle
+vistazo a la plantilla de rejilla principal:
+grid.html.twig del directorio themes/. ¡Vaya! Como
+
+00:04:12.506 --> 00:04:17.096 align:middle
+muchas plantillas de núcleo, ¡aquí
+hay un montón de cosas! Puedes
+
+00:04:17.856 --> 00:04:20.506 align:middle
+elegir lo que quieres
+conservar o eliminar. Lo más
+
+00:04:21.496 --> 00:04:26.326 align:middle
+importante es esta variable
+collection_html: hacen un bucle sobre
+
+00:04:27.026 --> 00:04:31.516 align:middle
+collections[collection_identifier]...
+donde collection_identifier
+
+00:04:31.826 --> 00:04:36.226 align:middle
+es en realidad sólo la palabra
+default. Así que se repite
+
+00:04:36.656 --> 00:04:39.546 align:middle
+collections.default. Luego
+
+00:04:40.416 --> 00:04:42.376 align:middle
+incluye una plantilla.
+Esa variable templateName
+
+00:04:42.456 --> 00:04:45.496 align:middle
+se establecerá en algo como grid/
+
+00:04:45.496 --> 00:04:50.316 align:middle
+el número de columnas
+.html.twig . Por ejemplo,
+
+00:04:50.396 --> 00:04:58.726 align:middle
+si la cuadrícula está configurada para utilizar 3
+columnas, utilizaría 3_columns.html.twig. Esa plantilla
+
+00:04:59.626 --> 00:05:04.146 align:middle
+añade el div necesario para cada columna en
+una configuración de 3 columnas... y luego
+
+00:05:04.516 --> 00:05:07.796 align:middle
+llama a nglayouts_render_result().
+Eso renderiza
+
+00:05:08.196 --> 00:05:10.306 align:middle
+el "elemento". De todos modos, si
+
+00:05:11.206 --> 00:05:17.286 align:middle
+alejas el zoom, la plantilla básicamente hace
+un bucle sobre la variable collections y llama a
+
+00:05:17.716 --> 00:05:21.456 align:middle
+nglayouts_render_result() en
+cada una de ellas. De vuelta a
+
+00:05:22.316 --> 00:05:26.966 align:middle
+nuestra plantilla, voy a pegar algo de
+código que hace algo parecido: Sí,
+
+00:05:27.476 --> 00:05:32.136 align:middle
+extendemos block.html.twig, igual que hace la
+plantilla principal, luego hacemos un bucle sobre
+
+00:05:32.756 --> 00:05:38.036 align:middle
+collections.default, añadimos un div y
+renderizamos cada elemento. Así que esto
+
+00:05:38.126 --> 00:05:43.906 align:middle
+es efectivamente una versión más simple
+de lo que hace una cuadrícula. ¿Y qué
+
+00:05:44.546 --> 00:05:46.436 align:middle
+aspecto tiene? Actualiza y...
+
+00:05:47.306 --> 00:05:48.436 align:middle
+¡sí! ¡
+
+00:05:48.906 --> 00:05:51.156 align:middle
+Parece una cuadrícula! Pero recuerda
+
+00:05:51.876 --> 00:05:57.916 align:middle
+el objetivo: una gran habilidad a la izquierda con
+dos habilidades más pequeñas a la derecha. Para
+
+00:05:58.906 --> 00:06:02.906 align:middle
+conseguirlo, pegaré la versión 2 de mi
+plantilla. Aquí no hay nada especial.
+
+00:06:03.206 --> 00:06:04.466 align:middle
+En lugar de
+
+00:06:04.816 --> 00:06:09.506 align:middle
+hacer un bucle, esto renderiza la tecla
+0, luego las teclas 1 y 2: Y ahora...
+
+00:06:10.646 --> 00:06:11.466 align:middle
+¡sí! ¡ Es
+
+00:06:12.756 --> 00:06:15.276 align:middle
+exactamente lo que quería!
+Sin embargo, te haré
+
+00:06:15.576 --> 00:06:19.136 align:middle
+la misma advertencia que te hice antes cuando
+
+00:06:19.456 --> 00:06:22.326 align:middle
+modificamos las plantillas básicas
+de los "elementos". No estamos
+
+00:06:22.906 --> 00:06:27.496 align:middle
+incluyendo todas las cosas personalizadas que
+hay en la plantilla del núcleo. Si necesitas
+
+00:06:27.926 --> 00:06:32.466 align:middle
+dar soporte a una opción personalizada,
+asegúrate de incluir ese código. Y, de hecho,
+
+00:06:32.796 --> 00:06:38.446 align:middle
+una cosa de aquí -el número de columnas-
+no es algo que necesitemos. Es algo que
+
+00:06:38.816 --> 00:06:42.096 align:middle
+podemos configurar para el bloque... pero
+
+00:06:42.656 --> 00:06:47.496 align:middle
+no es relevante en absoluto cuando utilizamos
+nuestro nuevo tipo de vista. ¿Podríamos...
+
+00:06:48.076 --> 00:06:48.586 align:middle
+ocultar esa opción al
+utilizar nuestro tipo de vista
+
+00:06:48.786 --> 00:06:51.416 align:middle
+? ¡Sí!
+
+00:06:51.846 --> 00:06:57.526 align:middle
+Vuelve a tu terminal y depura de nuevo la
+configuración de block_definitions: Busca
+
+00:06:58.196 --> 00:06:59.816 align:middle
+one_by_two. Podríamos
+
+00:07:01.216 --> 00:07:07.216 align:middle
+configurar esta clave valid_parameters para eliminar
+una opción del bloque. El tipo de vista list
+
+00:07:08.046 --> 00:07:11.186 align:middle
+hace exactamente eso. No
+
+00:07:11.786 --> 00:07:14.036 align:middle
+lo haré, pero así es como se hace. Vale,
+
+00:07:15.246 --> 00:07:19.626 align:middle
+vuelve al sitio y ve a la página "Todas
+las habilidades". Sí... las cosas
+
+00:07:20.326 --> 00:07:23.286 align:middle
+siguen sin estar bien. En este
+
+00:07:23.966 --> 00:07:27.696 align:middle
+diseño, utilizamos una cuadrícula para
+representar los elementos. Y esa cuadrícula
+
+00:07:27.976 --> 00:07:34.106 align:middle
+se ve bien en otras páginas, pero no aquí,
+donde se supone que las habilidades son
+
+00:07:34.106 --> 00:07:36.496 align:middle
+el contenido principal de la
+página. A continuación, vamos a
+
+00:07:37.706 --> 00:07:43.846 align:middle
+aprender cómo podemos personalizar la representación
+de estos elementos sólo para esta cuadrícula.
