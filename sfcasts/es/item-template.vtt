@@ -1,0 +1,300 @@
+WEBVTT
+
+00:00:01.046 --> 00:00:04.516 align:middle
+¡Nuestra plantilla "artículo" para
+habilidades ya se está utilizando!
+
+00:00:04.716 --> 00:00:06.326 align:middle
+Así que, ¡vamos a terminarla!
+
+00:00:07.006 --> 00:00:09.896 align:middle
+Ya sabemos cómo queremos
+que sean las habilidades...
+
+00:00:10.116 --> 00:00:15.356 align:middle
+así que vamos a robárselo a
+templates/main/homepage.html.twig.
+
+00:00:16.496 --> 00:00:22.076 align:middle
+Busca el bloque featured_skills, copia
+el aspecto de una de esas habilidades
+
+00:00:22.336 --> 00:00:25.636 align:middle
+y pégalo en skill.html.twig.
+
+00:00:26.696 --> 00:00:29.896 align:middle
+Añadamos también dump(item.object)
+en la parte superior.
+
+00:00:30.766 --> 00:00:38.126 align:middle
+Ya hemos creado antes una plantilla de artículo, así que
+sabemos que item.object debería darnos el "objeto" subyacente
+
+00:00:38.216 --> 00:00:41.416 align:middle
+que representa esta entrada de Contentful.
+
+00:00:42.216 --> 00:00:43.596 align:middle
+Si nos dirigimos y actualizamos...
+
+00:00:44.176 --> 00:00:48.036 align:middle
+¡impresionante! Esto vuelca
+un objeto ContentfulEntry.
+
+00:00:48.346 --> 00:00:55.436 align:middle
+Y, aunque no puedas verlo desde aquí, esta clase tiene
+un método get() que podemos utilizar para leer cualquiera
+
+00:00:55.436 --> 00:00:57.916 align:middle
+de los datos subyacentes de Contentful.
+
+00:00:58.836 --> 00:01:01.416 align:middle
+Por habilidades, si escarbamos un poco...
+
+00:01:01.646 --> 00:01:04.716 align:middle
+tenemos campos como title y shortDescription.
+
+00:01:05.616 --> 00:01:06.766 align:middle
+¡Vamos a utilizarlos!
+
+00:01:07.376 --> 00:01:12.646 align:middle
+Por ejemplo, en el <h3>, digamos
+{{ item.object.get('title') }}.
+
+00:01:12.786 --> 00:01:13.316 align:middle
+Y... ¡sí!
+
+00:01:16.576 --> 00:01:18.636 align:middle
+Eso renderiza el título.
+
+00:01:18.636 --> 00:01:26.086 align:middle
+Para el <img src="">, sustituye lo
+de asset() por item.object.get('image'),
+
+00:01:26.986 --> 00:01:32.256 align:middle
+seguido de .file.url, que es
+específico de Contentful.
+
+00:01:33.046 --> 00:01:37.916 align:middle
+Rellena también el atributo alt
+con item.object.get('title').
+
+00:01:39.376 --> 00:01:42.566 align:middle
+Lo último que tenemos
+que actualizar es la URL.
+
+00:01:42.916 --> 00:01:48.146 align:middle
+Pero Si hubiéramos creado una página de
+"demostración de habilidades" en Symfony,
+
+00:01:48.276 --> 00:01:52.346 align:middle
+¡podríamos utilizar la función de
+ruta de Twig y enlazar a esa ruta!
+
+00:01:52.756 --> 00:02:00.586 align:middle
+Sin embargo, cada página de habilidad se crea en realidad a
+través de una ruta dinámica gracias al bundle Contentful.
+
+00:02:00.986 --> 00:02:06.746 align:middle
+Y, para crear esas rutas,
+utiliza el sistema de rutas CMF.
+
+00:02:07.176 --> 00:02:10.886 align:middle
+Así que, para enlazar, tenemos
+que utilizar ese sistema.
+
+00:02:11.256 --> 00:02:20.636 align:middle
+Por ejemplo, path('cmf_routing_object')
+y pasar _route_object a item.object.
+
+00:02:21.426 --> 00:02:27.676 align:middle
+Si estuvieras utilizando Sylius o Ibexa CMS,
+utilizarías alguna función de su sistema
+
+00:02:27.676 --> 00:02:32.146 align:middle
+para crear este enlace: esto es específico
+del sistema de enrutamiento CMF.
+
+00:02:32.146 --> 00:02:34.496 align:middle
+Si nos dirigimos e intentamos eso...
+
+00:02:35.706 --> 00:02:38.696 align:middle
+¡sí! Y si hacemos clic en él...
+
+00:02:40.046 --> 00:02:40.996 align:middle
+¡doble sí!
+
+00:02:41.506 --> 00:02:43.596 align:middle
+Celebrémoslo eliminando el dump()...
+
+00:02:43.596 --> 00:02:48.556 align:middle
+y borrando el bloque featured_skills de
+nuestra plantilla de página de inicio.
+
+00:02:48.956 --> 00:02:51.346 align:middle
+Ya no lo necesitaremos para nada.
+
+00:02:51.846 --> 00:02:56.136 align:middle
+Incluso podemos rehacer este <h2>
+dentro del administrador de diseños.
+
+00:02:56.276 --> 00:03:06.696 align:middle
+Hagámoslo: añade un bloque Título llamado
+"Habilidades destacadas", hazlo "Título 2"...
+
+00:03:07.076 --> 00:03:12.786 align:middle
+y dale la misma clase CSS: text-center mb-4.
+
+00:03:13.656 --> 00:03:15.646 align:middle
+La cuadrícula ya está en un contenedor...
+
+00:03:15.826 --> 00:03:18.296 align:middle
+pero queremos todo esto en un contenedor.
+
+00:03:18.336 --> 00:03:27.086 align:middle
+Así que añade una Columna, envuélvela en un Contenedor,
+mueve los bloques Rejilla y Título dentro de él...
+
+00:03:27.086 --> 00:03:30.326 align:middle
+entonces ya no necesitaremos
+un Contenedor ahí.
+
+00:03:32.806 --> 00:03:34.826 align:middle
+Elimina el bloque
+"Características Habilidades"...
+
+00:03:35.946 --> 00:03:39.166 align:middle
+y finalmente pulsa "Publicar
+y continuar editando".
+
+00:03:40.206 --> 00:03:44.106 align:middle
+Mientras esperamos, elimina también
+ese bloque de la plantilla Twig.
+
+00:03:44.596 --> 00:03:45.526 align:middle
+Y ahora...
+
+00:03:47.376 --> 00:03:50.026 align:middle
+¡sí! ¡El aspecto es perfecto!
+
+00:03:50.756 --> 00:03:55.846 align:middle
+Vale, ya que estamos hablando de vistas de elementos,
+vamos a personalizar la plantilla de elementos
+
+00:03:55.896 --> 00:04:00.526 align:middle
+para nuestro otro modelo de contenido
+dentro de Contentful: Publicidad.
+
+00:04:01.316 --> 00:04:07.996 align:middle
+Sólo vamos a renderizarlo en un lugar, en una
+página específica de habilidades justo...
+
+00:04:07.996 --> 00:04:10.176 align:middle
+aquí. Vamos a comprobarlo.
+
+00:04:10.976 --> 00:04:12.126 align:middle
+Publica este diseño...
+
+00:04:12.616 --> 00:04:15.156 align:middle
+y luego edita el diseño
+individual de la habilidad.
+
+00:04:16.436 --> 00:04:19.886 align:middle
+Antes hemos utilizado el bloque
+Campo de entrada Contentful
+
+00:04:19.886 --> 00:04:24.106 align:middle
+para mostrar el campo advertisements,
+que es una "entidad referenciada".
+
+00:04:25.416 --> 00:04:30.416 align:middle
+Sí, si modificas una habilidad en
+Content ful, en la parte inferior,
+
+00:04:30.576 --> 00:04:35.636 align:middle
+el campo "Anuncio" te permite elegir
+entre los Anuncios de nuestro sistema.
+
+00:04:37.006 --> 00:04:39.416 align:middle
+Haz clic en el icono Twig de la barra
+de herramientas de depuración web...
+
+00:04:39.736 --> 00:04:42.586 align:middle
+busca "artículo", y desplázate hacia abajo..
+
+00:04:43.596 --> 00:04:48.156 align:middle
+No es ninguna sorpresa: está utilizando la
+plantilla estándar "item" de Contentful.
+
+00:04:48.636 --> 00:04:52.796 align:middle
+Y, buena noticia, ya sabemos cómo anularla. Ve
+
+00:04:53.806 --> 00:04:55.386 align:middle
+a nuestra configuración,
+
+00:04:56.266 --> 00:05:00.966 align:middle
+copia la sección contentful_entry/skill
+y pégala a continuación. A
+
+00:05:00.966 --> 00:05:04.526 align:middle
+continuación, sustituye skill por
+ad para el nombre de la sección,
+
+00:05:04.526 --> 00:05:09.036 align:middle
+template y, por último, establece
+content_type en advertisement...
+
+00:05:09.146 --> 00:05:13.166 align:middle
+porque ese es el nombre interno
+de ese tipo en Contentful.
+
+00:05:14.116 --> 00:05:16.196 align:middle
+¡Vale! Vamos a añadir esa plantilla.
+
+00:05:17.106 --> 00:05:21.846 align:middle
+En contentful_entry, crea un nuevo
+archivo llamado ad.html.twig...
+
+00:05:22.286 --> 00:05:25.606 align:middle
+y añade un texto: Advertisement.
+
+00:05:27.076 --> 00:05:28.666 align:middle
+Momento de la verdad.
+
+00:05:29.076 --> 00:05:31.016 align:middle
+Vuelve, actualiza...
+
+00:05:33.976 --> 00:05:34.796 align:middle
+¡ya lo tenemos!
+
+00:05:35.046 --> 00:05:36.496 align:middle
+¡Ha sido fácil!
+
+00:05:36.916 --> 00:05:40.926 align:middle
+Para el contenido real de la
+plantilla, simplemente pegaré algo.
+
+00:05:41.646 --> 00:05:46.756 align:middle
+Una vez más, utilizaremos
+item.object.get() para leer el campo url.
+
+00:05:47.376 --> 00:05:51.206 align:middle
+También hay un campo
+image y un campo shortText.
+
+00:05:52.406 --> 00:05:53.336 align:middle
+Y ahora...
+
+00:05:54.316 --> 00:05:55.696 align:middle
+¡ya lo tenemos!
+
+00:05:56.616 --> 00:06:00.266 align:middle
+Lo siguiente: ¿Qué pasaría si quisiéramos crear
+una Cuadrícula de elementos en nuestro sitio,
+
+00:06:00.266 --> 00:06:05.596 align:middle
+pero hacer que esa única Cuadrícula tuviera un aspecto
+diferente al de todas las demás cuadrículas del sitio?
+
+00:06:06.096 --> 00:06:11.396 align:middle
+Podemos hacerlo creando una "vista de
+bloque" adicional para un bloque existente.

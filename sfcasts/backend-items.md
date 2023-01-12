@@ -83,6 +83,76 @@ And just like that, when we refresh... and open the Content Browser...
 
 ## Adding the Search Functionality
 
+***TIP
+Though this solution works fine, `search()` and `searchCount()` are deprecated
+in favor of `searchItems()` and `searchItemsCount()`. To use the new methods,
+keep the old methods (because they're still part of the interface) and use the
+following for the new methods:
+
+```php
+class RecipeBrowserBackend implements BackendInterface
+{
+    // ...
+
+    public function search(string $searchText, int $offset = 0, int $limit = 25): iterable
+    {
+        // deprecated
+        return [];
+    }
+
+    public function searchCount(string $searchText): int
+    {
+        // deprecated
+        return 0;
+    }
+
+    public function searchItems(SearchQuery $searchQuery)
+    {
+        $recipes = $this->recipeRepository
+            ->createQueryBuilderOrderedByNewest($searchQuery->getSearchText())
+            ->setFirstResult($searchQuery->getOffset())
+            ->setMaxResults($searchQuery->getLimit())
+            ->getQuery()
+            ->getResult();
+        return new RecipeBrowserSearchResults($recipes);
+    }
+
+    public function searchItemsCount(SearchQuery $searchQuery)
+    {
+        return $this->recipeRepository
+            ->createQueryBuilderOrderedByNewest($searchQuery->getSearchText())
+            ->select('COUNT(recipe.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+}
+```
+
+You'll also need a new `RecipeBrowserSearchResults` class:
+
+```php
+// src/ContentBrowser/RecipeBrowserSearchResults.php
+namespace App\ContentBrowser;
+
+use Netgen\ContentBrowser\Backend\SearchResultInterface;
+use App\Entity\Recipe;
+
+class RecipeBrowserSearchResults implements SearchResultInterface
+{
+    public function __construct(private array $results)
+    {
+    }
+
+    public function getResults(): iterable
+    {
+        return array_map(fn (Recipe $recipe) => new RecipeBrowserItem($recipe), $this->results);
+    }
+}
+```
+
+Thanks to Joris in the comments for noticing this!
+***
+
 Ok, but could we search for recipes? *Absolutely*. We can leverage `search()` and
 `searchCount()`. This is simple. Steal all of the logic from `getSubItems()`, paste
 into `search()` and pass `$searchText` to the QueryBuilder method, which already

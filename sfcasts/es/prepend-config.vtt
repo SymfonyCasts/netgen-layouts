@@ -1,0 +1,182 @@
+WEBVTT
+
+00:00:01.046 --> 00:00:04.786 align:middle
+Estoy bastante seguro de que nuestro nuevo
+item_view está configurado correctamente.
+
+00:00:05.216 --> 00:00:10.536 align:middle
+Tenemos item\value_type: contentful_entry,
+que sé que es correcto...
+
+00:00:10.536 --> 00:00:18.196 align:middle
+y luego estamos usando contentful\content_type configurado
+como skill para que esto sólo afecte a las habilidades:
+
+00:00:18.876 --> 00:00:22.396 align:middle
+Pero... parece que no funciona en el frontend.
+
+00:00:23.266 --> 00:00:29.716 align:middle
+Antes, cuando ejecutamos debug:config, vimos que el
+problema reside en el orden de la configuración.
+
+00:00:30.476 --> 00:00:34.376 align:middle
+Layouts lee de arriba abajo cuando
+decide qué "vista" utilizar.
+
+00:00:35.016 --> 00:00:40.486 align:middle
+Así que mira ésta primero, ve que
+la value_type es contentful_entry...
+
+00:00:40.896 --> 00:00:42.486 align:middle
+y se detiene.
+
+00:00:43.266 --> 00:00:46.746 align:middle
+Para solucionarlo, tenemos que
+invertir nuestra configuración.
+
+00:00:47.686 --> 00:00:50.806 align:middle
+Vale, entonces... ¿por qué
+está en este orden para empezar?
+
+00:00:51.306 --> 00:00:53.856 align:middle
+¿Por qué nuestra configuración
+aparece al final? Esto se debe
+
+00:00:54.746 --> 00:01:00.256 align:middle
+a la forma en que Symfony carga la configuración:
+primero carga la configuración del bundle -
+
+00:01:00.546 --> 00:01:07.416 align:middle
+como la del paquete Contentful o Layouts - y
+luego carga nuestros archivos de configuración.
+
+00:01:08.116 --> 00:01:10.926 align:middle
+Y ese suele ser el orden que queremos
+
+00:01:11.576 --> 00:01:16.166 align:middle
+Nos permite anular la configuración
+establecida en los bundles.
+
+00:01:16.816 --> 00:01:19.926 align:middle
+Pero en este caso, queremos lo contrario.
+
+00:01:20.676 --> 00:01:22.176 align:middle
+¿Cómo lo conseguimos?
+
+00:01:22.666 --> 00:01:26.526 align:middle
+Pidiendo a Symfony que anteponga
+nuestra configuración.
+
+00:01:26.526 --> 00:01:31.436 align:middle
+En el directorio config/, crea un
+nuevo directorio llamado prepends/
+
+00:01:31.846 --> 00:01:34.826 align:middle
+y mueve la configuración
+de Netgen Layouts a él.
+
+00:01:35.416 --> 00:01:42.016 align:middle
+Esto evitará que Symfony cargue ese archivo de
+la forma normal: vamos a cargarlo manualmente.
+
+00:01:42.946 --> 00:01:44.716 align:middle
+El siguiente paso es un poco técnico.
+
+00:01:45.316 --> 00:01:50.266 align:middle
+En src/, crea una clase "extensión"
+llamada, qué tal, AppExtension.
+
+00:01:50.266 --> 00:01:55.436 align:middle
+Voy a pegar el código: puedes cogerlo
+del bloque de código de esta página:
+
+00:01:55.976 --> 00:01:59.006 align:middle
+Esto carga nuestro archivo de
+configuración de forma normal...
+
+00:01:59.346 --> 00:02:02.336 align:middle
+con la diferencia de que
+se le añadirá un prefijo.
+
+00:02:03.246 --> 00:02:04.006 align:middle
+Paso final.
+
+00:02:04.376 --> 00:02:08.166 align:middle
+Para llamar a este método,
+abre la clase Kernel.
+
+00:02:09.056 --> 00:02:15.316 align:middle
+Después de use MicroKernelTrait, añade
+configureContainer as baseConfigureContainer:
+
+00:02:16.136 --> 00:02:20.066 align:middle
+Esto añade el método
+configureContainer de MicroKernelTrait
+
+00:02:20.306 --> 00:02:23.216 align:middle
+a esta clase como haría
+normalmente un trait...
+
+00:02:24.046 --> 00:02:28.516 align:middle
+excepto que lo renombra
+a baseConfigureContainer.
+
+00:02:29.176 --> 00:02:34.036 align:middle
+Hacemos esto para poder definir nuestro
+propio método configureContainer().
+
+00:02:34.886 --> 00:02:42.966 align:middle
+Copia la firma configureContainer() del trait, pégala,
+dale a "Aceptar" para añadir las sentencias use
+
+00:02:43.816 --> 00:02:50.636 align:middle
+y luego llama a $this->baseConfigureContainer()
+pasando por $container, $loader y $builder:
+
+00:02:51.576 --> 00:02:57.576 align:middle
+El método configureContainer() del trait
+se encarga de cargar services.yaml y
+
+00:02:57.576 --> 00:03:00.916 align:middle
+todos los archivos de config/packages/.
+
+00:03:01.586 --> 00:03:05.316 align:middle
+Todo eso son cosas buenas
+que queremos seguir haciendo.
+
+00:03:05.906 --> 00:03:13.986 align:middle
+Pero después de hacer eso, añade una cosa más:
+$builder->registerExtension(new AppExtension()):
+
+00:03:14.936 --> 00:03:18.386 align:middle
+De nuevo, sí, esto es
+fastidiosamente técnico.
+
+00:03:18.876 --> 00:03:25.156 align:middle
+Pero gracias a estas dos piezas, nuestra configuración
+netgen_layouts.yaml estará preconfigurada.
+
+00:03:26.046 --> 00:03:26.536 align:middle
+¡Compruébalo!
+
+00:03:26.886 --> 00:03:31.816 align:middle
+Vuelve a ejecutar el comando debug:config:
+Desplázate hacia arriba y...
+
+00:03:32.116 --> 00:03:35.426 align:middle
+¡sí! ¡Nuestra configuración
+está ahora arriba!
+
+00:03:35.956 --> 00:03:37.676 align:middle
+Y cuando actualizamos...
+
+00:03:38.576 --> 00:03:40.976 align:middle
+¡woohoo! ¡Vemos el texto!
+
+00:03:41.816 --> 00:03:46.556 align:middle
+A continuación: vamos a hacer que esta plantilla se
+muestre exactamente igual que las habilidades codificadas.
+
+00:03:46.976 --> 00:03:51.486 align:middle
+A continuación, crearemos una segunda plantilla de elementos para
+personalizar la representación del tipo de contenido "Anuncio " de Contentful.
