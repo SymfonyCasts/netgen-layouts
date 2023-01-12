@@ -139,7 +139,7 @@ Copy this. Then override it via the theming system. If we follow the path...
 
 To make sure this is working, put a little `TEST`:
 
-[[[ code('2b3d295b1d') ]]]
+[[[ code('af2d79735c') ]]]
 
 Ok! Refresh the frontend. Yikes! Yep, that's definitely working. Go... take that out.
 
