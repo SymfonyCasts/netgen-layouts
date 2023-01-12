@@ -1,0 +1,548 @@
+WEBVTT
+
+00:00:01.056 --> 00:00:01.866 align:middle
+¡Pues míranos!
+
+00:00:02.016 --> 00:00:04.956 align:middle
+Hemos llegado al último tema del tutorial.
+
+00:00:05.586 --> 00:00:10.526 align:middle
+Ya hemos transformado nuestro sitio estático
+en uno en el que podemos reordenar el diseño
+
+00:00:10.526 --> 00:00:16.766 align:middle
+de cada página, mezclarlo con código personalizado
+de plantillas Twig y añadir contenido dinámico.
+
+00:00:17.506 --> 00:00:19.696 align:middle
+Eso es... algo impresionante.
+
+00:00:20.276 --> 00:00:25.766 align:middle
+Por supuesto, no hemos cubierto todo lo que puedes hacer
+con los Diseños, pero ahora eres realmente peligroso.
+
+00:00:26.506 --> 00:00:31.076 align:middle
+Un tema que no hemos tratado es cómo
+crear un bloque totalmente nuevo,
+
+00:00:31.576 --> 00:00:36.806 align:middle
+pero está documentado y, a estas alturas,
+creo que no sería demasiado difícil.
+
+00:00:37.576 --> 00:00:40.296 align:middle
+¿Por qué deberías crear
+un bloque personalizado?
+
+00:00:40.296 --> 00:00:46.966 align:middle
+Supongamos que tienes algo superpersonalizado
+como nuestra área "Héroe" o esta área "
+
+00:00:46.966 --> 00:00:53.166 align:middle
+suscribirse al boletín", que en realidad está
+potenciada por el paquete UX Live Component de Symfony,
+
+00:00:53.576 --> 00:00:56.046 align:middle
+que le da el elegante comportamiento Ajax.
+
+00:00:56.976 --> 00:01:02.296 align:middle
+En cualquier caso, si quieres algo así en tu
+página, la forma más sencilla de añadirlo es...
+
+00:01:02.536 --> 00:01:08.896 align:middle
+como hice yo en este proyecto: poner la lógica en
+Symfony, renderizarla dentro de un bloque Twig, y
+
+00:01:09.276 --> 00:01:12.466 align:middle
+luego incluir ese bloque
+Twig dentro de Layouts.
+
+00:01:13.116 --> 00:01:19.566 align:middle
+¿Pero qué pasa si queremos que el usuario administrador
+pueda añadir esto a varias páginas cuando quiera?
+
+00:01:20.046 --> 00:01:23.286 align:middle
+Entonces sería útil crear
+un bloque personalizado.
+
+00:01:24.046 --> 00:01:29.636 align:middle
+Los bloques personalizados también pueden tener opciones, así
+que incluso podrías permitirles personalizarlo de alguna manera.
+
+00:01:30.706 --> 00:01:36.786 align:middle
+De todos modos, hagamos un último reto relacionado
+con los bloques: crea un plugin de bloques.
+
+00:01:37.486 --> 00:01:39.316 align:middle
+Ve a una página de
+demostración de habilidades.
+
+00:01:39.916 --> 00:01:44.596 align:middle
+Hmm, probablemente nos vendría bien un
+poco más de margen entre estos bloques.
+
+00:01:44.946 --> 00:01:46.706 align:middle
+Y esa es una necesidad bastante común.
+
+00:01:47.486 --> 00:01:51.886 align:middle
+Podríamos manejar esto añadiendo una
+clase CSS que establezca el margen.
+
+00:01:52.346 --> 00:01:54.396 align:middle
+Pero quiero hacerlo aún más fácil.
+
+00:01:55.256 --> 00:01:59.666 align:middle
+Ve al administrador de Diseños y edita
+el Diseño de habilidad individual.
+
+00:02:00.616 --> 00:02:04.096 align:middle
+Bien, supongamos que queremos
+añadir algo de margen aquí.
+
+00:02:04.706 --> 00:02:11.616 align:middle
+Para ello, quiero que el usuario administrador pueda
+hacer clic en cualquier bloque del sistema -por ejemplo,
+
+00:02:11.616 --> 00:02:16.806 align:middle
+este bloque de columnas- y, en la pestaña
+de diseño, seleccionar el margen superior
+
+00:02:16.806 --> 00:02:20.196 align:middle
+o inferior que necesite de
+un nuevo campo de formulario.
+
+00:02:20.806 --> 00:02:22.956 align:middle
+Este es un objetivo bastante descabellado...
+
+00:02:23.406 --> 00:02:30.076 align:middle
+porque, para conseguirlo, ¡necesitamos poder
+modificar todos los bloques del sistema!
+
+00:02:30.076 --> 00:02:38.506 align:middle
+Afortunadamente, ése es exactamente el objetivo de un
+complemento de bloque: ampliar uno -o todos- los bloques.
+
+00:02:38.506 --> 00:02:40.056 align:middle
+Manos a la obra.
+
+00:02:40.576 --> 00:02:44.136 align:middle
+En el directorio src/Layouts/,
+crea una nueva clase PHP llamada,
+
+00:02:44.376 --> 00:02:46.716 align:middle
+qué tal, VerticalWhitespacePlugin.
+
+00:02:47.816 --> 00:02:50.266 align:middle
+Ésta tiene que implementar un PluginInterface.
+
+00:02:50.636 --> 00:02:56.986 align:middle
+Pero en la práctica, extendemos una clase
+Plugin que implementa esa interfaz por nosotros.
+
+00:02:57.406 --> 00:03:00.136 align:middle
+Ve a "Código"->"Generar", o Command+N
+en un Mac, e implementa el único
+
+00:03:00.356 --> 00:03:04.656 align:middle
+método que necesitamos:
+getExtendedHandlers(): Vale, cada bloque del
+
+00:03:05.406 --> 00:03:10.406 align:middle
+sistema -es decir, cada elemento de aquí del
+menú de la izquierda- tiene una clase detrás
+
+00:03:10.846 --> 00:03:14.726 align:middle
+llamada manejador de bloques. Nuestro
+trabajo en getExtendedHandlers()
+
+00:03:15.526 --> 00:03:21.016 align:middle
+es devolver un iterable de todos
+los "manejadores" que queramos
+
+00:03:21.016 --> 00:03:23.426 align:middle
+extender. Por ejemplo, si
+
+00:03:23.426 --> 00:03:27.966 align:middle
+sólo quisieras extender el bloque del
+título, podrías yield TitleHandler::class.
+
+00:03:28.246 --> 00:03:31.796 align:middle
+¿Cómo sabía
+
+00:03:32.576 --> 00:03:35.056 align:middle
+que debía utilizar esa clase?
+Bueno, la mayoría de las veces
+
+00:03:35.406 --> 00:03:40.626 align:middle
+puedes adivinarlo: el bloque de
+título tiene un TitleHandler. Pero si
+
+00:03:41.406 --> 00:03:45.816 align:middle
+quieres mirar más a fondo, puedes ver todos los manejadores del sistema ejecutando:
+php bin/console debug:container --tag=netgen_layouts.block_definition_handler De
+
+00:03:45.816 --> 00:03:47.516 align:middle
+todos modos, en nuestro
+
+00:03:47.516 --> 00:03:53.466 align:middle
+caso,
+
+00:03:53.686 --> 00:03:57.336 align:middle
+queremos anular todos los
+bloques. Así que podemos yield
+
+00:03:57.576 --> 00:04:01.996 align:middle
+BlockHandlerDefinitionInterface::class
+, porque cada manejador de bloque
+
+00:04:02.416 --> 00:04:06.316 align:middle
+debe implementar esa interfaz: Y sí,
+
+00:04:06.676 --> 00:04:11.546 align:middle
+acabo de olvidar por completo la palabra
+Definition. ¡Uy! Arreglaré esta mala interfaz
+
+00:04:12.046 --> 00:04:14.136 align:middle
+en un minuto. Para ver qué
+
+00:04:14.876 --> 00:04:17.776 align:middle
+hacer a continuación, vuelve al menú "Código"->"Generar",
+selecciona "Anular métodos" y elige buildParameters() . No necesitamos
+
+00:04:18.166 --> 00:04:21.556 align:middle
+llamar al
+
+00:04:22.286 --> 00:04:24.886 align:middle
+método padre porque está vacío:
+Parámetro es la palabra que utiliza Layouts
+
+00:04:25.786 --> 00:04:31.376 align:middle
+para las opciones del formulario que puedes
+personalizar en la parte derecha de la
+
+00:04:31.376 --> 00:04:34.096 align:middle
+pantalla para cada bloque. Gracias a nuestro
+método getExtendedHandlers(), cuando Layouts
+
+00:04:34.096 --> 00:04:40.566 align:middle
+construya esas opciones para cualquier
+bloque, ahora llamará a este método
+
+00:04:40.566 --> 00:04:45.516 align:middle
+y podremos añadir nuevos
+parámetros. Pegaré el primero... y
+
+00:04:45.906 --> 00:04:47.016 align:middle
+también necesitamos una declaración use
+
+00:04:47.416 --> 00:04:51.716 align:middle
+para este espacio de nombres ParameterType:
+¡Genial! Como puedes ver, Layouts
+
+00:04:52.276 --> 00:04:57.796 align:middle
+viene con un montón de "tipos de campo"
+incorporados, como BooleanField, que se mostrará como
+
+00:04:57.946 --> 00:05:01.626 align:middle
+una casilla de verificación. Su
+valor predeterminado es falso y tiene
+
+00:05:02.206 --> 00:05:04.686 align:middle
+una etiqueta. Ah, ¿y este
+grupo? ¿Recuerdas que
+
+00:05:05.286 --> 00:05:06.686 align:middle
+hay dos pestañas
+
+00:05:07.176 --> 00:05:11.006 align:middle
+: "Diseño" y "Contenido"?
+Aquí es donde determinas
+
+00:05:11.576 --> 00:05:15.536 align:middle
+dentro de cuál debe vivir tu parámetro. Y
+la primera clave - vertical_whitespace:enabled
+
+00:05:16.176 --> 00:05:21.976 align:middle
+es el nombre interno de este
+campo. Verás cómo lo utilizamos
+
+00:05:22.476 --> 00:05:24.296 align:middle
+en un minuto. Antes de que
+lo intentemos, el futuro Ryan
+
+00:05:24.886 --> 00:05:29.316 align:middle
+acaba de informarme de que... ¡He metido la
+pata! Típico. Desplázate hacia arriba. ¡Estoy
+
+00:05:29.316 --> 00:05:30.306 align:middle
+cediendo la
+
+00:05:30.736 --> 00:05:32.706 align:middle
+clase equivocada! Rinde
+
+00:05:33.506 --> 00:05:35.146 align:middle
+BlockDefinitionHandlerInterface::class:
+Así está mejor. Ahora vamos a
+
+00:05:36.836 --> 00:05:40.366 align:middle
+probar.
+
+00:05:40.676 --> 00:05:41.256 align:middle
+Actualiza... haz clic
+
+00:05:41.846 --> 00:05:42.946 align:middle
+en cualquier bloque...
+
+00:05:43.406 --> 00:05:44.066 align:middle
+déjame
+
+00:05:45.466 --> 00:05:46.806 align:middle
+encontrar mi bloque Título...
+
+00:05:47.236 --> 00:05:48.836 align:middle
+y... ¡ahí está! ¡ En cualquier bloque
+
+00:05:49.236 --> 00:05:51.236 align:middle
+vemos el
+
+00:05:51.506 --> 00:05:54.196 align:middle
+nuevo campo! Pero, la idea real es que,
+
+00:05:54.746 --> 00:06:01.546 align:middle
+si el usuario lo activa, le mostramos dos campos
+más en los que puede seleccionar el margen superior
+
+00:06:01.676 --> 00:06:04.356 align:middle
+o inferior. Para ello ,
+después del primer campo
+
+00:06:04.976 --> 00:06:09.266 align:middle
+, pegaré dos parámetros más: Estos
+son básicamente como el primero.
+
+00:06:09.846 --> 00:06:11.636 align:middle
+La gran diferencia es que,
+
+00:06:12.176 --> 00:06:16.636 align:middle
+aquí arriba, dijimos $builder->add(). Pero ahora
+tenemos $builder->get('vertical_whitespace:enabled') y
+
+00:06:17.006 --> 00:06:21.966 align:middle
+luego ->add(). Esto
+hace que estos campos sean
+
+00:06:22.226 --> 00:06:23.836 align:middle
+hijos
+
+00:06:24.306 --> 00:06:27.086 align:middle
+del primero. Esto está muy
+bien. Actualiza y... vamos a
+
+00:06:27.776 --> 00:06:28.656 align:middle
+buscar el bloque Columna.
+
+00:06:29.146 --> 00:06:31.906 align:middle
+Haz clic
+
+00:06:31.976 --> 00:06:33.576 align:middle
+en "Activar espacio en
+blanco vertical". ¡Guau! ¡
+
+00:06:35.106 --> 00:06:37.506 align:middle
+Aparecieron los otros dos campos !
+
+00:06:38.076 --> 00:06:40.766 align:middle
+Hagamos un espaciado superior "Medio" y un
+
+00:06:41.416 --> 00:06:45.096 align:middle
+espaciado inferior "No".
+Publícalo. Sin embargo, no debería
+
+00:06:45.646 --> 00:06:46.236 align:middle
+sorprenderte demasiado
+
+00:06:47.176 --> 00:06:51.846 align:middle
+que cuando actualicemos la página... ¡no
+ocurra absolutamente nada! Hemos añadido esas
+
+00:06:52.216 --> 00:06:54.296 align:middle
+opciones... pero
+
+00:06:54.776 --> 00:06:56.296 align:middle
+aún no las estamos
+utilizando en ningún sitio.
+
+00:06:56.506 --> 00:06:58.976 align:middle
+Para ello, necesitamos anular una plantilla.
+
+00:06:59.476 --> 00:07:01.536 align:middle
+Pensemos: queremos que este margen superior
+
+00:07:02.276 --> 00:07:07.726 align:middle
+e inferior se aplique a todos los bloques del sistema.
+Y, afortunadamente, todos los bloques del sistema
+
+00:07:08.176 --> 00:07:14.136 align:middle
+acaban extendiéndose a block.html.twig: éste
+de aquí, en el directorio nglayouts/themes/
+
+00:07:14.636 --> 00:07:17.726 align:middle
+. Cópialo. Luego, anúlalo
+a través del sistema
+
+00:07:18.336 --> 00:07:19.036 align:middle
+temático.
+
+00:07:19.476 --> 00:07:21.886 align:middle
+Si seguimos la ruta...
+standard/block... standard/block...
+
+00:07:22.486 --> 00:07:23.956 align:middle
+el nuevo archivo debería vivir aquí:
+
+00:07:25.206 --> 00:07:26.396 align:middle
+block.html.twig.
+
+00:07:26.706 --> 00:07:30.876 align:middle
+Pega el contenido dentro.
+Para asegurarte de que
+
+00:07:31.636 --> 00:07:32.906 align:middle
+funciona, pon
+
+00:07:33.476 --> 00:07:36.936 align:middle
+un poco de TEST: ¡Ok! Actualiza
+el frontend. ¡Yupi! Sí,
+
+00:07:36.936 --> 00:07:38.906 align:middle
+definitivamente funciona. Vamos ... quita
+
+00:07:39.516 --> 00:07:42.726 align:middle
+eso. En la parte superior de
+
+00:07:43.046 --> 00:07:44.366 align:middle
+la plantilla,
+
+00:07:45.286 --> 00:07:48.136 align:middle
+tenemos una variable llamada css_class, que
+está establecida en algunas clases principales.
+
+00:07:48.136 --> 00:07:52.036 align:middle
+Y ¡eh! ¡Llama a
+block.parameter('css_class')! Sí, ¡ eso es
+
+00:07:53.026 --> 00:07:58.086 align:middle
+lo que lee el campo "Clase CSS"
+
+00:07:58.796 --> 00:08:04.166 align:middle
+¡de las opciones del bloque! Luego,
+utiliza |join(' ') para combinar
+
+00:08:04.876 --> 00:08:08.486 align:middle
+todo esto en una cadena. Voy a
+eliminar ese join()... y luego
+
+00:08:08.486 --> 00:08:11.756 align:middle
+cambiaré el nombre de esta
+variable a css_classes: Estamos
+
+00:08:12.236 --> 00:08:16.246 align:middle
+configurando las cosas para que
+
+00:08:16.946 --> 00:08:20.756 align:middle
+podamos modificar fácilmente esa variable. Aquí abajo,
+justo antes de block_content, vuelve a crear esa variable
+
+00:08:21.376 --> 00:08:24.606 align:middle
+css_class configurada como css_classes|join('
+
+00:08:24.976 --> 00:08:30.426 align:middle
+') : Esta variable se utiliza en un
+
+00:08:31.206 --> 00:08:36.496 align:middle
+montón de sitios diferentes y en plantillas
+hijo. Así que tenemos que asegurarnos de que
+
+00:08:36.496 --> 00:08:39.206 align:middle
+sigue establecida. De todas formas,
+aquí arriba, ahora tenemos una
+
+00:08:40.246 --> 00:08:45.286 align:middle
+matrizcss_classes. ¡Vamos a
+utilizarla! Voy a pegar tres
+
+00:08:45.786 --> 00:08:47.076 align:middle
+variables, cada una ajust ada
+
+00:08:47.646 --> 00:08:52.846 align:middle
+al valor de nuestros tres parámetros: Aquí es
+donde resulta útil el nombre del parámetro que
+
+00:08:53.506 --> 00:08:57.266 align:middle
+utilizamos en la clase. Ahora, muy
+sencillo, si use_whitespace, entonces añade
+
+00:08:58.076 --> 00:09:06.746 align:middle
+algunas clases de margen. También
+pegaré ese código: Así,
+
+00:09:07.056 --> 00:09:08.336 align:middle
+para el margen superior, añad iremos
+
+00:09:08.336 --> 00:09:14.316 align:middle
+un nuevo whitespace-top- seguido
+de none, small, medium o large.
+
+00:09:16.186 --> 00:09:19.696 align:middle
+Y lo mismo para el inferior. Estas nuevas
+
+00:09:20.546 --> 00:09:21.896 align:middle
+clases son totalmente inventadas:
+
+00:09:22.906 --> 00:09:29.856 align:middle
+no forman parte del CSS de Bootstrap ni de nada,
+pero podrías hacer esto más inteligente para
+
+00:09:30.176 --> 00:09:33.426 align:middle
+reutilizarlas. Pero para nosotros,
+si abres assets/styles/app.css...
+
+00:09:33.906 --> 00:09:38.546 align:middle
+cerca de la parte superior,
+¡allá vamos! Antes
+
+00:09:38.546 --> 00:09:40.606 align:middle
+del tutorial, ya he preparado esas
+
+00:09:41.046 --> 00:09:44.776 align:middle
+clases. Así que... ¡debería
+funcionar! Muévete y
+
+00:09:44.776 --> 00:09:46.876 align:middle
+actualiza. ¡Ya está! Nuestro bloque
+
+00:09:47.506 --> 00:09:48.796 align:middle
+tiene un pequeño
+
+00:09:50.186 --> 00:09:53.696 align:middle
+espacio en blanco superior extra... que
+proviene de nuestra nueva clase. Y...
+
+00:09:54.106 --> 00:09:57.616 align:middle
+¡listo! ¡Gran trabajo, equipo! ¡
+
+00:09:57.616 --> 00:09:59.956 align:middle
+Ahora eres un campeón de Layouts
+
+00:10:00.216 --> 00:10:01.386 align:middle
+!
+
+00:10:01.676 --> 00:10:03.836 align:middle
+Cuéntanos qué cosas chulas estás
+
+00:10:04.406 --> 00:10:06.706 align:middle
+construyendo con él. Y si
+tienes alguna pregunta, como
+
+00:10:07.246 --> 00:10:12.356 align:middle
+siempre, estamos a tu disposición en la sección de
+comentarios. Muy bien, gracias y hasta la próxima.
