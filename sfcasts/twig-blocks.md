@@ -6,7 +6,7 @@ not really *that* interesting. What I *really* want to be able to do is use my
 
 [[[ code('edcd2bbc72') ]]]
 
-but then*tweak* it by adding little bits of dynamic content here and there...
+but then *tweak* it by adding little bits of dynamic content here and there...
 or even  rearrange things. To do that in the layout, under the blocks, at the bottom,
 add a special one called "Twig Block"... and let's put that right below the title.
 Notice that you can put as many blocks as you want inside of a single zone. These
