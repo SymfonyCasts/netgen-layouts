@@ -32,6 +32,6 @@ De todos modos, di "Publicar y continuar editando"... y luego ve a actualizar el
 
 Observa: Moveré el `subscribe_newsletter` hacia abajo, le daré a "Publicar y continuar editando", actualizaré y... ¡boom! Esa parte estática de la página se ha movido mágicamente a la parte inferior. Es genial.
 
-O podríamos volver a subirla... y luego añadir algo de contenido dinámico, como texto, entre uno de los otros bloques.
+O podríamos volver a subirla... y luego añadir algún contenido dinámico, como texto, entre uno de los otros bloques.
 
 A continuación, vamos a ser aún más agresivos y flexibles permitiendo que la navegación superior y el pie de página inferior sean opcionales, pero fáciles de añadir, dentro del Diseño.
