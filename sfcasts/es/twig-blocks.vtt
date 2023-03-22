@@ -1,0 +1,228 @@
+WEBVTT
+
+00:00:01.156 --> 00:00:05.836 align:middle
+Así que acabamos de sustituir completamente
+nuestra página de inicio por un diseño dinámico.
+
+00:00:06.216 --> 00:00:09.266 align:middle
+Pero eso no es tan interesante.
+
+00:00:09.666 --> 00:00:15.006 align:middle
+Lo que realmente quiero es poder utilizar
+mi plantilla de página de inicio existente
+
+00:00:15.006 --> 00:00:21.096 align:middle
+y todo este buen contenido que he preparado: pero
+luego modificarlo añadiendo pequeños fragmentos
+
+00:00:21.096 --> 00:00:23.106 align:middle
+de contenido dinámico aquí y allá...
+
+00:00:23.306 --> 00:00:25.246 align:middle
+o incluso reorganizar las cosas.
+
+00:00:25.946 --> 00:00:29.956 align:middle
+Para ello, en el diseño, debajo de
+los bloques, en la parte inferior,
+
+00:00:30.186 --> 00:00:33.356 align:middle
+añade uno especial llamado "Bloque Twig "...
+
+00:00:33.686 --> 00:00:35.776 align:middle
+y pongámoslo justo debajo del título.
+
+00:00:36.396 --> 00:00:41.126 align:middle
+Fíjate en que puedes poner tantos bloques
+como quieras dentro de una misma zona.
+
+00:00:41.416 --> 00:00:44.896 align:middle
+En realidad, estas zonas no
+acaban siendo tan importantes.
+
+00:00:45.386 --> 00:00:50.516 align:middle
+De todas formas, cuando hagas clic en un bloque,
+a la derecha verás las opciones de ese bloque.
+
+00:00:50.946 --> 00:00:54.286 align:middle
+Ésta tiene una importante
+llamada "Nombre del bloque Twig".
+
+00:00:54.996 --> 00:01:01.476 align:middle
+Introduce body para que coincida con el {%
+block body %} que tenemos en la plantilla: Ok,
+
+00:01:01.786 --> 00:01:03.716 align:middle
+dale a "publicar y continuar editando"...
+
+00:01:04.076 --> 00:01:06.876 align:middle
+luego ve y actualiza la página de inicio.
+
+00:01:08.506 --> 00:01:10.416 align:middle
+¡Bendito hombre murciélago del contenido!
+
+00:01:10.556 --> 00:01:14.946 align:middle
+Nuestro contenido Twig vive ahora
+dentro de esta página dinámica.
+
+00:01:15.116 --> 00:01:16.396 align:middle
+¡Es increíble!
+
+00:01:16.666 --> 00:01:21.926 align:middle
+Y todo sigue funcionando: incluso el elegante
+"componente vivo" del centro de la página.
+
+00:01:22.726 --> 00:01:25.176 align:middle
+Vale, esto es genial...
+
+00:01:25.316 --> 00:01:29.486 align:middle
+pero sigue siendo sólo un montón de
+contenido dinámico en la parte superior...
+
+00:01:29.746 --> 00:01:32.746 align:middle
+y luego contenido de plantilla
+Twig en la parte inferior:
+
+00:01:32.996 --> 00:01:36.986 align:middle
+realmente no podemos mezclar nada
+en el centro de nuestra página.
+
+00:01:37.466 --> 00:01:41.016 align:middle
+A menos que... añadamos más
+bloques a nuestra plantilla.
+
+00:01:41.016 --> 00:01:44.026 align:middle
+Por ejemplo, mantener el block body...
+
+00:01:44.096 --> 00:01:48.336 align:middle
+para que la página siga funcionando
+aunque no mapeemos un diseño...
+
+00:01:48.976 --> 00:01:55.186 align:middle
+pero luego añadimos un {% block hero %} alrededor
+de la sección superior, un bloque llamado, qué tal,
+
+00:01:55.186 --> 00:02:04.876 align:middle
+latest_recipes, {% endblock %}, otro
+llamado subscribe_newsletter, {% endblock %}
+
+00:02:04.876 --> 00:02:11.706 align:middle
+y uno final llamado featured_skills, {%
+endblock %}: Si nos detuviéramos ahora,
+
+00:02:12.016 --> 00:02:18.506 align:middle
+esto no supondría ninguna diferencia para nuestra aplicación:
+seguimos renderizando el bloque body aquí abajo...
+
+00:02:18.736 --> 00:02:20.816 align:middle
+que incluye todos esos.
+
+00:02:21.356 --> 00:02:24.536 align:middle
+Pero acabamos de darnos
+un montón de poder nuevo.
+
+00:02:25.316 --> 00:02:28.896 align:middle
+Compruébalo: cambia el nombre
+del bloque body por hero.
+
+00:02:28.996 --> 00:02:31.746 align:middle
+Y luego vamos a añadir unos
+cuantos bloques Twig más.
+
+00:02:35.076 --> 00:02:37.206 align:middle
+Renderiza latest_recipes para éste.
+
+00:02:38.156 --> 00:02:44.016 align:middle
+Por cierto, las "etiquetas" de los bloques son sólo para nosotros
+en el área de administración: sólo para mayor claridad.
+
+00:02:44.616 --> 00:02:48.546 align:middle
+Si introduzco "Últimas recetas",
+aparecerá encima del bloque.
+
+00:02:48.966 --> 00:02:50.116 align:middle
+Totalmente opcional.
+
+00:02:50.676 --> 00:02:56.536 align:middle
+Añade dos bloques más: uno
+que muestre subscribe_newsletter
+
+00:02:58.906 --> 00:03:01.766 align:middle
+y, por último, uno para featured_skills.
+
+00:03:06.506 --> 00:03:10.356 align:middle
+Luego, aquí arriba, voy a
+eliminar por ahora el bloque title.
+
+00:03:10.946 --> 00:03:15.256 align:middle
+Por cierto, estoy utilizando la palabra "bloque"
+para referirme a dos cosas distintas a la vez.
+
+00:03:15.656 --> 00:03:21.936 align:middle
+Los bloques son las "cosas" que añadimos a nuestro diseño,
+como un título, un mapa de Google o una lista de elementos.
+
+00:03:22.326 --> 00:03:26.296 align:middle
+Pero los bloques también se refieren a
+los bloques Twig de nuestras plantillas.
+
+00:03:26.766 --> 00:03:30.056 align:middle
+Y, por supuesto, uno de los tipos
+de bloques que podemos añadir...
+
+00:03:30.316 --> 00:03:31.786 align:middle
+es el que renderiza...
+
+00:03:31.916 --> 00:03:32.696 align:middle
+Bloques Twig.
+
+00:03:32.836 --> 00:03:35.966 align:middle
+Un poco confuso, pero no puede ser peor.
+
+00:03:36.946 --> 00:03:39.596 align:middle
+De todos modos, di "Publicar
+y continuar editando"...
+
+00:03:40.046 --> 00:03:42.136 align:middle
+y actualiza el frontend.
+
+00:03:42.566 --> 00:03:44.166 align:middle
+Y... ¡genial!
+
+00:03:44.506 --> 00:03:46.006 align:middle
+Nuestra página funciona.
+
+00:03:46.516 --> 00:03:52.856 align:middle
+Lo sé, tiene exactamente el mismo aspecto que hace un
+minuto, pero ahora está siendo renderizada por layouts...
+
+00:03:52.856 --> 00:03:55.696 align:middle
+¡y podemos reorganizar las piezas!
+
+00:03:56.206 --> 00:04:01.216 align:middle
+Observa: Moveré el subscribe_newsletter
+hacia abajo, le daré a "Publicar
+
+00:04:01.216 --> 00:04:04.726 align:middle
+y seguir editando", actualizaré, y...
+
+00:04:04.986 --> 00:04:09.516 align:middle
+¡boom! Esa parte estática de la página se
+ha movido mágicamente a la parte inferior.
+
+00:04:09.766 --> 00:04:11.096 align:middle
+Es genial.
+
+00:04:12.156 --> 00:04:14.136 align:middle
+O podríamos volver a subirla...
+
+00:04:14.406 --> 00:04:20.616 align:middle
+y luego añadir algo de contenido dinámico,
+como texto, entre uno de los otros bloques.
+
+00:04:21.616 --> 00:04:27.106 align:middle
+A continuación, vamos a ser aún más agresivos y
+flexibles permitiendo que la navegación superior
+
+00:04:27.106 --> 00:04:32.076 align:middle
+y el pie de página inferior sean opcionales,
+pero fáciles de añadir, dentro del Diseño.
