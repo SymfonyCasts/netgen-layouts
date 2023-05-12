@@ -12,7 +12,7 @@ index 2727427..30eaad2 100644
 +CONTENTFUL_ACCESS_TOKEN=b4c0n73n7fu1
 +###< contentful/contentful-bundle ###
 diff --git a/composer.json b/composer.json
-index 59b0e33..e1b9c08 100644
+index 3695f34..b1e1829 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -12,6 +12,7 @@
@@ -24,15 +24,15 @@ index 59b0e33..e1b9c08 100644
          "pagerfanta/doctrine-orm-adapter": "^3.6",
          "sensio/framework-extra-bundle": "^6.2",
 diff --git a/composer.lock b/composer.lock
-index 27b2807..86b3a8d 100644
+index 962e10d..3945bea 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,8 +4,71 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "dd08252472bcaaeaf5e7c50184e2e4a8",
-+    "content-hash": "e291c6ae2c1b9567f322631e63691ac0",
+-    "content-hash": "171b0ab604140cdc2020e848f995bcb5",
++    "content-hash": "71800ec6e3977be4ecd931e118b5b4fd",
      "packages": [
 +        {
 +            "name": "aptoma/twig-markdown",
@@ -805,7 +805,7 @@ index 27b2807..86b3a8d 100644
          },
          {
              "name": "knplabs/knp-menu",
-@@ -2889,6 +3563,70 @@
+@@ -2886,6 +3560,70 @@
              },
              "time": "2021-05-12T14:19:36+00:00"
          },
@@ -876,7 +876,7 @@ index 27b2807..86b3a8d 100644
          {
              "name": "netgen/layouts-core",
              "version": "1.3.7",
-@@ -4088,6 +4826,50 @@
+@@ -4085,6 +4823,50 @@
              },
              "time": "2021-07-14T16:41:46+00:00"
          },
@@ -927,7 +927,7 @@ index 27b2807..86b3a8d 100644
          {
              "name": "ramsey/collection",
              "version": "1.2.2",
-@@ -4507,6 +5289,152 @@
+@@ -4504,6 +5286,152 @@
              },
              "time": "2022-08-17T11:21:43+00:00"
          },
