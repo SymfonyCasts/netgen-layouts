@@ -23,7 +23,7 @@ index 8e28565..3695f34 100644
          "sensio/framework-extra-bundle": "^6.2",
          "stof/doctrine-extensions-bundle": "^1.7",
 diff --git a/composer.lock b/composer.lock
-index 1499e2f..05e4b3e 100644
+index 5fca409..52acad7 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
@@ -484,36 +484,36 @@ index 1499e2f..05e4b3e 100644
          },
          {
 -            "name": "laminas/laminas-code",
--            "version": "4.13.0",
+-            "version": "4.16.0",
 +            "name": "erusev/parsedown",
 +            "version": "1.7.4",
              "source": {
                  "type": "git",
 -                "url": "https://github.com/laminas/laminas-code.git",
--                "reference": "7353d4099ad5388e84737dd16994316a04f48dbf"
+-                "reference": "1793e78dad4108b594084d05d1fb818b85b110af"
 +                "url": "https://github.com/erusev/parsedown.git",
 +                "reference": "cb17b6477dfff935958ba01325f2e8a2bfa6dab3"
              },
              "dist": {
                  "type": "zip",
--                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/7353d4099ad5388e84737dd16994316a04f48dbf",
--                "reference": "7353d4099ad5388e84737dd16994316a04f48dbf",
+-                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/1793e78dad4108b594084d05d1fb818b85b110af",
+-                "reference": "1793e78dad4108b594084d05d1fb818b85b110af",
 +                "url": "https://api.github.com/repos/erusev/parsedown/zipball/cb17b6477dfff935958ba01325f2e8a2bfa6dab3",
 +                "reference": "cb17b6477dfff935958ba01325f2e8a2bfa6dab3",
                  "shasum": ""
              },
              "require": {
--                "php": "~8.1.0 || ~8.2.0 || ~8.3.0"
+-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
 +                "ext-mbstring": "*",
 +                "php": ">=5.3.0"
              },
              "require-dev": {
 -                "doctrine/annotations": "^2.0.1",
 -                "ext-phar": "*",
--                "laminas/laminas-coding-standard": "^2.5.0",
--                "laminas/laminas-stdlib": "^3.17.0",
--                "phpunit/phpunit": "^10.3.3",
--                "psalm/plugin-phpunit": "^0.18.4",
+-                "laminas/laminas-coding-standard": "^3.0.0",
+-                "laminas/laminas-stdlib": "^3.18.0",
+-                "phpunit/phpunit": "^10.5.37",
+-                "psalm/plugin-phpunit": "^0.19.0",
 -                "vimeo/psalm": "^5.15.0"
 -            },
 -            "suggest": {
@@ -617,7 +617,7 @@ index 1499e2f..05e4b3e 100644
 +                    "homepage": "http://ezyang.com"
                  }
              ],
--            "time": "2023-10-18T10:00:55+00:00"
+-            "time": "2024-11-20T13:15:13+00:00"
 +            "description": "Standards compliant HTML filter written in PHP",
 +            "homepage": "http://htmlpurifier.org/",
 +            "keywords": [
@@ -1305,28 +1305,28 @@ index 1499e2f..05e4b3e 100644
 +        },
 +        {
 +            "name": "laminas/laminas-code",
-+            "version": "4.13.0",
++            "version": "4.16.0",
 +            "source": {
 +                "type": "git",
 +                "url": "https://github.com/laminas/laminas-code.git",
-+                "reference": "7353d4099ad5388e84737dd16994316a04f48dbf"
++                "reference": "1793e78dad4108b594084d05d1fb818b85b110af"
 +            },
 +            "dist": {
 +                "type": "zip",
-+                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/7353d4099ad5388e84737dd16994316a04f48dbf",
-+                "reference": "7353d4099ad5388e84737dd16994316a04f48dbf",
++                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/1793e78dad4108b594084d05d1fb818b85b110af",
++                "reference": "1793e78dad4108b594084d05d1fb818b85b110af",
 +                "shasum": ""
 +            },
 +            "require": {
-+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0"
++                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
 +            },
 +            "require-dev": {
 +                "doctrine/annotations": "^2.0.1",
 +                "ext-phar": "*",
-+                "laminas/laminas-coding-standard": "^2.5.0",
-+                "laminas/laminas-stdlib": "^3.17.0",
-+                "phpunit/phpunit": "^10.3.3",
-+                "psalm/plugin-phpunit": "^0.18.4",
++                "laminas/laminas-coding-standard": "^3.0.0",
++                "laminas/laminas-stdlib": "^3.18.0",
++                "phpunit/phpunit": "^10.5.37",
++                "psalm/plugin-phpunit": "^0.19.0",
 +                "vimeo/psalm": "^5.15.0"
 +            },
 +            "suggest": {
@@ -1364,7 +1364,7 @@ index 1499e2f..05e4b3e 100644
 +                    "type": "community_bridge"
 +                }
 +            ],
-+            "time": "2023-10-18T10:00:55+00:00"
++            "time": "2024-11-20T13:15:13+00:00"
 +        },
 +        {
 +            "name": "monolog/monolog",
