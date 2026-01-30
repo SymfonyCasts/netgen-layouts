@@ -24,7 +24,7 @@ index fc7dc69..e7ec048 100644
          "pagerfanta/doctrine-orm-adapter": "^3.6",
          "sensio/framework-extra-bundle": "^6.2",
 diff --git a/composer.lock b/composer.lock
-index 6dc9a66..c4bdbba 100644
+index e06c6a7..e087e0b 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,8 +4,71 @@
