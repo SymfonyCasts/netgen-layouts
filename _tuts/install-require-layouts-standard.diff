@@ -11,7 +11,7 @@ index 1f3f21a..8d53845 100644
  symfony console doctrine:fixtures:load
  ```
 diff --git a/composer.json b/composer.json
-index 8e28565..3695f34 100644
+index 94165e4..fc7dc69 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -12,6 +12,7 @@
@@ -23,15 +23,15 @@ index 8e28565..3695f34 100644
          "sensio/framework-extra-bundle": "^6.2",
          "stof/doctrine-extensions-bundle": "^1.7",
 diff --git a/composer.lock b/composer.lock
-index 5fca409..6ddeca6 100644
+index e4cf033..6dc9a66 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "294a56c1db4be0a3429e249d9fc4436d",
-+    "content-hash": "171b0ab604140cdc2020e848f995bcb5",
+-    "content-hash": "8c6131fa3f250bae56537985d9b74216",
++    "content-hash": "e4f680aab97afd942c1500c6eede7aac",
      "packages": [
          {
              "name": "babdev/pagerfanta-bundle",
@@ -484,26 +484,26 @@ index 5fca409..6ddeca6 100644
          },
          {
 -            "name": "laminas/laminas-code",
--            "version": "4.16.0",
+-            "version": "4.17.0",
 +            "name": "erusev/parsedown",
 +            "version": "1.7.4",
              "source": {
                  "type": "git",
 -                "url": "https://github.com/laminas/laminas-code.git",
--                "reference": "1793e78dad4108b594084d05d1fb818b85b110af"
+-                "reference": "40d61e2899ec17c5d08bbc0a2d586b3ca17ab9bd"
 +                "url": "https://github.com/erusev/parsedown.git",
 +                "reference": "cb17b6477dfff935958ba01325f2e8a2bfa6dab3"
              },
              "dist": {
                  "type": "zip",
--                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/1793e78dad4108b594084d05d1fb818b85b110af",
--                "reference": "1793e78dad4108b594084d05d1fb818b85b110af",
+-                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/40d61e2899ec17c5d08bbc0a2d586b3ca17ab9bd",
+-                "reference": "40d61e2899ec17c5d08bbc0a2d586b3ca17ab9bd",
 +                "url": "https://api.github.com/repos/erusev/parsedown/zipball/cb17b6477dfff935958ba01325f2e8a2bfa6dab3",
 +                "reference": "cb17b6477dfff935958ba01325f2e8a2bfa6dab3",
                  "shasum": ""
              },
              "require": {
--                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
+-                "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0"
 +                "ext-mbstring": "*",
 +                "php": ">=5.3.0"
              },
@@ -512,7 +512,7 @@ index 5fca409..6ddeca6 100644
 -                "ext-phar": "*",
 -                "laminas/laminas-coding-standard": "^3.0.0",
 -                "laminas/laminas-stdlib": "^3.18.0",
--                "phpunit/phpunit": "^10.5.37",
+-                "phpunit/phpunit": "^10.5.58",
 -                "psalm/plugin-phpunit": "^0.19.0",
 -                "vimeo/psalm": "^5.15.0"
 -            },
@@ -617,7 +617,7 @@ index 5fca409..6ddeca6 100644
 +                    "homepage": "http://ezyang.com"
                  }
              ],
--            "time": "2024-11-20T13:15:13+00:00"
+-            "time": "2025-11-01T09:38:14+00:00"
 +            "description": "Standards compliant HTML filter written in PHP",
 +            "homepage": "http://htmlpurifier.org/",
 +            "keywords": [
@@ -1305,27 +1305,27 @@ index 5fca409..6ddeca6 100644
 +        },
 +        {
 +            "name": "laminas/laminas-code",
-+            "version": "4.16.0",
++            "version": "4.17.0",
 +            "source": {
 +                "type": "git",
 +                "url": "https://github.com/laminas/laminas-code.git",
-+                "reference": "1793e78dad4108b594084d05d1fb818b85b110af"
++                "reference": "40d61e2899ec17c5d08bbc0a2d586b3ca17ab9bd"
 +            },
 +            "dist": {
 +                "type": "zip",
-+                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/1793e78dad4108b594084d05d1fb818b85b110af",
-+                "reference": "1793e78dad4108b594084d05d1fb818b85b110af",
++                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/40d61e2899ec17c5d08bbc0a2d586b3ca17ab9bd",
++                "reference": "40d61e2899ec17c5d08bbc0a2d586b3ca17ab9bd",
 +                "shasum": ""
 +            },
 +            "require": {
-+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
++                "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0"
 +            },
 +            "require-dev": {
 +                "doctrine/annotations": "^2.0.1",
 +                "ext-phar": "*",
 +                "laminas/laminas-coding-standard": "^3.0.0",
 +                "laminas/laminas-stdlib": "^3.18.0",
-+                "phpunit/phpunit": "^10.5.37",
++                "phpunit/phpunit": "^10.5.58",
 +                "psalm/plugin-phpunit": "^0.19.0",
 +                "vimeo/psalm": "^5.15.0"
 +            },
@@ -1364,7 +1364,7 @@ index 5fca409..6ddeca6 100644
 +                    "type": "community_bridge"
 +                }
 +            ],
-+            "time": "2024-11-20T13:15:13+00:00"
++            "time": "2025-11-01T09:38:14+00:00"
 +        },
 +        {
 +            "name": "monolog/monolog",
@@ -3629,10 +3629,10 @@ index 0000000..5074964
 +    resource: "@NetgenLayoutsBundle/Resources/config/routing.yml"
 +    prefix: "%netgen_layouts.route_prefix%"
 diff --git a/symfony.lock b/symfony.lock
-index f9e5f3f..a8efa2b 100644
+index 2044400..03b92a2 100644
 --- a/symfony.lock
 +++ b/symfony.lock
-@@ -62,6 +62,45 @@
+@@ -71,6 +71,45 @@
              "ref": "b131e6cbfe1b898a508987851963fff485986285"
          }
      },

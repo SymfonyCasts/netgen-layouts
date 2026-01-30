@@ -12,7 +12,7 @@ index 2727427..30eaad2 100644
 +CONTENTFUL_ACCESS_TOKEN=b4c0n73n7fu1
 +###< contentful/contentful-bundle ###
 diff --git a/composer.json b/composer.json
-index 3695f34..b1e1829 100644
+index fc7dc69..e7ec048 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -12,6 +12,7 @@
@@ -24,15 +24,15 @@ index 3695f34..b1e1829 100644
          "pagerfanta/doctrine-orm-adapter": "^3.6",
          "sensio/framework-extra-bundle": "^6.2",
 diff --git a/composer.lock b/composer.lock
-index 6ddeca6..45528ca 100644
+index 6dc9a66..c4bdbba 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,8 +4,71 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "171b0ab604140cdc2020e848f995bcb5",
-+    "content-hash": "71800ec6e3977be4ecd931e118b5b4fd",
+-    "content-hash": "e4f680aab97afd942c1500c6eede7aac",
++    "content-hash": "2d664c5107f67da226e6218d733fabb0",
      "packages": [
 +        {
 +            "name": "aptoma/twig-markdown",
@@ -1106,7 +1106,7 @@ index 0000000..995ee7c
 +            token: "%env(CONTENTFUL_ACCESS_TOKEN)%"
 +            space: "%env(CONTENTFUL_SPACE_ID)%"
 diff --git a/symfony.lock b/symfony.lock
-index a8efa2b..d3a70d8 100644
+index 03b92a2..1131712 100644
 --- a/symfony.lock
 +++ b/symfony.lock
 @@ -2,6 +2,18 @@
@@ -1128,7 +1128,7 @@ index a8efa2b..d3a70d8 100644
      "doctrine/annotations": {
          "version": "1.13",
          "recipe": {
-@@ -83,6 +95,9 @@
+@@ -92,6 +104,9 @@
      "netgen/content-browser-ui": {
          "version": "1.3.0"
      },
@@ -1138,7 +1138,7 @@ index a8efa2b..d3a70d8 100644
      "netgen/layouts-core": {
          "version": "1.3",
          "recipe": {
-@@ -137,6 +152,9 @@
+@@ -146,6 +161,9 @@
              "config/packages/stof_doctrine_extensions.yaml"
          ]
      },
